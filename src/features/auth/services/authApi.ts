@@ -1,4 +1,4 @@
-import { authApiClient, apiClient, tokenStorage } from '@/shared/lib/apiClient'
+import { authApiClient, tokenStorage } from '@/shared/lib/apiClient'
 import type {
   LoginCredentials,
   RegisterCredentials,
@@ -6,8 +6,8 @@ import type {
   UserProfile,
 } from '../types/auth.types'
 
-// Decode JWT payload to extract username
-function decodeJwtPayload(token: string): { username?: string; email?: string } | null {
+// Decode JWT payload to extract user data
+function decodeJwtPayload(token: string): { sub?: string; username?: string; email?: string } | null {
   try {
     const base64Payload = token.split('.')[1]
     const payload = JSON.parse(atob(base64Payload))
@@ -59,8 +59,20 @@ export const authApi = {
   },
 
   getProfile: async (): Promise<UserProfile> => {
-    const { data } = await apiClient.get<UserProfile>('/api/user/me')
-    return data
+    // Extract profile from JWT token instead of making API call
+    const token = tokenStorage.getAccessToken()
+    if (!token) {
+      throw new Error('No token found')
+    }
+    const payload = decodeJwtPayload(token)
+    if (!payload) {
+      throw new Error('Invalid token')
+    }
+    return {
+      id: payload.sub || '',
+      username: payload.username || payload.email || '',
+      email: payload.email || '',
+    }
   },
 
   isAuthenticated: (): boolean => {
