@@ -49,9 +49,15 @@ const ptBR = {
     ] as const,
   },
   flow: {
-    title: '[Phase 3] Como Funciona',
-    subtitle: '[Phase 3] Em poucos passos voce esta treinando',
-    steps: [] as const,
+    title: 'Como Funciona',
+    subtitle: 'Em poucos passos voce esta treinando com inteligencia',
+    steps: [
+      { title: 'Conecte com Strava', description: 'Login social com sua conta Strava. Seus dados de corrida alimentam o coach desde o primeiro dia.', metric: '' },
+      { title: 'Complete seu Perfil', description: 'Objetivos, nivel de condicionamento, rotina e limitacoes. Dados que o Strava nao captura mas que fazem toda diferenca no seu treino.', metric: 'Dados exclusivos RunMind' },
+      { title: 'Escolha sua Distancia', description: 'De 5K a maratona, o coach adapta tudo para o seu momento. 82% dos corredores brasileiros focam em 5K-10K.', metric: '82% focam 5K-10K' },
+      { title: 'Receba seu Treino', description: 'Planilha do dia personalizada. Frequencia media de 3.4x por semana, volume medio de 9.2km por sessao.', metric: '3.4x/semana | 9.2km/sessao' },
+      { title: 'Acompanhe sua Evolucao', description: 'Veja seus numeros crescerem. 43% dos corredores brasileiros treinam antes das 8h -- o coach se adapta ao seu horario.', metric: '43% treinam antes das 8h' },
+    ] as const,
   },
   numbers: {
     title: '[Phase 4] Numeros que Impressionam',
@@ -60,9 +66,14 @@ const ptBR = {
     engagement: '[Phase 4] Engajamento',
   },
   gap: {
-    title: '[Phase 3] O Gap do Mercado',
-    subtitle: '[Phase 3] Coaching humano e caro. Planilhas genericas nao funcionam.',
-    stats: [] as const,
+    title: 'O Gap da Corrida Solo',
+    subtitle: 'Milhoes correm sozinhos no Brasil. O suporte tecnico de elite sempre foi exclusivo de poucos.',
+    stats: [
+      { number: '30%', label: 'correm completamente sozinhos' },
+      { number: '44%', label: 'sentem-se despreparados tecnicamente' },
+      { number: 'R$300+', label: 'custo mensal de um coach humano' },
+    ] as const,
+    message: 'RunMind democratiza o acesso ao suporte tecnico de elite. IA que entende corrida, acessivel para todos.',
   },
   cta: {
     title: 'Pronto para Treinar com Inteligencia?',
@@ -123,9 +134,15 @@ const en = {
     ] as const,
   },
   flow: {
-    title: '[Phase 3] How It Works',
-    subtitle: '[Phase 3] In a few steps you are training',
-    steps: [] as const,
+    title: 'How It Works',
+    subtitle: 'In a few steps you are training with intelligence',
+    steps: [
+      { title: 'Connect with Strava', description: 'Social login with your Strava account. Your running data feeds the coach from day one.', metric: '' },
+      { title: 'Complete Your Profile', description: 'Goals, fitness level, routine, and limitations. Data Strava doesn\'t capture but that makes all the difference in your training.', metric: 'RunMind-exclusive data' },
+      { title: 'Choose Your Distance', description: 'From 5K to marathon, the coach adapts everything for your moment. 82% of Brazilian runners focus on 5K-10K.', metric: '82% focus 5K-10K' },
+      { title: 'Get Your Workout', description: 'Personalized daily plan. Average frequency of 3.4x per week, average volume of 9.2km per session.', metric: '3.4x/week | 9.2km/session' },
+      { title: 'Track Your Progress', description: 'Watch your numbers grow. 43% of Brazilian runners train before 8am -- the coach adapts to your schedule.', metric: '43% train before 8am' },
+    ] as const,
   },
   numbers: {
     title: '[Phase 4] Impressive Numbers',
@@ -134,9 +151,14 @@ const en = {
     engagement: '[Phase 4] Engagement',
   },
   gap: {
-    title: '[Phase 3] The Market Gap',
-    subtitle: '[Phase 3] Human coaching is expensive. Generic plans do not work.',
-    stats: [] as const,
+    title: 'The Solo Running Gap',
+    subtitle: 'Millions run alone in Brazil. Elite technical support has always been exclusive to a few.',
+    stats: [
+      { number: '30%', label: 'run completely alone' },
+      { number: '44%', label: 'feel technically unprepared' },
+      { number: 'R$300+', label: 'monthly cost of a human coach' },
+    ] as const,
+    message: 'RunMind democratizes access to elite technical support. AI that understands running, accessible to everyone.',
   },
   cta: {
     title: 'Ready to Train with Intelligence?',
