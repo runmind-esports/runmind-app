@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Roadmap created, ready to plan Phase 1
-last_updated: "2026-04-22T17:09:28.333Z"
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-04-22T17:56:17.822Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
-  percent: 100
+  total_plans: 4
+  completed_plans: 3
+  percent: 75
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-22)
 
 **Core value:** Converter visitantes em usuarios demonstrando que o RunMind entrega treinamento de elite acessivel
-**Current focus:** Phase 1: Foundation
+**Current focus:** Phase 2: Core Landing Page
 
 ## Current Position
 
 Phase: 2 of 4 (core landing page)
-Plan: Not started
-Status: Ready to plan
+Plan: 1 of 2 complete
+Status: Executing
 Last activity: 2026-04-22
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [████████░░] 75%
 
 ## Performance Metrics
 
@@ -52,6 +52,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+| Phase 02 P01 | 2min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -63,6 +64,7 @@ Recent decisions affecting current work:
 - [Roadmap]: Use custom React context for i18n instead of next-intl routing layer (avoids middleware collision with existing routes)
 - [Roadmap]: Phase 4 (Big Numbers) depends on Phase 2 not Phase 3 — can run in parallel with Phase 3 if needed
 - [Roadmap]: Hardcoded fallback values for Big Numbers until API endpoint confirmed
+- [Phase 02]: DeepStringify and DeepWiden updated with readonly (infer U)[] pattern to support populated arrays with as const
 
 ### Pending Todos
 
@@ -75,6 +77,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-22
-Stopped at: Roadmap created, ready to plan Phase 1
+Last session: 2026-04-22T17:56:17.820Z
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None

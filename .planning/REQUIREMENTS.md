@@ -14,15 +14,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Hero Section
 
-- [ ] **HERO-01**: User sees outcome-driven headline, subheadline attacking market pain, and CTA button directing to `/signup`
-- [ ] **HERO-02**: User sees stylized app mockup placeholder with Strava social login visible
+- [x] **HERO-01**: User sees outcome-driven headline, subheadline attacking market pain, and CTA button directing to `/signup`
+- [x] **HERO-02**: User sees stylized app mockup placeholder with Strava social login visible
 - [ ] **HERO-03**: Hero elements animate in on page load (fade/slide-in)
 
 ### Features Section
 
-- [ ] **FEAT-01**: User sees 3 feature cards with icons: Chat IA 24/7, Planilhas Dinamicas, Sincronizacao Inteligente
-- [ ] **FEAT-02**: User sees Strava and Garmin logo badges with "Parceiro Oficial" designation
-- [ ] **FEAT-03**: User sees 4 runner profiles: Corpo & Alma (88% influenciam amigos), Mestre Zen (98% buscam equilibrio), Competidor Nato (foco em provas), Espirito Livre (81% sem regras rigidas)
+- [x] **FEAT-01**: User sees 3 feature cards with icons: Chat IA 24/7, Planilhas Dinamicas, Sincronizacao Inteligente
+- [x] **FEAT-02**: User sees Strava and Garmin logo badges with "Parceiro Oficial" designation
+- [x] **FEAT-03**: User sees 4 runner profiles: Corpo & Alma (88% influenciam amigos), Mestre Zen (98% buscam equilibrio), Competidor Nato (foco em provas), Espirito Livre (81% sem regras rigidas)
 
 ### User Journey
 
@@ -37,12 +37,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Conversion
 
-- [ ] **CONV-01**: User sees prominent CTA "Comece seu treino de elite agora" directing to `/signup` at bottom of page
+- [x] **CONV-01**: User sees prominent CTA "Comece seu treino de elite agora" directing to `/signup` at bottom of page
 
 ### Social Proof
 
 - [ ] **SOCL-01**: User sees "Gap da Solidao" section: 30% correm sozinhos, 44% sentem-se despreparados, RunMind como oportunidade de democratizacao do suporte tecnico
-- [ ] **SOCL-02**: User sees footer with navigation links, RunMind logo, and tagline "Inteligencia que move voce"
+- [x] **SOCL-02**: User sees footer with navigation links, RunMind logo, and tagline "Inteligencia que move voce"
 
 ### Onboarding Differentiator
 
@@ -88,20 +88,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | INFRA-01 | Phase 1 | Pending |
 | INFRA-02 | Phase 1 | Pending |
-| HERO-01 | Phase 2 | Pending |
-| HERO-02 | Phase 2 | Pending |
+| HERO-01 | Phase 2 | Complete |
+| HERO-02 | Phase 2 | Complete |
 | HERO-03 | Phase 3 | Pending |
-| FEAT-01 | Phase 2 | Pending |
-| FEAT-02 | Phase 2 | Pending |
-| FEAT-03 | Phase 2 | Pending |
+| FEAT-01 | Phase 2 | Complete |
+| FEAT-02 | Phase 2 | Complete |
+| FEAT-03 | Phase 2 | Complete |
 | JRNY-01 | Phase 3 | Pending |
 | JRNY-02 | Phase 3 | Pending |
 | JRNY-03 | Phase 3 | Pending |
 | PERF-01 | Phase 4 | Pending |
 | PERF-02 | Phase 4 | Pending |
-| CONV-01 | Phase 2 | Pending |
+| CONV-01 | Phase 2 | Complete |
 | SOCL-01 | Phase 3 | Pending |
-| SOCL-02 | Phase 2 | Pending |
+| SOCL-02 | Phase 2 | Complete |
 | ONBR-01 | Phase 3 | Pending |
 
 **Coverage:**

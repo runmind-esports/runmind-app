@@ -45,7 +45,7 @@ Plans:
   5. Visitor sees a prominent bottom-of-page CTA and a footer with navigation links, logo, and tagline
 **Plans**: 2 plans
 Plans:
-- [ ] 02-01-PLAN.md — Translation dictionary updates, type system fix, and 5 UI primitives
+- [x] 02-01-PLAN.md — Translation dictionary updates, type system fix, and 5 UI primitives
 - [ ] 02-02-PLAN.md — 5 section components and page orchestrator wiring
 **UI hint**: yes
 
