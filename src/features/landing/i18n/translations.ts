@@ -79,13 +79,13 @@ const ptBR = {
   },
   gap: {
     title: 'O Gap da Corrida Solo',
-    subtitle: 'Milhoes correm sozinhos no Brasil. O suporte tecnico de elite sempre foi exclusivo de poucos.',
+    subtitle: 'Milhoes correm sozinhos no Brasil sem nenhum suporte tecnico. A tecnologia pode ser o primeiro passo.',
     stats: [
       { number: '30%', label: 'correm completamente sozinhos' },
       { number: '44%', label: 'sentem-se despreparados tecnicamente' },
-      { number: 'R$300+', label: 'custo mensal de um coach humano' },
+      { number: '3.4x', label: 'treinos por semana do amador brasileiro' },
     ] as const,
-    message: 'RunMind democratiza o acesso ao suporte tecnico de elite. IA que entende corrida, acessivel para todos.',
+    message: 'RunMind e o parceiro digital para quem quer comecar com orientacao. Um complemento inteligente para a sua jornada de corrida.',
   },
   cta: {
     title: 'Pronto para Treinar com Inteligencia?',
@@ -176,13 +176,13 @@ const en = {
   },
   gap: {
     title: 'The Solo Running Gap',
-    subtitle: 'Millions run alone in Brazil. Elite technical support has always been exclusive to a few.',
+    subtitle: 'Millions run alone in Brazil with no technical support. Technology can be the first step.',
     stats: [
       { number: '30%', label: 'run completely alone' },
       { number: '44%', label: 'feel technically unprepared' },
-      { number: 'R$300+', label: 'monthly cost of a human coach' },
+      { number: '3.4x', label: 'weekly workouts of the Brazilian amateur' },
     ] as const,
-    message: 'RunMind democratizes access to elite technical support. AI that understands running, accessible to everyone.',
+    message: 'RunMind is the digital partner for those who want to start with guidance. A smart complement for your running journey.',
   },
   cta: {
     title: 'Ready to Train with Intelligence?',
