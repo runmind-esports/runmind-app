@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 
 interface SectionWrapperProps {
   id: string
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   dark?: boolean
 }
