@@ -16,7 +16,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **HERO-01**: User sees outcome-driven headline, subheadline attacking market pain, and CTA button directing to `/signup`
 - [x] **HERO-02**: User sees stylized app mockup placeholder with Strava social login visible
-- [ ] **HERO-03**: Hero elements animate in on page load (fade/slide-in)
+- [x] **HERO-03**: Hero elements animate in on page load (fade/slide-in)
 
 ### Features Section
 
@@ -26,7 +26,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### User Journey
 
-- [ ] **JRNY-01**: User sees 5-step visual timeline: Login (Strava) → Onboarding (perfil + metas) → Interface (5k-42k + Coach AI) → Planilha (treino do dia) → Perfil (Big Numbers + evolucao)
+- [x] **JRNY-01**: User sees 5-step visual timeline: Login (Strava) → Onboarding (perfil + metas) → Interface (5k-42k + Coach AI) → Planilha (treino do dia) → Perfil (Big Numbers + evolucao)
 - [x] **JRNY-02**: Journey steps reveal progressively as user scrolls into view
 - [x] **JRNY-03**: User sees metricas do amador brasileiro: 3.4x/semana frequencia, 9.2km volume, 82% focam 5k-10k, 43% correm antes das 8h
 
@@ -41,7 +41,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Social Proof
 
-- [ ] **SOCL-01**: User sees "Gap da Solidao" section: 30% correm sozinhos, 44% sentem-se despreparados, RunMind como oportunidade de democratizacao do suporte tecnico
+- [x] **SOCL-01**: User sees "Gap da Solidao" section: 30% correm sozinhos, 44% sentem-se despreparados, RunMind como oportunidade de democratizacao do suporte tecnico
 - [x] **SOCL-02**: User sees footer with navigation links, RunMind logo, and tagline "Inteligencia que move voce"
 
 ### Onboarding Differentiator
@@ -90,17 +90,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-02 | Phase 1 | Pending |
 | HERO-01 | Phase 2 | Complete |
 | HERO-02 | Phase 2 | Complete |
-| HERO-03 | Phase 3 | Pending |
+| HERO-03 | Phase 3 | Complete |
 | FEAT-01 | Phase 2 | Complete |
 | FEAT-02 | Phase 2 | Complete |
 | FEAT-03 | Phase 2 | Complete |
-| JRNY-01 | Phase 3 | Pending |
+| JRNY-01 | Phase 3 | Complete |
 | JRNY-02 | Phase 3 | Complete |
 | JRNY-03 | Phase 3 | Complete |
 | PERF-01 | Phase 4 | Pending |
 | PERF-02 | Phase 4 | Pending |
 | CONV-01 | Phase 2 | Complete |
-| SOCL-01 | Phase 3 | Pending |
+| SOCL-01 | Phase 3 | Complete |
 | SOCL-02 | Phase 2 | Complete |
 | ONBR-01 | Phase 3 | Complete |
 

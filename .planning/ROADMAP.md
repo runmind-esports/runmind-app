@@ -62,7 +62,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 03-01-PLAN.md — Animation infrastructure (useInView, ScrollReveal, CSS), UI primitives (TimelineStep, StatCard), and translation dictionary
-- [ ] 03-02-PLAN.md — FlowSection, GapSection, HeroSection animations, barrel exports, and page orchestrator wiring
+- [x] 03-02-PLAN.md — FlowSection, GapSection, HeroSection animations, barrel exports, and page orchestrator wiring
 **UI hint**: yes
 
 ### Phase 4: Dynamic Data
