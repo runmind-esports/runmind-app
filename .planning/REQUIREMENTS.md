@@ -32,8 +32,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Performance & Big Numbers
 
-- [ ] **PERF-01**: User sees Big Numbers (Volume Total, Pace Medio, Engajamento) fetched from API via runmidApiClient
-- [ ] **PERF-02**: Numbers animate with counter effect when section scrolls into view
+- [x] **PERF-01**: User sees Big Numbers (Volume Total, Pace Medio, Engajamento) fetched from API via runmidApiClient
+- [x] **PERF-02**: Numbers animate with counter effect when section scrolls into view
 
 ### Conversion
 
@@ -97,8 +97,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | JRNY-01 | Phase 3 | Complete |
 | JRNY-02 | Phase 3 | Complete |
 | JRNY-03 | Phase 3 | Complete |
-| PERF-01 | Phase 4 | Pending |
-| PERF-02 | Phase 4 | Pending |
+| PERF-01 | Phase 4 | Complete |
+| PERF-02 | Phase 4 | Complete |
 | CONV-01 | Phase 2 | Complete |
 | SOCL-01 | Phase 3 | Complete |
 | SOCL-02 | Phase 2 | Complete |

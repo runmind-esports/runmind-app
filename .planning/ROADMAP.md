@@ -75,7 +75,7 @@ Plans:
   3. If the API is unavailable, hardcoded fallback values display without layout shift or loading spinners
 **Plans**: 1 plan
 Plans:
-- [ ] 04-01-PLAN.md — Service function, useCountUp hook, AnimatedCounter, NumbersSection, translations, and page wiring
+- [x] 04-01-PLAN.md — Service function, useCountUp hook, AnimatedCounter, NumbersSection, translations, and page wiring
 **UI hint**: yes
 
 ## Progress
