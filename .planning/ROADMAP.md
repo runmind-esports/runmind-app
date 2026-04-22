@@ -29,8 +29,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Existing routes (`/login`, `/signup`, `/chat`, `/settings`, `/auth/strava/callback`) continue working unchanged
 **Plans**: 2 plans
 Plans:
-- [ ] 01-01-PLAN.md — Landing feature module: i18n translations, LanguageProvider, SectionWrapper
-- [ ] 01-02-PLAN.md — Marketing route group: layout, page orchestrator, delete old page.tsx
+- [x] 01-01-PLAN.md — Landing feature module: i18n translations, LanguageProvider, SectionWrapper
+- [x] 01-02-PLAN.md — Marketing route group: layout, page orchestrator, delete old page.tsx
 **UI hint**: yes
 
 ### Phase 2: Core Landing Page
