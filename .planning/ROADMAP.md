@@ -73,7 +73,9 @@ Plans:
   1. Visitor sees Big Numbers (Volume Total, Pace Medio, Engajamento) populated from the runmidApiClient API
   2. Numbers animate with a counter effect when the section scrolls into view
   3. If the API is unavailable, hardcoded fallback values display without layout shift or loading spinners
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 04-01-PLAN.md — Service function, useCountUp hook, AnimatedCounter, NumbersSection, translations, and page wiring
 **UI hint**: yes
 
 ## Progress
@@ -86,4 +88,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation | 0/2 | Planning complete | - |
 | 2. Core Landing Page | 2/2 | Complete   | 2026-04-22 |
 | 3. Extended Content | 0/2 | Planning complete | - |
-| 4. Dynamic Data | 0/0 | Not started | - |
+| 4. Dynamic Data | 0/1 | Planning complete | - |
