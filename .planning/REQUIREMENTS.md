@@ -86,29 +86,29 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | — | Pending |
-| INFRA-02 | — | Pending |
-| HERO-01 | — | Pending |
-| HERO-02 | — | Pending |
-| HERO-03 | — | Pending |
-| FEAT-01 | — | Pending |
-| FEAT-02 | — | Pending |
-| FEAT-03 | — | Pending |
-| JRNY-01 | — | Pending |
-| JRNY-02 | — | Pending |
-| JRNY-03 | — | Pending |
-| PERF-01 | — | Pending |
-| PERF-02 | — | Pending |
-| CONV-01 | — | Pending |
-| SOCL-01 | — | Pending |
-| SOCL-02 | — | Pending |
-| ONBR-01 | — | Pending |
+| INFRA-01 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Pending |
+| HERO-01 | Phase 2 | Pending |
+| HERO-02 | Phase 2 | Pending |
+| HERO-03 | Phase 3 | Pending |
+| FEAT-01 | Phase 2 | Pending |
+| FEAT-02 | Phase 2 | Pending |
+| FEAT-03 | Phase 2 | Pending |
+| JRNY-01 | Phase 3 | Pending |
+| JRNY-02 | Phase 3 | Pending |
+| JRNY-03 | Phase 3 | Pending |
+| PERF-01 | Phase 4 | Pending |
+| PERF-02 | Phase 4 | Pending |
+| CONV-01 | Phase 2 | Pending |
+| SOCL-01 | Phase 3 | Pending |
+| SOCL-02 | Phase 2 | Pending |
+| ONBR-01 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 17 total
-- Mapped to phases: 0
-- Unmapped: 17
+- Mapped to phases: 17
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-22*
-*Last updated: 2026-04-22 after initial definition*
+*Last updated: 2026-04-22 after roadmap creation*
