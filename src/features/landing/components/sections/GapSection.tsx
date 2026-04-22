@@ -35,7 +35,7 @@ export function GapSection() {
           </ScrollReveal>
         </div>
         <ScrollReveal delay={200}>
-          <div className="relative rounded-2xl overflow-hidden aspect-[4/3] hidden lg:block">
+          <div className="relative rounded-2xl overflow-hidden aspect-[16/9] lg:aspect-[4/3]">
             <Image
               src="/images/solo-runner.jpg"
               alt="Corredor solo treinando"

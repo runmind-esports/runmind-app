@@ -31,9 +31,7 @@ export function HeroSection() {
           </ScrollReveal>
         </div>
         <ScrollReveal delay={300}>
-          <div className="hidden lg:block">
-            <AppMockup />
-          </div>
+          <AppMockup />
         </ScrollReveal>
       </div>
     </SectionWrapper>
