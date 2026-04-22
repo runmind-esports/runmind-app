@@ -49,6 +49,15 @@ const config: Config = {
         'bubble': '1.5rem',
         'input': '1.5rem',
       },
+      animation: {
+        'shimmer': 'shimmer 1.5s infinite',
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '200% 0' },
+          '100%': { backgroundPosition: '-200% 0' },
+        },
+      },
     },
   },
   plugins: [],

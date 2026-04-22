@@ -44,7 +44,7 @@ export default function SettingsPage() {
             Configuracoes
           </h1>
           <p className="text-[14px] text-foreground-muted mt-1">
-            Gerencie suas preferencias e integracoes
+            Gerencie suas preferencias e integrações
           </p>
         </div>
 

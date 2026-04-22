@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
@@ -28,8 +29,13 @@ export default function SignupPage() {
   })
 
   // Redirect if already authenticated
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.push('/chat')
+    }
+  }, [isLoading, isAuthenticated, router])
+
   if (!isLoading && isAuthenticated) {
-    router.push('/chat')
     return null
   }
 

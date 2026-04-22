@@ -166,6 +166,65 @@ runmidApiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
+// Response interceptor for runmid API (token refresh)
+runmidApiClient.interceptors.response.use(
+  (response) => response,
+  async (error: AxiosError) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({
+            resolve: (token: string) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`
+              resolve(runmidApiClient(originalRequest))
+            },
+            reject,
+          })
+        })
+      }
+
+      originalRequest._retry = true
+      isRefreshing = true
+
+      const refreshToken = tokenStorage.getRefreshToken()
+      if (!refreshToken) {
+        tokenStorage.clearTokens()
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login'
+        }
+        return Promise.reject(error)
+      }
+
+      try {
+        const response = await authApiClient.post('/api/auth/refresh', {
+          refreshToken: refreshToken,
+        })
+
+        const { accessToken, refreshToken: newRefreshToken } = response.data
+        tokenStorage.setTokens(accessToken, newRefreshToken)
+
+        processQueue(null, accessToken)
+
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`
+        return runmidApiClient(originalRequest)
+      } catch (refreshError) {
+        processQueue(refreshError as AxiosError)
+        tokenStorage.clearTokens()
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login'
+        }
+        return Promise.reject(refreshError)
+      } finally {
+        isRefreshing = false
+      }
+    }
+
+    return Promise.reject(error)
+  }
+)
+
 // API client for chat service
 export const chatApiClient = axios.create({
   baseURL: CHAT_API_URL,
@@ -184,6 +243,65 @@ chatApiClient.interceptors.request.use(
     return config
   },
   (error) => Promise.reject(error)
+)
+
+// Response interceptor for chat API (token refresh)
+chatApiClient.interceptors.response.use(
+  (response) => response,
+  async (error: AxiosError) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({
+            resolve: (token: string) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`
+              resolve(chatApiClient(originalRequest))
+            },
+            reject,
+          })
+        })
+      }
+
+      originalRequest._retry = true
+      isRefreshing = true
+
+      const refreshToken = tokenStorage.getRefreshToken()
+      if (!refreshToken) {
+        tokenStorage.clearTokens()
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login'
+        }
+        return Promise.reject(error)
+      }
+
+      try {
+        const response = await authApiClient.post('/api/auth/refresh', {
+          refreshToken: refreshToken,
+        })
+
+        const { accessToken, refreshToken: newRefreshToken } = response.data
+        tokenStorage.setTokens(accessToken, newRefreshToken)
+
+        processQueue(null, accessToken)
+
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`
+        return chatApiClient(originalRequest)
+      } catch (refreshError) {
+        processQueue(refreshError as AxiosError)
+        tokenStorage.clearTokens()
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login'
+        }
+        return Promise.reject(refreshError)
+      } finally {
+        isRefreshing = false
+      }
+    }
+
+    return Promise.reject(error)
+  }
 )
 
 export default apiClient

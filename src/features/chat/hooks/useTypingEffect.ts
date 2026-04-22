@@ -8,7 +8,7 @@ interface UseTypingEffectOptions {
   enabled?: boolean
 }
 
-export function useTypingEffect({ text, speed = 20, enabled = true }: UseTypingEffectOptions) {
+export function useTypingEffect({ text, speed = 10, enabled = true }: UseTypingEffectOptions) {
   const [displayedText, setDisplayedText] = useState('')
   const [isTyping, setIsTyping] = useState(false)
 

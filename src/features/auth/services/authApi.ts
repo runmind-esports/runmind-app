@@ -7,7 +7,7 @@ import type {
 } from '../types/auth.types'
 
 // Decode JWT payload to extract user data
-function decodeJwtPayload(token: string): { sub?: string; username?: string; email?: string } | null {
+function decodeJwtPayload(token: string): { sub?: string; username?: string; email?: string; exp?: number } | null {
   try {
     const base64Payload = token.split('.')[1]
     const payload = JSON.parse(atob(base64Payload))
@@ -15,6 +15,16 @@ function decodeJwtPayload(token: string): { sub?: string; username?: string; ema
   } catch {
     return null
   }
+}
+
+// Check if JWT token is expired
+function isTokenExpired(token: string): boolean {
+  const payload = decodeJwtPayload(token)
+  if (!payload || !payload.exp) {
+    return true // Consider invalid tokens as expired
+  }
+  // exp is in seconds, Date.now() is in milliseconds
+  return payload.exp * 1000 < Date.now()
 }
 
 export const authApi = {
@@ -79,7 +89,14 @@ export const authApi = {
   },
 
   isAuthenticated: (): boolean => {
-    return !!tokenStorage.getAccessToken()
+    const token = tokenStorage.getAccessToken()
+    if (!token) return false
+    // Check if token is expired
+    if (isTokenExpired(token)) {
+      tokenStorage.clearTokens()
+      return false
+    }
+    return true
   },
 
   getUsername: (): string | null => {

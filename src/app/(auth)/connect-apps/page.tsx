@@ -389,8 +389,8 @@ function ConnectAppsContent() {
 
           <p className="text-center text-[11px] text-[#A8ADBE] mt-3 leading-[1.5]">
             {connectedCount > 0
-              ? 'Voce pode adicionar mais integracoes depois nas Configuracoes.'
-              : 'Voce pode adicionar ou remover integracoes a qualquer momento em Configuracoes.'
+              ? 'Voce pode adicionar mais integrações depois nas Configuracoes.'
+              : 'Voce pode adicionar ou remover integrações a qualquer momento em Configuracoes.'
             }
           </p>
         </div>

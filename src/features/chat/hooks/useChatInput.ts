@@ -31,13 +31,17 @@ export function useChatInput({ onSubmit, disabled }: UseChatInputOptions) {
   const handleSubmit = useCallback(async () => {
     if (!value.trim() || isSubmitting || disabled) return
 
+    const messageToSend = value.trim()
+
+    // Clear input immediately for better UX
+    setValue('')
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'
+    }
+
     setIsSubmitting(true)
     try {
-      await onSubmit(value.trim())
-      setValue('')
-      if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto'
-      }
+      await onSubmit(messageToSend)
     } finally {
       setIsSubmitting(false)
     }

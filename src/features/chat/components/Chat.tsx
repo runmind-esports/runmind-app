@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect, useCallback, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { useChat } from '../hooks/useChat'
 import { useSidebar } from '../hooks/useSidebar'
 import { useConversations } from '../hooks/useConversations'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 import { ChatHeader } from './ChatHeader'
 import { MessageList } from './MessageList'
 import { ChatInput } from './ChatInput'
@@ -12,6 +14,15 @@ import { Sidebar } from './Sidebar'
 import { ImageAttachment } from '../hooks/useImageAttachments'
 
 export function Chat() {
+  const router = useRouter()
+  const { isAuthenticated, isLoading: authLoading } = useAuth()
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.push('/login')
+    }
+  }, [authLoading, isAuthenticated, router])
   const chat = useChat()
   const sidebar = useSidebar()
   const conversations = useConversations()
@@ -67,6 +78,11 @@ export function Chat() {
   const handleSelectConversation = useCallback((id: string) => {
     conversations.selectConversation(id)
   }, [conversations])
+
+  // Show nothing while checking auth or redirecting
+  if (authLoading || !isAuthenticated) {
+    return null
+  }
 
   return (
     <div className="flex h-screen flex-col bg-background">

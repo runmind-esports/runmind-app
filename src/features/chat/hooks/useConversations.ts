@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { Conversation, Message } from '../types'
 import { chatApi, ApiConversation, ApiMessage } from '../services/chatApi'
+import { authApi } from '@/features/auth/services/authApi'
 
 // Convert API conversation to local format
 const toLocalConversation = (api: ApiConversation): Conversation => ({
@@ -45,9 +46,11 @@ export function useConversations() {
     }
   }, [])
 
-  // Load conversations on mount
+  // Load conversations on mount (only if authenticated)
   useEffect(() => {
-    fetchConversations()
+    if (authApi.isAuthenticated()) {
+      fetchConversations()
+    }
   }, [fetchConversations])
 
   // Create new conversation

@@ -27,8 +27,9 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
   } = useImageAttachments()
 
   const handleSubmit = async (message: string) => {
-    await onSend(message, attachments.length > 0 ? attachments : undefined)
-    clearAttachments()
+    const currentAttachments = attachments.length > 0 ? [...attachments] : undefined
+    clearAttachments() // Clear immediately for better UX
+    await onSend(message, currentAttachments)
   }
 
   const {
