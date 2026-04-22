@@ -1,17 +1,30 @@
 'use client'
 
+import Image from 'next/image'
+
 export function AppMockup() {
   return (
-    <div className="rounded-2xl border border-border bg-background-secondary aspect-[4/3] p-6 flex flex-col justify-between">
-      <div className="space-y-3">
-        <div className="bg-background rounded-lg p-3 w-3/4 h-8" />
-        <div className="bg-accent-dim rounded-lg p-3 w-2/3 h-8 ml-auto" />
-        <div className="bg-background rounded-lg p-3 w-1/2 h-8" />
-      </div>
-      <div className="flex justify-center">
-        <div className="bg-[#FC4C02]/20 rounded-full px-6 py-2 flex items-center gap-2">
-          <div className="w-5 h-5 rounded-full bg-[#FC4C02]/40" />
-          <div className="w-24 h-3 rounded bg-[#FC4C02]/30" />
+    <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+      <Image
+        src="/images/hero-runner.jpg"
+        alt="Corredor treinando com RunMind"
+        fill
+        className="object-cover"
+        unoptimized
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#14162E]/80 via-transparent to-transparent" />
+      <div className="absolute bottom-6 left-6 right-6">
+        <div className="bg-[#14162E]/90 backdrop-blur-sm rounded-xl p-4 border border-border">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
+              <span className="text-[#14162E] text-sm font-bold">AI</span>
+            </div>
+            <div className="flex-1">
+              <div className="text-[13px] text-accent font-bold">RunMind Coach</div>
+              <div className="text-[13px] text-foreground-muted">Seu treino de hoje esta pronto!</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
