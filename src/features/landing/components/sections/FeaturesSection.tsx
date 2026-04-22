@@ -24,9 +24,12 @@ export function FeaturesSection() {
         <FeatureCard icon={Calendar} title={t.features.plans.title} description={t.features.plans.description} />
         <FeatureCard icon={RefreshCw} title={t.features.sync.title} description={t.features.sync.description} />
       </div>
-      <div className="flex justify-center gap-6 mt-8">
-        <IntegrationBadge provider="strava" label={t.features.badge} />
-        <IntegrationBadge provider="garmin" label={t.features.badge} />
+      <div className="flex flex-col items-center mt-12">
+        <p className="text-[13px] text-foreground-muted mb-4 uppercase tracking-wider font-semibold">Integracoes</p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <IntegrationBadge provider="strava" label={t.features.badge} />
+          <IntegrationBadge provider="garmin" label={t.features.badge} />
+        </div>
       </div>
     </SectionWrapper>
   )
