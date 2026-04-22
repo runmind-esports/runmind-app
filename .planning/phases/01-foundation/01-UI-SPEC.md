@@ -21,8 +21,8 @@ created: 2026-04-22
 | Preset | default — cssVariables: false |
 | Component library | Radix UI (existing: avatar, button, scroll-area, textarea, theme-toggle) |
 | Icon library | Lucide React ^0.312.0 |
-| Font (body) | Manrope (400, 500, 600, 700) via Google Fonts import |
-| Font (display) | Poppins (400, 500, 600, 700) via Google Fonts import |
+| Font (body) | Manrope (400, 700) via Google Fonts import |
+| Font (display) | Poppins (400, 700) via Google Fonts import |
 
 **Phase 1 scope:** This phase delivers infrastructure (i18n, route group, layout shell, SectionWrapper). No new UI components with visual complexity. The design contract here locks the tokens and layout primitives that Phase 2+ will consume.
 
@@ -41,9 +41,10 @@ Declared values (must be multiples of 4):
 | xl | 32px | Card padding (desktop), layout gaps |
 | 2xl | 48px | Section vertical padding (mobile: `py-12`) |
 | 3xl | 64px | Section vertical padding (tablet: `py-16`) |
+| 3.5xl | 80px | SectionWrapper intermediate vertical padding (`sm:py-20`) |
 | 4xl | 96px | Section vertical padding (desktop: `py-24`) |
 
-Exceptions: none
+Exceptions: 80px is added to support the SectionWrapper responsive padding ramp (64px -> 80px -> 96px at mobile -> sm -> lg). This provides a smooth visual transition across breakpoints rather than jumping directly from 64px to 96px.
 
 **SectionWrapper padding contract:**
 - Horizontal: `px-4` (16px) at mobile, `sm:px-6` (24px) at 640px, `lg:px-8` (32px) at 1024px
@@ -58,14 +59,16 @@ Exceptions: none
 | Role | Size | Weight | Line Height | Font Family |
 |------|------|--------|-------------|-------------|
 | Body | 16px | 400 (regular) | 1.5 | Manrope |
-| Label / Small | 13px | 600 (semibold) | 1.4 | Manrope |
+| Label / Small | 13px | 400 (regular) | 1.4 | Manrope |
 | Heading (section) | 24px | 700 (bold) | 1.2 | Poppins |
-| Display (hero) | 40px | 800 (extrabold) | 1.1 | Poppins |
+| Display (hero) | 40px | 700 (bold) | 1.1 | Poppins |
+
+**Font weights:** Exactly 2 weights are loaded: 400 (regular) and 700 (bold). Both Manrope and Poppins import only these two weights. Labels differentiate from body text via smaller size (13px) and optional uppercase/letter-spacing treatment, not via font weight.
 
 **Notes:**
 - Existing codebase uses `font-display` for headings (Poppins) and `font-sans` for body (Manrope) -- maintain this convention.
 - Phase 1 only renders the layout shell with no visible headings or body text beyond placeholder section slots. These values lock the contract for Phase 2.
-- Tags and badges use 10px uppercase with `tracking-[0.14em]` as established in existing page.tsx.
+- Tags and badges in the existing codebase use 10px uppercase with `tracking-[0.14em]`. This is NOT a formal type scale token; it is an inherited codebase convention. It does not count toward the 4-size type scale. If Phase 2+ needs to formalize tag typography, it should be added to the type scale at that time with a maximum of 4 total sizes maintained.
 
 ---
 
