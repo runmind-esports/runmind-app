@@ -8,7 +8,9 @@ type DeepWiden<T> = {
     ? string
     : T[K] extends readonly []
       ? readonly []
-      : DeepWiden<T[K]>
+      : T[K] extends readonly (infer U)[]
+        ? readonly DeepWiden<U>[]
+        : DeepWiden<T[K]>
 }
 
 export type TranslationKeys = DeepWiden<(typeof translations)['pt-BR']>

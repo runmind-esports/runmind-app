@@ -3,7 +3,9 @@ type DeepStringify<T> = {
     ? string
     : T[K] extends readonly []
       ? readonly []
-      : DeepStringify<T[K]>
+      : T[K] extends readonly (infer U)[]
+        ? readonly DeepStringify<U>[]
+        : DeepStringify<T[K]>
 }
 
 const ptBR = {
@@ -15,30 +17,36 @@ const ptBR = {
     languageToggle: 'EN',
   },
   hero: {
-    title: '[Phase 2] Treinamento de Elite ao Seu Alcance',
-    subtitle: '[Phase 2] O gap entre querer correr e ter um coach esta prestes a fechar.',
+    title: 'Treinamento de Elite ao Seu Alcance',
+    subtitle: 'O gap entre querer correr melhor e ter um coach de elite esta prestes a fechar. IA que entende seu ritmo, adapta seus treinos e conecta com Strava.',
     cta: 'Comece Gratis',
-    ctaSecondary: '[Phase 2] Saiba Mais',
+    ctaSecondary: 'Saiba Mais',
   },
   features: {
-    title: '[Phase 2] Funcionalidades',
-    subtitle: '[Phase 2] Tudo que voce precisa para evoluir na corrida',
+    title: 'Tudo que Voce Precisa para Evoluir',
+    subtitle: 'Tecnologia de ponta a servico do seu treino',
+    badge: 'Parceiro Oficial',
     chat: {
-      title: '[Phase 2] Coach IA 24/7',
-      description: '[Phase 2] Converse com seu coach a qualquer hora',
+      title: 'Coach IA 24/7',
+      description: 'Converse com seu coach a qualquer hora. Respostas personalizadas baseadas no seu historico e objetivos.',
     },
     plans: {
-      title: '[Phase 2] Planilhas Dinamicas',
-      description: '[Phase 2] Treinos personalizados que se adaptam ao seu progresso',
+      title: 'Planilhas Dinamicas',
+      description: 'Treinos personalizados que se adaptam ao seu progresso, rotina e feedback em tempo real.',
     },
     sync: {
-      title: '[Phase 2] Sincronizacao Inteligente',
-      description: '[Phase 2] Conecte Strava e Garmin automaticamente',
+      title: 'Sincronizacao Inteligente',
+      description: 'Conecte Strava e Garmin automaticamente. Seus dados alimentam o coach para recomendacoes mais precisas.',
     },
   },
   profiles: {
-    title: '[Phase 2] Perfis',
-    items: [] as const,
+    title: 'Qual e o Seu Perfil?',
+    items: [
+      { name: 'Corpo & Alma', emoji: '\u{1F3C3}', stat: '88% influenciam amigos a correr', description: 'Corrida como estilo de vida. Busca equilibrio entre performance e bem-estar.' },
+      { name: 'Mestre Zen', emoji: '\u{1F9D8}', stat: '98% buscam equilibrio', description: 'Corre para a mente e o corpo. Valoriza consistencia sobre velocidade.' },
+      { name: 'Competidor Nato', emoji: '\u{1F3C6}', stat: 'Foco total em provas', description: 'Vive para a proxima prova. Quer planilha otimizada e pace preciso.' },
+      { name: 'Espirito Livre', emoji: '\u{1F32C}\u{FE0F}', stat: '81% sem regras rigidas', description: 'Corre quando quer, como quer. Precisa de flexibilidade, nao rigidez.' },
+    ] as const,
   },
   flow: {
     title: '[Phase 3] Como Funciona',
@@ -57,14 +65,20 @@ const ptBR = {
     stats: [] as const,
   },
   cta: {
-    title: '[Phase 2] Pronto para Comecar?',
-    subtitle: '[Phase 2] Junte-se a milhares de corredores que ja treinam com IA.',
+    title: 'Pronto para Treinar com Inteligencia?',
+    subtitle: 'Junte-se a corredores que ja treinam com IA. Sem cartao, sem compromisso.',
     button: 'Comece Gratis',
   },
   footer: {
     tagline: 'Inteligencia que move voce',
-    links: [] as const,
-    rights: 'Todos os direitos reservados.',
+    links: [
+      { label: 'Funcionalidades', href: '#features' },
+      { label: 'Como Funciona', href: '#flow' },
+      { label: 'Precos', href: '#pricing' },
+      { label: 'Entrar', href: '/login' },
+      { label: 'Criar Conta', href: '/signup' },
+    ] as const,
+    rights: '2026 RunMind. Todos os direitos reservados.',
   },
 } as const
 
@@ -77,30 +91,36 @@ const en = {
     languageToggle: 'PT',
   },
   hero: {
-    title: '[Phase 2] Elite Training Within Your Reach',
-    subtitle: '[Phase 2] The gap between wanting to run and having a coach is about to close.',
+    title: 'Elite Training Within Your Reach',
+    subtitle: 'The gap between wanting to run better and having an elite coach is about to close. AI that understands your pace, adapts your workouts, and syncs with Strava.',
     cta: 'Start Free',
-    ctaSecondary: '[Phase 2] Learn More',
+    ctaSecondary: 'Learn More',
   },
   features: {
-    title: '[Phase 2] Features',
-    subtitle: '[Phase 2] Everything you need to level up your running',
+    title: 'Everything You Need to Level Up',
+    subtitle: 'Cutting-edge technology at your training\'s service',
+    badge: 'Official Partner',
     chat: {
-      title: '[Phase 2] 24/7 AI Coach',
-      description: '[Phase 2] Chat with your coach anytime',
+      title: '24/7 AI Coach',
+      description: 'Chat with your coach anytime. Personalized responses based on your history and goals.',
     },
     plans: {
-      title: '[Phase 2] Dynamic Plans',
-      description: '[Phase 2] Personalized workouts that adapt to your progress',
+      title: 'Dynamic Plans',
+      description: 'Personalized workouts that adapt to your progress, routine, and real-time feedback.',
     },
     sync: {
-      title: '[Phase 2] Smart Sync',
-      description: '[Phase 2] Connect Strava and Garmin automatically',
+      title: 'Smart Sync',
+      description: 'Connect Strava and Garmin automatically. Your data feeds the coach for more precise recommendations.',
     },
   },
   profiles: {
-    title: '[Phase 2] Profiles',
-    items: [] as const,
+    title: 'What\'s Your Profile?',
+    items: [
+      { name: 'Body & Soul', emoji: '\u{1F3C3}', stat: '88% influence friends to run', description: 'Running as a lifestyle. Seeks balance between performance and well-being.' },
+      { name: 'Zen Master', emoji: '\u{1F9D8}', stat: '98% seek balance', description: 'Runs for mind and body. Values consistency over speed.' },
+      { name: 'Born Competitor', emoji: '\u{1F3C6}', stat: 'Total focus on races', description: 'Lives for the next race. Wants optimized plans and precise pacing.' },
+      { name: 'Free Spirit', emoji: '\u{1F32C}\u{FE0F}', stat: '81% without rigid rules', description: 'Runs when they want, how they want. Needs flexibility, not rigidity.' },
+    ] as const,
   },
   flow: {
     title: '[Phase 3] How It Works',
@@ -119,14 +139,20 @@ const en = {
     stats: [] as const,
   },
   cta: {
-    title: '[Phase 2] Ready to Start?',
-    subtitle: '[Phase 2] Join thousands of runners already training with AI.',
+    title: 'Ready to Train with Intelligence?',
+    subtitle: 'Join runners already training with AI. No card, no commitment.',
     button: 'Start Free',
   },
   footer: {
     tagline: 'Intelligence that moves you',
-    links: [] as const,
-    rights: 'All rights reserved.',
+    links: [
+      { label: 'Features', href: '#features' },
+      { label: 'How It Works', href: '#flow' },
+      { label: 'Pricing', href: '#pricing' },
+      { label: 'Log In', href: '/login' },
+      { label: 'Sign Up', href: '/signup' },
+    ] as const,
+    rights: '2026 RunMind. All rights reserved.',
   },
 } as const satisfies DeepStringify<typeof ptBR>
 
