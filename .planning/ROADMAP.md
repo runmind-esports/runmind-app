@@ -13,7 +13,7 @@ This roadmap delivers a bilingual landing page that converts visitors into RunMi
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Foundation** - Translation system, route group, and layout shell that all sections depend on
-- [ ] **Phase 2: Core Landing Page** - Hero, features, footer, and CTA delivering the minimum viable conversion path
+- [x] **Phase 2: Core Landing Page** - Hero, features, footer, and CTA delivering the minimum viable conversion path (completed 2026-04-22)
 - [ ] **Phase 3: Extended Content** - User journey timeline, social proof, onboarding differentiator, and scroll animations
 - [ ] **Phase 4: Dynamic Data** - API-driven Big Numbers with animated counters and graceful fallback
 
@@ -46,7 +46,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 02-01-PLAN.md — Translation dictionary updates, type system fix, and 5 UI primitives
-- [ ] 02-02-PLAN.md — 5 section components and page orchestrator wiring
+- [x] 02-02-PLAN.md — 5 section components and page orchestrator wiring
 **UI hint**: yes
 
 ### Phase 3: Extended Content
@@ -81,6 +81,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/2 | Planning complete | - |
-| 2. Core Landing Page | 0/2 | Planning complete | - |
+| 2. Core Landing Page | 2/2 | Complete   | 2026-04-22 |
 | 3. Extended Content | 0/0 | Not started | - |
 | 4. Dynamic Data | 0/0 | Not started | - |
