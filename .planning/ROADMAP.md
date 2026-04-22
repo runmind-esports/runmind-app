@@ -59,7 +59,10 @@ Plans:
   3. Visitor sees the "Gap da Solidao" section with statistics on solo runners and the RunMind democratization message
   4. Journey section clearly communicates that onboarding captures data Strava does not provide (objectives, fitness level, limitations)
   5. Hero elements animate in on page load (fade/slide-in)
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 03-01-PLAN.md — Animation infrastructure (useInView, ScrollReveal, CSS), UI primitives (TimelineStep, StatCard), and translation dictionary
+- [ ] 03-02-PLAN.md — FlowSection, GapSection, HeroSection animations, barrel exports, and page orchestrator wiring
 **UI hint**: yes
 
 ### Phase 4: Dynamic Data
@@ -82,5 +85,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/2 | Planning complete | - |
 | 2. Core Landing Page | 2/2 | Complete   | 2026-04-22 |
-| 3. Extended Content | 0/0 | Not started | - |
+| 3. Extended Content | 0/2 | Planning complete | - |
 | 4. Dynamic Data | 0/0 | Not started | - |
