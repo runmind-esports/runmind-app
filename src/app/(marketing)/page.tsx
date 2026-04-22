@@ -7,6 +7,7 @@ import { ProfilesSection } from '@/features/landing/components/sections/Profiles
 import { FlowSection } from '@/features/landing/components/sections/FlowSection'
 import { NumbersSection } from '@/features/landing/components/sections/NumbersSection'
 import { GapSection } from '@/features/landing/components/sections/GapSection'
+import { PricingSection } from '@/features/landing/components/sections/PricingSection'
 import { CTASection } from '@/features/landing/components/sections/CTASection'
 import { FooterSection } from '@/features/landing/components/sections/FooterSection'
 
@@ -20,6 +21,7 @@ export default function LandingPage() {
       <FlowSection />
       <NumbersSection />
       <GapSection />
+      <PricingSection />
       <CTASection />
       <FooterSection />
     </main>
