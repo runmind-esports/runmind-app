@@ -61,7 +61,7 @@ Plans:
   5. Hero elements animate in on page load (fade/slide-in)
 **Plans**: 2 plans
 Plans:
-- [ ] 03-01-PLAN.md — Animation infrastructure (useInView, ScrollReveal, CSS), UI primitives (TimelineStep, StatCard), and translation dictionary
+- [x] 03-01-PLAN.md — Animation infrastructure (useInView, ScrollReveal, CSS), UI primitives (TimelineStep, StatCard), and translation dictionary
 - [ ] 03-02-PLAN.md — FlowSection, GapSection, HeroSection animations, barrel exports, and page orchestrator wiring
 **UI hint**: yes
 

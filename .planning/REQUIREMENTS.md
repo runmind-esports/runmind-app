@@ -27,8 +27,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### User Journey
 
 - [ ] **JRNY-01**: User sees 5-step visual timeline: Login (Strava) → Onboarding (perfil + metas) → Interface (5k-42k + Coach AI) → Planilha (treino do dia) → Perfil (Big Numbers + evolucao)
-- [ ] **JRNY-02**: Journey steps reveal progressively as user scrolls into view
-- [ ] **JRNY-03**: User sees metricas do amador brasileiro: 3.4x/semana frequencia, 9.2km volume, 82% focam 5k-10k, 43% correm antes das 8h
+- [x] **JRNY-02**: Journey steps reveal progressively as user scrolls into view
+- [x] **JRNY-03**: User sees metricas do amador brasileiro: 3.4x/semana frequencia, 9.2km volume, 82% focam 5k-10k, 43% correm antes das 8h
 
 ### Performance & Big Numbers
 
@@ -46,7 +46,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Onboarding Differentiator
 
-- [ ] **ONBR-01**: Journey section highlights that onboarding captures data Strava doesn't provide (objectives, fitness level, routine, limitations) to feed the AI coach with richer context
+- [x] **ONBR-01**: Journey section highlights that onboarding captures data Strava doesn't provide (objectives, fitness level, routine, limitations) to feed the AI coach with richer context
 
 ## v2 Requirements
 
@@ -95,14 +95,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FEAT-02 | Phase 2 | Complete |
 | FEAT-03 | Phase 2 | Complete |
 | JRNY-01 | Phase 3 | Pending |
-| JRNY-02 | Phase 3 | Pending |
-| JRNY-03 | Phase 3 | Pending |
+| JRNY-02 | Phase 3 | Complete |
+| JRNY-03 | Phase 3 | Complete |
 | PERF-01 | Phase 4 | Pending |
 | PERF-02 | Phase 4 | Pending |
 | CONV-01 | Phase 2 | Complete |
 | SOCL-01 | Phase 3 | Pending |
 | SOCL-02 | Phase 2 | Complete |
-| ONBR-01 | Phase 3 | Pending |
+| ONBR-01 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 17 total
