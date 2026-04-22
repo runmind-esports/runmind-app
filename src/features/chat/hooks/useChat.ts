@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Message, ChatState } from '../types'
+import { Message, MessageAttachment, ChatState } from '../types'
 import { chatApi, ApiMessage } from '../services/chatApi'
 import { generateId } from '@/lib/utils'
+import { ImageAttachment } from './useImageAttachments'
 
 // Convert API message to local message format
 const toLocalMessage = (apiMessage: ApiMessage): Message => ({
@@ -49,8 +50,15 @@ export function useChat(conversationId?: string | null) {
     conversationId || null
   )
 
-  const sendMessage = useCallback(async (content: string): Promise<string | null> => {
-    if (!content.trim()) return null
+  const sendMessage = useCallback(async (content: string, attachments?: ImageAttachment[]): Promise<string | null> => {
+    if (!content.trim() && (!attachments || attachments.length === 0)) return null
+
+    // Create attachment data for user message display
+    const messageAttachments: MessageAttachment[] | undefined = attachments?.map((a) => ({
+      id: a.id,
+      url: a.previewUrl,
+      type: 'image' as const,
+    }))
 
     // Optimistic update: add user message immediately
     const userMessage: Message = {
@@ -58,6 +66,7 @@ export function useChat(conversationId?: string | null) {
       role: 'user',
       content: content.trim(),
       createdAt: new Date(),
+      attachments: messageAttachments,
     }
 
     setState((prev) => ({
@@ -68,10 +77,29 @@ export function useChat(conversationId?: string | null) {
     }))
 
     try {
-      const response = await chatApi.sendMessage({
-        message: content.trim(),
-        conversationId: currentConversationId || undefined,
-      })
+      let response
+
+      if (attachments && attachments.length > 0) {
+        const files = attachments.map((a) => a.file)
+        if (files.length === 1) {
+          response = await chatApi.sendMessageWithAttachment({
+            message: content.trim(),
+            image: files[0],
+            conversationId: currentConversationId || undefined,
+          })
+        } else {
+          response = await chatApi.sendMessageWithAttachments({
+            message: content.trim(),
+            images: files,
+            conversationId: currentConversationId || undefined,
+          })
+        }
+      } else {
+        response = await chatApi.sendMessage({
+          message: content.trim(),
+          conversationId: currentConversationId || undefined,
+        })
+      }
 
       // Update conversation ID if it was created
       if (response.conversationId && !currentConversationId) {

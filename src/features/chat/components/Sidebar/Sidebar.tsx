@@ -1,11 +1,13 @@
 'use client'
 
+import Link from 'next/link'
 import { Settings, User, HelpCircle } from 'lucide-react'
 import { SidebarHeader } from './SidebarHeader'
 import { SidebarContent } from './SidebarContent'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { Conversation } from '../../types'
 import { cn } from '@/lib/utils'
+
 
 interface SidebarProps {
   isOpen: boolean
@@ -76,14 +78,23 @@ export function Sidebar({
             <User className="h-4 w-4" />
             <span className="text-sm">Meu perfil</span>
           </button>
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors">
+          <Link
+            href="/settings"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors"
+          >
             <Settings className="h-4 w-4" />
             <span className="text-sm">Configuracoes</span>
-          </button>
+          </Link>
           <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors">
             <HelpCircle className="h-4 w-4" />
             <span className="text-sm">Ajuda</span>
           </button>
+        </div>
+
+        {/* User Tier */}
+        <div className="border-t border-border p-3 flex items-center justify-between">
+          <span className="text-[12px] text-foreground-muted">Plano atual</span>
+          <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[11px] font-bold">Trial</span>
         </div>
       </aside>
     </>

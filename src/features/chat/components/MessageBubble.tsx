@@ -3,6 +3,7 @@
 import { Message } from '../types'
 import { cn } from '@/lib/utils'
 import { useTypingEffect } from '../hooks/useTypingEffect'
+import Image from 'next/image'
 
 interface MessageBubbleProps {
   message: Message
@@ -20,6 +21,7 @@ export function MessageBubble({ message, isLatest = false }: MessageBubbleProps)
   })
 
   const content = shouldAnimate ? displayedText : message.content
+  const hasAttachments = message.attachments && message.attachments.length > 0
 
   return (
     <div
@@ -36,10 +38,35 @@ export function MessageBubble({ message, isLatest = false }: MessageBubbleProps)
             : 'py-1'
         )}
       >
-        <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words text-foreground">
-          {content}
-          {isTyping && <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-foreground" />}
-        </p>
+        {/* Image attachments */}
+        {hasAttachments && (
+          <div className={cn(
+            'flex flex-wrap gap-2',
+            content ? 'mb-2' : ''
+          )}>
+            {message.attachments!.map((attachment) => (
+              <div
+                key={attachment.id}
+                className="relative h-32 w-32 overflow-hidden rounded-lg"
+              >
+                <Image
+                  src={attachment.url}
+                  alt="Imagem anexada"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Text content */}
+        {content && (
+          <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words text-foreground">
+            {content}
+            {isTyping && <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-foreground" />}
+          </p>
+        )}
       </div>
     </div>
   )

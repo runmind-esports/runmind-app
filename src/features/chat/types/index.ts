@@ -1,10 +1,17 @@
 export type MessageRole = 'user' | 'assistant'
 
+export interface MessageAttachment {
+  id: string
+  url: string
+  type: 'image'
+}
+
 export interface Message {
   id: string
   role: MessageRole
   content: string
   createdAt: Date
+  attachments?: MessageAttachment[]
 }
 
 export interface ChatState {

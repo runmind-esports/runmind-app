@@ -9,6 +9,7 @@ import { MessageList } from './MessageList'
 import { ChatInput } from './ChatInput'
 import { WelcomeScreen } from './WelcomeScreen'
 import { Sidebar } from './Sidebar'
+import { ImageAttachment } from '../hooks/useImageAttachments'
 
 export function Chat() {
   const chat = useChat()
@@ -38,8 +39,8 @@ export function Chat() {
   }, [conversations.activeConversationId])
 
   // Handle sending message
-  const handleSendMessage = useCallback(async (content: string) => {
-    const conversationId = await chat.sendMessage(content)
+  const handleSendMessage = useCallback(async (content: string, attachments?: ImageAttachment[]) => {
+    const conversationId = await chat.sendMessage(content, attachments)
 
     // If a new conversation was created, mark it and refresh the list
     if (conversationId && !conversations.activeConversationId) {

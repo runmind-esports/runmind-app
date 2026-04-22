@@ -68,10 +68,13 @@ export const authApi = {
     if (!payload) {
       throw new Error('Invalid token')
     }
+    const username = payload.username || payload.email?.split('@')[0] || ''
     return {
       id: payload.sub || '',
-      username: payload.username || payload.email || '',
       email: payload.email || '',
+      firstName: username,
+      lastName: '',
+      createdAt: new Date().toISOString(),
     }
   },
 

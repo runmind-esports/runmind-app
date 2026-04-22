@@ -71,9 +71,9 @@ function StravaCallbackContent() {
         clearOAuthState()
         setStatus('success')
 
-        // Redirect to connect-apps with success indicator
+        // Redirect to settings with success indicator
         setTimeout(() => {
-          router.push('/connect-apps?strava=connected')
+          router.push('/settings?strava=connected')
         }, 1500)
       } catch (err: unknown) {
         console.error('Strava exchange error:', err)
@@ -150,10 +150,10 @@ function StravaCallbackContent() {
               {errorMessage}
             </p>
             <button
-              onClick={() => router.push('/connect-apps')}
+              onClick={() => router.push('/settings')}
               className="w-full py-3 bg-[#14162E] text-white rounded-xl text-[14px] font-bold transition-all hover:bg-[#1C2040]"
             >
-              Voltar para conexoes
+              Voltar para configuracoes
             </button>
           </>
         )}

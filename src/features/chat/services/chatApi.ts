@@ -21,6 +21,18 @@ export interface SendMessageRequest {
   conversationId?: string
 }
 
+export interface SendMessageWithAttachmentRequest {
+  message: string
+  image: File
+  conversationId?: string
+}
+
+export interface SendMessageWithAttachmentsRequest {
+  message: string
+  images: File[]
+  conversationId?: string
+}
+
 export interface SendMessageResponse {
   response: string
   timestamp: string
@@ -48,6 +60,38 @@ export const chatApi = {
       message: data.message,
       conversationId: data.conversationId,
     })
+    return response.data
+  },
+
+  // Send message with single image attachment
+  sendMessageWithAttachment: async (data: SendMessageWithAttachmentRequest): Promise<SendMessageResponse> => {
+    const formData = new FormData()
+    formData.append('message', data.message)
+    formData.append('image', data.image)
+    if (data.conversationId) {
+      formData.append('conversationId', data.conversationId)
+    }
+    const response = await chatApiClient.post<SendMessageResponse>(
+      '/api/v1/chat/message/attachment',
+      formData,
+      { headers: { 'Content-Type': 'multipart/form-data' } }
+    )
+    return response.data
+  },
+
+  // Send message with multiple image attachments
+  sendMessageWithAttachments: async (data: SendMessageWithAttachmentsRequest): Promise<SendMessageResponse> => {
+    const formData = new FormData()
+    formData.append('message', data.message)
+    data.images.forEach((img, i) => formData.append(`image_${i}`, img))
+    if (data.conversationId) {
+      formData.append('conversationId', data.conversationId)
+    }
+    const response = await chatApiClient.post<SendMessageResponse>(
+      '/api/v1/chat/message/attachments',
+      formData,
+      { headers: { 'Content-Type': 'multipart/form-data' } }
+    )
     return response.data
   },
 
