@@ -21,18 +21,28 @@ Converter visitantes em usuários demonstrando que o RunMind entrega treinamento
 - ✓ Tela de settings com integrações — existing
 - ✓ Upload de imagens no chat — existing
 - ✓ Theme toggle (dark/light) — existing
+- ✓ Hero Section com headline, CTA e foto de corredor — Phase 2
+- ✓ Seção de Funcionalidades com background image — Phase 2
+- ✓ Fluxo do Usuário em 5 steps com timeline e foto de grupo — Phase 3
+- ✓ Seção de Performance com Big Numbers via API e counters animados — Phase 4
+- ✓ Seção de Planos e Pricing (Iniciante/Pro/Elite) — post-phase
+- ✓ Gap da Solidão com stats e foto de corredor solo — Phase 3
+- ✓ Suporte bilíngue PT-BR + EN com LanguageProvider — Phase 1
+- ✓ Fotos reais de corredores nas seções — post-phase
+- ✓ Navbar fixa com logo, links e CTAs — post-phase
+- ✓ Scroll reveal animations em todas as seções — Phase 3
+- ✓ Design com identidade visual RunMind (escuro/verde neon) — Phase 1-4
+- ✓ Deploy em produção no Cloud Run — post-phase
 
 ### Active
 
-- [ ] Hero Section com headline de impacto, subheadline, CTA e mockup do app com Strava login
-- [ ] Seção de Funcionalidades (Chat IA 24/7, Planilhas Dinâmicas, Sincronização Inteligente)
-- [ ] Fluxo do Usuário em 5 steps (timeline/carrossel visual)
-- [ ] Seção de Performance com Big Numbers reais via API (Volume Total, Pace Médio, Engajamento)
-- [ ] Seção de Planos e Pricing (Free + Premium) com CTA de conversão
-- [ ] Prova Social (depoimentos com fotos reais)
-- [ ] Suporte bilíngue PT-BR + EN com toggle de idioma
-- [ ] Placeholders estilizados para mockups do app
-- [ ] Design com identidade visual RunMind (fundo escuro/claro, verde neon, tech + energia)
+(Nenhum — v1 da landing page entregue)
+
+### Out of Scope
+
+- Prova Social com depoimentos reais de usuários — v2 (precisa de usuários reais)
+- Toggle de idioma visível na navbar — v2
+- Cookie de persistência de idioma — v2
 
 ### Out of Scope
 
@@ -65,11 +75,13 @@ Converter visitantes em usuários demonstrando que o RunMind entrega treinamento
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Landing page como rota separada `/` | Não interferir nas telas existentes de auth | — Pending |
-| Placeholders para mockups | Screenshots reais virão depois, não bloquear desenvolvimento | — Pending |
-| Big Numbers via API real | Dados reais dão mais credibilidade que valores fixos | — Pending |
-| Free + Premium pricing | Modelo freemium para baixar barreira de entrada | — Pending |
-| Bilíngue PT-BR + EN | Mercado principal é Brasil mas permite expansão | — Pending |
+| Landing page como rota separada `/` | Não interferir nas telas existentes de auth | ✓ Good |
+| Fotos reais de corredores (Unsplash) | Mais impacto visual que placeholders CSS | ✓ Good |
+| Big Numbers via API com fallback | Dados reais + fallback garante que a página nunca quebra | ✓ Good |
+| 3 planos (Iniciante/Pro/Elite) | Modelo freemium com upgrade path claro | ✓ Good |
+| Bilíngue PT-BR + EN via LanguageProvider | Mercado principal é Brasil mas permite expansão | ✓ Good |
+| CSS animations (sem Motion lib) | Bundle menor para mobile brasileiro em 4G | ✓ Good |
+| RunMind como complemento, não substituto de treinador | Respeitar o trabalho de treinadores humanos | ✓ Good |
 
 ## Evolution
 
@@ -89,4 +101,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after initialization*
+*Last updated: 2026-04-22 after v1 landing page complete — deployed to production*
