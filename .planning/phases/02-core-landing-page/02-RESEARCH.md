@@ -341,22 +341,19 @@ export function AppMockup() {
 | A3 | AppMockup CSS-only implementation adequately communicates "chat app with Strava" | Code Examples | Might look too abstract -- can iterate on visual quality |
 | A4 | Profile card emojis render consistently across browsers | Architecture | Emoji rendering varies by OS -- could use Lucide icons as fallback |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Dark mode default for landing page**
    - What we know: `tailwind.config.ts` uses `darkMode: 'class'`, globals.css defines both light and dark variables, UI-SPEC provides both themes
-   - What's unclear: Should the landing page force dark mode? Or follow system preference?
-   - Recommendation: Check if the existing app has a theme mechanism. If not, landing page likely follows system default (no `.dark` class = light mode). The UI-SPEC's dark specs would apply when user toggles to dark mode.
+   - RESOLVED: Landing page uses SectionWrapper `dark` prop for alternating section backgrounds. Follows system/app theme preference via existing ThemeProvider in root layout.
 
 2. **Profile card emojis**
    - What we know: UI-SPEC says "emoji/avatar: 48px circle, centered at top" but `ProfileCard` prop is `emoji: string`
-   - What's unclear: Which specific emojis to use for each profile
-   - Recommendation: Use runner-themed emojis that work cross-platform. Planner should define these (e.g., runner, lotus, trophy, wind).
+   - RESOLVED: Emojis defined in plans as runner-themed: runner, lotus, trophy, wind.
 
 3. **Footer "Precos"/"Pricing" link target**
    - What we know: UI-SPEC specifies `#pricing` as the anchor target
-   - What's unclear: There is no pricing section in Phase 2 (deferred to future)
-   - Recommendation: Include the link pointing to `#pricing` but it will be a no-op until pricing section is built. This is low risk.
+   - RESOLVED: Link included as `#pricing` — no-op until pricing section is built in a future phase. Low risk.
 
 ## Environment Availability
 
