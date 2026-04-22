@@ -27,7 +27,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Visiting `/` renders the marketing layout without loading app providers (QueryProvider, auth state)
   2. A LanguageProvider context serves PT-BR translations by default and English when toggled
   3. Existing routes (`/login`, `/signup`, `/chat`, `/settings`, `/auth/strava/callback`) continue working unchanged
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 01-01-PLAN.md — Landing feature module: i18n translations, LanguageProvider, SectionWrapper
+- [ ] 01-02-PLAN.md — Marketing route group: layout, page orchestrator, delete old page.tsx
 **UI hint**: yes
 
 ### Phase 2: Core Landing Page
@@ -74,7 +77,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/0 | Not started | - |
+| 1. Foundation | 0/2 | Planning complete | - |
 | 2. Core Landing Page | 0/0 | Not started | - |
 | 3. Extended Content | 0/0 | Not started | - |
 | 4. Dynamic Data | 0/0 | Not started | - |
