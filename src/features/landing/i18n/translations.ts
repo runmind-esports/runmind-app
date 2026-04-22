@@ -15,6 +15,11 @@ const ptBR = {
   },
   nav: {
     languageToggle: 'EN',
+    features: 'Funcionalidades',
+    journey: 'Jornada',
+    profiles: 'Perfis',
+    login: 'Entrar',
+    signup: 'Criar Conta',
   },
   hero: {
     title: 'Treinamento de Elite ao Seu Alcance',
@@ -107,6 +112,11 @@ const en = {
   },
   nav: {
     languageToggle: 'PT',
+    features: 'Features',
+    journey: 'Journey',
+    profiles: 'Profiles',
+    login: 'Log In',
+    signup: 'Sign Up',
   },
   hero: {
     title: 'Elite Training Within Your Reach',

@@ -1,5 +1,6 @@
 'use client'
 
+import { Navbar } from '@/features/landing/components/sections/Navbar'
 import { HeroSection } from '@/features/landing/components/sections/HeroSection'
 import { FeaturesSection } from '@/features/landing/components/sections/FeaturesSection'
 import { ProfilesSection } from '@/features/landing/components/sections/ProfilesSection'
@@ -11,7 +12,8 @@ import { FooterSection } from '@/features/landing/components/sections/FooterSect
 
 export default function LandingPage() {
   return (
-    <main>
+    <main className="pt-16">
+      <Navbar />
       <HeroSection />
       <FeaturesSection />
       <ProfilesSection />
