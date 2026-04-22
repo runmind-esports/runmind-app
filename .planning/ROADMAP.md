@@ -43,7 +43,10 @@ Plans:
   3. Visitor sees 3 feature cards (Chat IA 24/7, Planilhas Dinamicas, Sincronizacao Inteligente) with icons, plus Strava/Garmin badges
   4. Visitor sees 4 runner profile cards with real Brazilian market statistics
   5. Visitor sees a prominent bottom-of-page CTA and a footer with navigation links, logo, and tagline
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Translation dictionary updates, type system fix, and 5 UI primitives
+- [ ] 02-02-PLAN.md — 5 section components and page orchestrator wiring
 **UI hint**: yes
 
 ### Phase 3: Extended Content
@@ -78,6 +81,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/2 | Planning complete | - |
-| 2. Core Landing Page | 0/0 | Not started | - |
+| 2. Core Landing Page | 0/2 | Planning complete | - |
 | 3. Extended Content | 0/0 | Not started | - |
 | 4. Dynamic Data | 0/0 | Not started | - |
