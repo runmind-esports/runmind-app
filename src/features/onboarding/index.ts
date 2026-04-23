@@ -14,5 +14,8 @@ export { useOnboarding } from './hooks/useOnboarding'
 // Services
 export { onboardingApi } from './services/onboardingApi'
 
+// i18n
+export { translations, getTranslations } from './i18n/translations'
+
 // Types
 export type { SaveProfileRequest, RunnerProfileResponse, ApiErrorResponse } from './types/onboarding.types'
