@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: verifying
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-04-22T19:28:54.945Z"
+milestone: v1.1
+milestone_name: onboarding
+status: defining-requirements
+stopped_at: Milestone v1.1 started
+last_updated: "2026-04-22T21:30:00.000Z"
 last_activity: 2026-04-22
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 7
-  completed_plans: 7
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -20,14 +20,15 @@ progress:
 
 See: .planning/PROJECT.md (updated 2026-04-22)
 
-**Core value:** Converter visitantes em usuarios demonstrando que o RunMind entrega treinamento de elite acessivel
-**Current focus:** Phase 4 — Dynamic Data
+**Core value:** Treinamento de elite acessível ao corredor amador brasileiro
+**Current focus:** Defining requirements for Onboarding milestone
 
 ## Current Position
 
-Phase: 04
-Plan: Not started
-Status: Phase complete — ready for verification
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-04-22 — Milestone v1.1 started
 Last activity: 2026-04-22
 
 Progress: [████████░░] 75%

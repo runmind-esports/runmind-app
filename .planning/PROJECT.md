@@ -1,12 +1,23 @@
-# RunMind Landing Page
+# RunMind
 
 ## What This Is
 
-Landing page estruturada para o RunMind — um coach de corrida com IA que conecta Strava/Garmin e oferece planos de treino personalizados e suporte 24/7 via chat. A landing page será uma rota separada (`/`) que espelha o pitch de vendas do produto, com 5 dobras alinhadas à jornada do usuário e ao modelo de negócio. Disponível em PT-BR e inglês.
+RunMind é um coach de corrida com IA para o corredor amador brasileiro. O app conecta Strava/Garmin, oferece planos de treino personalizados e suporte 24/7 via chat. Frontend Next.js 14 + backend Go (runmid-api). Landing page bilíngue em produção.
 
 ## Core Value
 
-Converter visitantes em usuários demonstrando que o RunMind entrega treinamento de elite acessível — preenchendo o gap do mercado brasileiro onde coaching humano é caro e planilhas são genéricas.
+Entregar treinamento de elite acessível ao corredor amador brasileiro — do primeiro cadastro à planilha personalizada em menos de 5 minutos.
+
+## Current Milestone: v1.1 Onboarding
+
+**Goal:** Formulário de onboarding multi-step que coleta perfil do corredor, persiste no backend (Go), gera planilha para download, e redireciona para o chat.
+
+**Target features:**
+- Etapa 1: Dados automáticos do Google/Strava (nome, email)
+- Etapa 2: Formulário multi-step com 11 perguntas de perfil de corredor
+- Tela "momento ahá" com planilha personalizada para download
+- Fluxo: Signup → Etapa 1 → Etapa 2 → Planilha download → Chat
+- Backend API (Go/runmid-api) para persistir perfil e gerar planilha
 
 ## Requirements
 
@@ -36,7 +47,12 @@ Converter visitantes em usuários demonstrando que o RunMind entrega treinamento
 
 ### Active
 
-(Nenhum — v1 da landing page entregue)
+- [ ] Etapa 1 do onboarding: importar dados do Google/Strava (nome, email)
+- [ ] Etapa 2 do onboarding: formulário multi-step com 11 perguntas de perfil
+- [ ] Tela "momento ahá" com planilha personalizada para download
+- [ ] Redirecionamento para chat após download da planilha
+- [ ] Backend API (Go) para persistir perfil do corredor
+- [ ] Backend API (Go) para gerar planilha personalizada
 
 ### Out of Scope
 
@@ -54,13 +70,11 @@ Converter visitantes em usuários demonstrando que o RunMind entrega treinamento
 ## Context
 
 - RunMind é um app Next.js 14 (App Router) com React 18, TypeScript e Tailwind CSS
-- Codebase brownfield com features existentes: auth, chat, strava, settings
-- Backend são microserviços separados acessados via axios (auth, chat, runmid API)
-- A landing page será uma nova rota `/` separada das rotas de auth (`/login`, `/signup`)
-- Dados de Big Numbers serão consumidos de API real (runmidApiClient)
-- Mockups do app usarão placeholders estilizados (screenshots reais virão depois)
-- Planos definidos: Free (limitado) + Premium (pago mensal)
-- Design segue a identidade visual existente: contraste alto, verde neon (#00FF00 area), sensação tech
+- Backend Go em `/Documents/runmid/runmid-api` (microserviço REST)
+- Outros backends: auth (cara-cracha), chat-agent, runmid-api (atividades/Strava)
+- Landing page v1 em produção no Cloud Run
+- Onboarding: formulário no frontend, persistência no backend Go
+- Planilha gerada pelo backend após coleta do perfil
 
 ## Constraints
 
@@ -101,4 +115,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after v1 landing page complete — deployed to production*
+*Last updated: 2026-04-22 after milestone v1.1 Onboarding started*
