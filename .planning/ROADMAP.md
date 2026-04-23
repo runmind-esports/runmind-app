@@ -125,7 +125,9 @@ Plans:
   1. After profile submission, user sees a success screen with a personalized message and a visible download button for their training spreadsheet
   2. Clicking download fetches the spreadsheet from the backend API and saves it to the user's device
   3. After download (or explicit skip/continue action), user is redirected to the chat screen
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 07-01-PLAN.md -- Planilha success screen with spreadsheet download and chat redirect
 **UI hint**: yes
 
 ## Progress
@@ -141,4 +143,4 @@ Phases execute in numeric order: 5 -> 6 -> 7
 | 4. Dynamic Data | v1.0 | 1/1 | Complete | 2026-04-22 |
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
 | 6. Onboarding Flow | v1.1 | 0/3 | Not started | - |
-| 7. Planilha & Completion | v1.1 | 0/? | Not started | - |
+| 7. Planilha & Completion | v1.1 | 0/1 | Not started | - |
