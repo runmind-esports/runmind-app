@@ -245,7 +245,7 @@ function ConnectAppsContent() {
   }
 
   const handleContinue = () => {
-    router.push('/chat')
+    router.push('/onboarding')
   }
 
   const getConnectedNames = (): string[] => {

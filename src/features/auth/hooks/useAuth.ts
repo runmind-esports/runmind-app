@@ -37,7 +37,7 @@ export function useAuth() {
     mutationFn: (credentials: RegisterCredentials) => authApi.register(credentials),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: authKeys.profile })
-      router.push('/connect-apps')
+      router.push('/onboarding')
     },
   })
 
