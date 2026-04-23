@@ -76,7 +76,7 @@ Plans:
 
 </details>
 
-### 🚧 v1.1 Onboarding (In Progress)
+### v1.1 Onboarding (In Progress)
 
 **Milestone Goal:** Do cadastro a planilha personalizada em menos de 5 minutos -- onboarding que converte visitante em corredor ativo.
 
@@ -110,7 +110,11 @@ Plans:
   3. Each question presents the correct input type (single select, scale, yes/no) matching the requirement specs
   4. Upon completing the last question, the profile is submitted to the backend API and the user advances to the planilha screen
   5. The entire flow is responsive and usable on mobile screens
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 06-01-PLAN.md -- useOnboarding hook, translations module, and input primitives (OptionButton, ScaleInput, YesNoInput)
+- [ ] 06-02-PLAN.md -- OnboardingFlow orchestrator, WelcomeStep, QuestionStep, ProgressBar, OnboardingNavigation, page route, and animations
+- [ ] 06-03-PLAN.md -- Signup redirect chain wiring to /onboarding
 **UI hint**: yes
 
 ### Phase 7: Planilha & Completion
@@ -135,6 +139,6 @@ Phases execute in numeric order: 5 -> 6 -> 7
 | 2. Core Landing Page | v1.0 | 2/2 | Complete | 2026-04-22 |
 | 3. Extended Content | v1.0 | 2/2 | Complete | 2026-04-22 |
 | 4. Dynamic Data | v1.0 | 1/1 | Complete | 2026-04-22 |
-| 5. Runner Profile API | v1.1 | 0/2 | Not started | - |
-| 6. Onboarding Flow | v1.1 | 0/? | Not started | - |
+| 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
+| 6. Onboarding Flow | v1.1 | 0/3 | Not started | - |
 | 7. Planilha & Completion | v1.1 | 0/? | Not started | - |
