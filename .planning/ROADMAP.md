@@ -95,7 +95,10 @@ Plans:
   2. A GET request for a runner who has a saved profile returns a downloadable spreadsheet file
   3. A GET request for a runner without a saved profile returns an appropriate error response
   4. Profile data validates required fields and rejects malformed requests
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 05-01-PLAN.md -- Extend RunnerProfile with 4 new onboarding fields across domain, DTO, handler, repo, and DB schema
+- [ ] 05-02-PLAN.md -- XLSX spreadsheet generation endpoint with excelize + frontend onboarding service layer
 
 ### Phase 6: Onboarding Flow
 **Goal**: New users complete a guided onboarding that captures their runner profile in a smooth, mobile-friendly multi-step experience
@@ -132,6 +135,6 @@ Phases execute in numeric order: 5 -> 6 -> 7
 | 2. Core Landing Page | v1.0 | 2/2 | Complete | 2026-04-22 |
 | 3. Extended Content | v1.0 | 2/2 | Complete | 2026-04-22 |
 | 4. Dynamic Data | v1.0 | 1/1 | Complete | 2026-04-22 |
-| 5. Runner Profile API | v1.1 | 0/? | Not started | - |
+| 5. Runner Profile API | v1.1 | 0/2 | Not started | - |
 | 6. Onboarding Flow | v1.1 | 0/? | Not started | - |
 | 7. Planilha & Completion | v1.1 | 0/? | Not started | - |
