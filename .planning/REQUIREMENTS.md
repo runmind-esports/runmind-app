@@ -1,114 +1,81 @@
-# Requirements: RunMind Landing Page
+# Requirements: RunMind Onboarding
 
 **Defined:** 2026-04-22
-**Core Value:** Converter visitantes em usuarios demonstrando que o RunMind entrega treinamento de elite acessivel — preenchendo o gap do mercado brasileiro.
+**Core Value:** Do cadastro à planilha personalizada em menos de 5 minutos — onboarding que converte visitante em corredor ativo.
 
-## v1 Requirements
+## v1.1 Requirements
 
-Requirements for initial release. Each maps to roadmap phases.
+Requirements for the Onboarding milestone. Each maps to roadmap phases.
 
-### Infrastructure
+### Onboarding Step 1
 
-- [ ] **INFRA-01**: Landing page uses translation dictionary (PT-BR + EN) with LanguageProvider React context
-- [ ] **INFRA-02**: Landing page lives in `(marketing)` route group, isolated from existing app routes
+- [ ] **ONB-01**: Após signup, usuário vê tela de boas-vindas com dados importados do Google/Strava (nome, email)
+- [ ] **ONB-02**: Usuário pode confirmar/editar nome antes de prosseguir para o formulário
 
-### Hero Section
+### Onboarding Step 2 (Formulário)
 
-- [x] **HERO-01**: User sees outcome-driven headline, subheadline attacking market pain, and CTA button directing to `/signup`
-- [x] **HERO-02**: User sees stylized app mockup placeholder with Strava social login visible
-- [x] **HERO-03**: Hero elements animate in on page load (fade/slide-in)
+- [ ] **ONB-03**: Usuário seleciona objetivo atual (correr 5km, correr 10km, melhorar tempo 5k, melhorar tempo 10k)
+- [ ] **ONB-04**: Usuário informa nível de condicionamento físico (escala 1-5)
+- [ ] **ONB-05**: Usuário informa se já corre regularmente e faixa de km/semana (até 5km, até 10km, 11-20km, 21-30km, +30km)
+- [ ] **ONB-06**: Usuário informa se já participou de provas oficiais (sim/não)
+- [ ] **ONB-07**: Usuário informa pace médio atual (não sei, acima de 7:00, 6:00-7:00, 5:00-6:00, abaixo de 5:00)
+- [ ] **ONB-08**: Usuário seleciona quantos dias por semana pode treinar (2, 3, 4, 5+)
+- [ ] **ONB-09**: Usuário informa se pratica outras atividades e se tem lesão ou restrição médica (sim/não cada)
+- [ ] **ONB-10**: Usuário escolhe preferência de treino (curtos e intensos, longos e moderados, tanto faz)
+- [ ] **ONB-11**: Usuário escolhe se quer incluir treinos de força na planilha (sim/não)
 
-### Features Section
+### Planilha & Redirecionamento
 
-- [x] **FEAT-01**: User sees 3 feature cards with icons: Chat IA 24/7, Planilhas Dinamicas, Sincronizacao Inteligente
-- [x] **FEAT-02**: User sees Strava and Garmin logo badges with "Parceiro Oficial" designation
-- [x] **FEAT-03**: User sees 4 runner profiles: Corpo & Alma (88% influenciam amigos), Mestre Zen (98% buscam equilibrio), Competidor Nato (foco em provas), Espirito Livre (81% sem regras rigidas)
+- [ ] **ONB-12**: Após formulário, usuário vê tela "momento ahá" com mensagem de sucesso e planilha pronta para download
+- [ ] **ONB-13**: Após download da planilha, usuário é redirecionado para a tela de chat
 
-### User Journey
+### Backend API
 
-- [x] **JRNY-01**: User sees 5-step visual timeline: Login (Strava) → Onboarding (perfil + metas) → Interface (5k-42k + Coach AI) → Planilha (treino do dia) → Perfil (Big Numbers + evolucao)
-- [x] **JRNY-02**: Journey steps reveal progressively as user scrolls into view
-- [x] **JRNY-03**: User sees metricas do amador brasileiro: 3.4x/semana frequencia, 9.2km volume, 82% focam 5k-10k, 43% correm antes das 8h
+- [ ] **API-01**: Endpoint POST no runmid-api (Go) para persistir perfil do corredor no banco de dados
+- [ ] **API-02**: Endpoint GET no runmid-api (Go) para gerar e retornar planilha personalizada baseada no perfil
 
-### Performance & Big Numbers
+## Future Requirements
 
-- [x] **PERF-01**: User sees Big Numbers (Volume Total, Pace Medio, Engajamento) fetched from API via runmidApiClient
-- [x] **PERF-02**: Numbers animate with counter effect when section scrolls into view
+### Onboarding Enhancements
 
-### Conversion
-
-- [x] **CONV-01**: User sees prominent CTA "Comece seu treino de elite agora" directing to `/signup` at bottom of page
-
-### Social Proof
-
-- [x] **SOCL-01**: User sees "Gap da Solidao" section: 30% correm sozinhos, 44% sentem-se despreparados, RunMind como oportunidade de democratizacao do suporte tecnico
-- [x] **SOCL-02**: User sees footer with navigation links, RunMind logo, and tagline "Inteligencia que move voce"
-
-### Onboarding Differentiator
-
-- [x] **ONBR-01**: Journey section highlights that onboarding captures data Strava doesn't provide (objectives, fitness level, routine, limitations) to feed the AI coach with richer context
-
-## v2 Requirements
-
-Deferred to future release. Tracked but not in current roadmap.
-
-### i18n Enhancements
-
-- **I18N-01**: Language toggle component visible in landing page header/nav
-- **I18N-02**: Cookie-based locale persistence across sessions
-- **I18N-03**: Dynamic HTML `lang` attribute toggling
-
-### Social Proof
-
-- **SOCL-03**: Testimonials section with real user photos from Brazilian running events
-- **SOCL-04**: LGPD privacy trust badge
-
-### Pricing
-
-- **PRIC-01**: Free vs Premium comparison table with feature breakdown
-- **PRIC-02**: Locale-aware currency formatting (R$ for PT-BR)
-- **PRIC-03**: Annual vs monthly pricing toggle
+- **ONB-F01**: Onboarding via chat com IA (conversa humanizada em vez de formulário)
+- **ONB-F02**: Import de histórico de corridas do Strava para pré-preencher campos
+- **ONB-F03**: Recomendação de plano baseada em dados Strava (pace, volume, frequência)
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Redesign of internal app screens (login, chat, settings) | Focus is landing page only |
-| Payment/checkout integration | Landing page displays plans, directs to signup |
-| Blog or content section | Potential v2+ feature |
-| Mobile native app | Web-first approach |
-| Multi-page marketing funnel | Single-page landing, focused conversion |
-| Server-side rendering for entire app | Only landing page benefits from SSR/SSG |
+| Pagamento/assinatura durante onboarding | Onboarding é grátis, pricing vem depois |
+| Onboarding via chat com IA | v1.1 usa formulário, chat IA é future |
+| Edição de perfil pós-onboarding | Pode ser adicionado em settings futuramente |
+| Geração de planilha com IA generativa | v1.1 usa templates baseados no perfil |
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
-| HERO-01 | Phase 2 | Complete |
-| HERO-02 | Phase 2 | Complete |
-| HERO-03 | Phase 3 | Complete |
-| FEAT-01 | Phase 2 | Complete |
-| FEAT-02 | Phase 2 | Complete |
-| FEAT-03 | Phase 2 | Complete |
-| JRNY-01 | Phase 3 | Complete |
-| JRNY-02 | Phase 3 | Complete |
-| JRNY-03 | Phase 3 | Complete |
-| PERF-01 | Phase 4 | Complete |
-| PERF-02 | Phase 4 | Complete |
-| CONV-01 | Phase 2 | Complete |
-| SOCL-01 | Phase 3 | Complete |
-| SOCL-02 | Phase 2 | Complete |
-| ONBR-01 | Phase 3 | Complete |
+| ONB-01 | — | Pending |
+| ONB-02 | — | Pending |
+| ONB-03 | — | Pending |
+| ONB-04 | — | Pending |
+| ONB-05 | — | Pending |
+| ONB-06 | — | Pending |
+| ONB-07 | — | Pending |
+| ONB-08 | — | Pending |
+| ONB-09 | — | Pending |
+| ONB-10 | — | Pending |
+| ONB-11 | — | Pending |
+| ONB-12 | — | Pending |
+| ONB-13 | — | Pending |
+| API-01 | — | Pending |
+| API-02 | — | Pending |
 
 **Coverage:**
-- v1 requirements: 17 total
-- Mapped to phases: 17
-- Unmapped: 0
+- v1.1 requirements: 15 total
+- Mapped to phases: 0
+- Unmapped: 15
 
 ---
 *Requirements defined: 2026-04-22*
-*Last updated: 2026-04-22 after roadmap creation*
+*Last updated: 2026-04-22 after milestone v1.1 definition*
