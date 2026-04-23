@@ -26,7 +26,7 @@ export function ScaleInput({ value, onChange, labels }: ScaleInputProps) {
                 'w-12 h-12 rounded-full flex items-center justify-center text-base transition-all duration-200',
                 isSelected
                   ? 'bg-[#00F048] border-[2px] border-[#00F048] text-[#14162E] font-bold'
-                  : 'bg-[#F5F6F7] border-[1.5px] border-[rgba(20,22,46,0.09)]',
+                  : 'bg-[#F5F6F7] border-[1.5px] border-[rgba(20,22,46,0.09)] text-[#14162E]',
               )}
             >
               {scaleValue}
