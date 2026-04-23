@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: onboarding
-status: defining-requirements
-stopped_at: Milestone v1.1 started
-last_updated: "2026-04-22T21:30:00.000Z"
+status: ready-to-plan
+stopped_at: Roadmap created for v1.1 Onboarding
+last_updated: "2026-04-22T22:00:00.000Z"
 last_activity: 2026-04-22
 progress:
-  total_phases: 0
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_phases: 7
+  completed_phases: 4
+  total_plans: 7
+  completed_plans: 7
+  percent: 57
 ---
 
 # Project State
@@ -20,47 +20,37 @@ progress:
 
 See: .planning/PROJECT.md (updated 2026-04-22)
 
-**Core value:** Treinamento de elite acessível ao corredor amador brasileiro
-**Current focus:** Defining requirements for Onboarding milestone
+**Core value:** Do cadastro a planilha personalizada em menos de 5 minutos -- onboarding que converte visitante em corredor ativo.
+**Current focus:** Phase 5 - Runner Profile API
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-04-22 — Milestone v1.1 started
-Last activity: 2026-04-22
+Phase: 5 of 7 (Runner Profile API)
+Plan: 0 of ? in current phase
+Status: Ready to plan
+Last activity: 2026-04-22 -- Roadmap created for v1.1 Onboarding milestone
 
-Progress: [████████░░] 75%
+Progress: [██████████░░░░░░░░░░] 57% (v1.0 complete, v1.1 starting)
 
 ## Performance Metrics
 
 **Velocity:**
-
-- Total plans completed: 9
-- Average duration: -
-- Total execution time: 0 hours
+- Total plans completed: 7 (v1.0)
+- Average duration: ~2.6 min
+- Total execution time: ~13 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 2 | - | - |
-| 02 | 2 | - | - |
-| 03 | 2 | - | - |
-| 04 | 1 | - | - |
+| 02 | 2 | 4min | 2min |
+| 03 | 2 | 6min | 3min |
+| 04 | 1 | 3min | 3min |
 
 **Recent Trend:**
-
-- Last 5 plans: -
-- Trend: -
-
-*Updated after each plan completion*
-| Phase 02 P01 | 2min | 2 tasks | 9 files |
-| Phase 02 P02 | 2min | 2 tasks | 7 files |
-| Phase 03-extended-content P01 | 4min | 2 tasks | 7 files |
-| Phase 03-extended-content P02 | 2min | 2 tasks | 5 files |
-| Phase 04-dynamic-data P01 | 3min | 2 tasks | 7 files |
+- Last 5 plans: 2min, 2min, 4min, 2min, 3min
+- Trend: Stable
 
 ## Accumulated Context
 
@@ -69,15 +59,9 @@ Progress: [████████░░] 75%
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- [Roadmap]: Use custom React context for i18n instead of next-intl routing layer (avoids middleware collision with existing routes)
-- [Roadmap]: Phase 4 (Big Numbers) depends on Phase 2 not Phase 3 — can run in parallel with Phase 3 if needed
-- [Roadmap]: Hardcoded fallback values for Big Numbers until API endpoint confirmed
-- [Phase 02]: DeepStringify and DeepWiden updated with readonly (infer U)[] pattern to support populated arrays with as const
-- [Phase 02]: Section components own their SectionWrapper to avoid double-wrapping in page orchestrator
-- [Phase 03-extended-content]: Used null! assertion on useRef for React 18 @types/react ref compatibility
-- [Phase 03-extended-content]: Sections own their SectionWrapper with dark prop (FlowSection, GapSection pattern)
-- [Phase 04-dynamic-data]: Used requestAnimationFrame with easeOutCubic instead of animation library (zero bundle cost)
-- [Phase 04-dynamic-data]: Fallback-first pattern: render hardcoded values immediately, replace silently on API success
+- [v1.1]: Backend already has RunnerProfile domain model with fields (FitnessLevel, WeeklyKmCapacity, etc.) -- build API on existing model
+- [v1.1]: Onboarding flow: Signup -> Step 1 (confirm name) -> Step 2 (11-question form) -> Planilha download -> Chat
+- [v1.1]: Multi-repo: frontend (Next.js here) + backend (Go at /Documents/runmid/runmid-api)
 
 ### Pending Todos
 
@@ -85,11 +69,10 @@ None yet.
 
 ### Blockers/Concerns
 
-- API endpoint for Big Numbers (`/metrics/landing`) not confirmed to exist on backend — Phase 4 may need backend coordination
-- Real testimonial content not yet available — research suggests deferring testimonials to v2
+- Backend Go repo needs to be explored for existing RunnerProfile model before Phase 5 planning
 
 ## Session Continuity
 
-Last session: 2026-04-22T19:25:51.033Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-04-22
+Stopped at: Roadmap created for v1.1 Onboarding milestone
 Resume file: None
