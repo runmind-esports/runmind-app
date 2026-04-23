@@ -97,8 +97,8 @@ Plans:
   4. Profile data validates required fields and rejects malformed requests
 **Plans**: 2 plans
 Plans:
-- [ ] 05-01-PLAN.md -- Extend RunnerProfile with 4 new onboarding fields across domain, DTO, handler, repo, and DB schema
-- [ ] 05-02-PLAN.md -- XLSX spreadsheet generation endpoint with excelize + frontend onboarding service layer
+- [x] 05-01-PLAN.md -- Extend RunnerProfile with 4 new onboarding fields across domain, DTO, handler, repo, and DB schema
+- [x] 05-02-PLAN.md -- XLSX spreadsheet generation endpoint with excelize + frontend onboarding service layer
 
 ### Phase 6: Onboarding Flow
 **Goal**: New users complete a guided onboarding that captures their runner profile in a smooth, mobile-friendly multi-step experience
