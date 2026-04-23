@@ -127,7 +127,7 @@ Plans:
   3. After download (or explicit skip/continue action), user is redirected to the chat screen
 **Plans**: 1 plan
 Plans:
-- [ ] 07-01-PLAN.md -- Planilha success screen with spreadsheet download and chat redirect
+- [x] 07-01-PLAN.md -- Planilha success screen with spreadsheet download and chat redirect
 **UI hint**: yes
 
 ## Progress
