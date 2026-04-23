@@ -5,6 +5,18 @@ import { cn } from '@/lib/utils'
 import { useTypingEffect } from '../hooks/useTypingEffect'
 import Image from 'next/image'
 
+function AssistantAvatar() {
+  return (
+    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/15">
+      <svg width="14" height="14" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="40" fill="currentColor" className="text-accent" />
+        <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
+      </svg>
+    </div>
+  )
+}
+
 interface MessageBubbleProps {
   message: Message
   isLatest?: boolean
@@ -30,12 +42,13 @@ export function MessageBubble({ message, isLatest = false }: MessageBubbleProps)
         isUser ? 'justify-end' : 'justify-start'
       )}
     >
+      {!isUser && <AssistantAvatar />}
       <div
         className={cn(
           'max-w-[85%]',
           isUser
             ? 'rounded-2xl rounded-br-md bg-bubble-user px-4 py-2.5'
-            : 'py-1'
+            : 'ml-2.5 rounded-2xl rounded-tl-md bg-background-secondary px-4 py-2.5'
         )}
       >
         {/* Image attachments */}

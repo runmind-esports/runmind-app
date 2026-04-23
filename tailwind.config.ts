@@ -36,6 +36,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['Manrope', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        body: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         display: ['Poppins', 'sans-serif'],
       },
       fontSize: {

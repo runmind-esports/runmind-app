@@ -56,7 +56,7 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
   const canSubmit = value.trim() || hasAttachments
 
   return (
-    <div className="border-t border-border bg-background px-4 py-4">
+    <div className="border-t border-border bg-background px-4 py-4 font-body">
       <div className="mx-auto max-w-chat">
         {/* Error messages */}
         {errors.length > 0 && (
