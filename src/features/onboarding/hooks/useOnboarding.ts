@@ -133,9 +133,12 @@ export function useOnboarding() {
     }
   }, [answers, userName])
 
-  const goNext = useCallback(() => {
+  const goNext = useCallback(async () => {
     if (currentStep === 10) {
-      submitProfile()
+      const result = await submitProfile()
+      if (result) {
+        window.location.href = '/planilha'
+      }
       return
     }
     setDirection('forward')
