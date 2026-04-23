@@ -293,12 +293,11 @@ planilha: {
 
 **All other claims verified against existing codebase files.**
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Personalized message content**
+1. **RESOLVED: Personalized message content** — Use generic success message from translations. Profile-based personalization deferred.
    - What we know: D-04 says "personalized message mentioning the user's goal and fitness level"
-   - What's unclear: Whether to fetch profile data from API for personalization, or use simpler generic message
-   - Recommendation: Use a generic success message for v1. Fetching profile just for a personalized subtitle adds unnecessary API call and complexity. The user just completed the form -- they know their goal.
+   - Resolution: Use a generic success message for v1. Fetching profile just for a personalized subtitle adds unnecessary API call and complexity. The user just completed the form -- they know their goal.
 
 ## Sources
 
