@@ -112,7 +112,7 @@ Plans:
   5. The entire flow is responsive and usable on mobile screens
 **Plans**: 3 plans
 Plans:
-- [ ] 06-01-PLAN.md -- useOnboarding hook, translations module, and input primitives (OptionButton, ScaleInput, YesNoInput)
+- [x] 06-01-PLAN.md -- useOnboarding hook, translations module, and input primitives (OptionButton, ScaleInput, YesNoInput)
 - [ ] 06-02-PLAN.md -- OnboardingFlow orchestrator, WelcomeStep, QuestionStep, ProgressBar, OnboardingNavigation, page route, and animations
 - [ ] 06-03-PLAN.md -- Signup redirect chain wiring to /onboarding
 **UI hint**: yes
