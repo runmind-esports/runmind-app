@@ -389,7 +389,7 @@ All breakpoints:
 
 - Layout: `flex items-center justify-between`
 - Back button is hidden on first question (`isFirst === true`)
-- All buttons: `rounded-xl py-3.5 font-bold font-display text-[15px] tracking-tight`
+- All buttons: `rounded-xl py-4 font-bold font-display text-base tracking-tight`
 - Next/Submit hover: matches auth page button hover (slight translateY + shadow)
 - Next button disabled state when `canProceed === false`: `opacity-50 cursor-not-allowed`
 - Submit loading state: text changes to "Salvando seu perfil..." with opacity animation
