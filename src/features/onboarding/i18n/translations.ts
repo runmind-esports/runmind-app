@@ -61,6 +61,14 @@ export const translations = {
       yes: 'Sim',
       no: 'Nao',
     },
+    planilha: {
+      heading: 'Seu plano esta pronto!',
+      subtitle: 'Sua planilha personalizada foi gerada com sucesso. Baixe agora e comece a treinar!',
+      downloadCta: 'Baixar minha planilha',
+      chatCta: 'Ir para o chat',
+      loading: 'Gerando sua planilha...',
+      error: 'Erro ao gerar planilha. Tente novamente.',
+    },
   },
   en: {
     welcome: {
@@ -123,6 +131,14 @@ export const translations = {
     options: {
       yes: 'Yes',
       no: 'No',
+    },
+    planilha: {
+      heading: 'Your plan is ready!',
+      subtitle: 'Your personalized spreadsheet has been generated. Download it now and start training!',
+      downloadCta: 'Download my spreadsheet',
+      chatCta: 'Go to chat',
+      loading: 'Generating your spreadsheet...',
+      error: 'Error generating spreadsheet. Try again.',
     },
   },
 }
