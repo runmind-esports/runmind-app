@@ -264,6 +264,10 @@ Plans:
   6. Conversas sem projeto aparecem na lista geral "Conversas" abaixo dos projetos
   7. Usuário pode renomear, trocar ícone e deletar projeto (conversas voltam pra lista geral)
 **UI hint**: yes
+**Plans**: 2 plans
+Plans:
+- [ ] 15-01-PLAN.md -- Service layer + hooks: projectsApi, useProjects hook, types, barrel exports
+- [ ] 15-02-PLAN.md -- UI components: IconPicker, CreateProjectModal, ProjectSection, ConversationItem context menu, sidebar wiring
 
 ## Progress
 
@@ -286,4 +290,4 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 12. Histórico de Atividades | v2.0 | 0/1 | Planned | - |
 | 13. Treino do Dia & Execução | v2.0 | 0/1 | Planned | - |
 | 14. Projetos Backend | v2.0 | 0/0 | Planned | - |
-| 15. Projetos Frontend | v2.0 | 0/0 | Planned | - |
+| 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |
