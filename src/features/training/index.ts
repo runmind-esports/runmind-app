@@ -40,5 +40,11 @@ export { WeekSummary } from './components/week/WeekSummary'
 // Week hooks
 export { useWeekNavigation, getDaysOfWeek } from './hooks/useWeekNavigation'
 
+// Workout components
+export { WorkoutScreen } from './components/workout/WorkoutScreen'
+export { WorkoutParts } from './components/workout/WorkoutParts'
+export { WorkoutSummary } from './components/workout/WorkoutSummary'
+
 // Types
 export type { TrainingTab } from './types'
+export type { Workout, WorkoutPart, WorkoutStep, WorkoutCompletion } from './types/workout.types'
