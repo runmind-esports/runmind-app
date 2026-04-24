@@ -235,10 +235,26 @@ Plans:
 Plans:
 - [ ] 13-01-PLAN.md -- Workout types, WorkoutParts, WorkoutSummary, WorkoutScreen, route wiring
 
-### Phase 14: Projetos (Pastas de Conversas)
-**Goal**: Usuário pode criar projetos para agrupar conversas, com ícone customizável (Material Design icons)
-**Depends on**: Phase 8 (sidebar com navegação)
-**Requirements**: PROJ-01, PROJ-02, PROJ-03, PROJ-04
+### Phase 14: Projetos — Backend (chat-agent)
+**Goal**: Chat-agent suporta projetos para agrupar conversas com ícone customizável
+**Depends on**: Nenhuma (aditivo, sem breaking changes)
+**Requirements**: PROJ-01, PROJ-02
+**Success Criteria**:
+  1. Tabela `projects` criada (id, user_id, name, icon, created_at, updated_at)
+  2. Coluna `project_id` (nullable FK) adicionada em `conversations`
+  3. `POST /api/v1/chat/projects` cria projeto com nome e ícone
+  4. `GET /api/v1/chat/projects` lista projetos do usuário
+  5. `PUT /api/v1/chat/projects/:id` renomeia / troca ícone
+  6. `DELETE /api/v1/chat/projects/:id` deleta projeto (conversas voltam pra project_id null)
+  7. `PATCH /api/v1/chat/conversations/:id/move` move conversa pra projeto
+  8. `GET /api/v1/chat/conversations/list` aceita query param opcional `project_id` pra filtrar
+**UI hint**: no
+**Repo**: siiix-platform/chat-agent
+
+### Phase 15: Projetos — Frontend (runmid-app)
+**Goal**: Usuário pode criar, gerenciar projetos e organizar conversas no sidebar
+**Depends on**: Phase 14 (backend de projetos)
+**Requirements**: PROJ-03, PROJ-04, PROJ-05
 **Success Criteria**:
   1. Seção "Projetos" no sidebar com botão "Novo projeto"
   2. Ao criar projeto, usuário define nome e escolhe ícone de uma galeria de Material Design icons
@@ -252,7 +268,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14
+Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 -> 15
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -269,4 +285,5 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 11. Calendário Semanal | v2.0 | 0/1 | Planned | - |
 | 12. Histórico de Atividades | v2.0 | 0/1 | Planned | - |
 | 13. Treino do Dia & Execução | v2.0 | 0/1 | Planned | - |
-| 14. Projetos (Pastas) | v2.0 | 0/0 | Planned | - |
+| 14. Projetos Backend | v2.0 | 0/0 | Planned | - |
+| 15. Projetos Frontend | v2.0 | 0/0 | Planned | - |
