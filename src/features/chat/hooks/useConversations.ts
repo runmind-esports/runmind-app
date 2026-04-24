@@ -16,9 +16,9 @@ const toLocalConversation = (api: ApiConversation): Conversation => ({
     createdAt: new Date(m.created_at),
   })),
   folderId: null,
-  projectId: null,
-  createdAt: new Date(api.created_at),
-  updatedAt: new Date(api.updated_at),
+  projectId: api.projectId || api.project_id || null,
+  createdAt: new Date(api.createdAt || api.created_at || ''),
+  updatedAt: new Date(api.updatedAt || api.updated_at || ''),
 })
 
 export function useConversations() {

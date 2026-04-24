@@ -12,8 +12,12 @@ export interface ApiConversation {
   id: string
   title: string
   messages?: ApiMessage[]
-  created_at: string
-  updated_at: string
+  created_at?: string
+  updated_at?: string
+  createdAt?: string
+  updatedAt?: string
+  project_id?: string | null
+  projectId?: string | null
 }
 
 export interface SendMessageRequest {

@@ -59,7 +59,7 @@ export function SidebarContent({
   )
 
   return (
-    <div className="flex-1 overflow-y-auto p-2">
+    <div className="p-2">
       {/* Projects section */}
       <ProjectSection
         projects={projects}
@@ -79,8 +79,8 @@ export function SidebarContent({
       {/* Unassigned conversations */}
       {unassignedConversations.length > 0 ? (
         <div>
-          <div className="px-3 py-1.5 text-xs text-foreground-muted uppercase tracking-wider">
-            Conversas
+          <div className="px-3 py-1.5 text-sm font-medium text-foreground-muted">
+            Recentes
           </div>
 
           {unassignedConversations.map((conversation) => (

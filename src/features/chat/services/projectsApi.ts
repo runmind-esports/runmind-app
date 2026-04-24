@@ -6,10 +6,6 @@ import {
   MoveConversationRequest,
 } from '../types'
 
-interface ListProjectsResponse {
-  projects: ApiProject[]
-}
-
 export const projectsApi = {
   // Create a new project
   createProject: async (data: CreateProjectRequest): Promise<ApiProject> => {
@@ -19,8 +15,8 @@ export const projectsApi = {
 
   // List all projects for the authenticated user
   listProjects: async (): Promise<ApiProject[]> => {
-    const response = await chatApiClient.get<ListProjectsResponse>('/api/v1/chat/projects')
-    return response.data.projects
+    const response = await chatApiClient.get<ApiProject[]>('/api/v1/chat/projects')
+    return response.data
   },
 
   // Update a project

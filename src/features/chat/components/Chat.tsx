@@ -109,7 +109,10 @@ export function Chat() {
         onRenameProject={(id, name) => updateProject(id, { name })}
         onChangeProjectIcon={(id, icon) => updateProject(id, { icon })}
         onCreateProject={(name, icon) => createProject({ name, icon })}
-        onMoveConversation={(convId, projId) => moveConversation(convId, projId)}
+        onMoveConversation={async (convId, projId) => {
+          await moveConversation(convId, projId)
+          conversations.fetchConversations()
+        }}
       />
 
       <ChatHeader

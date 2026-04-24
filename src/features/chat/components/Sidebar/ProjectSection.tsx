@@ -56,7 +56,7 @@ export function ProjectSection({
     <div className="mb-2">
       {/* Section header */}
       <div className="flex items-center justify-between px-3 py-1.5">
-        <span className="text-xs text-foreground-muted uppercase tracking-wider">
+        <span className="text-sm font-medium text-foreground-muted">
           Projetos
         </span>
         <button

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Target, BarChart3, Activity, Settings, X } from 'lucide-react'
+import { Home, BarChart3, Activity, Settings, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SidebarContent } from './SidebarContent'
 import { Conversation, Project } from '../../types'
@@ -67,16 +67,6 @@ export function Sidebar({
       isActive: pathname === '/chat',
     },
     {
-      id: 'objectives',
-      label: 'Objetivos',
-      href: '/chat',
-      icon: <Target className="h-5 w-5" />,
-      children: [
-        { label: 'Baixar tempo nos 10km', href: '/chat' },
-        { label: 'Primeira Meia Maratona', href: '/chat' },
-      ],
-    },
-    {
       id: 'progress',
       label: 'Progresso',
       href: '/training',
@@ -111,62 +101,47 @@ export function Sidebar({
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        {/* Close button */}
-        <div className="flex items-center justify-end p-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="h-8 w-8 text-foreground-muted hover:text-foreground"
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        </div>
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto">
+          {/* Close button */}
+          <div className="flex items-center justify-end p-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="h-8 w-8 text-foreground-muted hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
 
-        {/* Navigation */}
-        <nav className="px-4 py-3">
-          <ul className="space-y-1">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={item.href}
-                  onClick={onClose}
-                  className={cn(
-                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
-                    item.isActive
-                      ? 'text-accent font-medium'
-                      : 'text-foreground hover:bg-background-secondary'
-                  )}
-                >
-                  <span className={item.isActive ? 'text-accent' : 'text-foreground-muted'}>
-                    {item.icon}
-                  </span>
-                  {item.label}
-                </Link>
+          {/* Navigation */}
+          <nav className="px-4 py-1">
+            <ul className="space-y-1">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    href={item.href}
+                    onClick={onClose}
+                    className={cn(
+                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
+                      item.isActive
+                        ? 'text-accent font-medium'
+                        : 'text-foreground hover:bg-background-secondary'
+                    )}
+                  >
+                    <span className={item.isActive ? 'text-accent' : 'text-foreground-muted'}>
+                      {item.icon}
+                    </span>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-                {/* Sub-items */}
-                {item.children && (
-                  <ul className="ml-11 mt-1 space-y-1">
-                    {item.children.map((child) => (
-                      <li key={child.label}>
-                        <Link
-                          href={child.href}
-                          onClick={onClose}
-                          className="block text-sm py-1 text-accent hover:text-accent/80 transition-colors"
-                        >
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Conversations list */}
-        <SidebarContent
+          {/* Projects + Conversations */}
+          <SidebarContent
           conversations={conversations}
           activeConversationId={activeConversationId}
           isLoading={isLoading}
@@ -185,6 +160,7 @@ export function Sidebar({
           onCreateProject={onCreateProject}
           onMoveConversation={onMoveConversation}
         />
+        </div>
 
         {/* Footer — Configurações */}
         <div className="p-3">

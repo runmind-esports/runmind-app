@@ -15,14 +15,17 @@ interface ConversationItemProps {
   onMoveToProject?: (projectId: string | null) => void
 }
 
-function formatRelativeDate(date: Date): string {
+function formatRelativeDate(input: Date | string | undefined): string {
+  if (!input) return ''
+  const date = typeof input === 'string' ? new Date(input) : input
+  if (isNaN(date.getTime())) return ''
   const now = new Date()
   const diffMs = now.getTime() - date.getTime()
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
 
   if (diffDays === 0) return 'Hoje'
   if (diffDays === 1) return 'Ontem'
-  if (diffDays < 7) return `${diffDays} dias atras`
+  if (diffDays < 7) return `${diffDays} dias atrás`
   return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })
 }
 
@@ -38,6 +41,11 @@ export function ConversationItem({
   const [showMenu, setShowMenu] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(conversation.title)
+
+  // Sync edit value when conversation title changes externally
+  useEffect(() => {
+    setEditValue(conversation.title)
+  }, [conversation.title])
   const [showProjectSubmenu, setShowProjectSubmenu] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -108,7 +116,7 @@ export function ConversationItem({
           <>
             <p className="truncate text-sm text-foreground">{conversation.title}</p>
             <p className="text-xs text-foreground-muted">
-              {formatRelativeDate(conversation.updatedAt)}
+              {formatRelativeDate(conversation.updatedAt || conversation.createdAt)}
             </p>
           </>
         )}
