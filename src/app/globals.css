@@ -10,9 +10,9 @@ html {
 
 :root {
   /* Light Theme - Branco & Verde (softened contrast) */
-  --background: #FAFAFA;
-  --background-secondary: #F2F3F5;
-  --background-tertiary: #E8E8EC;
+  --background: #F0F0F3;
+  --background-secondary: #E8E9EC;
+  --background-tertiary: #DDDDE2;
   --foreground: #1A1A2E;
   --foreground-muted: #6B7280;
   --border: #E5E5EA;
