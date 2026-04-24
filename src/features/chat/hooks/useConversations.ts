@@ -39,8 +39,13 @@ export function useConversations() {
       const localConversations = response.conversations.map(toLocalConversation)
       setConversations(localConversations)
     } catch (err) {
-      console.error('Error fetching conversations:', err)
-      setError('Erro ao carregar conversas')
+      const axiosErr = err as { response?: { status?: number } }
+      if (axiosErr?.response?.status === 404) {
+        setConversations([])
+      } else {
+        console.error('Error fetching conversations:', err)
+        setError('Erro ao carregar conversas')
+      }
     } finally {
       setIsLoading(false)
     }
