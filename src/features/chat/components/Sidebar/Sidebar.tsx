@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, BarChart3, Activity, Settings, X } from 'lucide-react'
+import { Home, BarChart3, Dumbbell, Settings, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SidebarContent } from './SidebarContent'
 import { Conversation, Project } from '../../types'
@@ -77,7 +77,7 @@ export function Sidebar({
       id: 'activities',
       label: 'Atividades',
       href: '/training/history',
-      icon: <Activity className="h-5 w-5" />,
+      icon: <Dumbbell className="h-5 w-5" />,
       isActive: pathname?.startsWith('/training/history'),
     },
   ]

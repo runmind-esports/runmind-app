@@ -78,7 +78,7 @@ export interface UpdateProjectRequest {
 }
 
 export interface MoveConversationRequest {
-  project_id: string | null  // null to unassign
+  projectId: string | null  // null to unassign
 }
 
 export interface SidebarState {

@@ -88,7 +88,7 @@ export function useProjects() {
   // Move conversation mutation
   const moveMutation = useMutation({
     mutationFn: ({ conversationId, projectId }: { conversationId: string; projectId: string | null }) =>
-      projectsApi.moveConversation(conversationId, { project_id: projectId }),
+      projectsApi.moveConversation(conversationId, { projectId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] })
       queryClient.invalidateQueries({ queryKey: ['conversations'] })
