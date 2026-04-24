@@ -156,6 +156,10 @@ Plans:
   5. Modo treino tem layout próprio com bottom tabs: Dashboard, Semana, Histórico
   6. Botão de voltar ao chat visível no modo treino
 **UI hint**: yes
+**Plans**: 2 plans
+Plans:
+- [ ] 08-01-PLAN.md -- Draggable FAB component with localStorage position persistence, wired into Chat
+- [ ] 08-02-PLAN.md -- Training shell layout with bottom tabs, routes, header with back-to-chat
 
 ### Phase 9: Strava Activities Service
 **Goal**: Frontend tem camada de serviço para buscar e cachear atividades do Strava
@@ -230,7 +234,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
 | 6. Onboarding Flow | v1.1 | 0/3 | Not started | - |
 | 7. Planilha & Completion | v1.1 | 0/1 | Not started | - |
-| 8. FAB Button & Training Shell | v2.0 | 0/0 | Planned | - |
+| 8. FAB Button & Training Shell | v2.0 | 0/2 | Planned | - |
 | 9. Strava Activities Service | v2.0 | 0/0 | Planned | - |
 | 10. Dashboard de Métricas | v2.0 | 0/0 | Planned | - |
 | 11. Calendário Semanal | v2.0 | 0/0 | Planned | - |
