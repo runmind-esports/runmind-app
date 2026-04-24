@@ -41,10 +41,12 @@ function readStoredPosition(): Position | null {
 
 export function useFABPosition() {
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     const stored = readStoredPosition()
     setPosition(stored ?? getDefaultPosition())
+    setReady(true)
   }, [])
 
   const savePosition = useCallback((pos: Position) => {
@@ -56,5 +58,5 @@ export function useFABPosition() {
     }
   }, [])
 
-  return { position, savePosition }
+  return { position, savePosition, ready }
 }

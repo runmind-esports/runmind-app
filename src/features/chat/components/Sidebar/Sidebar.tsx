@@ -1,13 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { Settings, User, HelpCircle } from 'lucide-react'
-import { SidebarHeader } from './SidebarHeader'
+import { usePathname } from 'next/navigation'
+import { Home, Target, BarChart3, Activity, Settings, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { SidebarContent } from './SidebarContent'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { Conversation } from '../../types'
 import { cn } from '@/lib/utils'
-
 
 interface SidebarProps {
   isOpen: boolean
@@ -22,6 +21,15 @@ interface SidebarProps {
   onRenameConversation: (id: string, title: string) => void
 }
 
+interface NavItem {
+  id: string
+  label: string
+  href: string
+  icon: React.ReactNode
+  isActive?: boolean
+  children?: { label: string; href: string }[]
+}
+
 export function Sidebar({
   isOpen,
   onClose,
@@ -34,6 +42,42 @@ export function Sidebar({
   onDeleteConversation,
   onRenameConversation,
 }: SidebarProps) {
+  const pathname = usePathname()
+
+  const navItems: NavItem[] = [
+    {
+      id: 'home',
+      label: 'Home',
+      href: '/chat',
+      icon: <Home className="h-5 w-5" />,
+      isActive: pathname === '/chat',
+    },
+    {
+      id: 'objectives',
+      label: 'Objetivos',
+      href: '/chat',
+      icon: <Target className="h-5 w-5" />,
+      children: [
+        { label: 'Baixar tempo nos 10km', href: '/chat' },
+        { label: 'Primeira Meia Maratona', href: '/chat' },
+      ],
+    },
+    {
+      id: 'progress',
+      label: 'Progresso',
+      href: '/training',
+      icon: <BarChart3 className="h-5 w-5" />,
+      isActive: pathname === '/training',
+    },
+    {
+      id: 'activities',
+      label: 'Atividades',
+      href: '/training/history',
+      icon: <Activity className="h-5 w-5" />,
+      isActive: pathname?.startsWith('/training/history'),
+    },
+  ]
+
   return (
     <>
       {/* Overlay */}
@@ -48,16 +92,66 @@ export function Sidebar({
       {/* Drawer */}
       <aside
         className={cn(
-          'fixed left-0 top-0 h-full w-[280px] bg-sidebar z-50 flex flex-col',
+          'fixed left-0 top-0 h-full w-[280px] bg-background z-50 flex flex-col',
           'transition-transform duration-300 ease-in-out',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        <SidebarHeader
-          onNewConversation={onNewConversation}
-          onClose={onClose}
-        />
+        {/* Close button */}
+        <div className="flex items-center justify-end p-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="h-8 w-8 text-foreground-muted hover:text-foreground"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
 
+        {/* Navigation */}
+        <nav className="px-4 py-3">
+          <ul className="space-y-1">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <Link
+                  href={item.href}
+                  onClick={onClose}
+                  className={cn(
+                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
+                    item.isActive
+                      ? 'text-accent font-medium'
+                      : 'text-foreground hover:bg-background-secondary'
+                  )}
+                >
+                  <span className={item.isActive ? 'text-accent' : 'text-foreground-muted'}>
+                    {item.icon}
+                  </span>
+                  {item.label}
+                </Link>
+
+                {/* Sub-items */}
+                {item.children && (
+                  <ul className="ml-11 mt-1 space-y-1">
+                    {item.children.map((child) => (
+                      <li key={child.label}>
+                        <Link
+                          href={child.href}
+                          onClick={onClose}
+                          className="block text-sm py-1 text-accent hover:text-accent/80 transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Conversations list */}
         <SidebarContent
           conversations={conversations}
           activeConversationId={activeConversationId}
@@ -71,30 +165,16 @@ export function Sidebar({
           onRenameConversation={onRenameConversation}
         />
 
-        {/* Configuracoes */}
-        <div className="border-t border-border p-2">
-          <ThemeToggle />
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors">
-            <User className="h-4 w-4" />
-            <span className="text-sm">Meu perfil</span>
-          </button>
+        {/* Footer — Configurações */}
+        <div className="p-3">
           <Link
             href="/settings"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors"
+            onClick={onClose}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors"
           >
-            <Settings className="h-4 w-4" />
-            <span className="text-sm">Configuracoes</span>
+            <Settings className="h-5 w-5" />
+            Configurações
           </Link>
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors">
-            <HelpCircle className="h-4 w-4" />
-            <span className="text-sm">Ajuda</span>
-          </button>
-        </div>
-
-        {/* User Tier */}
-        <div className="border-t border-border p-3 flex items-center justify-between">
-          <span className="text-[12px] text-foreground-muted">Plano atual</span>
-          <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[11px] font-bold">Trial</span>
         </div>
       </aside>
     </>

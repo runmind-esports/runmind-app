@@ -7,7 +7,7 @@ import { useFABPosition } from '../hooks/useFABPosition'
 
 export function FAB() {
   const router = useRouter()
-  const { position, savePosition } = useFABPosition()
+  const { position, savePosition, ready } = useFABPosition()
   const { position: currentPos, isDragging, dragMovedRef, ref } = useDraggable({
     initialPosition: position,
     onPositionChange: savePosition,
@@ -17,6 +17,8 @@ export function FAB() {
     if (dragMovedRef.current) return
     router.push('/training')
   }
+
+  if (!ready) return null
 
   return (
     <button
