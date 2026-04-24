@@ -53,8 +53,32 @@ export interface Folder {
 export interface Project {
   id: string
   name: string
-  isExpanded: boolean
+  icon: string          // lucide-react icon name, e.g. 'folder', 'target', 'zap'
+  isExpanded: boolean   // local UI state, not from API
   createdAt: Date
+  updatedAt: Date
+}
+
+export interface ApiProject {
+  id: string
+  name: string
+  icon: string
+  created_at: string
+  updated_at: string
+}
+
+export interface CreateProjectRequest {
+  name: string
+  icon: string
+}
+
+export interface UpdateProjectRequest {
+  name?: string
+  icon?: string
+}
+
+export interface MoveConversationRequest {
+  project_id: string | null  // null to unassign
 }
 
 export interface SidebarState {

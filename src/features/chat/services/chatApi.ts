@@ -104,11 +104,11 @@ export const chatApi = {
     return response.data
   },
 
-  // List conversations (paginated)
-  listConversations: async (page = 1, limit = 20): Promise<ListConversationsResponse> => {
-    const response = await chatApiClient.get<ListConversationsResponse>(
-      `/api/v1/chat/conversations/list?page=${page}&limit=${limit}`
-    )
+  // List conversations (paginated, optionally filtered by project)
+  listConversations: async (page = 1, limit = 20, projectId?: string): Promise<ListConversationsResponse> => {
+    let url = `/api/v1/chat/conversations/list?page=${page}&limit=${limit}`
+    if (projectId) url += `&project_id=${projectId}`
+    const response = await chatApiClient.get<ListConversationsResponse>(url)
     return response.data
   },
 
