@@ -30,10 +30,10 @@ export function IconPicker({ selectedIcon, onSelect }: IconPickerProps) {
         type="text"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        placeholder="Buscar icone..."
-        className="w-full rounded-lg bg-background-secondary px-3 py-2 text-sm text-foreground placeholder:text-foreground-muted outline-none mb-2"
+        placeholder="Buscar ícone..."
+        className="w-full rounded-lg bg-background-secondary px-4 py-3 text-sm text-foreground placeholder:text-foreground-muted outline-none focus:ring-2 focus:ring-accent/30 mb-3"
       />
-      <div className="grid grid-cols-4 gap-1.5 max-h-48 overflow-y-auto">
+      <div className="grid grid-cols-6 gap-2 max-h-[200px] overflow-y-auto p-1">
         {filteredIcons.map((name) => {
           const IconComponent = icons[name as keyof typeof icons]
           if (!IconComponent) return null
@@ -45,14 +45,14 @@ export function IconPicker({ selectedIcon, onSelect }: IconPickerProps) {
               key={name}
               type="button"
               onClick={() => onSelect(name)}
-              className={`flex items-center justify-center rounded-lg p-2 transition-colors ${
+              className={`flex items-center justify-center rounded-lg p-2.5 min-h-[44px] transition-colors ${
                 isSelected
-                  ? 'ring-2 ring-accent bg-background-secondary'
+                  ? 'ring-2 ring-accent bg-accent/10'
                   : 'bg-background-secondary hover:bg-background-tertiary'
               }`}
               title={name}
             >
-              <IconComponent className="h-5 w-5 text-foreground" />
+              <IconComponent className={`h-5 w-5 ${isSelected ? 'text-accent' : 'text-foreground'}`} />
             </button>
           )
         })}
