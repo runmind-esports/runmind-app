@@ -24,8 +24,10 @@ export function formatDuration(seconds: number): string {
   return `${hours}h ${mins.toString().padStart(2, '0')}min`
 }
 
-export function formatDateShort(isoDate: string | Date): string {
+export function formatDateShort(isoDate: string | Date | undefined | null): string {
+  if (!isoDate) return '--'
   const date = typeof isoDate === 'string' ? new Date(isoDate) : isoDate
+  if (isNaN(date.getTime())) return '--'
   const day = date.getDate()
   const month = MONTHS_PT[date.getMonth()]
   return `${day} ${month}`
