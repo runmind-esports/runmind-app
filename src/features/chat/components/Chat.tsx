@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useChat } from '../hooks/useChat'
 import { useSidebar } from '../hooks/useSidebar'
 import { useConversations } from '../hooks/useConversations'
+import { useProjects } from '../hooks/useProjects'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import { ChatHeader } from './ChatHeader'
 import { MessageList } from './MessageList'
@@ -26,6 +27,7 @@ export function Chat() {
   const chat = useChat()
   const sidebar = useSidebar()
   const conversations = useConversations()
+  const { projects, createProject, updateProject, deleteProject, moveConversation, toggleProject } = useProjects()
   // Track conversation IDs we've just created via sendMessage to skip reloading
   const justCreatedRef = useRef<Set<string>>(new Set())
   // Track if messages were loaded from history (skip typing animation)
@@ -101,6 +103,13 @@ export function Chat() {
         onSelectConversation={handleSelectConversation}
         onDeleteConversation={conversations.deleteConversation}
         onRenameConversation={conversations.renameConversation}
+        projects={projects}
+        onToggleProject={toggleProject}
+        onDeleteProject={(id) => deleteProject(id)}
+        onRenameProject={(id, name) => updateProject(id, { name })}
+        onChangeProjectIcon={(id, icon) => updateProject(id, { icon })}
+        onCreateProject={(name, icon) => createProject({ name, icon })}
+        onMoveConversation={(convId, projId) => moveConversation(convId, projId)}
       />
 
       <ChatHeader

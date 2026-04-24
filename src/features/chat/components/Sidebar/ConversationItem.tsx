@@ -1,7 +1,7 @@
 'use client'
 
-import { MessageSquare, MoreHorizontal, Trash2, Edit2, FolderInput } from 'lucide-react'
-import { Conversation } from '../../types'
+import { MessageSquare, MoreHorizontal, Trash2, Edit2, FolderInput, Folder, icons } from 'lucide-react'
+import { Conversation, Project } from '../../types'
 import { cn } from '@/lib/utils'
 import { useState, useRef, useEffect } from 'react'
 
@@ -11,6 +11,8 @@ interface ConversationItemProps {
   onSelect: () => void
   onDelete: () => void
   onRename: (title: string) => void
+  projects?: Project[]
+  onMoveToProject?: (projectId: string | null) => void
 }
 
 function formatRelativeDate(date: Date): string {
@@ -20,7 +22,7 @@ function formatRelativeDate(date: Date): string {
 
   if (diffDays === 0) return 'Hoje'
   if (diffDays === 1) return 'Ontem'
-  if (diffDays < 7) return `${diffDays} dias atrás`
+  if (diffDays < 7) return `${diffDays} dias atras`
   return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })
 }
 
@@ -30,10 +32,13 @@ export function ConversationItem({
   onSelect,
   onDelete,
   onRename,
+  projects,
+  onMoveToProject,
 }: ConversationItemProps) {
   const [showMenu, setShowMenu] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(conversation.title)
+  const [showProjectSubmenu, setShowProjectSubmenu] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -48,6 +53,7 @@ export function ConversationItem({
     const handleClickOutside = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setShowMenu(false)
+        setShowProjectSubmenu(false)
       }
     }
 
@@ -72,6 +78,8 @@ export function ConversationItem({
       setIsEditing(false)
     }
   }
+
+  const hasProjects = projects && projects.length > 0 && onMoveToProject
 
   return (
     <div
@@ -111,6 +119,7 @@ export function ConversationItem({
           onClick={(e) => {
             e.stopPropagation()
             setShowMenu(!showMenu)
+            setShowProjectSubmenu(false)
           }}
           className={cn(
             'p-1 rounded hover:bg-background-tertiary text-foreground-muted hover:text-foreground transition-opacity',
@@ -121,7 +130,7 @@ export function ConversationItem({
         </button>
 
         {showMenu && (
-          <div className="absolute right-0 top-full mt-1 z-50 w-40 rounded-lg bg-background-tertiary border border-border shadow-lg py-1">
+          <div className="absolute right-0 top-full mt-1 z-50 w-48 rounded-lg bg-background-tertiary border border-border shadow-lg py-1">
             <button
               onClick={(e) => {
                 e.stopPropagation()
@@ -133,6 +142,60 @@ export function ConversationItem({
               <Edit2 className="h-4 w-4" />
               Renomear
             </button>
+
+            {hasProjects && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowProjectSubmenu(!showProjectSubmenu)
+                }}
+                className="flex w-full items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-background-secondary"
+              >
+                <FolderInput className="h-4 w-4" />
+                Mover para projeto
+              </button>
+            )}
+
+            {hasProjects && showProjectSubmenu && (
+              <div className="border-t border-border mt-1 pt-1">
+                {projects.map((project) => {
+                  const ProjectIcon = icons[project.icon as keyof typeof icons] || Folder
+                  return (
+                    <button
+                      key={project.id}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setShowMenu(false)
+                        setShowProjectSubmenu(false)
+                        onMoveToProject!(project.id)
+                      }}
+                      className="flex w-full items-center gap-2 px-5 py-1.5 text-sm text-foreground hover:bg-background-secondary"
+                    >
+                      <ProjectIcon className="h-3.5 w-3.5 text-accent" />
+                      <span className="truncate">{project.name}</span>
+                    </button>
+                  )
+                })}
+                {conversation.projectId && (
+                  <>
+                    <div className="my-1 border-t border-border" />
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setShowMenu(false)
+                        setShowProjectSubmenu(false)
+                        onMoveToProject!(null)
+                      }}
+                      className="flex w-full items-center gap-2 px-5 py-1.5 text-sm text-foreground-muted hover:bg-background-secondary"
+                    >
+                      Remover do projeto
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+
+            <div className="my-1 border-t border-border" />
             <button
               onClick={(e) => {
                 e.stopPropagation()

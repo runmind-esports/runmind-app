@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { Home, Target, BarChart3, Activity, Settings, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SidebarContent } from './SidebarContent'
-import { Conversation } from '../../types'
+import { Conversation, Project } from '../../types'
 import { cn } from '@/lib/utils'
 
 interface SidebarProps {
@@ -19,6 +19,13 @@ interface SidebarProps {
   onSelectConversation: (id: string) => void
   onDeleteConversation: (id: string) => void
   onRenameConversation: (id: string, title: string) => void
+  projects: Project[]
+  onToggleProject: (id: string) => void
+  onDeleteProject: (id: string) => void
+  onRenameProject: (id: string, name: string) => void
+  onChangeProjectIcon: (id: string, icon: string) => void
+  onCreateProject: (name: string, icon: string) => void
+  onMoveConversation: (conversationId: string, projectId: string | null) => void
 }
 
 interface NavItem {
@@ -41,6 +48,13 @@ export function Sidebar({
   onSelectConversation,
   onDeleteConversation,
   onRenameConversation,
+  projects,
+  onToggleProject,
+  onDeleteProject,
+  onRenameProject,
+  onChangeProjectIcon,
+  onCreateProject,
+  onMoveConversation,
 }: SidebarProps) {
   const pathname = usePathname()
 
@@ -163,6 +177,13 @@ export function Sidebar({
           }}
           onDeleteConversation={onDeleteConversation}
           onRenameConversation={onRenameConversation}
+          projects={projects}
+          onToggleProject={onToggleProject}
+          onDeleteProject={onDeleteProject}
+          onRenameProject={onRenameProject}
+          onChangeProjectIcon={onChangeProjectIcon}
+          onCreateProject={onCreateProject}
+          onMoveConversation={onMoveConversation}
         />
 
         {/* Footer — Configurações */}
