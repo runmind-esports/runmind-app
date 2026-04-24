@@ -1,5 +1,5 @@
-import { DashboardPlaceholder } from '@/features/training'
+import { DashboardScreen } from '@/features/training'
 
 export default function TrainingDashboardPage() {
-  return <DashboardPlaceholder />
+  return <DashboardScreen />
 }

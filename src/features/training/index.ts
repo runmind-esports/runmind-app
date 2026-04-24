@@ -11,5 +11,14 @@ export { HistoryPlaceholder } from './components/placeholders/HistoryPlaceholder
 export { useDraggable } from './hooks/useDraggable'
 export { useFABPosition } from './hooks/useFABPosition'
 
+// Dashboard components
+export { DashboardScreen } from './components/dashboard/DashboardScreen'
+export { MetricCard } from './components/dashboard/MetricCard'
+export { LastActivityCard } from './components/dashboard/LastActivityCard'
+export { StravaConnectCTA } from './components/dashboard/StravaConnectCTA'
+
+// Utils
+export { formatDistance, formatPace, formatDuration, formatDateShort, formatTrend } from './utils/formatters'
+
 // Types
 export type { TrainingTab } from './types'
