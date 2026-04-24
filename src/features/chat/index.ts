@@ -12,6 +12,7 @@ export { ImagePreview } from './components/ImagePreview'
 
 // Services
 export { chatApi } from './services/chatApi'
+export { projectsApi } from './services/projectsApi'
 
 // Hooks
 export { useChat } from './hooks/useChat'
@@ -20,6 +21,7 @@ export { useChatScroll } from './hooks/useChatScroll'
 export { useTypingEffect } from './hooks/useTypingEffect'
 export { useSidebar } from './hooks/useSidebar'
 export { useConversations } from './hooks/useConversations'
+export { useProjects } from './hooks/useProjects'
 export { useImageAttachments } from './hooks/useImageAttachments'
 
 // Utils
@@ -37,6 +39,10 @@ export type {
   Folder,
   Project,
   SidebarState,
+  ApiProject,
+  CreateProjectRequest,
+  UpdateProjectRequest,
+  MoveConversationRequest,
 } from './types'
 
 export type { ImageAttachment } from './hooks/useImageAttachments'
