@@ -135,7 +135,7 @@ Plans:
 
 **Milestone Goal:** Acompanhamento de treinos via Strava — dashboard com métricas, calendário semanal, histórico de atividades e detalhe de treino. Dados puxados automaticamente do Strava. Chat acessível pelo menu.
 
-- [ ] **Phase 8: App Shell & Navigation** - Layout autenticado com bottom tabs (Dashboard, Semana, Histórico, Chat), roteamento
+- [ ] **Phase 8: FAB Button & Training Shell** - Botão floating draggable no chat + modo treino com bottom tabs (Dashboard, Semana, Histórico)
 - [ ] **Phase 9: Strava Activities Service** - Camada de serviço e hooks para consumir atividades do Strava via runmid-api
 - [ ] **Phase 10: Dashboard de Métricas** - Métricas do mês (km total, corridas, pace médio), evolução, última atividade
 - [ ] **Phase 11: Calendário Semanal** - Cards por dia com atividades do Strava, navegação entre semanas
@@ -144,15 +144,17 @@ Plans:
 
 ## Phase Details (v2.0)
 
-### Phase 8: App Shell & Navigation
-**Goal**: App tem navegação com bottom tabs, chat deixa de ser tela principal
+### Phase 8: FAB Button & Training Shell
+**Goal**: Chat permanece a tela principal com um FAB draggable semi-transparente que leva ao modo treino com bottom tabs
 **Depends on**: Phase 7 (onboarding completo)
 **Requirements**: NAV-01, NAV-02, NAV-03
 **Success Criteria**:
-  1. Usuário autenticado vê bottom tab bar com: Dashboard, Semana, Histórico, Chat
-  2. Após login, redireciona para `/dashboard` em vez de `/chat`
-  3. Layout compartilhado com bottom nav persiste em todas as telas autenticadas
-  4. Chat mantém funcionalidade existente na tab dedicada
+  1. Chat continua como home após login (`/chat`)
+  2. FAB (floating action button) visível no chat: semi-transparente, ícone de treino, draggable (usuário arrasta pra qualquer posição)
+  3. FAB persiste posição entre sessões (localStorage)
+  4. Ao clicar no FAB, navega para `/training` (modo treino)
+  5. Modo treino tem layout próprio com bottom tabs: Dashboard, Semana, Histórico
+  6. Botão de voltar ao chat visível no modo treino
 **UI hint**: yes
 
 ### Phase 9: Strava Activities Service
@@ -228,7 +230,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
 | 6. Onboarding Flow | v1.1 | 0/3 | Not started | - |
 | 7. Planilha & Completion | v1.1 | 0/1 | Not started | - |
-| 8. App Shell & Navigation | v2.0 | 0/0 | Planned | - |
+| 8. FAB Button & Training Shell | v2.0 | 0/0 | Planned | - |
 | 9. Strava Activities Service | v2.0 | 0/0 | Planned | - |
 | 10. Dashboard de Métricas | v2.0 | 0/0 | Planned | - |
 | 11. Calendário Semanal | v2.0 | 0/0 | Planned | - |
