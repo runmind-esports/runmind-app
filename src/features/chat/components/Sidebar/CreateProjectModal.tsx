@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { IconPicker } from './IconPicker'
 
 interface CreateProjectModalProps {
@@ -57,9 +58,9 @@ export function CreateProjectModal({
 
   if (!isOpen) return null
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+      className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center"
       onClick={onClose}
     >
       <div
@@ -103,6 +104,7 @@ export function CreateProjectModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
