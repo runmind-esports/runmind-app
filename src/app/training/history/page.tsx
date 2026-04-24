@@ -1,5 +1,5 @@
-import { HistoryPlaceholder } from '@/features/training'
+import { HistoryScreen } from '@/features/training'
 
 export default function TrainingHistoryPage() {
-  return <HistoryPlaceholder />
+  return <HistoryScreen />
 }

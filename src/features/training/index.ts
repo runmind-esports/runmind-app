@@ -20,6 +20,17 @@ export { StravaConnectCTA } from './components/dashboard/StravaConnectCTA'
 // Utils
 export { formatDistance, formatPace, formatDuration, formatDateShort, formatTrend } from './utils/formatters'
 
+// History components
+export { HistoryScreen } from './components/history/HistoryScreen'
+export { ActivityDetailScreen } from './components/history/ActivityDetailScreen'
+export { ActivityListItem } from './components/history/ActivityListItem'
+export { ActivityFilters } from './components/history/ActivityFilters'
+export { SplitsTable } from './components/history/SplitsTable'
+export { HRZonesChart } from './components/history/HRZonesChart'
+
+// History hooks
+export { useInfiniteActivities } from './hooks/useInfiniteActivities'
+
 // Week components
 export { WeekScreen } from './components/week/WeekScreen'
 export { WeekSelector } from './components/week/WeekSelector'
