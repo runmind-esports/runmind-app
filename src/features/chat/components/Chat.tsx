@@ -12,6 +12,7 @@ import { ChatInput } from './ChatInput'
 import { WelcomeScreen } from './WelcomeScreen'
 import { Sidebar } from './Sidebar'
 import { ImageAttachment } from '../hooks/useImageAttachments'
+import { FAB } from '@/features/training'
 
 export function Chat() {
   const router = useRouter()
@@ -116,6 +117,8 @@ export function Chat() {
       )}
 
       <ChatInput onSend={handleSendMessage} disabled={chat.isLoading} />
+
+      <FAB />
     </div>
   )
 }
