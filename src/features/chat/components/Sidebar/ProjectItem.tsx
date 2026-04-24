@@ -1,54 +1,47 @@
 'use client'
 
-import { Briefcase, ChevronRight, MoreHorizontal, Trash2, Edit2, FolderPlus, Plus } from 'lucide-react'
-import { Project, Folder, Conversation } from '../../types'
-import { FolderItem } from './FolderItem'
+import { ChevronRight, MoreHorizontal, Trash2, Edit2, Palette, Folder, icons } from 'lucide-react'
+import { Project, Conversation } from '../../types'
 import { ConversationItem } from './ConversationItem'
 import { cn } from '@/lib/utils'
 import { useState, useRef, useEffect } from 'react'
 
 interface ProjectItemProps {
   project: Project
-  folders: Folder[]
   conversations: Conversation[]
   activeConversationId: string | null
   onToggle: () => void
   onDelete: () => void
   onRename: (name: string) => void
-  onAddFolder: () => void
-  onAddConversation: () => void
+  onChangeIcon: (icon: string) => void
   onSelectConversation: (id: string) => void
   onDeleteConversation: (id: string) => void
   onRenameConversation: (id: string, title: string) => void
-  onToggleFolder: (id: string) => void
-  onDeleteFolder: (id: string) => void
-  onRenameFolder: (id: string, name: string) => void
-  getConversationsInFolder: (folderId: string, projectId: string) => Conversation[]
+  onMoveConversation: (conversationId: string, projectId: string | null) => void
+  allProjects: Project[]
 }
 
 export function ProjectItem({
   project,
-  folders,
   conversations,
   activeConversationId,
   onToggle,
   onDelete,
   onRename,
-  onAddFolder,
-  onAddConversation,
+  onChangeIcon,
   onSelectConversation,
   onDeleteConversation,
   onRenameConversation,
-  onToggleFolder,
-  onDeleteFolder,
-  onRenameFolder,
-  getConversationsInFolder,
+  onMoveConversation,
+  allProjects,
 }: ProjectItemProps) {
   const [showMenu, setShowMenu] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(project.name)
   const inputRef = useRef<HTMLInputElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+
+  const IconComponent = icons[project.icon as keyof typeof icons] || Folder
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -86,8 +79,6 @@ export function ProjectItem({
     }
   }
 
-  const totalItems = folders.length + conversations.length
-
   return (
     <div className="mb-1">
       <div
@@ -100,7 +91,7 @@ export function ProjectItem({
             project.isExpanded && 'rotate-90'
           )}
         />
-        <Briefcase className="h-4 w-4 shrink-0 text-accent" />
+        <IconComponent className="h-4 w-4 shrink-0 text-accent" />
 
         {isEditing ? (
           <input
@@ -113,10 +104,12 @@ export function ProjectItem({
             className="flex-1 bg-transparent text-sm font-medium text-foreground outline-none"
           />
         ) : (
-          <span className="flex-1 truncate text-sm font-medium text-foreground">{project.name}</span>
+          <span className="flex-1 truncate text-sm font-medium text-foreground">
+            {project.name}
+          </span>
         )}
 
-        <span className="text-xs text-foreground-muted">{totalItems}</span>
+        <span className="text-xs text-foreground-muted">{conversations.length}</span>
 
         <div className="relative" ref={menuRef}>
           <button
@@ -138,29 +131,6 @@ export function ProjectItem({
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowMenu(false)
-                  onAddConversation()
-                }}
-                className="flex w-full items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-background-secondary"
-              >
-                <Plus className="h-4 w-4" />
-                Nova conversa
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setShowMenu(false)
-                  onAddFolder()
-                }}
-                className="flex w-full items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-background-secondary"
-              >
-                <FolderPlus className="h-4 w-4" />
-                Nova pasta
-              </button>
-              <div className="my-1 border-t border-border" />
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setShowMenu(false)
                   setIsEditing(true)
                 }}
                 className="flex w-full items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-background-secondary"
@@ -168,6 +138,18 @@ export function ProjectItem({
                 <Edit2 className="h-4 w-4" />
                 Renomear
               </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowMenu(false)
+                  onChangeIcon(project.icon)
+                }}
+                className="flex w-full items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-background-secondary"
+              >
+                <Palette className="h-4 w-4" />
+                Trocar icone
+              </button>
+              <div className="my-1 border-t border-border" />
               <button
                 onClick={(e) => {
                   e.stopPropagation()
@@ -186,23 +168,6 @@ export function ProjectItem({
 
       {project.isExpanded && (
         <div className="ml-4 border-l border-border pl-2">
-          {/* Pastas do projeto */}
-          {folders.map((folder) => (
-            <FolderItem
-              key={folder.id}
-              folder={folder}
-              conversations={getConversationsInFolder(folder.id, project.id)}
-              activeConversationId={activeConversationId}
-              onToggle={() => onToggleFolder(folder.id)}
-              onDelete={() => onDeleteFolder(folder.id)}
-              onRename={(name) => onRenameFolder(folder.id, name)}
-              onSelectConversation={onSelectConversation}
-              onDeleteConversation={onDeleteConversation}
-              onRenameConversation={onRenameConversation}
-            />
-          ))}
-
-          {/* Conversas soltas no projeto */}
           {conversations.map((conversation) => (
             <ConversationItem
               key={conversation.id}
@@ -211,10 +176,14 @@ export function ProjectItem({
               onSelect={() => onSelectConversation(conversation.id)}
               onDelete={() => onDeleteConversation(conversation.id)}
               onRename={(title) => onRenameConversation(conversation.id, title)}
+              projects={allProjects}
+              onMoveToProject={(projectId) =>
+                onMoveConversation(conversation.id, projectId)
+              }
             />
           ))}
 
-          {folders.length === 0 && conversations.length === 0 && (
+          {conversations.length === 0 && (
             <div className="px-3 py-2 text-xs text-foreground-muted">
               Projeto vazio
             </div>
