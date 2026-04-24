@@ -5,6 +5,18 @@ import { cn } from '@/lib/utils'
 import { useTypingEffect } from '../hooks/useTypingEffect'
 import Image from 'next/image'
 
+// Convert basic markdown to HTML (bold, italic, line breaks)
+function markdownToHtml(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br/>')
+}
+
+function hasMarkdown(text: string): boolean {
+  return /\*\*.+?\*\*/.test(text)
+}
+
 function AssistantAvatar() {
   return (
     <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/15">
@@ -76,10 +88,10 @@ export function MessageBubble({ message, isLatest = false, animate = true }: Mes
 
         {/* Text content */}
         {content && (
-          content.includes('<') && content.includes('>') ? (
+          content.includes('<') && content.includes('>') || hasMarkdown(content) ? (
             <div
-              className="text-[15px] leading-relaxed break-words text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:mb-1 [&_p]:mb-2 [&_p:last-child]:mb-0"
-              dangerouslySetInnerHTML={{ __html: content }}
+              className="text-[15px] leading-relaxed break-words text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:mb-1 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:font-semibold [&_em]:italic"
+              dangerouslySetInnerHTML={{ __html: content.includes('<') ? content : markdownToHtml(content) }}
             />
           ) : (
             <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words text-foreground">
