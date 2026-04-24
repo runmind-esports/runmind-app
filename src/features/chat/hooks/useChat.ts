@@ -10,7 +10,9 @@ import { ImageAttachment } from './useImageAttachments'
 const toLocalMessage = (apiMessage: ApiMessage): Message => ({
   id: apiMessage.id,
   role: apiMessage.role,
-  content: apiMessage.content,
+  content: apiMessage.role === 'assistant'
+    ? parseResponseContent(apiMessage.content)
+    : apiMessage.content,
   createdAt: new Date(apiMessage.created_at),
 })
 

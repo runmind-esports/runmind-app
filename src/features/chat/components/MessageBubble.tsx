@@ -20,11 +20,12 @@ function AssistantAvatar() {
 interface MessageBubbleProps {
   message: Message
   isLatest?: boolean
+  animate?: boolean
 }
 
-export function MessageBubble({ message, isLatest = false }: MessageBubbleProps) {
+export function MessageBubble({ message, isLatest = false, animate = true }: MessageBubbleProps) {
   const isUser = message.role === 'user'
-  const shouldAnimate = !isUser && isLatest
+  const shouldAnimate = !isUser && isLatest && animate
 
   const { displayedText, isTyping } = useTypingEffect({
     text: message.content,
@@ -75,10 +76,17 @@ export function MessageBubble({ message, isLatest = false }: MessageBubbleProps)
 
         {/* Text content */}
         {content && (
-          <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words text-foreground">
-            {content}
-            {isTyping && <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-foreground" />}
-          </p>
+          content.includes('<') && content.includes('>') ? (
+            <div
+              className="text-[15px] leading-relaxed break-words text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:mb-1 [&_p]:mb-2 [&_p:last-child]:mb-0"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          ) : (
+            <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words text-foreground">
+              {content}
+              {isTyping && <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-foreground" />}
+            </p>
+          )
         )}
       </div>
     </div>

@@ -8,9 +8,10 @@ import { useChatScroll } from '../hooks/useChatScroll'
 interface MessageListProps {
   messages: Message[]
   isLoading: boolean
+  animate?: boolean
 }
 
-export function MessageList({ messages, isLoading }: MessageListProps) {
+export function MessageList({ messages, isLoading, animate = true }: MessageListProps) {
   const { scrollRef } = useChatScroll<HTMLDivElement>([messages, isLoading])
 
   return (
@@ -24,6 +25,7 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
             key={message.id}
             message={message}
             isLatest={index === messages.length - 1}
+            animate={animate}
           />
         ))}
 

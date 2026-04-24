@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useChat } from '../hooks/useChat'
 import { useSidebar } from '../hooks/useSidebar'
@@ -28,6 +28,8 @@ export function Chat() {
   const conversations = useConversations()
   // Track conversation IDs we've just created via sendMessage to skip reloading
   const justCreatedRef = useRef<Set<string>>(new Set())
+  // Track if messages were loaded from history (skip typing animation)
+  const [isLoadedConversation, setIsLoadedConversation] = useState(false)
 
   const hasMessages = chat.messages.length > 0
 
@@ -43,6 +45,7 @@ export function Chat() {
         // Just sync the conversationId without reloading
         chat.setConversationId(conversations.activeConversationId)
       } else {
+        setIsLoadedConversation(true)
         chat.loadConversation(conversations.activeConversationId)
       }
     }
@@ -51,6 +54,7 @@ export function Chat() {
 
   // Handle sending message
   const handleSendMessage = useCallback(async (content: string, attachments?: ImageAttachment[]) => {
+    setIsLoadedConversation(false)
     const conversationId = await chat.sendMessage(content, attachments)
 
     // If a new conversation was created, mark it and refresh the list
@@ -106,7 +110,7 @@ export function Chat() {
       />
 
       {hasMessages ? (
-        <MessageList messages={chat.messages} isLoading={chat.isLoading} />
+        <MessageList messages={chat.messages} isLoading={chat.isLoading} animate={!isLoadedConversation} />
       ) : (
         <WelcomeScreen onSelectPrompt={handleSendMessage} />
       )}
