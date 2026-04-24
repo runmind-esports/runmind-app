@@ -1,5 +1,5 @@
-import { WeekPlaceholder } from '@/features/training'
+import { WeekScreen } from '@/features/training'
 
 export default function TrainingWeekPage() {
-  return <WeekPlaceholder />
+  return <WeekScreen />
 }

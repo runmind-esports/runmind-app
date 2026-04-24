@@ -1,9 +1,10 @@
 'use client'
 
 import { useMemo } from 'react'
-import { Link2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useWeekNavigation, getDaysOfWeek } from '../../hooks/useWeekNavigation'
 import { useStravaActivities, useStrava } from '@/features/strava'
+import { StravaConnectCTA } from '../dashboard/StravaConnectCTA'
 import { WeekSelector } from './WeekSelector'
 import { WeekSummary } from './WeekSummary'
 import { DayCard } from './DayCard'
@@ -17,27 +18,8 @@ function isSameDay(d1: Date, d2: Date): boolean {
   )
 }
 
-function StravaConnectCTA() {
-  return (
-    <div className="bg-background-secondary rounded-xl p-6 border border-border text-center space-y-3">
-      <div className="flex justify-center">
-        <Link2 size={32} className="text-foreground-muted" />
-      </div>
-      <h3 className="text-sm font-medium text-foreground">Conecte seu Strava</h3>
-      <p className="text-xs text-foreground-muted">
-        Conecte sua conta do Strava para ver suas atividades no calendario semanal.
-      </p>
-      <a
-        href="/settings"
-        className="inline-block text-sm font-medium text-accent hover:text-accent-hover"
-      >
-        Ir para Configuracoes
-      </a>
-    </div>
-  )
-}
-
 export function WeekScreen() {
+  const router = useRouter()
   const {
     weekStart,
     weekEnd,
@@ -91,7 +73,7 @@ export function WeekScreen() {
   if (!isConnected) {
     return (
       <div className="p-4 space-y-4 max-w-lg mx-auto">
-        <StravaConnectCTA />
+        <StravaConnectCTA onConnect={() => router.push('/settings')} />
       </div>
     )
   }

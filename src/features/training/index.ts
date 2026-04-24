@@ -20,5 +20,14 @@ export { StravaConnectCTA } from './components/dashboard/StravaConnectCTA'
 // Utils
 export { formatDistance, formatPace, formatDuration, formatDateShort, formatTrend } from './utils/formatters'
 
+// Week components
+export { WeekScreen } from './components/week/WeekScreen'
+export { WeekSelector } from './components/week/WeekSelector'
+export { DayCard } from './components/week/DayCard'
+export { WeekSummary } from './components/week/WeekSummary'
+
+// Week hooks
+export { useWeekNavigation, getDaysOfWeek } from './hooks/useWeekNavigation'
+
 // Types
 export type { TrainingTab } from './types'
