@@ -4,6 +4,7 @@
 
 - ✅ **v1.0 Landing Page** - Phases 1-4 (shipped 2026-04-22)
 - 🚧 **v1.1 Onboarding** - Phases 5-7 (in progress)
+- 📋 **v2.0 Training Dashboard** - Phases 8-14 (planned)
 
 ## Phases
 
@@ -130,10 +131,103 @@ Plans:
 - [x] 07-01-PLAN.md -- Planilha success screen with spreadsheet download and chat redirect
 **UI hint**: yes
 
+### v2.0 Training Dashboard (Planned)
+
+**Milestone Goal:** Dashboard de treino completo — do planejamento à execução diária, com visão semanal, calendário mensal e tracking de progresso. Home deixa de ser chat e passa a ser dashboard de treino. Chat acessível pelo menu.
+
+- [ ] **Phase 8: App Shell & Navigation** - Menu principal com tabs (Home, Meu Treino, Semana, Desempenho), roteamento, layout compartilhado
+- [ ] **Phase 9: Home Dashboard** - Tela principal com métricas (km total, progresso), conquistas, e botão de acesso ao chat
+- [ ] **Phase 10: Criar Plano de Treino (Backend)** - Endpoints no runmid-api para geração de plano via IA, CRUD de workouts, e tracking de conclusão
+- [ ] **Phase 11: Criar Plano de Treino (Frontend)** - Fluxo de criação de plano: seleção de objetivo, data da prova, geração via IA, confirmação
+- [ ] **Phase 12: Visão Semanal** - Cards por dia com tipo de treino, tempo, variações, status (concluído/não realizado/pendente), marcação de conclusão
+- [ ] **Phase 13: Calendário Mensal (Meu Treino)** - Calendário com dias coloridos por status, lista de atividades do dia selecionado, integração Strava
+- [ ] **Phase 14: Treino do Dia & Execução** - Tela de execução do treino com partes/etapas, conclusão, resumo com mapa e métricas do Strava
+
+## Phase Details (v2.0)
+
+### Phase 8: App Shell & Navigation
+**Goal**: App tem navegação principal com tabs que permite acessar todas as seções sem depender do chat como tela principal
+**Depends on**: Phase 7 (onboarding completo)
+**Requirements**: NAV-01, NAV-02, NAV-03
+**Success Criteria**:
+  1. Usuário autenticado vê menu inferior com tabs: Home, Meu Treino, Semana, Desempenho
+  2. Tab "Chat" no menu leva à tela de chat existente (mesma funcionalidade, nova rota ou acesso)
+  3. Navegação entre tabs mantém estado (não recarrega dados ao voltar)
+  4. Layout compartilhado com header e bottom nav em todas as telas autenticadas
+**UI hint**: yes
+
+### Phase 9: Home Dashboard
+**Goal**: Usuário vê sua dashboard pessoal com métricas de corrida, progresso do plano ativo e conquistas
+**Depends on**: Phase 8 (shell de navegação)
+**Requirements**: DASH-01, DASH-02, DASH-03
+**Success Criteria**:
+  1. Dashboard mostra quilometragem total do mês e progresso percentual do plano ativo
+  2. Seção de conquistas/marcos mostra badges (ex: "6 meses de treino")
+  3. Botão "Dialogar com IA sobre seu treino" abre o chat com contexto
+  4. Sem campo de input de chat na home — chat é acessado pelo menu
+**UI hint**: yes
+
+### Phase 10: Criar Plano de Treino (Backend)
+**Goal**: Backend suporta criação, leitura e tracking de planos de treino com workouts individuais
+**Depends on**: Phase 5 (runner profile API já existente)
+**Requirements**: PLAN-01, PLAN-02, PLAN-03, PLAN-04
+**Success Criteria**:
+  1. POST /training/plans cria plano com objetivo, data de prova e gera workouts via IA
+  2. GET /training/plans/active retorna plano ativo com workouts da semana
+  3. PATCH /workouts/:id/complete marca workout como concluído com dados opcionais do Strava
+  4. GET /workouts/week retorna workouts da semana atual com status
+  5. GET /logs/weekly-review retorna análise semanal de aderência
+**UI hint**: no
+
+### Phase 11: Criar Plano de Treino (Frontend)
+**Goal**: Usuário cria um plano de treino personalizado através de um fluxo guiado
+**Depends on**: Phase 10 (API de planos), Phase 8 (navegação)
+**Requirements**: PLAN-05, PLAN-06, PLAN-07
+**Success Criteria**:
+  1. Usuário seleciona objetivo (5k, 10k, 21k, 42k) e data da prova
+  2. Sistema mostra preview do plano gerado pela IA com semanas e sessões
+  3. Usuário pode confirmar, ajustar ou regenerar o plano
+  4. Plano confirmado aparece nas telas de Semana e Meu Treino
+**UI hint**: yes
+
+### Phase 12: Visão Semanal
+**Goal**: Usuário visualiza e interage com o treino semanal em cards por dia
+**Depends on**: Phase 10 (API workouts), Phase 8 (navegação)
+**Requirements**: WEEK-01, WEEK-02, WEEK-03
+**Success Criteria**:
+  1. Tela mostra 7 cards (seg-dom) com tipo de treino, duração, variações
+  2. Card verde = concluído, vermelho = não realizado, cinza = pendente/futuro
+  3. Usuário pode marcar treino como concluído diretamente do card
+  4. Dias de descanso mostram "Dia off — descanse!"
+  5. Seletor de semana permite navegar entre semanas do plano
+**UI hint**: yes
+
+### Phase 13: Calendário Mensal (Meu Treino)
+**Goal**: Usuário vê visão mensal do plano com calendário colorido e atividades do dia
+**Depends on**: Phase 10 (API workouts), Phase 8 (navegação)
+**Requirements**: CAL-01, CAL-02, CAL-03
+**Success Criteria**:
+  1. Calendário mensal com dias coloridos: verde=concluído, vermelho=perdido, amarelo=hoje, cinza=futuro
+  2. Ao tocar em um dia, mostra lista de atividades programadas (Alongamento, Musculação, Corrida)
+  3. Navegação entre meses
+  4. Integração com dados do Strava para auto-completar treinos realizados
+**UI hint**: yes
+
+### Phase 14: Treino do Dia & Execução
+**Goal**: Usuário vê detalhes do treino do dia com etapas e pode registrar conclusão com métricas
+**Depends on**: Phase 12 (visão semanal para navegação)
+**Requirements**: EXEC-01, EXEC-02, EXEC-03
+**Success Criteria**:
+  1. Tela mostra partes do treino (Parte 1, 2, 3...) com descrição de cada etapa
+  2. Usuário marca treino como concluído e vê resumo (distância, tempo, pace)
+  3. Se Strava conectado, puxa dados reais da atividade (mapa, FC, splits)
+  4. Botão "Atualizar a IA" envia feedback do treino para o coach
+**UI hint**: yes
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 5 -> 6 -> 7
+Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -144,3 +238,10 @@ Phases execute in numeric order: 5 -> 6 -> 7
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
 | 6. Onboarding Flow | v1.1 | 0/3 | Not started | - |
 | 7. Planilha & Completion | v1.1 | 0/1 | Not started | - |
+| 8. App Shell & Navigation | v2.0 | 0/0 | Planned | - |
+| 9. Home Dashboard | v2.0 | 0/0 | Planned | - |
+| 10. Criar Plano (Backend) | v2.0 | 0/0 | Planned | - |
+| 11. Criar Plano (Frontend) | v2.0 | 0/0 | Planned | - |
+| 12. Visão Semanal | v2.0 | 0/0 | Planned | - |
+| 13. Calendário Mensal | v2.0 | 0/0 | Planned | - |
+| 14. Treino do Dia | v2.0 | 0/0 | Planned | - |
