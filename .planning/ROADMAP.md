@@ -172,6 +172,9 @@ Plans:
   4. Dados cacheados com React Query (stale time 5min)
   5. Estados de loading, erro e "Strava não conectado" tratados
 **UI hint**: no
+**Plans**: 1 plan
+Plans:
+- [ ] 09-01-PLAN.md -- Strava activities service layer: types, API methods, React Query hooks, barrel exports
 
 ### Phase 10: Dashboard de Métricas
 **Goal**: Usuário vê dashboard com métricas reais do Strava e acesso ao chat
@@ -184,6 +187,9 @@ Plans:
   4. Botão "Falar com coach" leva ao chat
   5. Se Strava não conectado, CTA para conectar
 **UI hint**: yes
+**Plans**: 1 plan
+Plans:
+- [ ] 10-01-PLAN.md -- Dashboard components (MetricCard, LastActivityCard, StravaConnectCTA, DashboardScreen), formatters, route wiring
 
 ### Phase 11: Calendário Semanal
 **Goal**: Usuário vê atividades do Strava da semana em cards por dia
@@ -196,6 +202,9 @@ Plans:
   4. Seletor de semana para navegar semanas anteriores
   5. Resumo da semana no topo (km total, corridas, tempo total)
 **UI hint**: yes
+**Plans**: 1 plan
+Plans:
+- [ ] 11-01-PLAN.md -- Week navigation hook, WeekSelector, DayCard, WeekSummary, WeekScreen, route wiring
 
 ### Phase 12: Histórico de Atividades
 **Goal**: Usuário vê lista completa de atividades com filtros e tela de detalhe
@@ -208,10 +217,13 @@ Plans:
   4. Ao tocar em uma atividade, abre tela de detalhe com splits, zonas FC, elevação, cadência
   5. Botão "Analisar com IA" no detalhe abre chat com contexto da atividade
 **UI hint**: yes
+**Plans**: 1 plan
+Plans:
+- [ ] 12-01-PLAN.md -- Infinite scroll list, filters, activity detail with splits/zones, route wiring
 
 ### Phase 13: Treino do Dia & Execução
 **Goal**: Usuário vê detalhes do treino do dia com etapas e pode registrar conclusão com métricas
-**Depends on**: Phase 11 (calendário semanal)
+**Depends on**: Phase 11 (calendário semanal), Phase 12 (histórico)
 **Requirements**: EXEC-01, EXEC-02, EXEC-03
 **Success Criteria**:
   1. Tela mostra partes do treino (Parte 1, 2, 3...) com descrição de cada etapa
@@ -219,6 +231,9 @@ Plans:
   3. Se Strava conectado, puxa dados reais da atividade (mapa, FC, splits)
   4. Botão "Atualizar a IA" envia feedback do treino para o coach
 **UI hint**: yes
+**Plans**: 1 plan
+Plans:
+- [ ] 13-01-PLAN.md -- Workout types, WorkoutParts, WorkoutSummary, WorkoutScreen, route wiring
 
 ## Progress
 
@@ -232,11 +247,11 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13
 | 3. Extended Content | v1.0 | 2/2 | Complete | 2026-04-22 |
 | 4. Dynamic Data | v1.0 | 1/1 | Complete | 2026-04-22 |
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
-| 6. Onboarding Flow | v1.1 | 0/3 | Not started | - |
-| 7. Planilha & Completion | v1.1 | 0/1 | Not started | - |
+| 6. Onboarding Flow | v1.1 | 1/3 | In progress | - |
+| 7. Planilha & Completion | v1.1 | 1/1 | Complete | - |
 | 8. FAB Button & Training Shell | v2.0 | 0/2 | Planned | - |
-| 9. Strava Activities Service | v2.0 | 0/0 | Planned | - |
-| 10. Dashboard de Métricas | v2.0 | 0/0 | Planned | - |
-| 11. Calendário Semanal | v2.0 | 0/0 | Planned | - |
-| 12. Histórico de Atividades | v2.0 | 0/0 | Planned | - |
-| 13. Treino do Dia & Execução | v2.0 | 0/0 | Planned | - |
+| 9. Strava Activities Service | v2.0 | 0/1 | Planned | - |
+| 10. Dashboard de Métricas | v2.0 | 0/1 | Planned | - |
+| 11. Calendário Semanal | v2.0 | 0/1 | Planned | - |
+| 12. Histórico de Atividades | v2.0 | 0/1 | Planned | - |
+| 13. Treino do Dia & Execução | v2.0 | 0/1 | Planned | - |
