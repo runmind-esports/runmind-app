@@ -8,62 +8,63 @@ import type {
   PaginatedActivitiesParams,
 } from '../types/activities.types'
 
-export const stravaActivitiesApi = {
-  /**
-   * Get recent activities with pagination
-   */
-  getRecentActivities: async (params?: PaginatedActivitiesParams): Promise<StravaActivity[]> => {
-    const { data } = await runmidApiClient.get<StravaActivity[]>(
-      '/api/v1/strava/activities',
-      {
-        params: {
-          page: params?.page ?? 1,
-          per_page: params?.perPage ?? 30,
-          ...(params?.before && { before: params.before }),
-          ...(params?.after && { after: params.after }),
-        },
+const STRAVA_API = 'https://www.strava.com/api/v3'
+
+// Get Strava access token from runmid-api
+async function getStravaToken(): Promise<string> {
+  const { data } = await runmidApiClient.get<{ accessToken: string }>(
+    '/api/v1/strava/access-token'
+  )
+  return data.accessToken
+}
+
+// Make authenticated request to Strava API
+async function stravaFetch<T>(path: string, params?: Record<string, unknown>): Promise<T> {
+  const token = await getStravaToken()
+  const url = new URL(`${STRAVA_API}${path}`)
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        url.searchParams.set(key, String(value))
       }
-    )
-    return data
+    })
+  }
+  const response = await fetch(url.toString(), {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!response.ok) {
+    throw new Error(`Strava API error: ${response.status}`)
+  }
+  return response.json()
+}
+
+export const stravaActivitiesApi = {
+  getRecentActivities: async (params?: PaginatedActivitiesParams): Promise<StravaActivity[]> => {
+    return stravaFetch<StravaActivity[]>('/athlete/activities', {
+      page: params?.page ?? 1,
+      per_page: params?.perPage ?? 30,
+      before: params?.before,
+      after: params?.after,
+    })
   },
 
-  /**
-   * Get aggregated athlete statistics
-   */
-  getAthleteStats: async (): Promise<StravaAthleteStats> => {
-    const { data } = await runmidApiClient.get<StravaAthleteStats>(
-      '/api/v1/strava/athlete/stats'
-    )
-    return data
+  getAthleteStats: async (athleteId: number): Promise<StravaAthleteStats> => {
+    return stravaFetch<StravaAthleteStats>(`/athletes/${athleteId}/stats`)
   },
 
-  /**
-   * Get full activity details including splits
-   */
+  getAthleteProfile: async (): Promise<{ id: number }> => {
+    return stravaFetch<{ id: number }>('/athlete')
+  },
+
   getActivityDetail: async (id: number): Promise<StravaActivityDetail> => {
-    const { data } = await runmidApiClient.get<StravaActivityDetail>(
-      `/api/v1/strava/activities/${id}`
-    )
-    return data
+    return stravaFetch<StravaActivityDetail>(`/activities/${id}`)
   },
 
-  /**
-   * Get laps for a specific activity
-   */
   getActivityLaps: async (id: number): Promise<StravaLap[]> => {
-    const { data } = await runmidApiClient.get<StravaLap[]>(
-      `/api/v1/strava/activities/${id}/laps`
-    )
-    return data
+    return stravaFetch<StravaLap[]>(`/activities/${id}/laps`)
   },
 
-  /**
-   * Get heart rate and power zones for an activity
-   */
   getActivityZones: async (id: number): Promise<StravaZone[]> => {
-    const { data } = await runmidApiClient.get<StravaZone[]>(
-      `/api/v1/strava/activities/${id}/zones`
-    )
-    return data
+    return stravaFetch<StravaZone[]>(`/activities/${id}/zones`)
   },
 }

@@ -32,7 +32,10 @@ export function useStravaStats() {
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: stravaActivityKeys.stats(),
-    queryFn: stravaActivitiesApi.getAthleteStats,
+    queryFn: async () => {
+      const profile = await stravaActivitiesApi.getAthleteProfile()
+      return stravaActivitiesApi.getAthleteStats(profile.id)
+    },
     staleTime: 1000 * 60 * 5,
     retry: false,
     enabled: isAuthenticated,
