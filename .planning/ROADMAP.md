@@ -235,10 +235,24 @@ Plans:
 Plans:
 - [ ] 13-01-PLAN.md -- Workout types, WorkoutParts, WorkoutSummary, WorkoutScreen, route wiring
 
+### Phase 14: Projetos (Pastas de Conversas)
+**Goal**: Usuário pode criar projetos para agrupar conversas, com ícone customizável (Material Design icons)
+**Depends on**: Phase 8 (sidebar com navegação)
+**Requirements**: PROJ-01, PROJ-02, PROJ-03, PROJ-04
+**Success Criteria**:
+  1. Seção "Projetos" no sidebar com botão "Novo projeto"
+  2. Ao criar projeto, usuário define nome e escolhe ícone de uma galeria de Material Design icons
+  3. Projetos listados no sidebar com ícone customizado e nome (máx 3 visíveis + "Ver mais")
+  4. Ao clicar num projeto, abre lista de conversas daquele projeto
+  5. Usuário pode mover conversas existentes para um projeto (arrastar ou menu de contexto)
+  6. Conversas sem projeto aparecem na lista geral "Conversas" abaixo dos projetos
+  7. Usuário pode renomear, trocar ícone e deletar projeto (conversas voltam pra lista geral)
+**UI hint**: yes
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13
+Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -255,3 +269,4 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13
 | 11. Calendário Semanal | v2.0 | 0/1 | Planned | - |
 | 12. Histórico de Atividades | v2.0 | 0/1 | Planned | - |
 | 13. Treino do Dia & Execução | v2.0 | 0/1 | Planned | - |
+| 14. Projetos (Pastas) | v2.0 | 0/0 | Planned | - |
