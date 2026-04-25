@@ -10,6 +10,7 @@ import { WelcomeStep } from './WelcomeStep'
 import { QuestionStep, QUESTIONS } from './QuestionStep'
 import { ProgressBar } from './ProgressBar'
 import { OnboardingNavigation } from './OnboardingNavigation'
+import { SuccessScreen } from './SuccessScreen'
 
 export function OnboardingFlow() {
   const router = useRouter()
@@ -28,6 +29,7 @@ export function OnboardingFlow() {
     goBack,
     setAnswer,
     confirmName,
+    showSuccess,
     submitProfile,
   } = useOnboarding()
   const t = getTranslations()
@@ -39,6 +41,10 @@ export function OnboardingFlow() {
   }, [authLoading, isAuthenticated, router])
 
   if (authLoading || !isAuthenticated) return null
+
+  if (showSuccess) {
+    return <SuccessScreen />
+  }
 
   return (
     <div className="bg-white min-h-screen">

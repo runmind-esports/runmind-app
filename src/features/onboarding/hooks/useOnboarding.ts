@@ -98,6 +98,7 @@ export function useOnboarding() {
   const [userName, setUserName] = useState(getInitialUserName)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   const totalQuestions = 10
   const isLastQuestion = currentStep === 10
@@ -137,7 +138,7 @@ export function useOnboarding() {
     if (currentStep === 10) {
       const result = await submitProfile()
       if (result) {
-        window.location.href = '/planilha'
+        setShowSuccess(true)
       }
       return
     }
@@ -181,6 +182,7 @@ export function useOnboarding() {
     goNext,
     goBack,
     setAnswer,
+    showSuccess,
     confirmName,
     submitProfile,
   }

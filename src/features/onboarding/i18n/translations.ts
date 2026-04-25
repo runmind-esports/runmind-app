@@ -69,6 +69,10 @@ export const translations = {
       loading: 'Gerando sua planilha...',
       error: 'Erro ao gerar planilha. Tente novamente.',
     },
+    success: {
+      title: 'Perfil salvo!',
+      subtitle: 'Preparando seu coach de IA...',
+    },
   },
   en: {
     welcome: {
@@ -139,6 +143,10 @@ export const translations = {
       chatCta: 'Go to chat',
       loading: 'Generating your spreadsheet...',
       error: 'Error generating spreadsheet. Try again.',
+    },
+    success: {
+      title: 'Profile saved!',
+      subtitle: 'Preparing your AI coach...',
     },
   },
 }
