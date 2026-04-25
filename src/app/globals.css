@@ -146,3 +146,24 @@ body {
     transition: none;
   }
 }
+
+/* Onboarding staggered animation delays (D-06) */
+.stagger-delay-1 { animation-delay: 0ms; }
+.stagger-delay-2 { animation-delay: 80ms; }
+.stagger-delay-3 { animation-delay: 160ms; }
+.stagger-delay-4 { animation-delay: 240ms; }
+.stagger-delay-5 { animation-delay: 320ms; }
+.stagger-delay-6 { animation-delay: 400ms; }
+
+/* Option fade-in initial state (hidden until animation runs) */
+.option-stagger-item {
+  opacity: 0;
+}
+
+/* Respect prefers-reduced-motion (D-09) */
+@media (prefers-reduced-motion: reduce) {
+  .option-stagger-item {
+    opacity: 1;
+    animation: none !important;
+  }
+}
