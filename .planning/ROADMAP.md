@@ -135,12 +135,12 @@ Plans:
 
 **Milestone Goal:** Acompanhamento de treinos via Strava — dashboard com métricas, calendário semanal, histórico de atividades e detalhe de treino. Dados puxados automaticamente do Strava. Chat acessível pelo menu.
 
-- [ ] **Phase 8: Dashboard Premium** - Redesign do dashboard de treino com progresso semanal, últimas 3 atividades, comparativo semanal, streak de corrida e CTA do coach IA
-- [ ] **Phase 9: Strava Activities Service** - Camada de serviço e hooks para consumir atividades do Strava via runmid-api
-- [ ] **Phase 10: Dashboard de Métricas** - Métricas do mês (km total, corridas, pace médio), evolução, última atividade
-- [ ] **Phase 11: Calendário Semanal** - Cards por dia com atividades do Strava, navegação entre semanas
-- [ ] **Phase 12: Histórico de Atividades** - Lista paginada com filtros e tela de detalhe completo
-- [ ] **Phase 13: Treino do Dia & Execução** - Detalhes da atividade com splits, zonas FC, elevação, e feedback para IA
+- [x] **Phase 8: Dashboard Premium** - Redesign do dashboard de treino com progresso semanal, últimas 3 atividades, comparativo semanal, streak de corrida e CTA do coach IA (completed 2026-04-25)
+- [x] **Phase 9: Strava Activities Service** - Camada de serviço e hooks para consumir atividades do Strava via runmid-api (completed 2026-04-25)
+- [x] **Phase 10: Dashboard de Métricas** - Métricas do mês (km total, corridas, pace médio), evolução, última atividade (completed 2026-04-25)
+- [x] **Phase 11: Calendário Semanal** - Cards por dia com atividades do Strava, navegação entre semanas (completed 2026-04-25)
+- [x] **Phase 12: Histórico de Atividades** - Lista paginada com filtros e tela de detalhe completo (completed 2026-04-25)
+- [x] **Phase 13: Treino do Dia & Execução** - Detalhes da atividade com splits, zonas FC, elevação, e feedback para IA (completed 2026-04-25)
 
 ## Phase Details (v2.0)
 
@@ -174,7 +174,7 @@ Plans:
 **UI hint**: no
 **Plans**: 1 plan
 Plans:
-- [ ] 09-01-PLAN.md -- Strava activities service layer: types, API methods, React Query hooks, barrel exports
+- [x] 09-01-PLAN.md -- Strava activities service layer: types, API methods, React Query hooks, barrel exports
 
 ### Phase 10: Dashboard de Métricas
 **Goal**: Usuário vê dashboard com métricas reais do Strava e acesso ao chat
@@ -189,7 +189,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [ ] 10-01-PLAN.md -- Dashboard components (MetricCard, LastActivityCard, StravaConnectCTA, DashboardScreen), formatters, route wiring
+- [x] 10-01-PLAN.md -- Dashboard components (MetricCard, LastActivityCard, StravaConnectCTA, DashboardScreen), formatters, route wiring
 
 ### Phase 11: Calendário Semanal
 **Goal**: Usuário vê atividades do Strava da semana em cards por dia
@@ -204,7 +204,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [ ] 11-01-PLAN.md -- Week navigation hook, WeekSelector, DayCard, WeekSummary, WeekScreen, route wiring
+- [x] 11-01-PLAN.md -- Week navigation hook, WeekSelector, DayCard, WeekSummary, WeekScreen, route wiring
 
 ### Phase 12: Histórico de Atividades
 **Goal**: Usuário vê lista completa de atividades com filtros e tela de detalhe
@@ -219,7 +219,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [ ] 12-01-PLAN.md -- Infinite scroll list, filters, activity detail with splits/zones, route wiring
+- [x] 12-01-PLAN.md -- Infinite scroll list, filters, activity detail with splits/zones, route wiring
 
 ### Phase 13: Treino do Dia & Execução
 **Goal**: Usuário vê detalhes do treino do dia com etapas e pode registrar conclusão com métricas
@@ -233,7 +233,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [ ] 13-01-PLAN.md -- Workout types, WorkoutParts, WorkoutSummary, WorkoutScreen, route wiring
+- [x] 13-01-PLAN.md -- Workout types, WorkoutParts, WorkoutSummary, WorkoutScreen, route wiring
 
 ### Phase 14: Projetos — Backend (chat-agent)
 **Goal**: Chat-agent suporta projetos para agrupar conversas com ícone customizável
@@ -266,8 +266,8 @@ Plans:
 **UI hint**: yes
 **Plans**: 2 plans
 Plans:
-- [ ] 15-01-PLAN.md -- Service layer + hooks: projectsApi, useProjects hook, types, barrel exports
-- [ ] 15-02-PLAN.md -- UI components: IconPicker, CreateProjectModal, ProjectSection, ConversationItem context menu, sidebar wiring
+- [x] 15-01-PLAN.md -- Service layer + hooks: projectsApi, useProjects hook, types, barrel exports
+- [x] 15-02-PLAN.md -- UI components: IconPicker, CreateProjectModal, ProjectSection, ConversationItem context menu, sidebar wiring
 
 ## Progress
 
@@ -283,11 +283,31 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
 | 6. Onboarding Flow | v1.1 | 1/3 | In progress | - |
 | 7. Planilha & Completion | v1.1 | 1/1 | Complete | - |
-| 8. Dashboard Premium | v2.0 | 0/2 | Planned | - |
-| 9. Strava Activities Service | v2.0 | 0/1 | Planned | - |
-| 10. Dashboard de Métricas | v2.0 | 0/1 | Planned | - |
-| 11. Calendário Semanal | v2.0 | 0/1 | Planned | - |
-| 12. Histórico de Atividades | v2.0 | 0/1 | Planned | - |
-| 13. Treino do Dia & Execução | v2.0 | 0/1 | Planned | - |
-| 14. Projetos Backend | v2.0 | 0/0 | Planned | - |
-| 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |
+| 8. Dashboard Premium | v2.0 | 2/2 | Complete    | 2026-04-25 |
+| 9. Strava Activities Service | v2.0 | 1/1 | Complete    | 2026-04-25 |
+| 10. Dashboard de Métricas | v2.0 | 1/1 | Complete    | 2026-04-25 |
+| 11. Calendário Semanal | v2.0 | 1/1 | Complete    | 2026-04-25 |
+| 12. Histórico de Atividades | v2.0 | 1/1 | Complete    | 2026-04-25 |
+| 13. Treino do Dia & Execução | v2.0 | 1/1 | Complete    | 2026-04-25 |
+| 14. Projetos Backend | v2.0 | 0/0 | Complete    | 2026-04-25 |
+| 15. Projetos Frontend | v2.0 | 2/2 | Complete    | 2026-04-25 |
+
+### Phase 8: Onboarding Visual Upgrade — Adicionar imagens ilustrativas, animações e visual premium nas telas de onboarding (welcome, questions, planilha). Inspirado em apps como Nike Run Club e Strava onboarding. Mobile-first.
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 7
+**Plans:** 2/2 plans complete
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 8 to break down)
+
+### Phase 8: Onboarding Visual Upgrade — Imagens ilustrativas, animações e visual premium nas telas de onboarding. Mobile-first, inspirado em NRC e Strava.
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 7
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 8 to break down)
