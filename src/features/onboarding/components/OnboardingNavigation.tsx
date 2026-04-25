@@ -32,7 +32,7 @@ export function OnboardingNavigation({
         <button
           type="button"
           onClick={onBack}
-          className="text-[#6B7088] font-bold font-display text-base tracking-tight active:motion-safe:animate-button-press"
+          className="text-[#6B7088] font-bold font-display text-sm tracking-tight active:motion-safe:animate-button-press"
         >
           {t.navigation.back}
         </button>
@@ -43,7 +43,7 @@ export function OnboardingNavigation({
           type="button"
           onClick={onNext}
           disabled={!canProceed || isSubmitting}
-          className={`rounded-xl py-4 font-bold font-display text-base tracking-tight min-w-[160px] transition-all ${
+          className={`rounded-xl py-4 font-bold font-display text-sm tracking-tight min-w-[160px] transition-all ${
             !canProceed || isSubmitting
               ? 'bg-[#00F048]/50 text-[#14162E]/50 cursor-not-allowed'
               : 'bg-[#00F048] text-[#14162E] hover:-translate-y-px hover:shadow-lg active:motion-safe:animate-button-press'
@@ -56,7 +56,7 @@ export function OnboardingNavigation({
           type="button"
           onClick={onNext}
           disabled={!canProceed}
-          className={`rounded-xl py-4 font-bold font-display text-base tracking-tight min-w-[140px] transition-all ${
+          className={`rounded-xl py-4 font-bold font-display text-sm tracking-tight min-w-[140px] transition-all ${
             !canProceed
               ? 'bg-[#14162E]/50 text-white/50 cursor-not-allowed'
               : 'bg-[#14162E] text-white hover:-translate-y-px hover:shadow-lg active:motion-safe:animate-button-press'

@@ -34,7 +34,7 @@ export function ScaleInput({ value, onChange, labels }: ScaleInputProps) {
             >
               {scaleValue}
             </button>
-            <span className="text-[13px] text-[#6B7088] text-center mt-1">
+            <span className="text-xs text-[#6B7088] text-center mt-1">
               {label}
             </span>
           </div>

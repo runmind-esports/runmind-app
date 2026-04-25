@@ -51,9 +51,9 @@ export function OnboardingFlow() {
       <div className="max-w-lg mx-auto px-6 py-8 lg:px-8 lg:py-12 flex flex-col min-h-screen">
         {/* Header zone */}
         <div className="flex items-center justify-between">
-          <span className="font-display font-bold text-lg text-[#14162E]">RunMind</span>
+          <span className="font-display font-bold text-sm text-[#14162E]">Runmind</span>
           {currentStep > 0 && (
-            <span className="text-[13px] text-[#6B7088]">
+            <span className="text-xs text-[#6B7088]">
               {t.navigation.progress.replace('{n}', String(currentStep))}
             </span>
           )}

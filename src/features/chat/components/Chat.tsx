@@ -85,13 +85,20 @@ export function Chat() {
     conversations.selectConversation(id)
   }, [conversations])
 
-  // Show nothing while checking auth or redirecting
+  // Show loading skeleton while checking auth
   if (authLoading || !isAuthenticated) {
-    return null
+    return (
+      <div className="flex h-dvh flex-col bg-background overflow-hidden">
+        <header className="relative flex h-14 shrink-0 items-center justify-center border-b border-border px-4">
+          <span className="font-display font-bold text-[14px] text-foreground tracking-tight">Runmind</span>
+        </header>
+        <div className="flex-1" />
+      </div>
+    )
   }
 
   return (
-    <div className="flex h-dvh flex-col bg-background overflow-hidden">
+    <div className="flex h-dvh bg-background overflow-hidden">
       <Sidebar
         isOpen={sidebar.isOpen}
         onClose={sidebar.close}
@@ -118,19 +125,21 @@ export function Chat() {
         }}
       />
 
-      <ChatHeader
-        onClear={handleClear}
-        onToggleSidebar={sidebar.toggle}
-        hasMessages={hasMessages}
-      />
+      <div className="flex flex-1 flex-col min-w-0">
+        <ChatHeader
+          onClear={handleClear}
+          onToggleSidebar={sidebar.toggle}
+          hasMessages={hasMessages}
+        />
 
-      {hasMessages ? (
-        <MessageList messages={chat.messages} isLoading={chat.isLoading} animate={!isLoadedConversation} />
-      ) : (
-        <WelcomeScreen onSelectPrompt={handleSendMessage} />
-      )}
+        {hasMessages ? (
+          <MessageList messages={chat.messages} isLoading={chat.isLoading} animate={!isLoadedConversation} />
+        ) : (
+          <WelcomeScreen onSelectPrompt={handleSendMessage} />
+        )}
 
-      <ChatInput onSend={handleSendMessage} disabled={chat.isLoading} />
+        <ChatInput onSend={handleSendMessage} disabled={chat.isLoading} />
+      </div>
     </div>
   )
 }

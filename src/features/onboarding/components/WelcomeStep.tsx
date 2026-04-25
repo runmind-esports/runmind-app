@@ -46,7 +46,7 @@ export function WelcomeStep({
         <div>
           <label
             htmlFor="onboarding-name"
-            className="block text-[13px] font-bold tracking-[0.04em] text-[#14162E] mb-1.5"
+            className="block text-xs font-bold tracking-[0.04em] text-[#14162E] mb-1.5"
           >
             {t.welcome.nameLabel}
           </label>
@@ -74,7 +74,7 @@ export function WelcomeStep({
         <button
           type="button"
           onClick={handleConfirm}
-          className="w-full py-3.5 bg-[#00F048] text-[#14162E] rounded-xl text-[15px] font-bold font-display tracking-tight shadow-[0_4px_16px_rgba(0,240,72,0.22)] transition-all hover:bg-[#00D840] hover:-translate-y-px hover:shadow-[0_6px_24px_rgba(0,240,72,0.32)] active:motion-safe:animate-button-press"
+          className="w-full py-3.5 bg-[#00F048] text-[#14162E] rounded-xl text-sm font-bold font-display tracking-tight shadow-[0_4px_16px_rgba(0,240,72,0.22)] transition-all hover:bg-[#00D840] hover:-translate-y-px hover:shadow-[0_6px_24px_rgba(0,240,72,0.32)] active:motion-safe:animate-button-press"
         >
           {t.welcome.cta}
         </button>

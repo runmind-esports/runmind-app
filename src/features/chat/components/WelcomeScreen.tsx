@@ -32,7 +32,7 @@ export function WelcomeScreen({ onSelectPrompt }: WelcomeScreenProps) {
     <div className="flex flex-1 flex-col px-4 py-6 overflow-y-auto">
       <div className="mx-auto w-full max-w-lg space-y-5">
         {/* Metric cards — same as training dashboard */}
-        {isConnected && (
+        {(isConnected || isLoadingStatus) && (
           <>
             <div className="grid grid-cols-2 gap-3">
               <MetricCard

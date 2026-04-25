@@ -31,7 +31,7 @@ export function ChatHeader({ onClear, onToggleSidebar, hasMessages }: ChatHeader
         <Menu className="h-5 w-5" />
       </Button>
 
-      <span className="absolute left-1/2 -translate-x-1/2 font-display font-bold text-lg text-foreground tracking-tight">Runmind</span>
+      <span className="flex-1 text-center font-display font-bold text-[14px] text-foreground tracking-tight">Runmind</span>
 
       <Button
         variant="ghost"

@@ -40,7 +40,7 @@ export function MetricCard({ label, value, icon, trend, isLoading, className, ac
       <div className={cn('relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br', accentStyles[accent])}>
         <div className="scale-75">{icon}</div>
       </div>
-      <p className="relative mt-2 text-xl font-extrabold tracking-tight text-foreground font-display">{value}</p>
+      <p className="relative mt-2 text-xl font-bold tracking-tight text-foreground font-display">{value}</p>
       <p className="relative text-[10px] font-medium uppercase tracking-wider text-foreground-muted">{label}</p>
       {trend && (
         <div className={cn('relative mt-1 flex items-center gap-1 text-[10px] font-semibold', trend.isPositive ? 'text-[#00F048]' : 'text-red-500')}>

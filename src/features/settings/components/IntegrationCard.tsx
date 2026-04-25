@@ -56,10 +56,10 @@ export function IntegrationCard({
 
       {/* Info */}
       <div className="flex-1 min-w-0">
-        <h3 className="font-display font-bold text-[15px] text-foreground tracking-tight mb-1">
+        <h3 className="font-display font-semibold text-sm text-foreground tracking-tight mb-1">
           {name}
         </h3>
-        <p className="text-[12px] text-foreground-muted leading-[1.45]">
+        <p className="text-xs text-foreground-muted leading-[1.45]">
           {description}
         </p>
       </div>
@@ -67,25 +67,25 @@ export function IntegrationCard({
       {/* Action button */}
       <div className="flex-shrink-0">
         {disabled ? (
-          <div className="px-4 py-2.5 rounded-full bg-background-tertiary text-foreground-muted text-[12px] font-bold">
+          <div className="px-4 py-2.5 rounded-full bg-background-tertiary text-foreground-muted text-xs font-bold">
             {disabledMessage || 'Em breve'}
           </div>
         ) : isLoading ? (
-          <div className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-background-tertiary text-foreground-muted text-[12px] font-bold min-w-[106px] justify-center">
+          <div className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-background-tertiary text-foreground-muted text-xs font-bold min-w-[106px] justify-center">
             <Loader2 className="w-3.5 h-3.5 animate-spin" />
             {isConnected ? 'Desconectando' : 'Conectando'}
           </div>
         ) : isConnected ? (
           <button
             onClick={onDisconnect}
-            className="px-4 py-2.5 rounded-full border border-border bg-background text-foreground-muted text-[12px] font-bold transition-all hover:border-red-400 hover:text-red-500 hover:bg-red-500/10"
+            className="px-4 py-2.5 rounded-full border border-border bg-background text-foreground-muted text-xs font-bold transition-all hover:border-red-400 hover:text-red-500 hover:bg-red-500/10"
           >
             Desconectar
           </button>
         ) : (
           <button
             onClick={onConnect}
-            className="px-4 py-2.5 rounded-full bg-foreground text-background text-[12px] font-bold transition-all hover:opacity-90"
+            className="px-4 py-2.5 rounded-full bg-foreground text-background text-xs font-bold transition-all hover:opacity-90"
           >
             Conectar
           </button>

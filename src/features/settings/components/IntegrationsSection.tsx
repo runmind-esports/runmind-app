@@ -36,7 +36,7 @@ export function IntegrationsSection() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-foreground mb-1">Integrações</h2>
+        <h2 className="text-lg font-semibold font-display text-foreground mb-1">Integrações</h2>
         <p className="text-sm text-foreground-muted">
           Conecte seus apps de corrida para uma experiencia personalizada
         </p>

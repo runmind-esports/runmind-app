@@ -16,9 +16,12 @@ export function TrainingHeader() {
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
-        <h1 className="font-display text-lg font-bold text-foreground tracking-tight">
-          Progressão
-        </h1>
+        <svg width="22" height="22" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="40" fill="#00F048"/>
+          <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
+        </svg>
+        <span className="font-display font-bold text-[14px] text-foreground tracking-tight">runmind</span>
       </div>
     </header>
   )
