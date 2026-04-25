@@ -135,7 +135,7 @@ Plans:
 
 **Milestone Goal:** Acompanhamento de treinos via Strava — dashboard com métricas, calendário semanal, histórico de atividades e detalhe de treino. Dados puxados automaticamente do Strava. Chat acessível pelo menu.
 
-- [ ] **Phase 8: FAB Button & Training Shell** - Botão floating draggable no chat + modo treino com bottom tabs (Dashboard, Semana, Histórico)
+- [ ] **Phase 8: Dashboard Premium** - Redesign do dashboard de treino com progresso semanal, últimas 3 atividades, comparativo semanal, streak de corrida e CTA do coach IA
 - [ ] **Phase 9: Strava Activities Service** - Camada de serviço e hooks para consumir atividades do Strava via runmid-api
 - [ ] **Phase 10: Dashboard de Métricas** - Métricas do mês (km total, corridas, pace médio), evolução, última atividade
 - [ ] **Phase 11: Calendário Semanal** - Cards por dia com atividades do Strava, navegação entre semanas
@@ -144,22 +144,22 @@ Plans:
 
 ## Phase Details (v2.0)
 
-### Phase 8: FAB Button & Training Shell
-**Goal**: Chat permanece a tela principal com um FAB draggable semi-transparente que leva ao modo treino com bottom tabs
+### Phase 8: Dashboard Premium
+**Goal**: Dashboard de treino redesenhado com anel de progresso semanal, 3 atividades recentes, comparativo semanal, streak de corrida e CTA contextual do coach IA
 **Depends on**: Phase 7 (onboarding completo)
 **Requirements**: NAV-01, NAV-02, NAV-03
 **Success Criteria**:
-  1. Chat continua como home após login (`/chat`)
-  2. FAB (floating action button) visível no chat: semi-transparente, ícone de treino, draggable (usuário arrasta pra qualquer posição)
-  3. FAB persiste posição entre sessões (localStorage)
-  4. Ao clicar no FAB, navega para `/training` (modo treino)
-  5. Modo treino tem layout próprio com bottom tabs: Dashboard, Semana, Histórico
-  6. Botão de voltar ao chat visível no modo treino
+  1. Anel circular (Apple Fitness+ style) mostra progresso semanal de km com meta editavel
+  2. 3 atividades recentes em cards compactos horizontais com nome, distancia, pace e data relativa
+  3. Comparativo semanal mostra diferenca de km vs semana passada com seta up/down
+  4. Streak de semanas consecutivas com pelo menos 1 corrida exibido com icone de fogo
+  5. CTA do coach IA com sugestao contextual baseada nos dados do Strava
+  6. Ao clicar no CTA, abre o chat com prompt pre-preenchido
 **UI hint**: yes
 **Plans**: 2 plans
 Plans:
-- [ ] 08-01-PLAN.md -- Draggable FAB component with localStorage position persistence, wired into Chat
-- [ ] 08-02-PLAN.md -- Training shell layout with bottom tabs, routes, header with back-to-chat
+- [ ] 08-01-PLAN.md -- Data layer: useDashboardData hook, dashboardHelpers utilities, WeeklyProgressRing SVG component, formatRelativeDate
+- [ ] 08-02-PLAN.md -- UI composition: RecentActivityCard, WeekComparison, StreakBadge, CoachCTA, DashboardScreen rebuild, chat pre-fill integration
 
 ### Phase 9: Strava Activities Service
 **Goal**: Frontend tem camada de serviço para buscar e cachear atividades do Strava
@@ -283,7 +283,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
 | 6. Onboarding Flow | v1.1 | 1/3 | In progress | - |
 | 7. Planilha & Completion | v1.1 | 1/1 | Complete | - |
-| 8. FAB Button & Training Shell | v2.0 | 0/2 | Planned | - |
+| 8. Dashboard Premium | v2.0 | 0/2 | Planned | - |
 | 9. Strava Activities Service | v2.0 | 0/1 | Planned | - |
 | 10. Dashboard de Métricas | v2.0 | 0/1 | Planned | - |
 | 11. Calendário Semanal | v2.0 | 0/1 | Planned | - |
