@@ -2,7 +2,6 @@
 
 import { CheckCircle } from 'lucide-react'
 import { formatDistance, formatPace, formatDuration } from '../../utils/formatters'
-import { Shimmer } from '@/components/ui/shimmer'
 
 interface WorkoutSummaryProps {
   distance?: number
@@ -15,11 +14,11 @@ interface WorkoutSummaryProps {
 
 function SkeletonSummary() {
   return (
-    <div className="rounded-2xl border border-border bg-background-secondary p-4">
-      <Shimmer className="mb-3 h-5 w-36" />
+    <div className="animate-pulse rounded-2xl border border-border bg-background-secondary p-4">
+      <div className="mb-3 h-5 w-36 rounded bg-background-tertiary" />
       <div className="grid grid-cols-2 gap-3">
         {[...Array(4)].map((_, i) => (
-          <Shimmer key={i} className="h-12" />
+          <div key={i} className="h-12 rounded bg-background-tertiary" />
         ))}
       </div>
     </div>

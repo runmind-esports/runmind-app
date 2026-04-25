@@ -2,7 +2,7 @@
 export { FAB } from './components/FAB'
 export { TrainingLayout } from './components/TrainingLayout'
 export { TrainingHeader } from './components/TrainingHeader'
-export { TrainingTabs } from './components/BottomTabs'
+export { BottomTabs } from './components/BottomTabs'
 export { DashboardPlaceholder } from './components/placeholders/DashboardPlaceholder'
 export { WeekPlaceholder } from './components/placeholders/WeekPlaceholder'
 export { HistoryPlaceholder } from './components/placeholders/HistoryPlaceholder'
@@ -17,21 +17,8 @@ export { MetricCard } from './components/dashboard/MetricCard'
 export { LastActivityCard } from './components/dashboard/LastActivityCard'
 export { StravaConnectCTA } from './components/dashboard/StravaConnectCTA'
 
-// Dashboard components (premium)
-export { WeeklyProgressRing } from './components/dashboard/WeeklyProgressRing'
-export { RecentActivityCard } from './components/dashboard/RecentActivityCard'
-export { WeekComparison } from './components/dashboard/WeekComparison'
-export { StreakBadge } from './components/dashboard/StreakBadge'
-export { CoachCTA } from './components/dashboard/CoachCTA'
-
-// Dashboard hooks
-export { useDashboardData } from './hooks/useDashboardData'
-
 // Utils
-export { formatDistance, formatPace, formatDuration, formatDateShort, formatTrend, formatRelativeDate } from './utils/formatters'
-
-// Dashboard types
-export type { CoachSuggestion } from './utils/dashboardHelpers'
+export { formatDistance, formatPace, formatDuration, formatDateShort, formatTrend } from './utils/formatters'
 
 // History components
 export { HistoryScreen } from './components/history/HistoryScreen'

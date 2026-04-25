@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Loader2, Unplug } from 'lucide-react'
-import { Shimmer } from '@/components/ui/shimmer'
 import { useStrava } from '@/features/strava'
 import { useInfiniteActivities } from '../../hooks/useInfiniteActivities'
 import { ActivityListItem } from './ActivityListItem'
@@ -11,12 +10,12 @@ import { ActivityFilters } from './ActivityFilters'
 
 function SkeletonItem() {
   return (
-    <div className="rounded-xl border border-border bg-background-secondary p-3">
+    <div className="animate-pulse rounded-xl border border-border bg-background-secondary p-3">
       <div className="flex items-center gap-3">
-        <Shimmer className="h-8 w-8 rounded-full" />
+        <div className="h-8 w-8 rounded-full bg-background-tertiary" />
         <div className="flex-1 space-y-2">
-          <Shimmer className="h-4 w-3/4" />
-          <Shimmer className="h-3 w-1/2" />
+          <div className="h-4 w-3/4 rounded bg-background-tertiary" />
+          <div className="h-3 w-1/2 rounded bg-background-tertiary" />
         </div>
       </div>
     </div>

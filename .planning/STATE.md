@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Onboarding
 status: executing
-stopped_at: Phase 16 context gathered
-last_updated: "2026-04-25T19:23:00.262Z"
-last_activity: 2026-04-25 -- Phase 16 planning complete
+stopped_at: Phase 7 context gathered
+last_updated: "2026-04-23T16:35:36.529Z"
+last_activity: 2026-04-23
 progress:
   total_phases: 3
   completed_phases: 2
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-04-22)
 
 ## Current Position
 
-Phase: 15 of 7 (planilha & completion)
+Phase: 07 of 7 (planilha & completion)
 Plan: Not started
 Status: Ready to execute
-Last activity: 2026-04-25 -- Phase 16 planning complete
+Last activity: 2026-04-23
 
 Progress: [██████████░░░░░░░░░░] 57% (v1.0 complete, v1.1 starting)
 
@@ -36,7 +36,7 @@ Progress: [██████████░░░░░░░░░░] 57% (v1
 
 **Velocity:**
 
-- Total plans completed: 22 (v1.0)
+- Total plans completed: 11 (v1.0)
 - Average duration: ~2.6 min
 - Total execution time: ~13 min
 
@@ -51,15 +51,6 @@ Progress: [██████████░░░░░░░░░░] 57% (v1
 | 05 | 2 | - | - |
 | 06 | 1 | - | - |
 | 07 | 1 | - | - |
-| 08 | 2 | - | - |
-| 8 | 2 | - | - |
-| 9 | 1 | - | - |
-| 10 | 1 | - | - |
-| 11 | 1 | - | - |
-| 12 | 1 | - | - |
-| 13 | 1 | - | - |
-| 14 | 0 | - | - |
-| 15 | 2 | - | - |
 
 **Recent Trend:**
 
@@ -77,10 +68,6 @@ Recent decisions affecting current work:
 - [v1.1]: Onboarding flow: Signup -> Step 1 (confirm name) -> Step 2 (11-question form) -> Planilha download -> Chat
 - [v1.1]: Multi-repo: frontend (Next.js here) + backend (Go at /Documents/runmid/runmid-api)
 
-### Roadmap Evolution
-
-- Phase 8 added: Dashboard Premium — Redesign do dashboard de treino com progresso semanal, últimas 3 atividades, comparativo semanal, streak de corrida e CTA do coach IA
-
 ### Pending Todos
 
 None yet.
@@ -91,6 +78,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-25T19:04:50.198Z
-Stopped at: Phase 16 context gathered
-Resume file: .planning/phases/16-onboarding-visual-upgrade/16-CONTEXT.md
+Last session: 2026-04-23T16:02:26.519Z
+Stopped at: Phase 7 context gathered
+Resume file: .planning/phases/07-planilha-completion/07-CONTEXT.md

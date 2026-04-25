@@ -135,31 +135,31 @@ Plans:
 
 **Milestone Goal:** Acompanhamento de treinos via Strava — dashboard com métricas, calendário semanal, histórico de atividades e detalhe de treino. Dados puxados automaticamente do Strava. Chat acessível pelo menu.
 
-- [x] **Phase 8: Dashboard Premium** - Redesign do dashboard de treino com progresso semanal, últimas 3 atividades, comparativo semanal, streak de corrida e CTA do coach IA (completed 2026-04-25)
-- [x] **Phase 9: Strava Activities Service** - Camada de serviço e hooks para consumir atividades do Strava via runmid-api (completed 2026-04-25)
-- [x] **Phase 10: Dashboard de Métricas** - Métricas do mês (km total, corridas, pace médio), evolução, última atividade (completed 2026-04-25)
-- [x] **Phase 11: Calendário Semanal** - Cards por dia com atividades do Strava, navegação entre semanas (completed 2026-04-25)
-- [x] **Phase 12: Histórico de Atividades** - Lista paginada com filtros e tela de detalhe completo (completed 2026-04-25)
-- [x] **Phase 13: Treino do Dia & Execução** - Detalhes da atividade com splits, zonas FC, elevação, e feedback para IA (completed 2026-04-25)
+- [ ] **Phase 8: FAB Button & Training Shell** - Botão floating draggable no chat + modo treino com bottom tabs (Dashboard, Semana, Histórico)
+- [ ] **Phase 9: Strava Activities Service** - Camada de serviço e hooks para consumir atividades do Strava via runmid-api
+- [ ] **Phase 10: Dashboard de Métricas** - Métricas do mês (km total, corridas, pace médio), evolução, última atividade
+- [ ] **Phase 11: Calendário Semanal** - Cards por dia com atividades do Strava, navegação entre semanas
+- [ ] **Phase 12: Histórico de Atividades** - Lista paginada com filtros e tela de detalhe completo
+- [ ] **Phase 13: Treino do Dia & Execução** - Detalhes da atividade com splits, zonas FC, elevação, e feedback para IA
 
 ## Phase Details (v2.0)
 
-### Phase 8: Dashboard Premium
-**Goal**: Dashboard de treino redesenhado com anel de progresso semanal, 3 atividades recentes, comparativo semanal, streak de corrida e CTA contextual do coach IA
+### Phase 8: FAB Button & Training Shell
+**Goal**: Chat permanece a tela principal com um FAB draggable semi-transparente que leva ao modo treino com bottom tabs
 **Depends on**: Phase 7 (onboarding completo)
 **Requirements**: NAV-01, NAV-02, NAV-03
 **Success Criteria**:
-  1. Anel circular (Apple Fitness+ style) mostra progresso semanal de km com meta editavel
-  2. 3 atividades recentes em cards compactos horizontais com nome, distancia, pace e data relativa
-  3. Comparativo semanal mostra diferenca de km vs semana passada com seta up/down
-  4. Streak de semanas consecutivas com pelo menos 1 corrida exibido com icone de fogo
-  5. CTA do coach IA com sugestao contextual baseada nos dados do Strava
-  6. Ao clicar no CTA, abre o chat com prompt pre-preenchido
+  1. Chat continua como home após login (`/chat`)
+  2. FAB (floating action button) visível no chat: semi-transparente, ícone de treino, draggable (usuário arrasta pra qualquer posição)
+  3. FAB persiste posição entre sessões (localStorage)
+  4. Ao clicar no FAB, navega para `/training` (modo treino)
+  5. Modo treino tem layout próprio com bottom tabs: Dashboard, Semana, Histórico
+  6. Botão de voltar ao chat visível no modo treino
 **UI hint**: yes
 **Plans**: 2 plans
 Plans:
-- [x] 08-01-PLAN.md -- Data layer: useDashboardData hook, dashboardHelpers utilities, WeeklyProgressRing SVG component, formatRelativeDate
-- [x] 08-02-PLAN.md -- UI composition: RecentActivityCard, WeekComparison, StreakBadge, CoachCTA, DashboardScreen rebuild, chat pre-fill integration
+- [ ] 08-01-PLAN.md -- Draggable FAB component with localStorage position persistence, wired into Chat
+- [ ] 08-02-PLAN.md -- Training shell layout with bottom tabs, routes, header with back-to-chat
 
 ### Phase 9: Strava Activities Service
 **Goal**: Frontend tem camada de serviço para buscar e cachear atividades do Strava
@@ -174,7 +174,7 @@ Plans:
 **UI hint**: no
 **Plans**: 1 plan
 Plans:
-- [x] 09-01-PLAN.md -- Strava activities service layer: types, API methods, React Query hooks, barrel exports
+- [ ] 09-01-PLAN.md -- Strava activities service layer: types, API methods, React Query hooks, barrel exports
 
 ### Phase 10: Dashboard de Métricas
 **Goal**: Usuário vê dashboard com métricas reais do Strava e acesso ao chat
@@ -189,7 +189,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [x] 10-01-PLAN.md -- Dashboard components (MetricCard, LastActivityCard, StravaConnectCTA, DashboardScreen), formatters, route wiring
+- [ ] 10-01-PLAN.md -- Dashboard components (MetricCard, LastActivityCard, StravaConnectCTA, DashboardScreen), formatters, route wiring
 
 ### Phase 11: Calendário Semanal
 **Goal**: Usuário vê atividades do Strava da semana em cards por dia
@@ -204,7 +204,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [x] 11-01-PLAN.md -- Week navigation hook, WeekSelector, DayCard, WeekSummary, WeekScreen, route wiring
+- [ ] 11-01-PLAN.md -- Week navigation hook, WeekSelector, DayCard, WeekSummary, WeekScreen, route wiring
 
 ### Phase 12: Histórico de Atividades
 **Goal**: Usuário vê lista completa de atividades com filtros e tela de detalhe
@@ -219,7 +219,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [x] 12-01-PLAN.md -- Infinite scroll list, filters, activity detail with splits/zones, route wiring
+- [ ] 12-01-PLAN.md -- Infinite scroll list, filters, activity detail with splits/zones, route wiring
 
 ### Phase 13: Treino do Dia & Execução
 **Goal**: Usuário vê detalhes do treino do dia com etapas e pode registrar conclusão com métricas
@@ -233,7 +233,7 @@ Plans:
 **UI hint**: yes
 **Plans**: 1 plan
 Plans:
-- [x] 13-01-PLAN.md -- Workout types, WorkoutParts, WorkoutSummary, WorkoutScreen, route wiring
+- [ ] 13-01-PLAN.md -- Workout types, WorkoutParts, WorkoutSummary, WorkoutScreen, route wiring
 
 ### Phase 14: Projetos — Backend (chat-agent)
 **Goal**: Chat-agent suporta projetos para agrupar conversas com ícone customizável
@@ -266,8 +266,8 @@ Plans:
 **UI hint**: yes
 **Plans**: 2 plans
 Plans:
-- [x] 15-01-PLAN.md -- Service layer + hooks: projectsApi, useProjects hook, types, barrel exports
-- [x] 15-02-PLAN.md -- UI components: IconPicker, CreateProjectModal, ProjectSection, ConversationItem context menu, sidebar wiring
+- [ ] 15-01-PLAN.md -- Service layer + hooks: projectsApi, useProjects hook, types, barrel exports
+- [ ] 15-02-PLAN.md -- UI components: IconPicker, CreateProjectModal, ProjectSection, ConversationItem context menu, sidebar wiring
 
 ## Progress
 
@@ -283,30 +283,11 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 5. Runner Profile API | v1.1 | 2/2 | Complete | - |
 | 6. Onboarding Flow | v1.1 | 1/3 | In progress | - |
 | 7. Planilha & Completion | v1.1 | 1/1 | Complete | - |
-| 8. Dashboard Premium | v2.0 | 2/2 | Complete    | 2026-04-25 |
-| 9. Strava Activities Service | v2.0 | 1/1 | Complete    | 2026-04-25 |
-| 10. Dashboard de Métricas | v2.0 | 1/1 | Complete    | 2026-04-25 |
-| 11. Calendário Semanal | v2.0 | 1/1 | Complete    | 2026-04-25 |
-| 12. Histórico de Atividades | v2.0 | 1/1 | Complete    | 2026-04-25 |
-| 13. Treino do Dia & Execução | v2.0 | 1/1 | Complete    | 2026-04-25 |
-| 14. Projetos Backend | v2.0 | 0/0 | Complete    | 2026-04-25 |
-| 15. Projetos Frontend | v2.0 | 2/2 | Complete    | 2026-04-25 |
-| 16. Onboarding Visual Upgrade | v2.0 | 0/2 | Ready    | - |
-
-### Phase 16: Onboarding Visual Upgrade
-**Goal**: Visual upgrade das telas de onboarding (welcome + questions) com SVG illustrations, animações CSS premium e layout aprimorado. Mobile-first, inspirado em NRC e Strava.
-**Depends on**: Phase 7 (onboarding flow)
-**Requirements**: VIS-01, VIS-02, VIS-03, VIS-04, VIS-05, VIS-06
-**Success Criteria**:
-  1. Welcome screen tem hero SVG illustration com gradient navy no topo (~40% height)
-  2. Cada pergunta tem ícone SVG temático (48-64px) acima do texto
-  3. Options aparecem com staggered cascade animation (~80ms delay)
-  4. Seleção de option tem scale bounce + checkmark verde
-  5. Progress bar tem animação spring/smooth
-  6. Tela de sucesso rápida (2-3s) com "Perfil salvo!" substitui PlanilhaScreen
-**UI hint**: yes
-**Plans**: 2 plans
-
-Plans:
-- [ ] 16-01-PLAN.md -- SVG illustration assets (hero + 10 question icons) and animation infrastructure (Tailwind keyframes + CSS utilities)
-- [ ] 16-02-PLAN.md -- Wire illustrations and animations into all onboarding components, create SuccessScreen, update flow
+| 8. FAB Button & Training Shell | v2.0 | 0/2 | Planned | - |
+| 9. Strava Activities Service | v2.0 | 0/1 | Planned | - |
+| 10. Dashboard de Métricas | v2.0 | 0/1 | Planned | - |
+| 11. Calendário Semanal | v2.0 | 0/1 | Planned | - |
+| 12. Histórico de Atividades | v2.0 | 0/1 | Planned | - |
+| 13. Treino do Dia & Execução | v2.0 | 0/1 | Planned | - |
+| 14. Projetos Backend | v2.0 | 0/0 | Planned | - |
+| 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |

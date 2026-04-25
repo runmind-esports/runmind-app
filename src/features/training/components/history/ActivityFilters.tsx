@@ -33,7 +33,7 @@ function PillButton({
   return (
     <button
       onClick={onClick}
-      className={`whitespace-nowrap rounded-full px-3 py-2 text-xs font-medium transition-colors ${
+      className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
         active
           ? 'bg-accent text-white'
           : 'border border-border bg-background-secondary text-foreground-muted'

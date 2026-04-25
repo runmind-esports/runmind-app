@@ -56,7 +56,7 @@ export function HRZonesChart({ zones }: HRZonesChartProps) {
 
           return (
             <div key={idx} className="flex items-center gap-2">
-              <span className="w-20 sm:w-28 shrink-0 text-xs text-foreground-muted">
+              <span className="w-28 shrink-0 text-xs text-foreground-muted">
                 {label}
               </span>
               <div className="mx-2 h-5 flex-1 overflow-hidden rounded-full bg-background-tertiary">
@@ -65,7 +65,7 @@ export function HRZonesChart({ zones }: HRZonesChartProps) {
                   style={{ width: `${Math.max(pct, 1)}%` }}
                 />
               </div>
-              <span className="w-12 sm:w-14 shrink-0 text-right text-xs text-foreground-muted">
+              <span className="w-14 shrink-0 text-right text-xs text-foreground-muted">
                 {formatDuration(bucket.time)}
               </span>
             </div>
