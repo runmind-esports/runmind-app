@@ -31,7 +31,7 @@ export default function SignupPage() {
   // Redirect if already authenticated
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
-      router.push('/onboarding')
+      router.push('/chat')
     }
   }, [isLoading, isAuthenticated, router])
 
