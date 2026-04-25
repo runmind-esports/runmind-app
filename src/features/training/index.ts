@@ -2,7 +2,7 @@
 export { FAB } from './components/FAB'
 export { TrainingLayout } from './components/TrainingLayout'
 export { TrainingHeader } from './components/TrainingHeader'
-export { BottomTabs } from './components/BottomTabs'
+export { TrainingTabs } from './components/BottomTabs'
 export { DashboardPlaceholder } from './components/placeholders/DashboardPlaceholder'
 export { WeekPlaceholder } from './components/placeholders/WeekPlaceholder'
 export { HistoryPlaceholder } from './components/placeholders/HistoryPlaceholder'
