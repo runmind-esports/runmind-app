@@ -34,6 +34,17 @@ Requirements for the Onboarding milestone. Each maps to roadmap phases.
 - [ ] **API-01**: Endpoint POST no runmid-api (Go) para persistir perfil do corredor no banco de dados
 - [ ] **API-02**: Endpoint GET no runmid-api (Go) para gerar e retornar planilha personalizada baseada no perfil
 
+## v2.0 Visual Upgrade Requirements
+
+### Onboarding Visual Upgrade (Phase 16)
+
+- [ ] **VIS-01**: Welcome screen tem hero SVG illustration com gradient navy (#14162E) no topo (~40% viewport height)
+- [ ] **VIS-02**: Cada pergunta tem icone SVG tematico (48-64px) acima do texto da pergunta, estilo flat moderno com paleta RunMind
+- [ ] **VIS-03**: Options aparecem com staggered cascade animation (~80ms delay por opcao, fade+slide)
+- [ ] **VIS-04**: Selecao de option tem scale bounce (1.02) + checkmark verde com pop animation
+- [ ] **VIS-05**: Progress bar tem animacao spring/smooth com easing cubic-bezier overshoot
+- [ ] **VIS-06**: Tela de sucesso rapida (2-3s) com "Perfil salvo!" e check animado substitui PlanilhaScreen, redireciona para /chat
+
 ## Future Requirements
 
 ### Onboarding Enhancements
@@ -70,12 +81,19 @@ Requirements for the Onboarding milestone. Each maps to roadmap phases.
 | ONB-13 | Phase 7 | Pending |
 | API-01 | Phase 5 | Pending |
 | API-02 | Phase 5 | Pending |
+| VIS-01 | Phase 16 | Pending |
+| VIS-02 | Phase 16 | Pending |
+| VIS-03 | Phase 16 | Pending |
+| VIS-04 | Phase 16 | Pending |
+| VIS-05 | Phase 16 | Pending |
+| VIS-06 | Phase 16 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 15 total
-- Mapped to phases: 15
+- v2.0 visual requirements: 6 total
+- Mapped to phases: 21
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-22*
-*Last updated: 2026-04-22 after roadmap creation*
+*Last updated: 2026-04-25 after Phase 16 planning*

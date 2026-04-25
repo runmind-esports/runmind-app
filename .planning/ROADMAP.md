@@ -291,12 +291,12 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 13. Treino do Dia & Execução | v2.0 | 1/1 | Complete    | 2026-04-25 |
 | 14. Projetos Backend | v2.0 | 0/0 | Complete    | 2026-04-25 |
 | 15. Projetos Frontend | v2.0 | 2/2 | Complete    | 2026-04-25 |
-| 16. Onboarding Visual Upgrade | v2.0 | 0/0 | Planning | - |
+| 16. Onboarding Visual Upgrade | v2.0 | 0/2 | Ready    | - |
 
 ### Phase 16: Onboarding Visual Upgrade
 **Goal**: Visual upgrade das telas de onboarding (welcome + questions) com SVG illustrations, animações CSS premium e layout aprimorado. Mobile-first, inspirado em NRC e Strava.
 **Depends on**: Phase 7 (onboarding flow)
-**Requirements**: TBD
+**Requirements**: VIS-01, VIS-02, VIS-03, VIS-04, VIS-05, VIS-06
 **Success Criteria**:
   1. Welcome screen tem hero SVG illustration com gradient navy no topo (~40% height)
   2. Cada pergunta tem ícone SVG temático (48-64px) acima do texto
@@ -305,7 +305,8 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
   5. Progress bar tem animação spring/smooth
   6. Tela de sucesso rápida (2-3s) com "Perfil salvo!" substitui PlanilhaScreen
 **UI hint**: yes
-**Plans**: 0 plans
+**Plans**: 2 plans
 
 Plans:
-- [ ] TBD (run /gsd-plan-phase 16 to break down)
+- [ ] 16-01-PLAN.md -- SVG illustration assets (hero + 10 question icons) and animation infrastructure (Tailwind keyframes + CSS utilities)
+- [ ] 16-02-PLAN.md -- Wire illustrations and animations into all onboarding components, create SuccessScreen, update flow
