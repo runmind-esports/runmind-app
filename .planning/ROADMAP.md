@@ -291,23 +291,21 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 13. Treino do Dia & Execução | v2.0 | 1/1 | Complete    | 2026-04-25 |
 | 14. Projetos Backend | v2.0 | 0/0 | Complete    | 2026-04-25 |
 | 15. Projetos Frontend | v2.0 | 2/2 | Complete    | 2026-04-25 |
+| 16. Onboarding Visual Upgrade | v2.0 | 0/0 | Planning | - |
 
-### Phase 8: Onboarding Visual Upgrade — Adicionar imagens ilustrativas, animações e visual premium nas telas de onboarding (welcome, questions, planilha). Inspirado em apps como Nike Run Club e Strava onboarding. Mobile-first.
-
-**Goal:** [To be planned]
+### Phase 16: Onboarding Visual Upgrade
+**Goal**: Visual upgrade das telas de onboarding (welcome + questions) com SVG illustrations, animações CSS premium e layout aprimorado. Mobile-first, inspirado em NRC e Strava.
+**Depends on**: Phase 7 (onboarding flow)
 **Requirements**: TBD
-**Depends on:** Phase 7
-**Plans:** 2/2 plans complete
+**Success Criteria**:
+  1. Welcome screen tem hero SVG illustration com gradient navy no topo (~40% height)
+  2. Cada pergunta tem ícone SVG temático (48-64px) acima do texto
+  3. Options aparecem com staggered cascade animation (~80ms delay)
+  4. Seleção de option tem scale bounce + checkmark verde
+  5. Progress bar tem animação spring/smooth
+  6. Tela de sucesso rápida (2-3s) com "Perfil salvo!" substitui PlanilhaScreen
+**UI hint**: yes
+**Plans**: 0 plans
 
 Plans:
-- [ ] TBD (run /gsd-plan-phase 8 to break down)
-
-### Phase 8: Onboarding Visual Upgrade — Imagens ilustrativas, animações e visual premium nas telas de onboarding. Mobile-first, inspirado em NRC e Strava.
-
-**Goal:** [To be planned]
-**Requirements**: TBD
-**Depends on:** Phase 7
-**Plans:** 0 plans
-
-Plans:
-- [ ] TBD (run /gsd-plan-phase 8 to break down)
+- [ ] TBD (run /gsd-plan-phase 16 to break down)
