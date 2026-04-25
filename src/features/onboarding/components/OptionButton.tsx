@@ -18,12 +18,12 @@ export function OptionButton({ label, selected, onClick }: OptionButtonProps) {
         'rounded-xl px-4 py-4 w-full text-base text-left transition-all duration-200 min-h-[52px]',
         'flex items-center justify-between',
         selected
-          ? 'bg-white border-[2px] border-[#00F048] text-[#14162E] font-bold'
+          ? 'bg-white border-[2px] border-[#00F048] text-[#14162E] font-bold shadow-[0_0_0_3px_rgba(0,240,72,0.15)] motion-safe:animate-scale-bounce'
           : 'bg-[#F5F6F7] border-[1.5px] border-[rgba(20,22,46,0.09)] text-[#14162E] hover:bg-[#EBEBEF] hover:border-[rgba(20,22,46,0.15)]',
       )}
     >
       <span>{label}</span>
-      {selected && <Check size={16} className="text-[#00F048] flex-shrink-0 ml-2" />}
+      {selected && <Check size={18} className="text-[#00F048] flex-shrink-0 ml-2 motion-safe:animate-check-pop" />}
     </button>
   )
 }

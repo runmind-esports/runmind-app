@@ -4,6 +4,8 @@ import { getTranslations } from '../i18n/translations'
 import { OptionButton } from './OptionButton'
 import { ScaleInput } from './ScaleInput'
 import { YesNoInput } from './YesNoInput'
+import { GoalIcon, FitnessIcon, RunningIcon, RacedIcon, PaceIcon, DaysIcon, ActivitiesIcon, InjuryIcon, PreferenceIcon, StrengthIcon } from '../assets'
+import { cn } from '@/lib/utils'
 
 interface QuestionConfig {
   key: string
@@ -24,6 +26,19 @@ export const QUESTIONS: QuestionConfig[] = [
   { key: 'strength', type: 'yes-no' },
 ]
 
+const QUESTION_ICONS: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+  goal: GoalIcon,
+  fitness: FitnessIcon,
+  running: RunningIcon,
+  raced: RacedIcon,
+  pace: PaceIcon,
+  days: DaysIcon,
+  otherActivities: ActivitiesIcon,
+  injury: InjuryIcon,
+  preference: PreferenceIcon,
+  strength: StrengthIcon,
+}
+
 export function QuestionStep({
   questionIndex,
   value,
@@ -41,8 +56,12 @@ export function QuestionStep({
   const config = QUESTIONS[questionIndex]
   const questionData = t.questions[config.key as keyof typeof t.questions]
 
+  const IconComponent = QUESTION_ICONS[config.key]
+
   return (
     <div>
+      {IconComponent && <IconComponent size={56} className="mb-4 motion-safe:animate-fade-in-up" />}
+
       <h2 className="text-2xl font-bold font-display leading-[1.2] text-[#14162E]">
         {questionData.question}
       </h2>
@@ -51,12 +70,16 @@ export function QuestionStep({
         {config.type === 'single-select' && config.optionKeys && (
           <div className="flex flex-col gap-2">
             {'options' in questionData && (questionData.options as string[]).map((label: string, i: number) => (
-              <OptionButton
+              <div
                 key={config.optionKeys![i]}
-                label={label}
-                selected={value === config.optionKeys![i]}
-                onClick={() => onChange(config.key, config.optionKeys![i])}
-              />
+                className={cn('option-stagger-item motion-safe:animate-option-fade-in', `stagger-delay-${i + 1}`)}
+              >
+                <OptionButton
+                  label={label}
+                  selected={value === config.optionKeys![i]}
+                  onClick={() => onChange(config.key, config.optionKeys![i])}
+                />
+              </div>
             ))}
           </div>
         )}
@@ -95,12 +118,16 @@ export function QuestionStep({
               {'options' in questionData && (
                 <div className="flex flex-col gap-2">
                   {(questionData.options as string[]).map((label: string, i: number) => (
-                    <OptionButton
+                    <div
                       key={config.optionKeys![i]}
-                      label={label}
-                      selected={conditionalValue === config.optionKeys![i]}
-                      onClick={() => onConditionalChange?.(config.optionKeys![i])}
-                    />
+                      className={cn('option-stagger-item motion-safe:animate-option-fade-in', `stagger-delay-${i + 1}`)}
+                    >
+                      <OptionButton
+                        label={label}
+                        selected={conditionalValue === config.optionKeys![i]}
+                        onClick={() => onConditionalChange?.(config.optionKeys![i])}
+                      />
+                    </div>
                   ))}
                 </div>
               )}
