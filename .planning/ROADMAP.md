@@ -158,8 +158,8 @@ Plans:
 **UI hint**: yes
 **Plans**: 2 plans
 Plans:
-- [ ] 08-01-PLAN.md -- Data layer: useDashboardData hook, dashboardHelpers utilities, WeeklyProgressRing SVG component, formatRelativeDate
-- [ ] 08-02-PLAN.md -- UI composition: RecentActivityCard, WeekComparison, StreakBadge, CoachCTA, DashboardScreen rebuild, chat pre-fill integration
+- [x] 08-01-PLAN.md -- Data layer: useDashboardData hook, dashboardHelpers utilities, WeeklyProgressRing SVG component, formatRelativeDate
+- [x] 08-02-PLAN.md -- UI composition: RecentActivityCard, WeekComparison, StreakBadge, CoachCTA, DashboardScreen rebuild, chat pre-fill integration
 
 ### Phase 9: Strava Activities Service
 **Goal**: Frontend tem camada de serviço para buscar e cachear atividades do Strava
