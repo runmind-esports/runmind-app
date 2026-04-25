@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Onboarding
 status: executing
-stopped_at: Phase 7 context gathered
-last_updated: "2026-04-23T16:35:36.529Z"
+stopped_at: Phase 8 context gathered
+last_updated: "2026-04-25T15:18:55.871Z"
 last_activity: 2026-04-23
 progress:
   total_phases: 3
@@ -68,6 +68,10 @@ Recent decisions affecting current work:
 - [v1.1]: Onboarding flow: Signup -> Step 1 (confirm name) -> Step 2 (11-question form) -> Planilha download -> Chat
 - [v1.1]: Multi-repo: frontend (Next.js here) + backend (Go at /Documents/runmid/runmid-api)
 
+### Roadmap Evolution
+
+- Phase 8 added: Dashboard Premium — Redesign do dashboard de treino com progresso semanal, últimas 3 atividades, comparativo semanal, streak de corrida e CTA do coach IA
+
 ### Pending Todos
 
 None yet.
@@ -78,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-23T16:02:26.519Z
-Stopped at: Phase 7 context gathered
-Resume file: .planning/phases/07-planilha-completion/07-CONTEXT.md
+Last session: 2026-04-25T15:18:55.867Z
+Stopped at: Phase 8 context gathered
+Resume file: .planning/phases/08-dashboard-premium-redesign-do-dashboard-de-treino-com-progre/08-CONTEXT.md
