@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, BarChart3, Dumbbell, Settings, X } from 'lucide-react'
+import { MessageSquare, BarChart3, Dumbbell, Settings, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { SidebarContent } from './SidebarContent'
@@ -77,9 +77,9 @@ export function Sidebar({
   const navItems: NavItem[] = [
     {
       id: 'home',
-      label: 'Home',
+      label: 'Chat',
       href: '/chat',
-      icon: <Home className="h-5 w-5" />,
+      icon: <MessageSquare className="h-5 w-5" />,
       isActive: pathname === '/chat',
     },
     {
@@ -100,32 +100,40 @@ export function Sidebar({
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay — mobile only */}
       <div
         className={cn(
-          'fixed inset-0 bg-black/50 z-40 transition-opacity duration-300',
+          'fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 lg:hidden',
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={onClose}
       />
 
-      {/* Drawer */}
+      {/* Sidebar: drawer on mobile, fixed on desktop */}
       <aside
         className={cn(
           'fixed left-0 top-0 h-full w-[75vw] max-w-[280px] bg-background z-50 flex flex-col',
-          'transition-transform duration-300 ease-in-out',
+          'transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-auto lg:border-r lg:border-border',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
-          {/* Close button */}
-          <div className="flex items-center justify-end p-3">
+          {/* Header with logo + close */}
+          <div className="flex items-center justify-between p-3">
+            <div className="flex items-center gap-2 pl-1">
+              <svg width="22" height="22" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="40" fill="#00F048"/>
+                <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
+              </svg>
+              <span className="font-display font-bold text-[14px] text-foreground tracking-tight">Runmind</span>
+            </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="h-8 w-8 text-foreground-muted hover:text-foreground"
+              className="h-8 w-8 text-foreground-muted hover:text-foreground lg:hidden"
             >
               <X className="h-4 w-4" />
             </Button>
