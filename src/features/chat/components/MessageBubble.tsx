@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useCallback } from 'react'
+import { Copy, Share2, Check } from 'lucide-react'
 import { Message } from '../types'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -14,6 +16,49 @@ function markdownToHtml(text: string): string {
 
 function hasRichContent(text: string): boolean {
   return (text.includes('<') && text.includes('>')) || /\*\*.+?\*\*/.test(text)
+}
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, '').replace(/&[^;]+;/g, ' ').trim()
+}
+
+function MessageActions({ content }: { content: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = useCallback(() => {
+    const text = stripHtml(content)
+    navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }, [content])
+
+  const handleShare = useCallback(() => {
+    const text = stripHtml(content)
+    if (navigator.share) {
+      navigator.share({ text })
+    } else {
+      navigator.clipboard.writeText(text)
+    }
+  }, [content])
+
+  return (
+    <div className="flex items-center gap-1 mt-2">
+      <button
+        onClick={handleCopy}
+        className="flex h-8 w-8 items-center justify-center rounded-lg text-foreground-muted hover:text-foreground hover:bg-background-secondary transition-colors"
+        aria-label="Copiar"
+      >
+        {copied ? <Check className="h-4 w-4 text-accent" /> : <Copy className="h-4 w-4" />}
+      </button>
+      <button
+        onClick={handleShare}
+        className="flex h-8 w-8 items-center justify-center rounded-lg text-foreground-muted hover:text-foreground hover:bg-background-secondary transition-colors"
+        aria-label="Compartilhar"
+      >
+        <Share2 className="h-4 w-4" />
+      </button>
+    </div>
+  )
 }
 
 interface MessageBubbleProps {
@@ -82,6 +127,9 @@ export function MessageBubble({ message, isLatest = false, animate = true }: Mes
             </p>
           )
         )}
+
+        {/* Action icons for assistant messages */}
+        {!isUser && content && <MessageActions content={content} />}
       </div>
     </div>
   )

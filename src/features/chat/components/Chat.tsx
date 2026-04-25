@@ -98,8 +98,11 @@ export function Chat() {
         conversations={conversations.conversations}
         activeConversationId={conversations.activeConversationId}
         isLoading={conversations.isLoading}
+        isLoadingMore={conversations.isLoadingMore}
+        hasMore={conversations.hasMore}
         error={conversations.error}
         onNewConversation={handleNewConversation}
+        onLoadMore={conversations.loadMore}
         onSelectConversation={handleSelectConversation}
         onDeleteConversation={conversations.deleteConversation}
         onRenameConversation={conversations.renameConversation}

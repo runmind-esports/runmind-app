@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef, useCallback } from 'react'
 import { Loader2 } from 'lucide-react'
 import { Conversation, Project } from '../../types'
 import { ConversationItem } from './ConversationItem'
@@ -9,10 +10,13 @@ interface SidebarContentProps {
   conversations: Conversation[]
   activeConversationId: string | null
   isLoading?: boolean
+  isLoadingMore?: boolean
+  hasMore?: boolean
   error?: string | null
   onSelectConversation: (id: string) => void
   onDeleteConversation: (id: string) => void
   onRenameConversation: (id: string, title: string) => void
+  onLoadMore?: () => void
   projects: Project[]
   onToggleProject: (id: string) => void
   onDeleteProject: (id: string) => void
@@ -26,10 +30,13 @@ export function SidebarContent({
   conversations,
   activeConversationId,
   isLoading,
+  isLoadingMore,
+  hasMore,
   error,
   onSelectConversation,
   onDeleteConversation,
   onRenameConversation,
+  onLoadMore,
   projects,
   onToggleProject,
   onDeleteProject,
@@ -38,6 +45,22 @@ export function SidebarContent({
   onCreateProject,
   onMoveConversation,
 }: SidebarContentProps) {
+  const sentinelRef = useRef<HTMLDivElement>(null)
+
+  const handleIntersect = useCallback((entries: IntersectionObserverEntry[]) => {
+    if (entries[0].isIntersecting && hasMore && !isLoadingMore && onLoadMore) {
+      onLoadMore()
+    }
+  }, [hasMore, isLoadingMore, onLoadMore])
+
+  useEffect(() => {
+    const el = sentinelRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(handleIntersect, { threshold: 0.1 })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [handleIntersect])
+
   if (isLoading) {
     return (
       <div className="flex-1 flex items-center justify-center">
@@ -97,6 +120,24 @@ export function SidebarContent({
               }
             />
           ))}
+
+          {/* Infinite scroll sentinel / load more */}
+          {hasMore && (
+            <div ref={sentinelRef} className="py-2">
+              {isLoadingMore ? (
+                <div className="flex justify-center py-2">
+                  <Loader2 className="h-4 w-4 animate-spin text-foreground-muted" />
+                </div>
+              ) : (
+                <button
+                  onClick={onLoadMore}
+                  className="w-full py-2 text-xs text-foreground-muted hover:text-foreground transition-colors"
+                >
+                  Carregar mais
+                </button>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         conversations.length === 0 && projects.length === 0 && (

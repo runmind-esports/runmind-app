@@ -120,9 +120,6 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
           </div>
         </div>
 
-        <p className="mt-2 text-center text-xs text-foreground-muted">
-          Runmind pode cometer erros. Verifique informações importantes.
-        </p>
       </div>
     </div>
   )

@@ -16,8 +16,11 @@ interface SidebarProps {
   conversations: Conversation[]
   activeConversationId: string | null
   isLoading?: boolean
+  isLoadingMore?: boolean
+  hasMore?: boolean
   error?: string | null
   onNewConversation: () => void
+  onLoadMore?: () => void
   onSelectConversation: (id: string) => void
   onDeleteConversation: (id: string) => void
   onRenameConversation: (id: string, title: string) => void
@@ -45,8 +48,11 @@ export function Sidebar({
   conversations,
   activeConversationId,
   isLoading,
+  isLoadingMore,
+  hasMore,
   error,
   onNewConversation,
+  onLoadMore,
   onSelectConversation,
   onDeleteConversation,
   onRenameConversation,
@@ -155,7 +161,10 @@ export function Sidebar({
           conversations={conversations}
           activeConversationId={activeConversationId}
           isLoading={isLoading}
+          isLoadingMore={isLoadingMore}
+          hasMore={hasMore}
           error={error}
+          onLoadMore={onLoadMore}
           onSelectConversation={(id) => {
             onSelectConversation(id)
             onClose()

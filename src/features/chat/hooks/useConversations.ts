@@ -21,27 +21,35 @@ const toLocalConversation = (api: ApiConversation): Conversation => ({
   updatedAt: new Date(api.updatedAt || api.updated_at || ''),
 })
 
+const PAGE_SIZE = 6
+
 export function useConversations() {
   const [conversations, setConversations] = useState<Conversation[]>([])
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
 
   const activeConversation = conversations.find((c) => c.id === activeConversationId) || null
 
-  // Fetch conversations from API
+  // Fetch first page of conversations
   const fetchConversations = useCallback(async () => {
     setIsLoading(true)
     setError(null)
 
     try {
-      const response = await chatApi.listConversations()
+      const response = await chatApi.listConversations(1, PAGE_SIZE)
       const localConversations = response.conversations.map(toLocalConversation)
       setConversations(localConversations)
+      setCurrentPage(1)
+      setHasMore(localConversations.length >= PAGE_SIZE)
     } catch (err) {
       const axiosErr = err as { response?: { status?: number } }
       if (axiosErr?.response?.status === 404) {
         setConversations([])
+        setHasMore(false)
       } else {
         console.error('Error fetching conversations:', err)
         setError('Erro ao carregar conversas')
@@ -50,6 +58,31 @@ export function useConversations() {
       setIsLoading(false)
     }
   }, [])
+
+  // Load more conversations (next page)
+  const loadMore = useCallback(async () => {
+    if (isLoadingMore || !hasMore) return
+
+    setIsLoadingMore(true)
+    const nextPage = currentPage + 1
+
+    try {
+      const response = await chatApi.listConversations(nextPage, PAGE_SIZE)
+      const newConversations = response.conversations.map(toLocalConversation)
+
+      setConversations((prev) => {
+        const existingIds = new Set(prev.map((c) => c.id))
+        const unique = newConversations.filter((c) => !existingIds.has(c.id))
+        return [...prev, ...unique]
+      })
+      setCurrentPage(nextPage)
+      setHasMore(newConversations.length >= PAGE_SIZE)
+    } catch (err) {
+      console.error('Error loading more conversations:', err)
+    } finally {
+      setIsLoadingMore(false)
+    }
+  }, [currentPage, hasMore, isLoadingMore])
 
   // Load conversations on mount (only if authenticated)
   useEffect(() => {
@@ -147,9 +180,12 @@ export function useConversations() {
     activeConversationId,
     activeConversation,
     isLoading,
+    isLoadingMore,
+    hasMore,
     error,
     // Actions
     fetchConversations,
+    loadMore,
     createConversation,
     deleteConversation,
     renameConversation,
