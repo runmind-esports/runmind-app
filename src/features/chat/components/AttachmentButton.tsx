@@ -43,7 +43,7 @@ export function AttachmentButton({ onFilesSelected, disabled }: AttachmentButton
         onClick={handleClick}
         disabled={disabled}
         aria-label="Anexar imagem"
-        className="h-7 w-7 shrink-0 rounded-full text-foreground-muted hover:text-foreground hover:bg-background-tertiary"
+        className="h-9 w-9 shrink-0 rounded-full text-foreground-muted hover:text-foreground hover:bg-background-tertiary"
       >
         <Paperclip className="h-4 w-4" />
       </Button>

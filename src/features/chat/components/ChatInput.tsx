@@ -109,7 +109,7 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
               disabled={isDisabled || !canSubmit}
               size="icon"
               className={cn(
-                'h-7 w-7 shrink-0 rounded-full',
+                'h-9 w-9 shrink-0 rounded-full',
                 canSubmit
                   ? 'bg-foreground text-background hover:bg-foreground/90'
                   : 'bg-background-tertiary text-foreground-muted'

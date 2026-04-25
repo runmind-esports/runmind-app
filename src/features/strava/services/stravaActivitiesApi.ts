@@ -1,6 +1,7 @@
 import { runmidApiClient } from '@/shared/lib/apiClient'
 import type {
   StravaActivity,
+  StravaAthleteProfile,
   StravaAthleteStats,
   StravaActivityDetail,
   StravaLap,
@@ -52,8 +53,8 @@ export const stravaActivitiesApi = {
     return stravaFetch<StravaAthleteStats>(`/athletes/${athleteId}/stats`)
   },
 
-  getAthleteProfile: async (): Promise<{ id: number }> => {
-    return stravaFetch<{ id: number }>('/athlete')
+  getAthleteProfile: async (): Promise<StravaAthleteProfile> => {
+    return stravaFetch<StravaAthleteProfile>('/athlete')
   },
 
   getActivityDetail: async (id: number): Promise<StravaActivityDetail> => {

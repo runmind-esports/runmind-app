@@ -2,7 +2,6 @@
 
 import { Message } from '../types'
 import { cn } from '@/lib/utils'
-import { useTypingEffect } from '../hooks/useTypingEffect'
 import Image from 'next/image'
 
 // Convert basic markdown to HTML (bold, italic, line breaks)
@@ -13,20 +12,8 @@ function markdownToHtml(text: string): string {
     .replace(/\n/g, '<br/>')
 }
 
-function hasMarkdown(text: string): boolean {
-  return /\*\*.+?\*\*/.test(text)
-}
-
-function AssistantAvatar() {
-  return (
-    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/15">
-      <svg width="14" height="14" viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="40" fill="currentColor" className="text-accent" />
-        <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-      </svg>
-    </div>
-  )
+function hasRichContent(text: string): boolean {
+  return (text.includes('<') && text.includes('>')) || /\*\*.+?\*\*/.test(text)
 }
 
 interface MessageBubbleProps {
@@ -38,30 +25,26 @@ interface MessageBubbleProps {
 export function MessageBubble({ message, isLatest = false, animate = true }: MessageBubbleProps) {
   const isUser = message.role === 'user'
   const shouldAnimate = !isUser && isLatest && animate
-
-  const { displayedText, isTyping } = useTypingEffect({
-    text: message.content,
-    speed: 15,
-    enabled: shouldAnimate,
-  })
-
-  const content = shouldAnimate ? displayedText : message.content
+  const content = message.content
   const hasAttachments = message.attachments && message.attachments.length > 0
+
+  const contentClasses = 'text-sm leading-[1.7] break-words text-foreground'
+  const richClasses = `${contentClasses} [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:mb-1 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:font-semibold [&_em]:italic`
 
   return (
     <div
       className={cn(
-        'flex w-full',
+        'flex w-full gap-3',
         isUser ? 'justify-end' : 'justify-start'
       )}
     >
-      {!isUser && <AssistantAvatar />}
       <div
         className={cn(
-          'max-w-[85%]',
+          'max-w-[95%] sm:max-w-[85%]',
           isUser
-            ? 'rounded-2xl rounded-br-md bg-bubble-user px-4 py-2.5'
-            : 'ml-2.5 rounded-2xl rounded-tl-md bg-background-secondary px-4 py-2.5'
+            ? 'rounded-2xl rounded-br-md bg-bubble-user px-3.5 py-2'
+            : 'py-0.5',
+          shouldAnimate && 'animate-fade-in'
         )}
       >
         {/* Image attachments */}
@@ -88,15 +71,14 @@ export function MessageBubble({ message, isLatest = false, animate = true }: Mes
 
         {/* Text content */}
         {content && (
-          content.includes('<') && content.includes('>') || hasMarkdown(content) ? (
+          hasRichContent(content) ? (
             <div
-              className="text-[15px] leading-relaxed break-words text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:mb-1 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:font-semibold [&_em]:italic"
+              className={richClasses}
               dangerouslySetInnerHTML={{ __html: content.includes('<') ? content : markdownToHtml(content) }}
             />
           ) : (
-            <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words text-foreground">
+            <p className={`${contentClasses} whitespace-pre-wrap`}>
               {content}
-              {isTyping && <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-foreground" />}
             </p>
           )
         )}

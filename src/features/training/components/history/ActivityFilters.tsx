@@ -53,8 +53,8 @@ export function ActivityFilters({
   return (
     <div className="space-y-2">
       <div
-        className="flex gap-2 overflow-x-auto pb-2"
-        style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+        className="flex gap-2 overflow-x-auto pb-2 no-scrollbar"
+        style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {typeOptions.map((opt) => (
           <PillButton
@@ -67,8 +67,8 @@ export function ActivityFilters({
       </div>
 
       <div
-        className="flex gap-2 overflow-x-auto pb-2"
-        style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+        className="flex gap-2 overflow-x-auto pb-2 no-scrollbar"
+        style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {periodOptions.map((opt) => (
           <PillButton

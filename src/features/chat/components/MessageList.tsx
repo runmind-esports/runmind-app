@@ -19,7 +19,7 @@ export function MessageList({ messages, isLoading, animate = true }: MessageList
       ref={scrollRef}
       className="flex-1 overflow-y-auto px-4 py-4"
     >
-      <div className="mx-auto max-w-chat space-y-4 font-body">
+      <div className="mx-auto max-w-chat space-y-6 font-body">
         {messages.map((message, index) => (
           <MessageBubble
             key={message.id}

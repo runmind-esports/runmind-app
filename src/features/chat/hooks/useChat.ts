@@ -20,8 +20,9 @@ const toLocalMessage = (apiMessage: ApiMessage): Message => ({
 const parseResponseContent = (response: string): string => {
   try {
     const parsed = JSON.parse(response)
+
+    // Handle blocks format
     if (parsed.blocks && Array.isArray(parsed.blocks)) {
-      // Extract text content from blocks
       return parsed.blocks
         .map((block: { content?: string; items?: { content: string }[]; type: string }) => {
           if (block.type === 'paragraph' && block.content) {
@@ -35,6 +36,20 @@ const parseResponseContent = (response: string): string => {
         .filter(Boolean)
         .join('\n\n')
     }
+
+    // Handle { message: "..." } or { text: "..." } or { response: "..." } or { content: "..." }
+    if (typeof parsed === 'object' && parsed !== null) {
+      const textField = parsed.message || parsed.text || parsed.response || parsed.content || parsed.answer
+      if (typeof textField === 'string') {
+        return textField
+      }
+    }
+
+    // Handle plain string wrapped in JSON
+    if (typeof parsed === 'string') {
+      return parsed
+    }
+
     return response
   } catch {
     // Not JSON, return as-is
@@ -126,11 +141,31 @@ export function useChat(conversationId?: string | null) {
       return response.conversationId
     } catch (error) {
       console.error('Error sending message:', error)
-      setState((prev) => ({
-        ...prev,
-        isLoading: false,
-        error: 'Erro ao enviar mensagem. Tente novamente.',
-      }))
+
+      // Check for rate limit (429)
+      const isRateLimit = error instanceof Error && 'response' in error &&
+        (error as { response?: { status?: number } }).response?.status === 429
+
+      if (isRateLimit) {
+        const limitMessage: Message = {
+          id: generateId(),
+          role: 'assistant',
+          content: 'Você atingiu o limite diário de uso do plano gratuito. Seu limite será renovado amanhã. Para continuar agora, considere fazer upgrade para o plano Pro.',
+          createdAt: new Date(),
+        }
+        setState((prev) => ({
+          ...prev,
+          messages: [...prev.messages, limitMessage],
+          isLoading: false,
+          error: null,
+        }))
+      } else {
+        setState((prev) => ({
+          ...prev,
+          isLoading: false,
+          error: 'Erro ao enviar mensagem. Tente novamente.',
+        }))
+      }
       return null
     }
   }, [currentConversationId])

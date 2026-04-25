@@ -45,9 +45,11 @@ export function useDraggable({
     const rect = el.getBoundingClientRect()
     const w = rect.width
     const h = rect.height
+    const safeTop = 60
+    const safeBottom = 100
     return {
-      x: Math.max(0, Math.min(x, window.innerWidth - w)),
-      y: Math.max(0, Math.min(y, window.innerHeight - h)),
+      x: Math.max(8, Math.min(x, window.innerWidth - w - 8)),
+      y: Math.max(safeTop, Math.min(y, window.innerHeight - h - safeBottom)),
     }
   }, [])
 

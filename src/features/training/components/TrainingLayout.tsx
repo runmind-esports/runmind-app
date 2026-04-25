@@ -37,7 +37,7 @@ export function TrainingLayout({ children }: TrainingLayoutProps) {
   return (
     <div
       className={cn(
-        'flex h-screen flex-col bg-background transition-opacity duration-300 ease-in-out',
+        'flex h-dvh flex-col bg-background overflow-hidden transition-opacity duration-300 ease-in-out',
         mounted ? 'opacity-100' : 'opacity-0'
       )}
     >

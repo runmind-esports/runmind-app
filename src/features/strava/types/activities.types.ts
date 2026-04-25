@@ -21,6 +21,16 @@ export interface StravaActivity {
   }
 }
 
+export interface StravaAthleteProfile {
+  id: number
+  firstname: string
+  lastname: string
+  profile_medium: string // 62x62 avatar URL
+  profile: string // 124x124 avatar URL
+  city?: string
+  country?: string
+}
+
 export interface StravaAthleteStats {
   recent_run_totals: StravaTotals
   all_run_totals: StravaTotals

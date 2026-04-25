@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, BarChart3, Dumbbell, Settings, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { SidebarContent } from './SidebarContent'
 import { Conversation, Project } from '../../types'
 import { cn } from '@/lib/utils'
+import { useUserProfile } from '@/shared/hooks/useUserProfile'
 
 interface SidebarProps {
   isOpen: boolean
@@ -57,6 +59,14 @@ export function Sidebar({
   onMoveConversation,
 }: SidebarProps) {
   const pathname = usePathname()
+  const { name, avatarUrl, plan } = useUserProfile()
+
+  const initials = name
+    .split(' ')
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase() || '?'
 
   const navItems: NavItem[] = [
     {
@@ -96,7 +106,7 @@ export function Sidebar({
       {/* Drawer */}
       <aside
         className={cn(
-          'fixed left-0 top-0 h-full w-[280px] bg-background z-50 flex flex-col',
+          'fixed left-0 top-0 h-full w-[75vw] max-w-[280px] bg-background z-50 flex flex-col',
           'transition-transform duration-300 ease-in-out',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
@@ -162,15 +172,25 @@ export function Sidebar({
         />
         </div>
 
-        {/* Footer — Configurações */}
-        <div className="p-3">
+        {/* Footer — User Profile */}
+        <div className="border-t border-border p-3">
           <Link
             href="/settings"
             onClick={onClose}
-            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground-muted hover:bg-background-secondary hover:text-foreground transition-colors"
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-background-secondary transition-colors"
           >
-            <Settings className="h-5 w-5" />
-            Configurações
+            <div className="relative h-10 w-10 shrink-0">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent to-foreground" />
+              <Avatar className="absolute inset-[2px] h-[calc(100%-4px)] w-[calc(100%-4px)] border-2 border-background">
+                {avatarUrl && <AvatarImage src={avatarUrl} alt={name} />}
+                <AvatarFallback>{initials}</AvatarFallback>
+              </Avatar>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-foreground truncate">{name}</p>
+              <p className="text-xs text-foreground-muted">{plan}</p>
+            </div>
+            <Settings className="h-4 w-4 text-foreground-muted shrink-0" />
           </Link>
         </div>
       </aside>
