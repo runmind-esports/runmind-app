@@ -12,6 +12,7 @@ import {
   Bot,
   type LucideIcon,
 } from 'lucide-react'
+import { Shimmer } from '@/components/ui/shimmer'
 import { useActivityDetail, useActivityLaps, useActivityZones } from '@/features/strava'
 import { formatDistance, formatPace, formatDuration, formatDateShort } from '../../utils/formatters'
 import { SplitsTable } from './SplitsTable'
@@ -41,15 +42,15 @@ function MetricCard({
 
 function SkeletonDetail() {
   return (
-    <div className="animate-pulse space-y-4 p-4">
-      <div className="h-8 w-48 rounded bg-background-tertiary" />
+    <div className="space-y-4 p-4">
+      <Shimmer className="h-8 w-48" />
       <div className="grid grid-cols-2 gap-3">
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="h-24 rounded-xl bg-background-tertiary" />
+          <Shimmer key={i} className="h-24 rounded-xl" />
         ))}
       </div>
-      <div className="h-40 rounded-xl bg-background-tertiary" />
-      <div className="h-40 rounded-xl bg-background-tertiary" />
+      <Shimmer className="h-40 rounded-xl" />
+      <Shimmer className="h-40 rounded-xl" />
     </div>
   )
 }
@@ -147,11 +148,18 @@ export function ActivityDetailScreen({ activityId }: ActivityDetailScreenProps) 
       {/* Analisar com IA button */}
       <div className="px-4 pb-8">
         <button
-          onClick={() =>
-            router.push(
-              `/chat?context=activity&activityId=${activityId}&activityName=${encodeURIComponent(activity.name)}`,
-            )
-          }
+          onClick={() => {
+            const summary = [
+              `Analise meu treino "${activity.name}" de ${formatDateShort(activity.start_date_local)}:`,
+              `- Distância: ${formatDistance(activity.distance)}`,
+              `- Pace médio: ${formatPace(activity.average_speed)}`,
+              `- Duração: ${formatDuration(activity.moving_time)}`,
+              activity.total_elevation_gain > 0 ? `- Elevação: ${Math.round(activity.total_elevation_gain)}m` : '',
+              activity.average_heartrate ? `- FC média: ${Math.round(activity.average_heartrate)} bpm` : '',
+              'O que achou do meu desempenho? Sugestões de melhoria?',
+            ].filter(Boolean).join('\n')
+            router.push(`/chat?prompt=${encodeURIComponent(summary)}`)
+          }}
           className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3 font-medium text-white transition-colors hover:bg-accent-hover"
         >
           <Bot size={20} />

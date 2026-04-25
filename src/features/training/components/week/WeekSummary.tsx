@@ -2,6 +2,7 @@
 
 import { formatDistance, formatDuration } from '../../utils/formatters'
 import type { StravaActivity } from '@/features/strava'
+import { Shimmer } from '@/components/ui/shimmer'
 
 interface WeekSummaryProps {
   activities: StravaActivity[]
@@ -11,8 +12,8 @@ interface WeekSummaryProps {
 function SkeletonStat() {
   return (
     <div className="flex-1 flex flex-col items-center gap-1">
-      <div className="h-6 w-12 rounded bg-background-tertiary animate-shimmer bg-[length:200%_100%] bg-gradient-to-r from-background-tertiary via-background-secondary to-background-tertiary" />
-      <div className="h-3 w-16 rounded bg-background-tertiary animate-shimmer bg-[length:200%_100%] bg-gradient-to-r from-background-tertiary via-background-secondary to-background-tertiary" />
+      <Shimmer className="h-6 w-12" />
+      <Shimmer className="h-3 w-16" />
     </div>
   )
 }

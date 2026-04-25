@@ -55,7 +55,7 @@ export function WeeklyProgressRing({
         {onGoalEdit && !isEditing && (
           <button
             onClick={handleEditStart}
-            className="absolute top-0 right-0 z-10 p-1 rounded-full hover:bg-background-tertiary transition-colors"
+            className="absolute top-0 right-0 z-10 p-2 rounded-full hover:bg-background-tertiary transition-colors"
             aria-label="Editar meta"
           >
             <Pencil size={14} className="text-foreground-muted" />
@@ -103,7 +103,7 @@ export function WeeklyProgressRing({
               onBlur={handleEditConfirm}
               onKeyDown={handleKeyDown}
               className={cn(
-                'w-16 text-center text-[10px] uppercase tracking-wider',
+                'w-16 text-center text-xs uppercase tracking-wider',
                 'bg-transparent border-b border-accent text-foreground-muted',
                 'outline-none',
               )}
@@ -111,7 +111,7 @@ export function WeeklyProgressRing({
               autoFocus
             />
           ) : (
-            <span className="text-[10px] uppercase tracking-wider text-foreground-muted">
+            <span className="text-xs uppercase tracking-wider text-foreground-muted">
               de {goal} km
             </span>
           )}

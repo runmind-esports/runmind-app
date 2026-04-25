@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Bot, CheckCircle } from 'lucide-react'
+import { Shimmer } from '@/components/ui/shimmer'
 import { useActivityDetail, useStrava } from '@/features/strava'
 import type { StravaSplit } from '@/features/strava'
 import { formatDateShort, formatPace } from '../../utils/formatters'
@@ -70,14 +71,14 @@ function derivePartsFromSplits(splits: StravaSplit[]): WorkoutPart[] {
 
 function SkeletonWorkout() {
   return (
-    <div className="animate-pulse space-y-4 p-4">
-      <div className="h-8 w-48 rounded bg-background-tertiary" />
+    <div className="space-y-4 p-4">
+      <Shimmer className="h-8 w-48" />
       <div className="space-y-2">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="h-12 rounded-xl bg-background-tertiary" />
+          <Shimmer key={i} className="h-12 rounded-xl" />
         ))}
       </div>
-      <div className="h-12 rounded-xl bg-background-tertiary" />
+      <Shimmer className="h-12 rounded-xl" />
     </div>
   )
 }
@@ -213,7 +214,7 @@ export function WorkoutScreen({ activityId }: WorkoutScreenProps) {
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3 font-medium text-white transition-colors hover:bg-accent-hover"
           >
             <Bot size={20} />
-            Atualizar a IA
+            Analisar com IA
           </button>
         </div>
       )}
