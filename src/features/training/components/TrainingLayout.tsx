@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import { cn } from '@/lib/utils'
 import { TrainingHeader } from './TrainingHeader'
-import { BottomTabs } from './BottomTabs'
+import { TrainingTabs } from './BottomTabs'
 
 interface TrainingLayoutProps {
   children: React.ReactNode
@@ -42,10 +42,10 @@ export function TrainingLayout({ children }: TrainingLayoutProps) {
       )}
     >
       <TrainingHeader />
-      <main className="flex-1 overflow-y-auto pb-20">
+      <TrainingTabs />
+      <main className="flex-1 overflow-y-auto">
         {children}
       </main>
-      <BottomTabs />
     </div>
   )
 }
