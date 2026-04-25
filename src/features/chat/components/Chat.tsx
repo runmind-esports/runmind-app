@@ -14,7 +14,7 @@ import { WelcomeScreen } from './WelcomeScreen'
 import { Sidebar } from './Sidebar'
 import { ImageAttachment } from '../hooks/useImageAttachments'
 
-export function Chat() {
+export function Chat({ initialPrompt }: { initialPrompt?: string }) {
   const router = useRouter()
   const { isAuthenticated, isLoading: authLoading } = useAuth()
 
@@ -67,6 +67,16 @@ export function Chat() {
     }
   }, [chat, conversations])
 
+  // Handle pre-filled prompt from URL (e.g. from CoachCTA)
+  useEffect(() => {
+    if (initialPrompt && !authLoading && isAuthenticated) {
+      handleSendMessage(initialPrompt)
+      // Clear the URL param to avoid re-sending on refresh
+      router.replace('/chat', { scroll: false })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialPrompt, authLoading, isAuthenticated])
+
   // Handle new conversation
   const handleNewConversation = useCallback(() => {
     conversations.selectConversation(null)
@@ -91,7 +101,7 @@ export function Chat() {
   }
 
   return (
-    <div className="flex h-dvh flex-col bg-background overflow-hidden">
+    <div className="flex h-dvh flex-row bg-background overflow-hidden">
       <Sidebar
         isOpen={sidebar.isOpen}
         onClose={sidebar.close}
@@ -118,19 +128,21 @@ export function Chat() {
         }}
       />
 
-      <ChatHeader
-        onClear={handleClear}
-        onToggleSidebar={sidebar.toggle}
-        hasMessages={hasMessages}
-      />
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <ChatHeader
+          onClear={handleClear}
+          onToggleSidebar={sidebar.toggle}
+          hasMessages={hasMessages}
+        />
 
-      {hasMessages ? (
-        <MessageList messages={chat.messages} isLoading={chat.isLoading} animate={!isLoadedConversation} />
-      ) : (
-        <WelcomeScreen onSelectPrompt={handleSendMessage} />
-      )}
+        {hasMessages ? (
+          <MessageList messages={chat.messages} isLoading={chat.isLoading} animate={!isLoadedConversation} />
+        ) : (
+          <WelcomeScreen onSelectPrompt={handleSendMessage} />
+        )}
 
-      <ChatInput onSend={handleSendMessage} disabled={chat.isLoading} />
+        <ChatInput onSend={handleSendMessage} disabled={chat.isLoading} />
+      </div>
     </div>
   )
 }

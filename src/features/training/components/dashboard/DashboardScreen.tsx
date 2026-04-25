@@ -1,30 +1,36 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { MapPin, Footprints, Timer, MessageCircle } from 'lucide-react'
-import { useStrava, useStravaActivities, useStravaStats } from '@/features/strava'
-import { MetricCard } from './MetricCard'
-import { LastActivityCard } from './LastActivityCard'
+import { useStrava } from '@/features/strava'
+import { useDashboardData } from '../../hooks/useDashboardData'
+import { WeeklyProgressRing } from './WeeklyProgressRing'
+import { RecentActivityCard } from './RecentActivityCard'
+import { WeekComparison } from './WeekComparison'
+import { StreakBadge } from './StreakBadge'
+import { CoachCTA } from './CoachCTA'
 import { StravaConnectCTA } from './StravaConnectCTA'
-import { formatDistance, formatPace } from '../../utils/formatters'
+import { Shimmer } from '@/components/ui/shimmer'
 
 export function DashboardScreen() {
-  const router = useRouter()
   const { isConnected, connect, isLoadingStatus } = useStrava()
-  const { stats, isLoading: isLoadingStats } = useStravaStats()
-  const { activities, isLoading: isLoadingActivities } = useStravaActivities(1, 5)
-
-  const isLoadingMetrics = isLoadingStats || isLoadingStatus
+  const {
+    currentWeekKm,
+    previousWeekKm,
+    weeklyGoal,
+    updateGoal,
+    streak,
+    recentThree,
+    suggestion,
+    isLoading,
+  } = useDashboardData()
 
   if (isLoadingStatus) {
     return (
       <div className="p-4 space-y-4 max-w-lg mx-auto">
-        <div className="grid grid-cols-2 gap-3">
-          <MetricCard label="" value="" icon={null} isLoading />
-          <MetricCard label="" value="" icon={null} isLoading />
-          <MetricCard label="" value="" icon={null} isLoading className="col-span-2" />
-        </div>
-        <LastActivityCard activity={undefined} isLoading />
+        <Shimmer className="h-52 w-full rounded-2xl" />
+        <Shimmer className="h-8 w-48 rounded-lg" />
+        <Shimmer className="h-16 w-full rounded-2xl" />
+        <Shimmer className="h-16 w-full rounded-2xl" />
+        <Shimmer className="h-16 w-full rounded-2xl" />
       </div>
     )
   }
@@ -37,47 +43,54 @@ export function DashboardScreen() {
     )
   }
 
-  const recentTotals = stats?.recent_run_totals
-  const avgPaceSpeed = recentTotals && recentTotals.moving_time > 0
-    ? recentTotals.distance / recentTotals.moving_time
-    : 0
-
   return (
     <div className="p-4 space-y-4 max-w-lg mx-auto">
-      <div className="grid grid-cols-2 gap-3">
-        <MetricCard
-          label="Km no Mes"
-          value={recentTotals ? formatDistance(recentTotals.distance) : '--'}
-          icon={<MapPin size={24} />}
-          isLoading={isLoadingMetrics}
-        />
-        <MetricCard
-          label="Corridas"
-          value={recentTotals ? String(recentTotals.count) : '--'}
-          icon={<Footprints size={24} />}
-          isLoading={isLoadingMetrics}
-        />
-        <MetricCard
-          label="Pace Medio"
-          value={avgPaceSpeed > 0 ? formatPace(avgPaceSpeed) : '--'}
-          icon={<Timer size={24} />}
-          isLoading={isLoadingMetrics}
-          className="col-span-2"
-        />
-      </div>
-
-      <LastActivityCard
-        activity={activities?.[0]}
-        isLoading={isLoadingActivities}
+      <WeeklyProgressRing
+        current={currentWeekKm}
+        goal={weeklyGoal}
+        onGoalEdit={updateGoal}
       />
 
-      <button
-        onClick={() => router.push('/chat')}
-        className="bg-accent hover:bg-accent-hover text-white rounded-xl py-3 font-medium w-full flex items-center justify-center gap-2 transition-colors"
-      >
-        <MessageCircle size={20} />
-        Falar com coach
-      </button>
+      <WeekComparison
+        currentKm={currentWeekKm}
+        previousKm={previousWeekKm}
+      />
+
+      <StreakBadge weeks={streak} />
+
+      {/* Recent activities section */}
+      <div>
+        <p className="text-xs font-medium uppercase tracking-wider text-foreground-muted mb-2">
+          Atividades Recentes
+        </p>
+        {isLoading ? (
+          <div className="space-y-2">
+            <Shimmer className="h-14 w-full rounded-2xl" />
+            <Shimmer className="h-14 w-full rounded-2xl" />
+            <Shimmer className="h-14 w-full rounded-2xl" />
+          </div>
+        ) : recentThree.length > 0 ? (
+          <>
+            <div className="space-y-2">
+              {recentThree.map((a) => (
+                <RecentActivityCard key={a.id} activity={a} />
+              ))}
+            </div>
+            <a
+              href="/training/history"
+              className="block text-xs text-accent font-medium cursor-pointer mt-2"
+            >
+              Ver todas
+            </a>
+          </>
+        ) : (
+          <p className="text-sm text-foreground-muted">
+            Nenhuma atividade recente
+          </p>
+        )}
+      </div>
+
+      <CoachCTA suggestion={suggestion} />
     </div>
   )
 }
