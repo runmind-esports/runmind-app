@@ -1,7 +1,17 @@
 'use client'
 
 import { useStrava } from '@/features/strava/hooks/useStrava'
+import { useGoogleHealth } from '@/features/google-health/hooks/useGoogleHealth'
 import { IntegrationCard } from './IntegrationCard'
+
+// Google Health icon (heart)
+function GoogleHealthIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="white"/>
+    </svg>
+  )
+}
 
 // Strava icon (official brand chevron from API logo)
 function StravaIcon() {
@@ -33,6 +43,15 @@ export function IntegrationsSection() {
     isDisconnecting: isStravaDisconnecting,
   } = useStrava()
 
+  const {
+    isConnected: isGoogleConnected,
+    isLoadingStatus: isGoogleLoading,
+    connect: connectGoogle,
+    isConnecting: isGoogleConnecting,
+    disconnect: disconnectGoogle,
+    isDisconnecting: isGoogleDisconnecting,
+  } = useGoogleHealth()
+
   return (
     <div className="space-y-6">
       <div>
@@ -52,6 +71,17 @@ export function IntegrationsSection() {
           isLoading={isStravaLoading || isStravaDisconnecting}
           onConnect={connectStrava}
           onDisconnect={disconnectStrava}
+        />
+
+        <IntegrationCard
+          name="Google Health"
+          description="Dados de saude, sono, frequencia cardiaca e atividades"
+          icon={<GoogleHealthIcon />}
+          color="#4285F4"
+          isConnected={isGoogleConnected}
+          isLoading={isGoogleLoading || isGoogleDisconnecting || isGoogleConnecting}
+          onConnect={connectGoogle}
+          onDisconnect={disconnectGoogle}
         />
 
         <IntegrationCard
