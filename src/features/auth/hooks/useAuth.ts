@@ -18,14 +18,15 @@ export function useAuth() {
   const [isConnectingStrava, setIsConnectingStrava] = useState(false)
   const [socialLoginError, setSocialLoginError] = useState<string | null>(null)
 
+  const tokenValid = authApi.isAuthenticated()
+
   const {
     data: profile,
     isLoading,
-    error,
   } = useQuery({
     queryKey: authKeys.profile,
     queryFn: authApi.getProfile,
-    enabled: authApi.isAuthenticated(),
+    enabled: tokenValid,
     retry: false,
     staleTime: 1000 * 60 * 5,
   })
@@ -60,10 +61,8 @@ export function useAuth() {
   return {
     profile: profile as UserProfile | null,
     username: authApi.getUsername(),
-    isAuthenticated: authApi.isAuthenticated() && !error,
+    isAuthenticated: tokenValid,
     isLoading,
-    error: error as Error | null,
-
     loginWithGoogle,
     isConnectingGoogle,
 

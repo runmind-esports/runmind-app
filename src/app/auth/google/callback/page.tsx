@@ -50,10 +50,7 @@ function GoogleCallbackContent() {
           userId: searchParams.get('userId') || '',
           username: username || '',
         })
-        setStatus('success')
-        setTimeout(() => {
-          router.push('/chat')
-        }, 1500)
+        router.replace('/chat')
         return
       }
 
