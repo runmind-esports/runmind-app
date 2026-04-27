@@ -1,0 +1,576 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Google Health API",
+    "description": "Google Health API v4 — dados de saúde, sono, frequência cardíaca, passos, peso, exercícios e métricas corporais. Substitui o Google Fit.",
+    "version": "4.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://health.googleapis.com/v4"
+    }
+  ],
+  "security": [
+    {
+      "oauth2": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+            "tokenUrl": "https://oauth2.googleapis.com/token",
+            "scopes": {
+              "https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly": "Ler atividades e fitness",
+              "https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly": "Ler métricas de saúde",
+              "https://www.googleapis.com/auth/googlehealth.sleep.readonly": "Ler dados de sono",
+              "https://www.googleapis.com/auth/googlehealth.location.readonly": "Ler localização",
+              "https://www.googleapis.com/auth/googlehealth.nutrition.readonly": "Ler nutrição",
+              "https://www.googleapis.com/auth/googlehealth.profile.readonly": "Ler perfil"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "TimeInterval": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp de início (RFC 3339)"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp de fim (RFC 3339)"
+          }
+        },
+        "required": ["startTime", "endTime"]
+      },
+      "CivilTimeInterval": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "Data de início (YYYY-MM-DD)"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Data de fim (YYYY-MM-DD)"
+          }
+        },
+        "required": ["startDate", "endDate"]
+      }
+    }
+  },
+  "paths": {
+    "/users/me/identity": {
+      "get": {
+        "operationId": "get_user_identity",
+        "summary": "Obter identidade do usuário",
+        "description": "Retorna o ID do usuário no Google Health (Fitbit ou Google user ID) após o consentimento OAuth.",
+        "responses": {
+          "200": { "description": "Identidade do usuário" }
+        }
+      }
+    },
+    "/users/me/profile": {
+      "get": {
+        "operationId": "get_user_profile",
+        "summary": "Obter perfil do usuário",
+        "description": "Retorna dados do perfil do usuário no Google Health. Requer scope googlehealth.profile.readonly.",
+        "responses": {
+          "200": { "description": "Perfil do usuário" }
+        }
+      },
+      "patch": {
+        "operationId": "update_user_profile",
+        "summary": "Atualizar perfil do usuário",
+        "description": "Atualiza dados do perfil do usuário no Google Health.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Campos do perfil a atualizar"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Perfil atualizado" }
+        }
+      }
+    },
+    "/users/me/settings": {
+      "get": {
+        "operationId": "get_user_settings",
+        "summary": "Obter configurações do usuário",
+        "description": "Retorna configurações do usuário no Google Health.",
+        "responses": {
+          "200": { "description": "Configurações do usuário" }
+        }
+      },
+      "patch": {
+        "operationId": "update_user_settings",
+        "summary": "Atualizar configurações do usuário",
+        "description": "Atualiza configurações do usuário no Google Health.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Campos de configuração a atualizar"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Configurações atualizadas" }
+        }
+      }
+    },
+    "/users/me/dataTypes/{dataType}/dataPoints": {
+      "get": {
+        "operationId": "list_data_points",
+        "summary": "Ler dados brutos de saúde",
+        "description": "Retorna pontos de dados individuais para um tipo específico. Ordenados por tempo descendente. Data types disponíveis: steps (passos), heart-rate (frequência cardíaca), sleep (sono), weight (peso), exercise (exercícios), body-fat (gordura corporal), distance (distância), floors (andares), altitude, active-minutes, total-calories, hydration-log, oxygen-saturation, respiratory-rate, resting-heart-rate, heart-rate-variability. Suporta filtro por intervalo de tempo via query param 'filter' com sintaxe AIP-160.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "description": "Tipo de dado: steps, heart-rate, sleep, weight, exercise, body-fat, distance, floors, active-minutes, total-calories, oxygen-saturation, respiratory-rate, resting-heart-rate, heart-rate-variability",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filtro de tempo AIP-160. Ex: interval.startTime >= \"2026-04-01T00:00:00Z\" AND interval.startTime < \"2026-04-26T00:00:00Z\"",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Máximo de resultados por página (default: 1440, max: 10000. Para exercise/sleep: default 25, max 25)",
+            "schema": { "type": "integer" }
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Token de paginação da resposta anterior",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de pontos de dados" }
+        }
+      },
+      "post": {
+        "operationId": "create_data_point",
+        "summary": "Criar ponto de dado",
+        "description": "Cria um ponto de dado identificável para o tipo especificado.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Ponto de dado a criar"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Ponto criado" }
+        }
+      }
+    },
+    "/users/me/dataTypes/{dataType}/dataPoints:rollUp": {
+      "post": {
+        "operationId": "roll_up_data_points",
+        "summary": "Agregar dados por janela de tempo",
+        "description": "Agrega dados granulares em janelas de tempo definidas (ex: 1h, 6h, 1 dia). Retorna métricas resumidas como total de passos, FC média/min/max, distância total. Suporta 18+ métricas: steps, heart-rate, weight, body-fat, distance, floors, altitude, total-calories, active-minutes, active-zone-minutes, sedentary-period, run-vo2-max, calories-in-heart-rate-zone, activity-level, hydration-log, time-in-heart-rate-zone, swim-lengths-data. Máximo 14 dias para heart-rate/calories/active-minutes/total-calories. Máximo 90 dias para os demais.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "description": "Tipo de dado a agregar: steps, heart-rate, weight, body-fat, distance, floors, altitude, total-calories, active-minutes, active-zone-minutes, run-vo2-max, heart-rate-variability",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["range", "windowSize"],
+                "properties": {
+                  "range": {
+                    "$ref": "#/components/schemas/TimeInterval"
+                  },
+                  "windowSize": {
+                    "type": "string",
+                    "description": "Tamanho da janela em segundos (ex: '86400s' para 1 dia, '3600s' para 1 hora)"
+                  },
+                  "dataSourceFamily": {
+                    "type": "string",
+                    "description": "Filtrar por fonte: users/me/dataSourceFamilies/all-sources (default), google-wearables, google-sources",
+                    "enum": ["users/me/dataSourceFamilies/all-sources", "users/me/dataSourceFamilies/google-wearables", "users/me/dataSourceFamilies/google-sources"]
+                  },
+                  "pageSize": {
+                    "type": "integer",
+                    "description": "Máximo de pontos (default: 1440, max: 10000)"
+                  },
+                  "pageToken": {
+                    "type": "string",
+                    "description": "Token de paginação"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Dados agregados por janela de tempo" }
+        }
+      }
+    },
+    "/users/me/dataTypes/{dataType}/dataPoints:dailyRollUp": {
+      "post": {
+        "operationId": "daily_roll_up_data_points",
+        "summary": "Agregação diária de dados",
+        "description": "Agrega dados por dias civis (calendário). Ideal para resumos diários: passos por dia, FC repouso diária, peso diário, HRV diário. Suporta dados exclusivos como restingHeartRatePersonalRange e heartRateVariabilityPersonalRange. Mesmos data types do rollUp. Máximo 14 dias para heart-rate/calories/active-minutes/total-calories, 90 dias para demais.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "description": "Tipo de dado: steps, heart-rate, weight, body-fat, distance, resting-heart-rate, heart-rate-variability, total-calories, active-minutes, run-vo2-max",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["range"],
+                "properties": {
+                  "range": {
+                    "$ref": "#/components/schemas/CivilTimeInterval"
+                  },
+                  "windowSizeDays": {
+                    "type": "integer",
+                    "description": "Janela em dias (default: 1)",
+                    "default": 1
+                  },
+                  "dataSourceFamily": {
+                    "type": "string",
+                    "description": "Filtrar por fonte",
+                    "enum": ["users/me/dataSourceFamilies/all-sources", "users/me/dataSourceFamilies/google-wearables", "users/me/dataSourceFamilies/google-sources"]
+                  },
+                  "pageSize": {
+                    "type": "integer",
+                    "description": "Máximo de pontos (default: 1440, max: 10000)"
+                  },
+                  "pageToken": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Dados agregados por dia" }
+        }
+      }
+    },
+    "/users/me/dataTypes/{dataType}/dataPoints:reconcile": {
+      "get": {
+        "operationId": "reconcile_data_points",
+        "summary": "Dados unificados de múltiplas fontes",
+        "description": "Combina dados de múltiplos dispositivos e apps numa visão única. Deduplica e resolve conflitos — se o usuário tem Pixel Watch + Samsung Galaxy, retorna um stream unificado em vez de dados duplicados. Diferente do list que retorna tudo bruto.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "description": "Tipo de dado a reconciliar: steps, heart-rate, sleep, weight, exercise, body-fat, distance",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filtro de tempo AIP-160",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "dataSourceFamily",
+            "in": "query",
+            "description": "Filtrar por fonte: all-sources, google-wearables, google-sources",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Máximo de resultados (default: 1440, max: 10000)",
+            "schema": { "type": "integer" }
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Dados reconciliados" }
+        }
+      }
+    },
+    "/users/me/dataTypes/{dataType}/dataPoints/{dataPointId}": {
+      "get": {
+        "operationId": "get_data_point",
+        "summary": "Obter ponto de dado específico",
+        "description": "Retorna um ponto de dado identificável específico.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "dataPointId",
+            "in": "path",
+            "required": true,
+            "description": "ID do ponto de dado",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Ponto de dado" }
+        }
+      },
+      "patch": {
+        "operationId": "update_data_point",
+        "summary": "Atualizar ponto de dado",
+        "description": "Insere ou atualiza um ponto de dado identificável.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "dataPointId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Dados do ponto a atualizar"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Ponto atualizado" }
+        }
+      }
+    },
+    "/users/me/dataTypes/{dataType}/dataPoints:batchDelete": {
+      "post": {
+        "operationId": "batch_delete_data_points",
+        "summary": "Deletar múltiplos pontos de dados",
+        "description": "Remove um lote de pontos de dados identificáveis.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dataPointIds": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "IDs dos pontos a deletar"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Pontos deletados" }
+        }
+      }
+    },
+    "/users/me/dataTypes/{dataType}/dataPoints/{dataPointId}:exportExerciseTcx": {
+      "get": {
+        "operationId": "export_exercise_tcx",
+        "summary": "Exportar exercício em formato TCX",
+        "description": "Exporta dados de exercício em formato TCX (Training Center XML). Útil para importar em outros apps de fitness.",
+        "parameters": [
+          {
+            "name": "dataType",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "dataPointId",
+            "in": "path",
+            "required": true,
+            "description": "ID do exercício a exportar",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Arquivo TCX do exercício" }
+        }
+      }
+    },
+    "/projects/{projectId}/subscribers": {
+      "get": {
+        "operationId": "list_subscribers",
+        "summary": "Listar subscribers de notificações",
+        "description": "Lista todos os subscribers registrados no Google Cloud Project para receber notificações de mudanças nos dados de saúde.",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "ID do projeto Google Cloud",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de subscribers" }
+        }
+      },
+      "post": {
+        "operationId": "create_subscriber",
+        "summary": "Criar subscriber de notificações",
+        "description": "Registra um novo endpoint para receber notificações quando dados de saúde mudam.",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "endpoint": {
+                    "type": "string",
+                    "description": "URL do endpoint de notificação"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Subscriber criado" }
+        }
+      }
+    },
+    "/projects/{projectId}/subscribers/{subscriberId}": {
+      "patch": {
+        "operationId": "update_subscriber",
+        "summary": "Atualizar subscriber",
+        "description": "Atualiza a configuração de um subscriber existente.",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "subscriberId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Subscriber atualizado" }
+        }
+      },
+      "delete": {
+        "operationId": "delete_subscriber",
+        "summary": "Remover subscriber",
+        "description": "Remove um subscriber de notificações.",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "subscriberId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Subscriber removido" }
+        }
+      }
+    }
+  }
+}

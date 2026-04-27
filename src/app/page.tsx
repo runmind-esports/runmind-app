@@ -3,15 +3,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-// Runmind Logo SVG Component
+// Runmind Logo
 function RunmindLogo({ size = 40 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 80 80" fill="none">
-      <circle cx="40" cy="40" r="40" fill="#00F048"/>
-      <path d="M22 58 L22 22 L44 22 C54 22 62 29.5 62 38.5 C62 47.5 54 55 44 55 L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-      <path d="M42 55 L62 65" stroke="white" strokeWidth="6" strokeLinecap="round" fill="none"/>
-    </svg>
-  )
+  return <img src="/brand/runmind-logo.svg" alt="Runmind" width={size} height={size} />
 }
 
 // Check icon for pricing

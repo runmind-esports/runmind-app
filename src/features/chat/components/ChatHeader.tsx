@@ -3,16 +3,6 @@
 import { Menu, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-function RunmindLogo() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 80 80" fill="none">
-      <circle cx="40" cy="40" r="40" fill="#00F048"/>
-      <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-    </svg>
-  )
-}
-
 interface ChatHeaderProps {
   onClear: () => void
   onToggleSidebar: () => void

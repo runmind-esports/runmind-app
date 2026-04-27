@@ -7,16 +7,6 @@ import { cn } from '@/lib/utils'
 import { IntegrationsSection } from '@/features/settings/components/IntegrationsSection'
 import { PlansSection } from '@/features/settings/components/PlansSection'
 
-function RunmindLogo() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 80 80" fill="none">
-      <circle cx="40" cy="40" r="40" fill="#00F048"/>
-      <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-    </svg>
-  )
-}
-
 const TABS = [
   { id: 'integrations', label: 'Integrações', icon: Link2 },
   { id: 'plans', label: 'Planos', icon: CreditCard },
@@ -41,7 +31,7 @@ export default function SettingsPage() {
           </Link>
           <div className="flex-1" />
           <Link href="/" className="flex items-center gap-2">
-            <RunmindLogo />
+            <img src="/brand/runmind-logo.svg" alt="Runmind" width={26} height={26} />
             <span className="font-display font-bold text-[14px] text-foreground tracking-tight">
               runmind
             </span>

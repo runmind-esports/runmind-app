@@ -73,13 +73,7 @@ const PLATFORMS: Record<string, Platform> = {
 type PlatformKey = 'strava' | 'garmin' | 'nike'
 
 function RunmindLogo() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 80 80" fill="none">
-      <circle cx="40" cy="40" r="40" fill="#00F048"/>
-      <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-    </svg>
-  )
+  return <img src="/brand/runmind-logo.svg" alt="Runmind" width={26} height={26} />
 }
 
 function CheckIcon() {
@@ -389,8 +383,8 @@ function ConnectAppsContent() {
 
           <p className="text-center text-[11px] text-[#A8ADBE] mt-3 leading-[1.5]">
             {connectedCount > 0
-              ? 'Voce pode adicionar mais integrações depois nas Configuracoes.'
-              : 'Voce pode adicionar ou remover integrações a qualquer momento em Configuracoes.'
+              ? 'Voce pode adicionar mais integrações depois nas Configurações.'
+              : 'Voce pode adicionar ou remover integrações a qualquer momento em Configurações.'
             }
           </p>
         </div>

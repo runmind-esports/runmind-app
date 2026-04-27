@@ -6,13 +6,7 @@ import { stravaApi } from '@/features/strava/services/stravaApi'
 import { validateOAuthState, clearOAuthState } from '@/features/strava/utils/oauth'
 
 function RunmindLogo() {
-  return (
-    <svg width="40" height="40" viewBox="0 0 80 80" fill="none">
-      <circle cx="40" cy="40" r="40" fill="#00F048"/>
-      <path d="M22 58L22 22L44 22C54 22 62 29.5 62 38.5C62 47.5 54 55 44 55L22 55" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M42 55L62 65" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-    </svg>
-  )
+  return <img src="/brand/runmind-logo.svg" alt="Runmind" width={40} height={40} />
 }
 
 function SpinnerIcon() {
@@ -151,9 +145,8 @@ function StravaCallbackContent() {
             </p>
             <button
               onClick={() => router.push('/settings')}
-              className="w-full py-3 bg-[#14162E] text-white rounded-xl text-[14px] font-bold transition-all hover:bg-[#1C2040]"
-            >
-              Voltar para configuracoes
+              className="w-full py-3 bg-[#14162E] text-white rounded-xl text-[14px] font-bold transition-all hover:bg-[#1C2040]">
+              Voltar para configurações
             </button>
           </>
         )}
