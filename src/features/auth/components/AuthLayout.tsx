@@ -50,14 +50,16 @@ export function AuthLayout({
     <div className="min-h-screen flex font-['Manrope',sans-serif]">
       {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-[52%] bg-[#14162E] relative overflow-hidden flex-col justify-between p-10">
-        {/* Dot grid background */}
+        {/* Runner background photo */}
         <div
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
-            backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200&q=80&auto=format)',
           }}
         />
+
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#14162E] via-[#14162E]/80 to-[#14162E]/60" />
 
         {/* Glow effects */}
         <div className="absolute top-[-200px] left-[-200px] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,240,72,0.12)_0%,transparent_70%)] pointer-events-none" />
@@ -65,13 +67,9 @@ export function AuthLayout({
 
         {/* Logo */}
         <Link href="/" className="relative z-10 flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-[#00F048] flex items-center justify-center">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#14162E"/>
-            </svg>
-          </div>
+          <img src="/brand/runmind-logo.svg" alt="Runmind" width={32} height={32} />
           <span className="font-['Poppins',sans-serif] font-bold text-[18px] text-white tracking-tight">
-            runmind
+            Runmind
           </span>
         </Link>
 
@@ -182,21 +180,28 @@ export function AuthLayout({
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-10 bg-white">
-        <div className="w-full max-w-[400px]">
-          {/* Mobile logo */}
-          <div className="lg:hidden flex items-center justify-center gap-2 mb-8">
-            <div className="w-8 h-8 rounded-full bg-[#00F048] flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#14162E"/>
-              </svg>
-            </div>
-            <span className="font-['Poppins',sans-serif] font-bold text-[18px] text-[#14162E] tracking-tight">
-              runmind
-            </span>
+      <div className="flex-1 flex flex-col bg-white min-h-screen lg:min-h-0">
+        {/* Mobile hero image */}
+        <div
+          className="lg:hidden relative h-[200px] bg-[#14162E] overflow-hidden"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80&auto=format)',
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="font-display font-bold text-[32px] text-white tracking-tight drop-shadow-lg"><span className="text-[#00F048]">R</span>unmind</span>
           </div>
+        </div>
 
-          {children}
+        {/* Form content */}
+        <div className="flex-1 flex items-center justify-center px-6 py-8 lg:p-10">
+          <div className="w-full max-w-[400px]">
+            {children}
+          </div>
         </div>
       </div>
     </div>

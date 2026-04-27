@@ -50,10 +50,10 @@ export default function LoginPage() {
     >
       <div className="mb-8">
         <h1 className="font-display font-bold text-[26px] tracking-tight text-[#14162E] mb-1.5">
-          Entrar no Runmind
+          Vamos treinar?
         </h1>
         <p className="text-sm font-light leading-relaxed text-[#6B7088]">
-          Escolha como quer treinar
+          Conecte sua conta para começar
         </p>
       </div>
 
