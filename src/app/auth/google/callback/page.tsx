@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { authApi } from '@/features/auth/services/authApi'
 import { googleHealthApi } from '@/features/google-health/services/googleHealthApi'
 
 function RunmindLogo() {
@@ -25,52 +26,66 @@ function GoogleCallbackContent() {
 
   useEffect(() => {
     const processCallback = async () => {
-      const code = searchParams.get('code')
-      const state = searchParams.get('state')
       const error = searchParams.get('error')
 
       if (error) {
         setStatus('error')
         setErrorMessage(
           error === 'access_denied'
-            ? 'Voce cancelou a autorizacao do Google Health.'
+            ? 'Voce cancelou a autorizacao do Google.'
             : `Erro do Google: ${error}`
         )
         return
       }
 
-      if (!code) {
-        setStatus('error')
-        setErrorMessage('Codigo de autorizacao nao encontrado.')
-        return
-      }
+      // Login flow: backend redirects with tokens in URL
+      const accessToken = searchParams.get('accessToken')
+      const refreshToken = searchParams.get('refreshToken')
+      const username = searchParams.get('username')
 
-      if (!state) {
-        setStatus('error')
-        setErrorMessage('Estado de autorizacao nao encontrado.')
-        return
-      }
-
-      try {
-        await googleHealthApi.exchangeCode(code, state)
+      if (accessToken && refreshToken) {
+        authApi.processGoogleCallback({
+          accessToken,
+          refreshToken,
+          userId: searchParams.get('userId') || '',
+          username: username || '',
+        })
         setStatus('success')
-
         setTimeout(() => {
-          router.push('/settings?google=connected')
+          router.push('/chat')
         }, 1500)
-      } catch (err: unknown) {
-        console.error('Google Health exchange error:', err)
-        setStatus('error')
-
-        const error = err as { response?: { status?: number; data?: { message?: string } } }
-        if (error?.response?.status === 401) {
-          setErrorMessage('Voce precisa estar logado para conectar o Google Health.')
-        } else if (error?.response?.data?.message) {
-          setErrorMessage(error.response.data.message)
-        } else {
-          setErrorMessage('Falha ao conectar com o Google Health. Tente novamente.')
-        }
+        return
       }
+
+      // Health connection flow: code + state from Google OAuth
+      const code = searchParams.get('code')
+      const state = searchParams.get('state')
+
+      if (code && state) {
+        try {
+          await googleHealthApi.exchangeCode(code, state)
+          setStatus('success')
+          setTimeout(() => {
+            router.push('/settings?google=connected')
+          }, 1500)
+        } catch (err: unknown) {
+          console.error('Google Health exchange error:', err)
+          setStatus('error')
+          const apiErr = err as { response?: { status?: number; data?: { message?: string } } }
+          if (apiErr?.response?.status === 401) {
+            setErrorMessage('Voce precisa estar logado para conectar o Google Health.')
+          } else if (apiErr?.response?.data?.message) {
+            setErrorMessage(apiErr.response.data.message)
+          } else {
+            setErrorMessage('Falha ao conectar com o Google. Tente novamente.')
+          }
+        }
+        return
+      }
+
+      // No valid params
+      setStatus('error')
+      setErrorMessage('Dados de autenticacao incompletos.')
     }
 
     processCallback()
@@ -89,7 +104,7 @@ function GoogleCallbackContent() {
               <SpinnerIcon />
             </div>
             <h1 className="font-display font-bold text-lg text-[#14162E] mb-2">
-              Conectando com Google Health...
+              Conectando com Google...
             </h1>
             <p className="text-sm text-[#6B7088]">
               Aguarde enquanto finalizamos a conexao.
@@ -107,7 +122,7 @@ function GoogleCallbackContent() {
               </div>
             </div>
             <h1 className="font-display font-bold text-lg text-[#14162E] mb-2">
-              Google Health conectado!
+              Conectado!
             </h1>
             <p className="text-sm text-[#6B7088]">
               Redirecionando...
@@ -131,10 +146,10 @@ function GoogleCallbackContent() {
               {errorMessage}
             </p>
             <button
-              onClick={() => router.push('/settings')}
+              onClick={() => router.push('/login')}
               className="w-full py-3 bg-[#14162E] text-white rounded-xl text-sm font-bold font-display transition-all hover:bg-[#1C2040]"
             >
-              Voltar para configuracoes
+              Tentar novamente
             </button>
           </>
         )}

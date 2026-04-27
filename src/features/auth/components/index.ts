@@ -1,3 +1,3 @@
 export { AuthLayout } from './AuthLayout'
-export { PlatformButton } from './PlatformButton'
-export { PasswordInput } from './PasswordInput'
+export { SocialLoginButton } from './SocialLoginButton'
+export { LoginDivider } from './LoginDivider'

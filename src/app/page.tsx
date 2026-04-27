@@ -73,7 +73,7 @@ function FeatureCard({
         <h3 className="mb-2 font-display text-lg font-bold text-white">{title}</h3>
         <p className="text-sm leading-relaxed text-white/45 mb-5">{description}</p>
         <Link
-          href="/signup"
+          href="/login"
           className="inline-flex items-center gap-2 rounded-full bg-[#14162E] border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10"
         >
           Comece seu treino de elite agora
@@ -191,7 +191,7 @@ function PricingCard({
         ))}
       </ul>
       <Link
-        href="/signup"
+        href="/login"
         className={`block w-full text-center py-3.5 rounded-full text-sm font-bold transition-all ${
           featured
             ? 'bg-white text-[#14162E] hover:shadow-[0_4px_20px_rgba(255,255,255,0.2)]'
@@ -281,7 +281,7 @@ export default function LandingPage() {
             Entrar
           </Link>
           <Link
-            href="/signup"
+            href="/login"
             className="rounded-full bg-[#14162E] px-4 sm:px-6 py-2 sm:py-2.5 text-[12px] sm:text-[13.5px] font-semibold text-white transition-all hover:bg-[#1C2040] hover:-translate-y-0.5"
           >
             Começar grátis
@@ -330,7 +330,7 @@ export default function LandingPage() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-stretch sm:items-center">
                 <Link
-                  href="/signup"
+                  href="/login"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#14162E] px-6 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-semibold text-white transition-all shadow-[0_4px_20px_rgba(20,22,46,0.2)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(20,22,46,0.25)]"
                 >
                   Começar grátis
@@ -831,7 +831,7 @@ export default function LandingPage() {
 
             <div className="flex flex-col items-center gap-3 flex-shrink-0 relative z-10">
               <Link
-                href="/signup"
+                href="/login"
                 className="px-8 sm:px-10 py-3.5 sm:py-4 bg-[#00F048] text-[#14162E] rounded-full text-[14px] sm:text-[15px] font-bold transition-all hover:shadow-[0_4px_24px_rgba(0,240,72,0.4)] hover:-translate-y-0.5 whitespace-nowrap"
               >
                 Comece seu treino de elite agora →

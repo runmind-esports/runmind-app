@@ -1,9 +1,11 @@
 'use client'
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState, useCallback } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { authApi } from '../services/authApi'
-import type { LoginCredentials, RegisterCredentials, UserProfile } from '../types/auth.types'
+import { buildStravaAuthUrl } from '@/features/strava/utils/oauth'
+import type { UserProfile } from '../types/auth.types'
 
 export const authKeys = {
   profile: ['auth', 'profile'] as const,
@@ -12,6 +14,9 @@ export const authKeys = {
 export function useAuth() {
   const queryClient = useQueryClient()
   const router = useRouter()
+  const [isConnectingGoogle, setIsConnectingGoogle] = useState(false)
+  const [isConnectingStrava, setIsConnectingStrava] = useState(false)
+  const [socialLoginError, setSocialLoginError] = useState<string | null>(null)
 
   const {
     data: profile,
@@ -22,28 +27,28 @@ export function useAuth() {
     queryFn: authApi.getProfile,
     enabled: authApi.isAuthenticated(),
     retry: false,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5,
   })
 
-  const loginMutation = useMutation({
-    mutationFn: (credentials: LoginCredentials) => authApi.login(credentials),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: authKeys.profile })
-      router.push('/chat')
-    },
-  })
+  const loginWithGoogle = useCallback(async () => {
+    try {
+      setIsConnectingGoogle(true)
+      setSocialLoginError(null)
+      const { url } = await authApi.getGoogleAuthUrl()
+      window.location.href = url
+    } catch (err) {
+      console.error('Error getting Google auth URL:', err)
+      setSocialLoginError('Erro ao conectar com Google. Tente novamente.')
+      setIsConnectingGoogle(false)
+    }
+  }, [])
 
-  const registerMutation = useMutation({
-    mutationFn: (credentials: RegisterCredentials) => authApi.register(credentials),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: authKeys.profile })
-      router.push('/onboarding')
-    },
-  })
-
-  const forgotPasswordMutation = useMutation({
-    mutationFn: (email: string) => authApi.forgotPassword(email),
-  })
+  const loginWithStrava = useCallback(() => {
+    setIsConnectingStrava(true)
+    setSocialLoginError(null)
+    const url = buildStravaAuthUrl()
+    window.location.href = url
+  }, [])
 
   const logout = () => {
     authApi.logout()
@@ -58,19 +63,15 @@ export function useAuth() {
     isAuthenticated: authApi.isAuthenticated() && !error,
     isLoading,
     error: error as Error | null,
-    login: loginMutation.mutate,
-    loginAsync: loginMutation.mutateAsync,
-    loginError: loginMutation.error as Error | null,
-    isLoggingIn: loginMutation.isPending,
-    register: registerMutation.mutate,
-    registerAsync: registerMutation.mutateAsync,
-    registerError: registerMutation.error as Error | null,
-    isRegistering: registerMutation.isPending,
-    forgotPassword: forgotPasswordMutation.mutate,
-    forgotPasswordAsync: forgotPasswordMutation.mutateAsync,
-    forgotPasswordError: forgotPasswordMutation.error as Error | null,
-    isSendingForgotPassword: forgotPasswordMutation.isPending,
-    forgotPasswordSuccess: forgotPasswordMutation.isSuccess,
+
+    loginWithGoogle,
+    isConnectingGoogle,
+
+    loginWithStrava,
+    isConnectingStrava,
+
+    socialLoginError,
+
     logout,
   }
 }
