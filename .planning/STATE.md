@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Onboarding
 status: executing
-stopped_at: Phase 7 context gathered
-last_updated: "2026-04-23T16:35:36.529Z"
+stopped_at: Phase 17 context gathered
+last_updated: "2026-04-28T00:59:37.045Z"
 last_activity: 2026-04-23
 progress:
   total_phases: 3
@@ -72,12 +72,16 @@ Recent decisions affecting current work:
 
 None yet.
 
+### Roadmap Evolution
+
+- Phase 8 added: Subscription Checkout UI — Conectar frontend ao módulo de subscription do runmid-api
+
 ### Blockers/Concerns
 
 - Backend Go repo needs to be explored for existing RunnerProfile model before Phase 5 planning
 
 ## Session Continuity
 
-Last session: 2026-04-23T16:02:26.519Z
-Stopped at: Phase 7 context gathered
-Resume file: .planning/phases/07-planilha-completion/07-CONTEXT.md
+Last session: 2026-04-28T00:59:37.042Z
+Stopped at: Phase 17 context gathered
+Resume file: .planning/phases/17-subscription-checkout-ui/17-CONTEXT.md
