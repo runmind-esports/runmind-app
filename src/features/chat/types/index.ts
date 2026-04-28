@@ -6,12 +6,18 @@ export interface MessageAttachment {
   type: 'image'
 }
 
+export interface MessageAction {
+  label: string
+  type: 'upgrade'
+}
+
 export interface Message {
   id: string
   role: MessageRole
   content: string
   createdAt: Date
   attachments?: MessageAttachment[]
+  action?: MessageAction
 }
 
 export interface ChatState {

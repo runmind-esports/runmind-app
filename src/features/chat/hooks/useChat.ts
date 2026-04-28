@@ -150,8 +150,12 @@ export function useChat(conversationId?: string | null) {
         const limitMessage: Message = {
           id: generateId(),
           role: 'assistant',
-          content: 'Você atingiu o limite diário de uso do plano gratuito. Seu limite será renovado amanhã. Para continuar agora, considere fazer upgrade para o plano Pro.',
+          content: 'Você atingiu o limite diário de uso do plano gratuito. Seu limite será renovado amanhã. Para continuar agora, faça upgrade para o plano Pro.',
           createdAt: new Date(),
+          action: {
+            label: 'Fazer upgrade',
+            type: 'upgrade',
+          },
         }
         setState((prev) => ({
           ...prev,

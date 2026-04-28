@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Copy, Share2, Check } from 'lucide-react'
+import { Copy, Share2, Check, Loader2 } from 'lucide-react'
 import { Message } from '../types'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { subscriptionApi } from '@/features/subscription'
 
 // Convert basic markdown to HTML (bold, italic, line breaks)
 function markdownToHtml(text: string): string {
@@ -58,6 +59,32 @@ function MessageActions({ content }: { content: string }) {
         <Share2 className="h-4 w-4" />
       </button>
     </div>
+  )
+}
+
+function UpgradeButton({ label }: { label: string }) {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleUpgrade = useCallback(async () => {
+    setIsLoading(true)
+    try {
+      const { url } = await subscriptionApi.checkout('pro_monthly')
+      window.location.href = url
+    } catch (err) {
+      console.error('Error creating checkout session:', err)
+      setIsLoading(false)
+    }
+  }, [])
+
+  return (
+    <button
+      onClick={handleUpgrade}
+      disabled={isLoading}
+      className="mt-3 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-60"
+    >
+      {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+      {label}
+    </button>
   )
 }
 
@@ -126,6 +153,11 @@ export function MessageBubble({ message, isLatest = false, animate = true }: Mes
               {content}
             </p>
           )
+        )}
+
+        {/* Upgrade action button */}
+        {message.action?.type === 'upgrade' && (
+          <UpgradeButton label={message.action.label} />
         )}
 
         {/* Action icons for assistant messages */}
