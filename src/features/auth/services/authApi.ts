@@ -5,7 +5,8 @@ import type { UserProfile } from '../types/auth.types'
 function decodeJwtPayload(token: string): { sub?: string; username?: string; email?: string; exp?: number } | null {
   try {
     const base64Payload = token.split('.')[1]
-    const payload = JSON.parse(atob(base64Payload))
+    const bytes = Uint8Array.from(atob(base64Payload), (c) => c.charCodeAt(0))
+    const payload = JSON.parse(new TextDecoder().decode(bytes))
     return payload
   } catch {
     return null
