@@ -269,6 +269,18 @@ Plans:
 - [ ] 15-01-PLAN.md -- Service layer + hooks: projectsApi, useProjects hook, types, barrel exports
 - [ ] 15-02-PLAN.md -- UI components: IconPicker, CreateProjectModal, ProjectSection, ConversationItem context menu, sidebar wiring
 
+### Phase 17: Subscription Checkout UI
+
+**Goal:** Conectar frontend ao modulo de subscription do runmid-api. Service/hook para API (plans, checkout, portal, tier). PlansSection com checkout Stripe. useUserProfile com tier real. Callback de sucesso/cancelamento.
+**Requirements**: TBD
+**Depends on:** Phase 16
+**Plans:** 3 plans
+
+Plans:
+- [ ] 17-01-PLAN.md -- Subscription feature module: types, API service, React Query hooks, barrel exports
+- [ ] 17-02-PLAN.md -- PlansSection refactor with checkout/portal, success/cancel callbacks, Elite->Premium rename
+- [ ] 17-03-PLAN.md -- useUserProfile real tier, sidebar badge, chat 429 upgrade button
+
 ## Progress
 
 **Execution Order:**
@@ -285,9 +297,10 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 7. Planilha & Completion | v1.1 | 1/1 | Complete | - |
 | 8. FAB Button & Training Shell | v2.0 | 0/2 | Planned | - |
 | 9. Strava Activities Service | v2.0 | 0/1 | Planned | - |
-| 10. Dashboard de Métricas | v2.0 | 0/1 | Planned | - |
-| 11. Calendário Semanal | v2.0 | 0/1 | Planned | - |
-| 12. Histórico de Atividades | v2.0 | 0/1 | Planned | - |
-| 13. Treino do Dia & Execução | v2.0 | 0/1 | Planned | - |
+| 10. Dashboard de Metricas | v2.0 | 0/1 | Planned | - |
+| 11. Calendario Semanal | v2.0 | 0/1 | Planned | - |
+| 12. Historico de Atividades | v2.0 | 0/1 | Planned | - |
+| 13. Treino do Dia & Execucao | v2.0 | 0/1 | Planned | - |
 | 14. Projetos Backend | v2.0 | 0/0 | Planned | - |
 | 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |
+| 17. Subscription Checkout UI | - | 0/3 | Planned | - |
