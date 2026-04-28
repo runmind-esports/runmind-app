@@ -3,15 +3,17 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Link2, CreditCard, CheckCircle2, X } from 'lucide-react'
+import { ArrowLeft, Link2, CreditCard, Zap, CheckCircle2, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { IntegrationsSection } from '@/features/settings/components/IntegrationsSection'
 import { PlansSection } from '@/features/settings/components/PlansSection'
+import { ConsumptionSection } from '@/features/runPoints/components/ConsumptionSection'
 import { useUserTier } from '@/features/subscription'
 
 const TABS = [
   { id: 'integrations', label: 'Integrações', icon: Link2 },
   { id: 'plans', label: 'Planos', icon: CreditCard },
+  { id: 'consumption', label: 'Consumo', icon: Zap },
 ] as const
 
 type TabId = typeof TABS[number]['id']
@@ -137,6 +139,7 @@ function SettingsContent() {
         <div className="bg-background-secondary rounded-2xl border border-border p-6">
           {activeTab === 'integrations' && <IntegrationsSection />}
           {activeTab === 'plans' && <PlansSection />}
+          {activeTab === 'consumption' && <ConsumptionSection />}
         </div>
       </main>
     </div>

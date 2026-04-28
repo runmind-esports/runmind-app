@@ -1,3 +1,6 @@
+// Components
+export { ConsumptionSection } from './components/ConsumptionSection'
+
 // Services
 export { runPointsApi } from './services/runPointsApi'
 
