@@ -274,10 +274,10 @@ Plans:
 **Goal:** Conectar frontend ao modulo de subscription do runmid-api. Service/hook para API (plans, checkout, portal, tier). PlansSection com checkout Stripe. useUserProfile com tier real. Callback de sucesso/cancelamento.
 **Requirements**: TBD
 **Depends on:** Phase 16
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 Plans:
-- [ ] 17-01-PLAN.md -- Subscription feature module: types, API service, React Query hooks, barrel exports
+- [x] 17-01-PLAN.md -- Subscription feature module: types, API service, React Query hooks, barrel exports
 - [ ] 17-02-PLAN.md -- PlansSection refactor with checkout/portal, success/cancel callbacks, Elite->Premium rename
 - [ ] 17-03-PLAN.md -- useUserProfile real tier, sidebar badge, chat 429 upgrade button
 
@@ -303,4 +303,4 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 13. Treino do Dia & Execucao | v2.0 | 0/1 | Planned | - |
 | 14. Projetos Backend | v2.0 | 0/0 | Planned | - |
 | 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |
-| 17. Subscription Checkout UI | - | 0/3 | Planned | - |
+| 17. Subscription Checkout UI | - | 1/3 | In Progress|  |

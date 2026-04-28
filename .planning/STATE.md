@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Onboarding
 status: executing
-stopped_at: Phase 17 context gathered
-last_updated: "2026-04-28T00:59:37.045Z"
+stopped_at: Completed 17-01-PLAN.md
+last_updated: "2026-04-28T01:23:40.895Z"
 last_activity: 2026-04-23
 progress:
   total_phases: 3
@@ -57,6 +57,8 @@ Progress: [██████████░░░░░░░░░░] 57% (v1
 - Last 5 plans: 2min, 2min, 4min, 2min, 3min
 - Trend: Stable
 
+| Phase 17 P01 | 1min | 2 tasks | 5 files |
+
 ## Accumulated Context
 
 ### Decisions
@@ -67,6 +69,7 @@ Recent decisions affecting current work:
 - [v1.1]: Backend already has RunnerProfile domain model with fields (FitnessLevel, WeeklyKmCapacity, etc.) -- build API on existing model
 - [v1.1]: Onboarding flow: Signup -> Step 1 (confirm name) -> Step 2 (11-question form) -> Planilha download -> Chat
 - [v1.1]: Multi-repo: frontend (Next.js here) + backend (Go at /Documents/runmid/runmid-api)
+- [Phase 17]: Subscription feature module follows existing stravaApi pattern with service object + React Query hooks
 
 ### Pending Todos
 
@@ -82,6 +85,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-28T00:59:37.042Z
-Stopped at: Phase 17 context gathered
-Resume file: .planning/phases/17-subscription-checkout-ui/17-CONTEXT.md
+Last session: 2026-04-28T01:23:34.475Z
+Stopped at: Completed 17-01-PLAN.md
+Resume file: None
