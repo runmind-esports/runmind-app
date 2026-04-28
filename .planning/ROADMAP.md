@@ -304,3 +304,15 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 14. Projetos Backend | v2.0 | 0/0 | Planned | - |
 | 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |
 | 17. Subscription Checkout UI | - | 3/3 | Complete    | 2026-04-28 |
+| 18. Tela de Consumo de Mana | - | 0/2 | Planned | - |
+
+### Phase 18: Tela de Consumo de Mana
+
+**Goal:** Adicionar tab "Consumo" nas configurações com gauge circular de RunPoints, gráfico de barras 7 dias, e card motivacional com upgrade CTA quando RunPoints estiver baixo. Dados via GET /api/v1/mana/status do chat-agent.
+**Requirements**: TBD
+**Depends on:** Phase 17
+**Plans:** 2 plans
+
+Plans:
+- [ ] 18-01-PLAN.md -- Mana feature module: types, API service (chatApiClient), useManaStatus hook, barrel exports
+- [ ] 18-02-PLAN.md -- CircularGauge, WeeklyBarChart, LowManaCard, ConsumptionSection components, settings page 3rd tab wiring
