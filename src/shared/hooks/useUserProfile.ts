@@ -4,20 +4,29 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import { useStrava } from '@/features/strava/hooks/useStrava'
 import { stravaActivitiesApi } from '@/features/strava/services/stravaActivitiesApi'
+import { useUserTier } from '@/features/subscription'
 
 const AVATAR_CACHE_KEY = 'runmind_avatar_url'
 const AVATAR_NAME_KEY = 'runmind_avatar_name'
+
+const TIER_DISPLAY_NAMES: Record<'free' | 'pro' | 'premium', string> = {
+  free: 'Free',
+  pro: 'Pro',
+  premium: 'Premium',
+}
 
 export interface UserProfileData {
   name: string
   avatarUrl: string | null
   plan: string
+  tier: 'free' | 'pro' | 'premium'
   isLoading: boolean
 }
 
 export function useUserProfile(): UserProfileData {
   const { profile, username } = useAuth()
   const { isConnected } = useStrava()
+  const { tier, isLoading: tierLoading } = useUserTier()
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
   const [stravaName, setStravaName] = useState<string | null>(null)
   const [isLoadingAvatar, setIsLoadingAvatar] = useState(false)
@@ -72,7 +81,8 @@ export function useUserProfile(): UserProfileData {
   return {
     name,
     avatarUrl,
-    plan: 'Free', // TODO: fetch from backend when plan system exists
-    isLoading: isLoadingAvatar,
+    plan: TIER_DISPLAY_NAMES[tier],
+    tier,
+    isLoading: isLoadingAvatar || tierLoading,
   }
 }

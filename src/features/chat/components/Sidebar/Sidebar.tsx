@@ -65,7 +65,7 @@ export function Sidebar({
   onMoveConversation,
 }: SidebarProps) {
   const pathname = usePathname()
-  const { name, avatarUrl, plan } = useUserProfile()
+  const { name, avatarUrl, plan, tier } = useUserProfile()
 
   const initials = name
     .split(' ')
@@ -197,7 +197,13 @@ export function Sidebar({
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-foreground truncate">{name}</p>
-              <p className="text-xs text-foreground-muted">{plan}</p>
+              {tier === 'pro' ? (
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#00F048]/15 text-[#00F048]">Pro</span>
+              ) : tier === 'premium' ? (
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-400/15 text-amber-400">Premium</span>
+              ) : (
+                <p className="text-xs text-foreground-muted">{plan}</p>
+              )}
             </div>
             <Settings className="h-4 w-4 text-foreground-muted shrink-0" />
           </Link>
