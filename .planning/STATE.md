@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Onboarding
 status: executing
-stopped_at: Completed 17-01-PLAN.md
-last_updated: "2026-04-28T01:32:59.009Z"
+stopped_at: Phase 18 context gathered
+last_updated: "2026-04-28T18:19:05.095Z"
 last_activity: 2026-04-28
 progress:
   total_phases: 3
@@ -79,6 +79,7 @@ None yet.
 ### Roadmap Evolution
 
 - Phase 8 added: Subscription Checkout UI — Conectar frontend ao módulo de subscription do runmid-api
+- Phase 18 added: Tela de Consumo de Mana — seção nas configurações com consumo diário
 
 ### Blockers/Concerns
 
@@ -86,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-28T01:23:34.475Z
-Stopped at: Completed 17-01-PLAN.md
-Resume file: None
+Last session: 2026-04-28T18:19:05.092Z
+Stopped at: Phase 18 context gathered
+Resume file: .planning/phases/18-tela-de-consumo-de-mana/18-CONTEXT.md
