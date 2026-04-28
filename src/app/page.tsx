@@ -751,7 +751,7 @@ export default function LandingPage() {
             />
             <PricingCard
               badge="Performance"
-              name="Elite"
+              name="Premium"
               price="R$59"
               subtitle="Para atletas que levam a sério"
               features={[
@@ -762,7 +762,7 @@ export default function LandingPage() {
                 { text: 'Relatórios semanais detalhados', included: true },
                 { text: 'Suporte prioritário', included: true },
               ]}
-              buttonText="Assinar Elite"
+              buttonText="Assinar Premium"
             />
           </div>
         </div>
