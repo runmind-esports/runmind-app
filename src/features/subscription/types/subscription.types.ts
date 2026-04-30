@@ -25,6 +25,7 @@ export interface PortalResponse {
 export interface TierResponse {
   tier: string        // "free" | "pro" | "premium"
   status: string      // "active" | "canceled" | "past_due"
+  interval: string | null // "monthly" | "yearly"
   expiresAt: string | null
   customerId: string | null
 }

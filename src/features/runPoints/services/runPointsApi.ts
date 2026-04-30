@@ -1,5 +1,5 @@
-import { chatApiClient } from '@/shared/lib/apiClient'
-import { RunPointsStatus } from '../types/runPoints.types'
+import { chatApiClient, backofficeApiClient } from '@/shared/lib/apiClient'
+import { RunPointsStatus, RunPointsHistoryDay } from '../types/runPoints.types'
 
 interface ManaStatusResponse {
   currentMana: number
@@ -8,6 +8,14 @@ interface ManaStatusResponse {
   periodStart: string
   nextResetAt: string
   tier: string
+}
+
+interface DailyTrendResponse {
+  days: { date: string; mana_cost: number }[]
+}
+
+const DAY_LABELS: Record<number, string> = {
+  0: 'Dom', 1: 'Seg', 2: 'Ter', 3: 'Qua', 4: 'Qui', 5: 'Sex', 6: 'Sab',
 }
 
 export const runPointsApi = {
@@ -22,5 +30,18 @@ export const runPointsApi = {
       nextResetAt: d.nextResetAt,
       tier: d.tier,
     }
+  },
+
+  async getHistory(): Promise<RunPointsHistoryDay[]> {
+    const response = await backofficeApiClient.get<DailyTrendResponse>('/api/v1/mana/analytics/daily', {
+      params: { period: '7d' },
+    })
+    return response.data.days.map((d) => {
+      const date = new Date(d.date)
+      return {
+        day: DAY_LABELS[date.getUTCDay()] || d.date,
+        used: d.mana_cost,
+      }
+    })
   },
 }

@@ -724,12 +724,11 @@ export default function LandingPage() {
               price="R$0"
               subtitle="Para começar a correr com IA"
               features={[
-                { text: 'Chat com IA (5 mensagens/dia)', included: true },
-                { text: '1 plano de treino ativo', included: true },
-                { text: 'Integração Strava básica', included: true },
-                { text: 'Dashboard semanal', included: true },
-                { text: 'Integração Garmin', included: false },
-                { text: 'Ajuste automático de plano', included: false },
+                { text: '100 RunPoints por dia', included: true },
+                { text: '2 anexos por dia', included: true },
+                { text: '5 conversas', included: true },
+                { text: 'Integração Strava + Google Health', included: true },
+                { text: 'Modelo inteligente', included: true },
               ]}
               buttonText="Começar grátis"
             />
@@ -737,14 +736,13 @@ export default function LandingPage() {
               badge="Mais popular"
               name="Pro"
               price="R$29"
-              subtitle="Para corredores que querem evoluir"
+              subtitle="3x mais que o Gratuito"
               features={[
-                { text: 'Chat com IA ilimitado', included: true },
-                { text: 'Planos ilimitados (5km, 10km, 21km)', included: true },
-                { text: 'Strava + Garmin Connect', included: true },
-                { text: 'Ajuste automático de plano por IA', included: true },
-                { text: 'Análise de HRV e carga de treino', included: true },
-                { text: 'Recomendação de eventos próximos', included: true },
+                { text: '300 RunPoints por mês', included: true },
+                { text: '10 anexos por dia (5x mais)', included: true },
+                { text: '15 conversas (3x mais)', included: true },
+                { text: 'Integração Strava + Google Health', included: true },
+                { text: 'Modelo inteligente', included: true },
               ]}
               buttonText="Assinar Pro"
               featured
@@ -753,14 +751,13 @@ export default function LandingPage() {
               badge="Performance"
               name="Premium"
               price="R$59"
-              subtitle="Para atletas que levam a sério"
+              subtitle="10x mais que o Gratuito"
               features={[
-                { text: 'Tudo do Pro', included: true },
-                { text: 'Análise avançada de biometria', included: true },
-                { text: 'Estratégia de prova personalizada', included: true },
-                { text: 'Previsão de tempo de prova por IA', included: true },
-                { text: 'Relatórios semanais detalhados', included: true },
-                { text: 'Suporte prioritário', included: true },
+                { text: '1.000 RunPoints por mês', included: true },
+                { text: '100 anexos por dia (10x mais)', included: true },
+                { text: '50 conversas (10x mais)', included: true },
+                { text: 'Integração Strava + Google Health', included: true },
+                { text: 'Modelo inteligente', included: true },
               ]}
               buttonText="Assinar Premium"
             />

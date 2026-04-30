@@ -18,6 +18,7 @@ export function useUserTier() {
 
   const tier: UserTier = (data?.tier as UserTier) || 'free'
   const status = data?.status || null
+  const interval = data?.interval || null
   const expiresAt = data?.expiresAt || null
   const customerId = data?.customerId || null
 
@@ -28,6 +29,7 @@ export function useUserTier() {
   return {
     tier,
     status,
+    interval,
     expiresAt,
     customerId,
     isLoading,

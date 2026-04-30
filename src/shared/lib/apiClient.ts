@@ -4,6 +4,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || ''
 const AUTH_API_URL = process.env.NEXT_PUBLIC_AUTH_API_URL || ''
 const RUNMID_API_URL = process.env.NEXT_PUBLIC_RUNMID_API_URL || ''
 const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || ''
+const BACKOFFICE_API_URL = process.env.NEXT_PUBLIC_BACKOFFICE_API_URL || ''
 
 // Token storage keys
 const ACCESS_TOKEN_KEY = 'runmind_access_token'
@@ -197,6 +198,32 @@ chatApiClient.interceptors.request.use(
 // Response interceptor for chat API — no auth redirect
 // Auth state is managed by useAuth hook
 chatApiClient.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => Promise.reject(error)
+)
+
+// API client for backoffice (mana analytics, configs)
+export const backofficeApiClient = axios.create({
+  baseURL: BACKOFFICE_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+// Request interceptor for backoffice API
+backofficeApiClient.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    const token = tokenStorage.getAccessToken()
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
+
+// Response interceptor for backoffice API — no auth redirect
+backofficeApiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => Promise.reject(error)
 )
