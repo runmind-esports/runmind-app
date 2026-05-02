@@ -256,7 +256,7 @@ export default function LandingPage() {
   }, [])
 
   const tickerItems = [
-    'Chat com IA', 'Integração Strava', 'Integração Garmin', 'Planos de Treino',
+    'Chat com IA', 'Integração Strava', 'Google Health', 'Planos de Treino',
     'Dashboard Pessoal', 'Eventos de Corrida', 'Análise de Performance', 'Recomendações Inteligentes'
   ]
 
@@ -562,7 +562,7 @@ export default function LandingPage() {
                 {
                   num: 1,
                   title: 'Conecte sua plataforma',
-                  desc: 'Faça login com Strava ou Garmin. O Runmind importa automaticamente todo o seu histórico de corridas — pace, distância, frequência cardíaca e muito mais.',
+                  desc: 'Faça login com Strava ou Google Health. O Runmind importa automaticamente todo o seu histórico de corridas — pace, distância, frequência cardíaca e muito mais.',
                   active: true
                 },
                 {
@@ -691,7 +691,7 @@ export default function LandingPage() {
               icon={<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M12 5 L17 15 L14 15 L19 25 M19 25 L24 15 L21 15 L16 5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
             />
             <IntegrationCard
-              name="Garmin Connect"
+              name="Google Health"
               description="Dados avançados de biometria: HRV, carga de treino, qualidade do sono, VO2max estimado e muito mais. Métricas que deixam as recomendações da IA ainda mais precisas."
               tags={['HRV', 'VO2max', 'Carga de treino', 'Sono']}
               bgColor="#0E6DB4"
@@ -788,7 +788,7 @@ export default function LandingPage() {
               gradientTo="#00B836"
             />
             <TestimonialCard
-              text={<>&ldquo;Corri minha primeira meia maratona em 1h54 usando o plano do Runmind. A <strong className="text-white font-semibold">integração com o Garmin foi perfeita</strong> — a IA ajustava o plano toda semana com base no meu HRV e qualidade de sono.&rdquo;</>}
+              text={<>&ldquo;Corri minha primeira meia maratona em 1h54 usando o plano do Runmind. A <strong className="text-white font-semibold">integração com o Google Health foi perfeita</strong> — a IA ajustava o plano toda semana com base no meu HRV e qualidade de sono.&rdquo;</>}
               name="Ana Ribeiro"
               role="1ª meia maratona · 1:54:38"
               initial="A"
@@ -822,7 +822,7 @@ export default function LandingPage() {
                 do seu próximo PR.
               </h2>
               <p className="text-[14px] sm:text-[15px] font-light leading-relaxed text-white/45 max-w-[400px] mx-auto lg:mx-0">
-                Conecte seu Strava ou Garmin, conte seu objetivo para a IA e receba seu plano de treino personalizado agora mesmo.
+                Conecte seu Strava ou Google Health, conte seu objetivo para a IA e receba seu plano de treino personalizado agora mesmo.
               </p>
             </div>
 
@@ -911,7 +911,7 @@ export default function LandingPage() {
           <div className="pt-6 sm:pt-7 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-[11px] sm:text-xs font-light text-white/25 text-center sm:text-left">© 2025 Runmind. Todos os direitos reservados.</span>
             <div className="flex items-center gap-2 flex-wrap justify-center">
-              {['Strava Connected', 'Garmin Connected'].map((badge) => (
+              {['Strava Connected', 'Google Health Connected'].map((badge) => (
                 <div key={badge} className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/10 text-[9px] sm:text-[10px] font-semibold tracking-[0.12em] uppercase text-white/30">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#00F048]" />
                   {badge}

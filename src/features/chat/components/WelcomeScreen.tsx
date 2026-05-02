@@ -15,6 +15,7 @@ const suggestions = [
   'Mostra meus treinos da semana',
   'Como melhorar meu pace?',
   'Monte uma planilha para 10km',
+  'Quais rotas populares perto de mim?',
 ]
 
 export function WelcomeScreen({ onSelectPrompt }: WelcomeScreenProps) {

@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { getTranslations } from '../i18n/translations'
-import { WelcomeHeroIllustration } from '../assets'
 
 export function WelcomeStep({
   name,
@@ -26,11 +25,13 @@ export function WelcomeStep({
 
   return (
     <>
-      <div className="relative -mx-6 -mt-8 mb-6 h-[40vh] min-h-[200px] max-h-[320px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#14162E] via-[#14162E]/80 to-transparent" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <WelcomeHeroIllustration className="w-48 h-48 motion-safe:animate-fade-in-up" />
-        </div>
+      <div className="relative -mx-6 -mt-8 mb-6 h-[40vh] min-h-[200px] max-h-[320px] overflow-hidden rounded-b-2xl">
+        <img
+          src="/images/onboarding-runner.jpg"
+          alt="Corredora ao pôr do sol"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
       </div>
 
       <div className="flex flex-col gap-6">

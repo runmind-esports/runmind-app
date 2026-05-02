@@ -50,7 +50,16 @@ function GoogleCallbackContent() {
           userId: searchParams.get('userId') || '',
           username: username || '',
         })
-        router.replace('/chat')
+
+        // Check if user has completed onboarding
+        try {
+          const { runmidApiClient } = await import('@/shared/lib/apiClient')
+          await runmidApiClient.get('/api/v1/training/profile')
+          router.replace('/chat')
+        } catch {
+          // Profile not found — first time user, go to onboarding
+          router.replace('/onboarding')
+        }
         return
       }
 
