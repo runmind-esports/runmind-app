@@ -738,7 +738,7 @@ export default function LandingPage() {
               price="R$29"
               subtitle="3x mais que o Gratuito"
               features={[
-                { text: '300 RunPoints por mês', included: true },
+                { text: '300 RunPoints por dia', included: true },
                 { text: '10 anexos por dia (5x mais)', included: true },
                 { text: '15 conversas (3x mais)', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
@@ -753,7 +753,7 @@ export default function LandingPage() {
               price="R$59"
               subtitle="10x mais que o Gratuito"
               features={[
-                { text: '1.000 RunPoints por mês', included: true },
+                { text: '1.000 RunPoints por dia', included: true },
                 { text: '100 anexos por dia (10x mais)', included: true },
                 { text: '50 conversas (10x mais)', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
