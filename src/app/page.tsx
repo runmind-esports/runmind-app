@@ -249,6 +249,13 @@ export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    // If user is already logged in, redirect to chat
+    const token = localStorage.getItem('runmind_access_token')
+    if (token) {
+      window.location.href = '/chat'
+      return
+    }
+
     setIsVisible(true)
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)

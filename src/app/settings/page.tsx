@@ -3,12 +3,13 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Link2, CreditCard, Zap, CheckCircle2, X } from 'lucide-react'
+import { ArrowLeft, Link2, CreditCard, Zap, CheckCircle2, X, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { IntegrationsSection } from '@/features/settings/components/IntegrationsSection'
 import { PlansSection } from '@/features/settings/components/PlansSection'
 import { ConsumptionSection } from '@/features/runPoints/components/ConsumptionSection'
 import { useUserTier } from '@/features/subscription'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 
 const TABS = [
   { id: 'integrations', label: 'Integrações', icon: Link2 },
@@ -24,6 +25,7 @@ function SettingsContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { invalidateTier } = useUserTier()
+  const { logout } = useAuth()
 
   useEffect(() => {
     const subscription = searchParams.get('subscription')
@@ -93,54 +95,55 @@ function SettingsContent() {
             <span className="text-sm font-medium">Voltar</span>
           </Link>
           <div className="flex-1" />
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/brand/runmind-logo.svg" alt="Runmind" width={26} height={26} />
-            <span className="font-display font-bold text-[14px] text-foreground tracking-tight">
-              runmind
-            </span>
-          </Link>
+          <button
+            onClick={logout}
+            className="flex items-center gap-1.5 text-foreground-muted hover:text-red-400 transition-colors"
+          >
+            <LogOut className="w-4 h-4" />
+            <span className="text-sm font-medium">Sair</span>
+          </button>
         </div>
       </header>
 
       {/* Content */}
-      <main className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <h1 className="font-display font-bold text-[24px] text-foreground tracking-tight">
+      <main className="max-w-2xl mx-auto px-4 py-6">
+        <div className="mb-5">
+          <h1 className="font-display font-bold text-[22px] text-foreground tracking-tight">
             Configurações
           </h1>
-          <p className="text-[14px] text-foreground-muted mt-1">
-            Gerencie suas preferências e integrações
-          </p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex gap-2 mb-6">
-          {TABS.map((tab) => {
-            const Icon = tab.icon
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={cn(
-                  'flex items-center gap-2 px-4 py-2.5 rounded-full text-[13px] font-bold transition-all',
-                  activeTab === tab.id
-                    ? 'bg-foreground text-background'
-                    : 'bg-background-secondary border border-border text-foreground-muted hover:text-foreground'
-                )}
-              >
-                <Icon className="w-4 h-4" />
-                {tab.label}
-              </button>
-            )
-          })}
+        {/* Tabs — horizontal scroll on mobile */}
+        <div className="overflow-x-auto -mx-4 px-4 mb-6 scrollbar-hide">
+          <div className="flex gap-2 w-max">
+            {TABS.map((tab) => {
+              const Icon = tab.icon
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={cn(
+                    'flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[12px] font-bold transition-all whitespace-nowrap',
+                    activeTab === tab.id
+                      ? 'bg-foreground text-background'
+                      : 'bg-background-secondary text-foreground-muted'
+                  )}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {/* Section content */}
-        <div className="bg-background-secondary rounded-2xl border border-border p-6">
+        <div>
           {activeTab === 'integrations' && <IntegrationsSection />}
           {activeTab === 'plans' && <PlansSection />}
           {activeTab === 'consumption' && <ConsumptionSection />}
         </div>
+
       </main>
     </div>
   )

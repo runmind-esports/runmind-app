@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/shared/providers/ThemeProvider'
 import { QueryProvider } from '@/shared/providers/QueryProvider'
+import { DeepLinkListener } from '@/shared/components/DeepLinkListener'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className="antialiased overflow-hidden">
         <QueryProvider>
           <ThemeProvider>
+            <DeepLinkListener />
             {children}
           </ThemeProvider>
         </QueryProvider>

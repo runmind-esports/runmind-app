@@ -51,6 +51,15 @@ function GoogleCallbackContent() {
           username: username || '',
         })
 
+        // Close in-app browser on native platforms
+        try {
+          const { Capacitor } = await import('@capacitor/core')
+          if (Capacitor.isNativePlatform()) {
+            const { Browser } = await import('@capacitor/browser')
+            await Browser.close()
+          }
+        } catch {}
+
         // Check if user has completed onboarding
         try {
           const { runmidApiClient } = await import('@/shared/lib/apiClient')

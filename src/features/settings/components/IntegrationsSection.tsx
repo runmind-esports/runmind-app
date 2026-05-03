@@ -87,18 +87,6 @@ export function IntegrationsSection() {
           onDisconnect={disconnectGoogle}
         />
 
-        <IntegrationCard
-          name="Garmin Connect"
-          description="HRV, VO2max, carga de treino e metricas avançadas"
-          icon={<GarminIcon />}
-          color="#0E6DB4"
-          isConnected={false}
-          isLoading={false}
-          onConnect={() => {}}
-          onDisconnect={() => {}}
-          disabled
-          disabledMessage="Em breve"
-        />
       </div>
     </div>
   )
