@@ -79,7 +79,7 @@ export async function getCustomerInfo(): Promise<CustomerInfo | null> {
  */
 export function isUserCancellation(error: unknown): boolean {
   if (error && typeof error === 'object' && 'code' in error) {
-    return (error as { code: number }).code === PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR
+    return (error as { code: PURCHASES_ERROR_CODE }).code === PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR
   }
   return false
 }
