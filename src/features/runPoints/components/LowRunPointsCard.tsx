@@ -22,9 +22,11 @@ export function LowRunPointsCard({ percentage, nextResetAt, currentPoints }: Low
 
   if (percentage >= 10) return null
 
+  const upgradePlan = plans.find((p) => p.id === 'pro_monthly')
+
   const handleUpgrade = () => {
-    if (plans.length > 0) {
-      checkout(plans[0].id)
+    if (upgradePlan) {
+      checkout(upgradePlan.id)
     }
   }
 
@@ -53,7 +55,7 @@ export function LowRunPointsCard({ percentage, nextResetAt, currentPoints }: Low
 
       <button
         onClick={handleUpgrade}
-        disabled={isCheckingOut || plans.length === 0}
+        disabled={isCheckingOut || !upgradePlan}
         className="mt-3 bg-accent text-background rounded-full px-4 py-2.5 text-sm font-bold hover:bg-accent/90 transition-colors disabled:opacity-50"
       >
         {isCheckingOut ? 'Redirecionando...' : 'Fazer upgrade'}
