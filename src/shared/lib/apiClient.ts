@@ -167,12 +167,63 @@ runmidApiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// Response interceptor for runmid API — no auth redirect
-// Auth state is managed by useAuth hook; 401s from domain endpoints
-// (strava, googlehealth) mean "not connected", not "not authenticated"
+// Response interceptor for runmid API — refresh token on 401
 runmidApiClient.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => Promise.reject(error)
+  async (error: AxiosError) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({
+            resolve: (token: string) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`
+              resolve(runmidApiClient(originalRequest))
+            },
+            reject,
+          })
+        })
+      }
+
+      originalRequest._retry = true
+      isRefreshing = true
+
+      const refreshToken = tokenStorage.getRefreshToken()
+      if (!refreshToken) {
+        tokenStorage.clearTokens()
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login'
+        }
+        return Promise.reject(error)
+      }
+
+      try {
+        const response = await authApiClient.post('/api/auth/refresh', {
+          refreshToken: refreshToken,
+        })
+
+        const { accessToken, refreshToken: newRefreshToken } = response.data
+        tokenStorage.setTokens(accessToken, newRefreshToken)
+
+        processQueue(null, accessToken)
+
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`
+        return runmidApiClient(originalRequest)
+      } catch (refreshError) {
+        processQueue(refreshError as AxiosError)
+        tokenStorage.clearTokens()
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login'
+        }
+        return Promise.reject(refreshError)
+      } finally {
+        isRefreshing = false
+      }
+    }
+
+    return Promise.reject(error)
+  }
 )
 
 // API client for chat service
