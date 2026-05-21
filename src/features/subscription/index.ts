@@ -15,7 +15,3 @@ export type {
   PlansResponse,
   TierResponse,
 } from './types/subscription.types'
-
-// RevenueCat
-export { useRevenueCat } from './hooks/useRevenueCat'
-export type { PurchaseSource, RevenueCatOffering, RevenueCatPackageInfo } from './types/subscription.types'

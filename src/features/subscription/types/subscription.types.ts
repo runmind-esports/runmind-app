@@ -31,24 +31,3 @@ export interface TierResponse {
 }
 
 export type UserTier = 'free' | 'pro' | 'premium'
-
-// RevenueCat types for in-app purchase flow
-export interface RevenueCatOffering {
-  identifier: string
-  availablePackages: RevenueCatPackageInfo[]
-}
-
-export interface RevenueCatPackageInfo {
-  identifier: string
-  packageType: string
-  product: {
-    identifier: string
-    title: string
-    description: string
-    priceString: string
-    price: number
-    currencyCode: string
-  }
-}
-
-export type PurchaseSource = 'stripe' | 'revenuecat'

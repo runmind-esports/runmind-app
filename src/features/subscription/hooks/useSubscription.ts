@@ -27,6 +27,7 @@ export function useSubscription() {
     } catch (err) {
       console.error('Error creating checkout session:', err)
       setError('Erro ao iniciar checkout. Tente novamente.')
+    } finally {
       setIsCheckingOut(false)
     }
   }
@@ -40,6 +41,7 @@ export function useSubscription() {
     } catch (err) {
       console.error('Error opening billing portal:', err)
       setError('Erro ao abrir portal de assinatura. Tente novamente.')
+    } finally {
       setIsOpeningPortal(false)
     }
   }
