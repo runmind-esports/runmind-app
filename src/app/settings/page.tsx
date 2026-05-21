@@ -41,7 +41,7 @@ function SettingsContent() {
   }, [searchParams])
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Success Modal */}
       {showSuccessModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -84,66 +84,66 @@ function SettingsContent() {
         </div>
       )}
 
-      {/* Header */}
-      <header className="bg-background border-b border-border">
-        <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-4">
+      {/* Header — compact, chat-style */}
+      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="max-w-2xl mx-auto px-4 h-14 flex items-center gap-3">
           <Link
             href="/chat"
-            className="flex items-center gap-2 text-foreground-muted hover:text-foreground transition-colors"
+            className="p-1.5 -ml-1.5 rounded-lg text-foreground-muted hover:text-foreground hover:bg-background-secondary transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span className="text-sm font-medium">Voltar</span>
           </Link>
-          <div className="flex-1" />
+          <h1 className="font-display font-bold text-base text-foreground flex-1">
+            Configurações
+          </h1>
           <button
             onClick={logout}
-            className="flex items-center gap-1.5 text-foreground-muted hover:text-red-400 transition-colors"
+            className="p-1.5 rounded-lg text-foreground-muted hover:text-red-400 hover:bg-red-500/10 transition-colors"
+            title="Sair"
           >
-            <LogOut className="w-4 h-4" />
-            <span className="text-sm font-medium">Sair</span>
+            <LogOut className="w-4.5 h-4.5" />
           </button>
         </div>
       </header>
 
-      {/* Content */}
-      <main className="max-w-2xl mx-auto px-4 py-6">
-        <div className="mb-5">
-          <h1 className="font-display font-bold text-[22px] text-foreground tracking-tight">
-            Configurações
-          </h1>
-        </div>
-
-        {/* Tabs — horizontal scroll on mobile */}
-        <div className="overflow-x-auto -mx-4 px-4 mb-6 scrollbar-hide">
-          <div className="flex gap-2 w-max">
+      {/* Tabs — underline style, full-width on mobile */}
+      <nav className="border-b border-border bg-background">
+        <div className="max-w-2xl mx-auto px-4">
+          <div className="flex">
             {TABS.map((tab) => {
               const Icon = tab.icon
+              const isActive = activeTab === tab.id
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={cn(
-                    'flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[12px] font-bold transition-all whitespace-nowrap',
-                    activeTab === tab.id
-                      ? 'bg-foreground text-background'
-                      : 'bg-background-secondary text-foreground-muted'
+                    'relative flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'text-foreground'
+                      : 'text-foreground-muted hover:text-foreground'
                   )}
                 >
-                  <Icon className="w-3.5 h-3.5" />
-                  {tab.label}
+                  <Icon className="w-4 h-4" />
+                  <span className="hidden sm:inline">{tab.label}</span>
+                  <span className="sm:hidden text-xs">{tab.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 inset-x-0 h-0.5 bg-accent rounded-full" />
+                  )}
                 </button>
               )
             })}
           </div>
         </div>
+      </nav>
 
-        {/* Section content */}
-        <div>
+      {/* Content — scrollable area */}
+      <main className="flex-1 overflow-y-auto">
+        <div className="max-w-2xl mx-auto px-4 py-6">
           {activeTab === 'integrations' && <IntegrationsSection />}
           {activeTab === 'plans' && <PlansSection />}
           {activeTab === 'consumption' && <ConsumptionSection />}
         </div>
-
       </main>
     </div>
   )

@@ -5,7 +5,7 @@ import { Copy, Share2, Check, Loader2 } from 'lucide-react'
 import { Message } from '../types'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { subscriptionApi } from '@/features/subscription'
+import { useSubscription } from '@/features/subscription'
 
 // Convert basic markdown to HTML (bold, italic, line breaks)
 function markdownToHtml(text: string): string {
@@ -63,26 +63,19 @@ function MessageActions({ content }: { content: string }) {
 }
 
 function UpgradeButton({ label }: { label: string }) {
-  const [isLoading, setIsLoading] = useState(false)
+  const { checkout, isCheckingOut } = useSubscription()
 
   const handleUpgrade = useCallback(async () => {
-    setIsLoading(true)
-    try {
-      const { url } = await subscriptionApi.checkout('pro_monthly')
-      window.location.href = url
-    } catch (err) {
-      console.error('Error creating checkout session:', err)
-      setIsLoading(false)
-    }
-  }, [])
+    await checkout('pro_monthly')
+  }, [checkout])
 
   return (
     <button
       onClick={handleUpgrade}
-      disabled={isLoading}
+      disabled={isCheckingOut}
       className="mt-3 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-60"
     >
-      {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+      {isCheckingOut && <Loader2 className="h-4 w-4 animate-spin" />}
       {label}
     </button>
   )

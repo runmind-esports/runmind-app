@@ -1,7 +1,7 @@
 export const translations = {
   ptBR: {
     welcome: {
-      greeting: 'Ola, {name}!',
+      greeting: 'Olá, {name}!',
       subtitle: 'Vamos configurar seu perfil de corredor em menos de 2 minutos.',
       nameLabel: 'Seu nome',
       namePlaceholder: 'Como quer ser chamado?',
@@ -14,11 +14,11 @@ export const translations = {
         options: ['Correr 5km', 'Correr 10km', 'Melhorar tempo nos 5km', 'Melhorar tempo nos 10km'],
       },
       fitness: {
-        question: 'Como voce avalia seu condicionamento fisico?',
+        question: 'Como Você avalia seu condicionamento fisico?',
         labels: ['Sedentario', 'Pouco ativo', 'Moderado', 'Ativo', 'Muito ativo'],
       },
       running: {
-        question: 'Voce ja corre regularmente?',
+        question: 'Você já corre regularmente?',
         options: ['Ate 5km', 'Ate 10km', '11 a 20km', '21 a 30km', 'Mais de 30km'],
       },
       raced: {
@@ -33,7 +33,7 @@ export const translations = {
         options: ['2 dias', '3 dias', '4 dias', '5 ou mais dias'],
       },
       otherActivities: {
-        question: 'Voce pratica outras atividades fisicas?',
+        question: 'Voce pratica outras atividades físicas?',
       },
       injury: {
         question: 'Possui alguma lesao ou restricao medica?',
