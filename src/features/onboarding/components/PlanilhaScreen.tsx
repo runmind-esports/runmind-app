@@ -6,6 +6,7 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import { CheckCircle, Download, ArrowRight } from 'lucide-react'
 import { useSpreadsheetDownload } from '../hooks/useSpreadsheetDownload'
 import { getTranslations } from '../i18n/translations'
+import { WhatsAppCTA } from '@/features/whatsapp-cta'
 
 export function PlanilhaScreen() {
   const router = useRouter()
@@ -66,6 +67,24 @@ export function PlanilhaScreen() {
             {error}
           </p>
         )}
+
+        {/* WhatsApp CTA — final do onboarding (D-F4, divergence documented in plan).
+            PlanilhaScreen força bg-white, então o componente WhatsAppCTA (que usa
+            CSS vars do tema dark global) ficaria com cinza-claro sobre branco.
+            Opção B do plan: override via arbitrary Tailwind variants para forçar
+            cores legíveis sobre fundo branco, mantendo variant="secondary"
+            (WhatsApp é caminho complementar — o primário visual continua sendo
+            "Baixar planilha"). */}
+        <div className="w-full mt-2 mb-6 pt-6 border-t border-[#E5E7EB] flex flex-col items-center">
+          <p className="text-sm text-[#6B7088] mb-3 text-center">
+            Tem dúvidas? Fala com o coach no WhatsApp
+          </p>
+          <WhatsAppCTA
+            variant="secondary"
+            showQR={true}
+            className="[&_a]:!bg-[#14162E] [&_a]:!text-white [&_a]:hover:!bg-[#1F2240] [&_p]:!text-[#6B7088]"
+          />
+        </div>
 
         {/* Secondary CTA - Go to chat */}
         <button
