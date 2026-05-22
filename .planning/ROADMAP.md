@@ -73,6 +73,7 @@ Plans:
 **Plans**: 1 plan
 Plans:
 - [x] 04-01-PLAN.md -- Service function, useCountUp hook, AnimatedCounter, NumbersSection, translations, and page wiring
+
 **UI hint**: yes
 
 </details>
@@ -305,6 +306,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |
 | 17. Subscription Checkout UI | - | 3/3 | Complete    | 2026-04-28 |
 | 18. Tela de Consumo de Mana | - | 2/2 | Complete    | 2026-04-28 |
+| 19. WhatsApp Conversion CTA | - | 0/2 | Planned     | - |
 
 ### Phase 18: Tela de Consumo de Mana
 
@@ -316,3 +318,30 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 Plans:
 - [x] 18-01-PLAN.md -- Mana feature module: types, API service (chatApiClient), useManaStatus hook, barrel exports
 - [x] 18-02-PLAN.md -- CircularGauge, WeeklyBarChart, LowManaCard, ConsumptionSection components, settings page 3rd tab wiring
+
+### Phase 19: WhatsApp Conversion CTA
+
+**Goal:** Componente `<WhatsAppCTA />` em `src/features/whatsapp-cta/` que chama `POST /api/v1/whatsapp/init-token` no runmid-api, recebe `{token, walink, expiresAt}`, e renderiza um CTA "Conversar no WhatsApp" — botão direto no mobile (abre app WhatsApp via `wa.me`) e botão + QR code (`qrcode.react`) no desktop. CTA aparece em ≥ 2 páginas: pós-checkout Stripe (Pro/Premium) e PlanilhaScreen (fim do onboarding — momento Free do funil de conversão; ver divergence_from_context no 19-02-PLAN). **Sem Capacitor, sem scheme `runmind://`, sem tela `/link?t=...`** — o `walink` é URL HTTPS comum que o OS entrega ao WhatsApp via handler nativo.
+
+**Depends on:** Phase 18 + endpoint `POST /api/v1/whatsapp/init-token` (runmid-api Phase 5, ainda pendente — Plan 02 documenta a dep cross-repo)
+**Requirements**: TBD (sem requirement IDs formais ainda — a definir na próxima evolução do REQUIREMENTS.md)
+
+**Success Criteria** (what must be TRUE):
+  1. Existe `src/features/whatsapp-cta/` com types, service `whatsappCtaApi`, hook `useWhatsAppInitToken` (TanStack Query 23h, retry: false), i18n pt/en, e 3 componentes (`WhatsAppCTAButton`, `WhatsAppQR`, `WhatsAppCTA`)
+  2. `qrcode.react` instalado como dependency em package.json
+  3. `<WhatsAppCTA />` aparece dentro do success modal de `/settings?subscription=success`
+  4. `<WhatsAppCTA />` aparece em `PlanilhaScreen` (final do onboarding) entre o botão de download e o link "Ir para o chat"
+  5. Mobile (< 768px) mostra apenas o botão CTA; desktop (>= 768px) mostra botão + QR — controlado por classes Tailwind responsive (sem UA detection, per D-F9)
+  6. Loading state e error states (rate-limited / unavailable / generic) renderizam mensagens i18n distintas; hook não auto-retry em 429/503 (per D-F13)
+  7. Anchor do botão usa `target="_blank" rel="noopener noreferrer"` (segurança + sem leak de referrer pro wa.me)
+  8. `npm run build` e `npm run lint` passam limpos
+
+**IN scope:** Componente CTA + hook `useWhatsAppInitToken` (TanStack Query 23h cache), renderização adaptativa via CSS media query (sem UA detection), integração em pós-checkout Stripe + PlanilhaScreen, i18n pt/en, lib `qrcode.react`, error states (429 rate limit, 503 service down, 401 expired — 401 já tratado pelo interceptor existente), prop `onCtaClick` exposta pra futuro tracking (sem implementar agora — projeto não tem tracker).
+
+**OUT of scope:** Capacitor/build nativo, tela `/link?t=...`, settings de unlink, webhook Meta (chat-agent Phase 15), endpoints HTTP (runmid-api Phase 5), magic-link validation, criação de novo "step de seleção Free" no onboarding (escolha: usar a PlanilhaScreen existente — documentado no Plan 02 como divergência consciente de D-F4).
+
+**Plans:** 2 plans
+Plans:
+- [ ] 19-01-PLAN.md -- Feature module scaffold: types, whatsappCtaApi service, useWhatsAppInitToken hook (23h cache), i18n pt/en, qrcode.react dep, 3 componentes (CTAButton, QR, composite CTA), barrel export
+- [ ] 19-02-PLAN.md -- Integrar `<WhatsAppCTA />` em `/settings?subscription=success` (success modal) e em `PlanilhaScreen` (final do onboarding); checkpoint humano de smoke test mobile+desktop
+**UI hint**: yes
