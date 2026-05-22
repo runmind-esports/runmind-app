@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Onboarding
 status: executing
-stopped_at: Completed 19-01-PLAN.md
-last_updated: "2026-05-22T16:50:00.000Z"
+stopped_at: Completed 19-02-PLAN.md
+last_updated: "2026-05-22T17:35:17.963Z"
 last_activity: 2026-05-22
 progress:
   total_phases: 15
-  completed_phases: 12
+  completed_phases: 13
   total_plans: 24
-  completed_plans: 22
-  percent: 83
+  completed_plans: 23
+  percent: 91
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-04-22)
 
 ## Current Position
 
-Phase: 19 (WhatsApp Conversion CTA)
-Plan: 19-01 complete (feature module scaffold); 19-02 pending (integration + checkpoint)
-Status: Ready to execute 19-02
+Phase: 19 (WhatsApp Conversion CTA) — **COMPLETE (2/2 plans)**
+Plan: 19-01 (feature module scaffold) + 19-02 (integration in 2 surfaces + smoke test runbook) — both shipped
+Status: Phase 19 ready for verification; smoke test runbook (`19-02-SMOKE-TEST.md`) awaiting operator execution
 Last activity: 2026-05-22
 
-Progress: [████████████░░░░░░░░] 60% (v1.0 complete, v1.1 in progress)
+Progress: [█████████████░░░░░░░] 65% (v1.0 complete, v1.1 in progress)
 
 ## Performance Metrics
 
@@ -76,11 +76,15 @@ Recent decisions affecting current work:
 - [Phase 19]: WhatsApp CTA é web-only (sem Capacitor). Renderização adaptativa via Tailwind responsive classes (sem UA detection). 23h cache no token (1h margin under 24h backend TTL). Retry: false em 429/503 (sem auto-retry, mensagem específica por errorCode).
 - [Phase 19]: Divergência consciente de D-F4 documentada — não existe "step de seleção Free" no onboarding atual; usar `PlanilhaScreen` como o catch-all do funil Free.
 - [Phase 19]: Analytics tracker (`whatsapp_cta_clicked`) deferido — runmid-app ainda não tem SDK de tracking instalado; componente expõe prop `onCtaClick` mas não dispara nenhum evento.
+- [Phase 19 Plan 02]: Theme contrast Opção B — override Tailwind arbitrary variants (`[&_a]:!bg-[#14162E] [&_a]:!text-white`) no callsite da PlanilhaScreen para forçar legibilidade sobre `bg-white`. Componente WhatsAppCTA permanece frozen. Reversível em 1 linha.
+- [Phase 19 Plan 02]: showQR=false no settings success modal (modal max-w-sm não cabe layout side-by-side QR+botão). Desktop pega QR na PlanilhaScreen.
+- [Phase 19 Plan 02]: Smoke test (`19-02-SMOKE-TEST.md`) é checkpoint humano — operador roda 6 cenários e sinaliza approval; agent não executa.
 
 ### Pending Todos
 
 - Phase 19 Plan 19-01 ✅ executado (3 commits: 03e6f18, 7df5ac3, a4d7a39).
-- Phase 19 Plan 19-02 pronto pra execução — depende do Plan 01 (✅ atendido). Smoke test em 19-02 ainda precisa runmid-api Phase 5 ou mock local.
+- Phase 19 Plan 19-02 ✅ executado (3 commits: 91bc97c, 4396df8, aed2c3b). Smoke test handoff pendente operador.
+- **Cross-repo gating**: runmid-api Phase 5 (`POST /api/v1/whatsapp/init-token`) ainda pendente — smoke test cenário 6 deferred until backend ships, cenários 1-5 cobrem via mock.
 
 ### Roadmap Evolution
 
@@ -95,6 +99,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-05-22T16:50:00.000Z
-Stopped at: Completed 19-01-PLAN.md
-Resume file: .planning/phases/19-whatsapp-deep-link-handler/19-02-PLAN.md
+Last session: 2026-05-22T17:35:00.000Z
+Stopped at: Completed 19-02-PLAN.md (Phase 19 done; awaiting operator smoke test signal)
+Resume file: None

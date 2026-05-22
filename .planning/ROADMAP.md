@@ -306,7 +306,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 15. Projetos Frontend | v2.0 | 0/2 | Planned | - |
 | 17. Subscription Checkout UI | - | 3/3 | Complete    | 2026-04-28 |
 | 18. Tela de Consumo de Mana | - | 2/2 | Complete    | 2026-04-28 |
-| 19. WhatsApp Conversion CTA | - | 0/2 | Planned     | - |
+| 19. WhatsApp Conversion CTA | - | 2/2 | Complete   | 2026-05-22 |
 
 ### Phase 18: Tela de Consumo de Mana
 
@@ -340,8 +340,8 @@ Plans:
 
 **OUT of scope:** Capacitor/build nativo, tela `/link?t=...`, settings de unlink, webhook Meta (chat-agent Phase 15), endpoints HTTP (runmid-api Phase 5), magic-link validation, criação de novo "step de seleção Free" no onboarding (escolha: usar a PlanilhaScreen existente — documentado no Plan 02 como divergência consciente de D-F4).
 
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 Plans:
 - [x] 19-01-PLAN.md -- Feature module scaffold: types, whatsappCtaApi service, useWhatsAppInitToken hook (23h cache), i18n pt/en, qrcode.react dep, 3 componentes (CTAButton, QR, composite CTA), barrel export (completed 2026-05-22)
-- [ ] 19-02-PLAN.md -- Integrar `<WhatsAppCTA />` em `/settings?subscription=success` (success modal) e em `PlanilhaScreen` (final do onboarding); checkpoint humano de smoke test mobile+desktop
+- [x] 19-02-PLAN.md -- Integrar `<WhatsAppCTA />` em `/settings?subscription=success` (success modal, showQR=false) e em `PlanilhaScreen` (final do onboarding, theme contrast Opção B); smoke test runbook entregue (19-02-SMOKE-TEST.md) — checkpoint humano awaiting operator approval (completed 2026-05-22)
 **UI hint**: yes
