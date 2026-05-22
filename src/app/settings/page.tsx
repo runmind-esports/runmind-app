@@ -10,6 +10,7 @@ import { PlansSection } from '@/features/settings/components/PlansSection'
 import { ConsumptionSection } from '@/features/runPoints/components/ConsumptionSection'
 import { useUserTier } from '@/features/subscription'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import { WhatsAppCTA } from '@/features/whatsapp-cta'
 
 const TABS = [
   { id: 'integrations', label: 'Integrações', icon: Link2 },
@@ -65,6 +66,16 @@ function SettingsContent() {
             <p className="text-sm text-foreground-muted mb-6">
               Seu plano foi atualizado com sucesso.
             </p>
+
+            {/* WhatsApp CTA — pós-checkout Stripe (D-F3).
+                showQR={false} é deliberado: modal é max-w-sm (~320px de área útil),
+                QR side-by-side estouraria o layout. Desktop users pegam o QR na
+                PlanilhaScreen (onboarding) ou em surfaces fullscreen futuras. */}
+            <div className="my-5 h-px bg-border" />
+            <p className="text-xs text-foreground-muted mb-3">
+              Continue a conversa no WhatsApp
+            </p>
+            <WhatsAppCTA variant="primary" showQR={false} className="mb-5" />
 
             <div className="flex flex-col gap-3">
               <button
