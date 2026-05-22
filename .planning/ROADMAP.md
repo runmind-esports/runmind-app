@@ -342,6 +342,6 @@ Plans:
 
 **Plans:** 2 plans
 Plans:
-- [ ] 19-01-PLAN.md -- Feature module scaffold: types, whatsappCtaApi service, useWhatsAppInitToken hook (23h cache), i18n pt/en, qrcode.react dep, 3 componentes (CTAButton, QR, composite CTA), barrel export
+- [x] 19-01-PLAN.md -- Feature module scaffold: types, whatsappCtaApi service, useWhatsAppInitToken hook (23h cache), i18n pt/en, qrcode.react dep, 3 componentes (CTAButton, QR, composite CTA), barrel export (completed 2026-05-22)
 - [ ] 19-02-PLAN.md -- Integrar `<WhatsAppCTA />` em `/settings?subscription=success` (success modal) e em `PlanilhaScreen` (final do onboarding); checkpoint humano de smoke test mobile+desktop
 **UI hint**: yes
