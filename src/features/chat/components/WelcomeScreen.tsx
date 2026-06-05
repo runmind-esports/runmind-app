@@ -14,7 +14,7 @@ const suggestions = [
   'Que treino devo fazer hoje?',
   'Mostra meus treinos da semana',
   'Como melhorar meu pace?',
-  'Monte uma planilha para 10km',
+  'Monta um treino para 10km',
   'Quais rotas populares perto de mim?',
 ]
 

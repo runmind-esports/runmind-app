@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Link2, CreditCard, Zap, CheckCircle2, X, LogOut } from 'lucide-react'
+import { ArrowLeft, Link2, CreditCard, Zap, CheckCircle2, X, LogOut, MessageCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { IntegrationsSection } from '@/features/settings/components/IntegrationsSection'
 import { PlansSection } from '@/features/settings/components/PlansSection'
@@ -13,6 +13,7 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import { WhatsAppCTA } from '@/features/whatsapp-cta'
 
 const TABS = [
+  { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
   { id: 'integrations', label: 'Integrações', icon: Link2 },
   { id: 'plans', label: 'Planos', icon: CreditCard },
   { id: 'consumption', label: 'Consumo', icon: Zap },
@@ -21,7 +22,7 @@ const TABS = [
 type TabId = typeof TABS[number]['id']
 
 function SettingsContent() {
-  const [activeTab, setActiveTab] = useState<TabId>('integrations')
+  const [activeTab, setActiveTab] = useState<TabId>('whatsapp')
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -151,6 +152,20 @@ function SettingsContent() {
       {/* Content — scrollable area */}
       <main className="flex-1 overflow-y-auto">
         <div className="max-w-2xl mx-auto px-4 py-6">
+          {activeTab === 'whatsapp' && (
+            <section className="space-y-4">
+              <div>
+                <h2 className="font-display font-bold text-lg text-foreground mb-1">
+                  Conversar no WhatsApp
+                </h2>
+                <p className="text-sm text-foreground-muted">
+                  O Runmind funciona via WhatsApp. Toque no botão pra abrir uma conversa
+                  com o coach — depois disso é só mandar áudio ou texto.
+                </p>
+              </div>
+              <WhatsAppCTA variant="primary" showQR={true} />
+            </section>
+          )}
           {activeTab === 'integrations' && <IntegrationsSection />}
           {activeTab === 'plans' && <PlansSection />}
           {activeTab === 'consumption' && <ConsumptionSection />}
