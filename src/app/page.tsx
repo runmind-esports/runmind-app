@@ -45,6 +45,15 @@ function PlayIcon() {
   )
 }
 
+// WhatsApp logo
+function WhatsAppIcon({ size = 18, color = '#14162E' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.464 3.488"/>
+    </svg>
+  )
+}
+
 // Star icon
 function StarIcon() {
   return <span className="text-[#00F048] text-sm">★</span>
@@ -320,28 +329,28 @@ export default function LandingPage() {
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#00F048]"></span>
                 </span>
                 <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.18em] uppercase text-[#14162E]">
-                  Coach de IA para corredores
+                  100% no WhatsApp · sem app pra baixar
                 </span>
               </div>
 
               {/* Title */}
               <h1 className="font-display font-extrabold text-[32px] sm:text-[42px] lg:text-[clamp(42px,5vw,64px)] leading-[1.1] sm:leading-[1.05] tracking-tight mb-5 sm:mb-6">
-                Treinamento de elite acessível: Seu Coach de <span className="text-[#00F048]">IA</span> 24/7 na palma da mão.
+                Seu coach de corrida no <span className="text-[#00F048]">WhatsApp</span>.
               </h1>
 
               {/* Subtitle */}
-              <p className="text-[15px] sm:text-[17px] font-light leading-[1.7] sm:leading-[1.75] text-[#6B7088] max-w-[460px] mb-7 sm:mb-10">
-                O fim das planilhas genéricas e caras. Conecte seu Strava e deixe nossa IA criar seu plano perfeito com suporte em tempo real.
+              <p className="text-[15px] sm:text-[17px] font-light leading-[1.7] sm:leading-[1.75] text-[#6B7088] max-w-[480px] mb-7 sm:mb-10">
+                Conecte Strava e Google Health uma vez. Depois é só perguntar: <em className="not-italic text-[#14162E] font-medium">&ldquo;que treino faço hoje?&rdquo;</em>, <em className="not-italic text-[#14162E] font-medium">&ldquo;confere meus passos da semana&rdquo;</em>, <em className="not-italic text-[#14162E] font-medium">&ldquo;cria um plano pra meia maratona&rdquo;</em>. A IA responde com seus dados reais.
               </p>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-stretch sm:items-center">
                 <Link
                   href="/login"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#14162E] px-6 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-semibold text-white transition-all shadow-[0_4px_20px_rgba(20,22,46,0.2)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(20,22,46,0.25)]"
+                  className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#00F048] px-6 sm:px-8 py-3.5 sm:py-4 text-[14px] sm:text-[15px] font-bold text-[#14162E] transition-all shadow-[0_4px_20px_rgba(0,240,72,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(0,240,72,0.45)]"
                 >
-                  Começar grátis
-                  <ArrowIcon />
+                  <WhatsAppIcon size={18} />
+                  Conversar no WhatsApp
                 </Link>
                 <a
                   href="#how"
@@ -351,6 +360,11 @@ export default function LandingPage() {
                   Ver como funciona
                 </a>
               </div>
+
+              {/* Objection killer */}
+              <p className="text-[12px] sm:text-[13px] text-[#6B7088] mt-3.5 sm:mt-4">
+                Grátis pra começar · Sem cartão · Conecta em 2 minutos
+              </p>
 
               {/* Trust */}
               <div className="flex items-center gap-3 mt-6 sm:mt-8">
@@ -399,66 +413,81 @@ export default function LandingPage() {
                 <div className="text-[9px] lg:text-[10px] font-medium text-[#00B836] mt-0.5">Ótimo para treinar</div>
               </div>
 
-              {/* Phone */}
+              {/* Phone — styled to evoke WhatsApp chat (without copying it literally) */}
               <div className="w-[260px] sm:w-[280px] bg-[#14162E] rounded-[38px] sm:rounded-[42px] border-2 border-white/10 overflow-hidden shadow-[0_0_0_8px_rgba(20,22,46,0.04),0_24px_48px_rgba(20,22,46,0.15)] sm:shadow-[0_0_0_10px_rgba(20,22,46,0.04),0_40px_80px_rgba(20,22,46,0.18),0_8px_24px_rgba(20,22,46,0.1)] relative z-0">
                 {/* Notch */}
                 <div className="bg-[#0A0C1A] h-7 flex items-center justify-center">
                   <div className="w-16 h-1.5 bg-white/10 rounded-full" />
                 </div>
 
-                {/* Screen */}
-                <div className="bg-[#14162E] min-h-[520px] sm:min-h-[560px]" style={{ background: 'radial-gradient(ellipse 100% 50% at 50% 0%, rgba(0,240,72,0.09) 0%, transparent 55%), #14162E' }}>
-                  {/* Phone Header */}
-                  <div className="flex items-center justify-between px-4 py-5 border-b border-white/[0.05]">
-                    <div className="flex items-center gap-2 font-display font-bold text-sm text-white">
-                      <RunmindLogo size={18} />
-                      runmind
-                    </div>
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#00F048] to-[#00B836]" />
+                {/* WhatsApp-style header */}
+                <div className="bg-[#0B1416] px-4 py-3 flex items-center gap-3 border-b border-white/[0.04]">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00F048] to-[#00B836] flex items-center justify-center flex-shrink-0">
+                    <RunmindLogo size={20} />
                   </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-[13px] text-white leading-tight">RunMind Coach</div>
+                    <div className="flex items-center gap-1 text-[10px] text-[#00F048]/80 leading-tight mt-0.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00F048]" />
+                      online
+                    </div>
+                  </div>
+                </div>
 
-                  {/* Chat */}
-                  <div className="p-4 flex flex-col gap-2.5">
+                {/* Chat surface — WhatsApp-ish dark green tint */}
+                <div className="min-h-[480px] sm:min-h-[520px] flex flex-col" style={{ background: '#0E1A1F' }}>
+                  <div className="p-3.5 flex flex-col gap-2 flex-1">
                     {/* User message */}
-                    <div className="self-end max-w-[85%] px-3.5 py-2.5 bg-[#00F048] text-[#14162E] text-[11px] font-medium leading-relaxed rounded-2xl rounded-br-sm">
-                      Que treino devo fazer hoje?
+                    <div className="self-end max-w-[80%] px-3 py-2 bg-[#005C4B] text-white text-[11px] leading-relaxed rounded-lg rounded-br-sm shadow-sm">
+                      Confere meus passos da semana
+                      <span className="block text-[8.5px] text-white/55 text-right mt-1">15:42 ✓✓</span>
                     </div>
 
-                    {/* AI message */}
-                    <div className="self-start max-w-[85%] px-3.5 py-2.5 bg-white/[0.07] border border-white/[0.08] text-white/85 text-[11px] leading-relaxed rounded-2xl rounded-bl-sm">
-                      Com base nos seus últimos 7 dias, você correu <strong className="text-white">38km</strong> e está bem recuperado (HRV normal). 💪
-                      <br /><br />
-                      Recomendo um <strong className="text-white">tempo run de 8km</strong> em pace controlado:
+                    {/* Bot reply */}
+                    <div className="self-start max-w-[85%] px-3 py-2 bg-[#1F2C32] text-white/90 text-[11px] leading-relaxed rounded-lg rounded-bl-sm shadow-sm">
+                      <span className="text-[#00F048] font-semibold">📊 Passos da Semana</span>
+                      <br />
+                      Você fez <strong className="text-white">47.382 passos</strong> essa semana ✨
+                      <div className="grid grid-cols-2 gap-1 mt-1.5 text-[10px]">
+                        <div className="text-white/70">• Hoje: <strong className="text-white">3.465</strong></div>
+                        <div className="text-white/70">• Ontem: <strong className="text-white">10.227</strong></div>
+                        <div className="text-white/70">• Qua: <strong className="text-white">12.254</strong></div>
+                        <div className="text-white/70">• Ter: <strong className="text-white">5.680</strong></div>
+                      </div>
+                      <span className="block text-[8.5px] text-white/55 text-right mt-1.5">15:42</span>
+                    </div>
 
-                      <div className="grid grid-cols-2 gap-1.5 mt-2">
-                        <div className="bg-white/[0.06] border border-white/[0.08] rounded-lg p-2">
-                          <div className="text-[8px] font-bold tracking-[0.16em] uppercase text-white/35 mb-1">Pace alvo</div>
-                          <div className="font-display font-bold text-base text-white tracking-tight">5:10<span className="text-[10px] font-light text-white/30">/km</span></div>
+                    {/* User message */}
+                    <div className="self-end max-w-[80%] px-3 py-2 bg-[#005C4B] text-white text-[11px] leading-relaxed rounded-lg rounded-br-sm shadow-sm">
+                      Que treino faço hoje?
+                      <span className="block text-[8.5px] text-white/55 text-right mt-1">15:43 ✓✓</span>
+                    </div>
+
+                    {/* Bot reply */}
+                    <div className="self-start max-w-[85%] px-3 py-2 bg-[#1F2C32] text-white/90 text-[11px] leading-relaxed rounded-lg rounded-bl-sm shadow-sm">
+                      Bem recuperado (HRV normal). Bora num <strong className="text-white">tempo run de 8km</strong> 💪
+                      <div className="grid grid-cols-2 gap-1.5 mt-1.5">
+                        <div className="bg-[#0E1A1F] rounded p-1.5">
+                          <div className="text-[8px] uppercase tracking-wider text-white/50">Pace</div>
+                          <div className="font-bold text-white text-sm">5:10<span className="text-[9px] text-white/40">/km</span></div>
                         </div>
-                        <div className="bg-white/[0.06] border border-white/[0.08] rounded-lg p-2">
-                          <div className="text-[8px] font-bold tracking-[0.16em] uppercase text-white/35 mb-1">Duração</div>
-                          <div className="font-display font-bold text-base text-[#00F048] tracking-tight">~42<span className="text-[10px] font-light text-white/30">min</span></div>
+                        <div className="bg-[#0E1A1F] rounded p-1.5">
+                          <div className="text-[8px] uppercase tracking-wider text-white/50">Duração</div>
+                          <div className="font-bold text-[#00F048] text-sm">~42<span className="text-[9px] text-white/40">min</span></div>
                         </div>
                       </div>
-                    </div>
-
-                    {/* User message */}
-                    <div className="self-end max-w-[85%] px-3.5 py-2.5 bg-[#00F048] text-[#14162E] text-[11px] font-medium leading-relaxed rounded-2xl rounded-br-sm">
-                      Cria um plano para a meia maratona
-                    </div>
-
-                    {/* AI message */}
-                    <div className="self-start max-w-[85%] px-3.5 py-2.5 bg-white/[0.07] border border-white/[0.08] text-white/85 text-[11px] leading-relaxed rounded-2xl rounded-bl-sm">
-                      Perfeito! Plano de <strong className="text-white">12 semanas</strong> gerado com base no seu histórico. Começamos segunda-feira! 🏃
+                      <span className="block text-[8.5px] text-white/55 text-right mt-1.5">15:43</span>
                     </div>
                   </div>
 
-                  {/* Input */}
-                  <div className="mx-4 mb-4 mt-3 bg-white/[0.06] border border-white/10 rounded-full px-4 py-2.5 flex items-center justify-between">
-                    <span className="text-[10px] text-white/30">Pergunte ao seu coach...</span>
-                    <div className="w-6 h-6 rounded-full bg-[#00F048] flex items-center justify-center">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 5 H8 M5.5 2.5 L8 5 L5.5 7.5" stroke="#14162E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  {/* WhatsApp-style input bar */}
+                  <div className="px-3 pb-3 pt-1 flex items-center gap-2">
+                    <div className="flex-1 bg-[#1F2C32] rounded-full px-3.5 py-2 flex items-center">
+                      <span className="text-[10px] text-white/40">Mensagem</span>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-[#00A884] flex items-center justify-center flex-shrink-0">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                       </svg>
                     </div>
                   </div>
@@ -493,7 +522,7 @@ export default function LandingPage() {
               Tudo que um corredor sério precisa
             </h2>
             <p className="text-[14px] sm:text-base font-light leading-[1.7] sm:leading-[1.75] text-[#6B7088] max-w-[500px]">
-              Cinco funcionalidades integradas para levar sua corrida ao próximo nível — com IA no centro de tudo.
+              Quatro funcionalidades integradas para levar sua corrida ao próximo nível — com IA no centro de tudo.
             </p>
           </div>
 
@@ -507,20 +536,12 @@ export default function LandingPage() {
               />
             </div>
             <FeatureCard
-              icon={<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="3" stroke="#14162E" strokeWidth="1.7"/><path d="M3 8 H19 M8 8 V19" stroke="#14162E" strokeWidth="1.5" strokeLinecap="round"/></svg>}
-              title="Planilhas Dinâmicas"
-              description="Opções recomendadas (5k, 10k, 21k, 42k) que se ajustam ao seu perfil. Criadas sob medida, adaptadas ao seu nível e ajustadas automaticamente se você falhar um treino."
-              tag="Personalizado"
+              icon={<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="12" width="4" height="7" rx="1" stroke="#14162E" strokeWidth="1.7"/><rect x="9" y="8" width="4" height="11" rx="1" stroke="#14162E" strokeWidth="1.7"/><rect x="15" y="4" width="4" height="15" rx="1" stroke="#14162E" strokeWidth="1.7"/></svg>}
+              title="Dashboard de Evolução"
+              description="Visualize KMs semanais, pace médio, recordes pessoais e conquistas. Gamificação com badges e streaks para manter sua consistência alta."
+              tag="Motivação"
             />
             <div className="rounded-tr-2xl overflow-hidden">
-              <FeatureCard
-                icon={<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="12" width="4" height="7" rx="1" stroke="#14162E" strokeWidth="1.7"/><rect x="9" y="8" width="4" height="11" rx="1" stroke="#14162E" strokeWidth="1.7"/><rect x="15" y="4" width="4" height="15" rx="1" stroke="#14162E" strokeWidth="1.7"/></svg>}
-                title="Dashboard de Evolução"
-                description="Visualize KMs semanais, pace médio, recordes pessoais e conquistas. Gamificação com badges e streaks para manter sua consistência alta."
-                tag="Motivação"
-              />
-            </div>
-            <div className="rounded-bl-2xl overflow-hidden">
               <FeatureCard
                 icon={<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="14" rx="2.5" stroke="#14162E" strokeWidth="1.7"/><path d="M7 3 V7 M15 3 V7 M3 10 H19" stroke="#14162E" strokeWidth="1.5" strokeLinecap="round"/></svg>}
                 title="Eventos de Corrida"
@@ -528,17 +549,19 @@ export default function LandingPage() {
                 tag="Motivação"
               />
             </div>
-            <FeatureCard
-              icon={<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="5.5" cy="11" r="2.5" stroke="#14162E" strokeWidth="1.7"/><circle cx="16.5" cy="6" r="2.5" stroke="#14162E" strokeWidth="1.7"/><circle cx="16.5" cy="16" r="2.5" stroke="#14162E" strokeWidth="1.7"/><path d="M8 11 C10 11 12 6 14 6 M8 11 C10 11 12 16 14 16" stroke="#14162E" strokeWidth="1.5" strokeLinecap="round"/></svg>}
-              title="Sincronização Inteligente"
-              description="Seus dados do Strava alimentam sua evolução sem esforço manual. Importe todo o seu histórico automaticamente — seus treinos chegam direto para a IA analisar."
-              tag="Automático"
-            />
-            <div className="rounded-br-2xl overflow-hidden">
+            <div className="rounded-bl-2xl overflow-hidden">
+              <FeatureCard
+                icon={<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="5.5" cy="11" r="2.5" stroke="#14162E" strokeWidth="1.7"/><circle cx="16.5" cy="6" r="2.5" stroke="#14162E" strokeWidth="1.7"/><circle cx="16.5" cy="16" r="2.5" stroke="#14162E" strokeWidth="1.7"/><path d="M8 11 C10 11 12 6 14 6 M8 11 C10 11 12 16 14 16" stroke="#14162E" strokeWidth="1.5" strokeLinecap="round"/></svg>}
+                title="Sincronização Inteligente"
+                description="Seus dados do Strava alimentam sua evolução sem esforço manual. Importe todo o seu histórico automaticamente — seus treinos chegam direto para a IA analisar."
+                tag="Automático"
+              />
+            </div>
+            <div className="rounded-br-2xl overflow-hidden sm:col-span-1 lg:col-span-2">
               <FeatureCard
                 icon={<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3 L14 9 L21 10 L16 15 L17.5 22 L11 18.5 L4.5 22 L6 15 L1 10 L8 9 Z" stroke="#00F048" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                 title="Pronto para correr?"
-                description="Comece grátis agora e tenha seu primeiro plano de treino personalizado em menos de 2 minutos."
+                description="Comece grátis agora e converse com seu coach no WhatsApp em menos de 2 minutos."
                 variant="cta"
               />
             </div>
