@@ -148,6 +148,7 @@ function PricingCard({
   badge,
   name,
   price,
+  intervalLabel = '/mês',
   subtitle,
   features,
   buttonText,
@@ -156,6 +157,7 @@ function PricingCard({
   badge: string
   name: string
   price: string
+  intervalLabel?: string
   subtitle: string
   features: { text: string; included: boolean }[]
   buttonText: string
@@ -177,7 +179,7 @@ function PricingCard({
       <h3 className={`font-display font-bold text-xl mb-1 ${featured ? 'text-white' : 'text-[#14162E]'}`}>{name}</h3>
       <div className={`font-display font-extrabold text-[40px] tracking-tight leading-none mt-5 mb-1 ${featured ? 'text-white' : 'text-[#14162E]'}`}>
         {price}
-        <span className={`text-sm font-normal ml-0.5 ${featured ? 'text-white/40' : 'text-[#6B7088]'}`}>/mês</span>
+        <span className={`text-sm font-normal ml-0.5 ${featured ? 'text-white/40' : 'text-[#6B7088]'}`}>{intervalLabel}</span>
       </div>
       <p className={`text-xs mb-7 ${featured ? 'text-white/35' : 'text-[#A8ADBE]'}`}>{subtitle}</p>
       <div className={`h-px mb-6 ${featured ? 'bg-white/[0.08]' : 'bg-[rgba(20,22,46,0.08)]'}`} />
@@ -256,6 +258,7 @@ function TestimonialCard({
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [billing, setBilling] = useState<'monthly' | 'yearly'>('monthly')
 
   useEffect(() => {
     // If user is already logged in, redirect to chat
@@ -734,7 +737,7 @@ export default function LandingPage() {
       {/* Pricing */}
       <section id="plans" className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center mb-10 sm:mb-14">
+          <div className="text-center mb-8 sm:mb-10">
             <div className="flex items-center gap-2 justify-center mb-3 sm:mb-4">
               <div className="w-5 h-0.5 bg-[#00F048] rounded-full" />
               <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-[#14162E]">Planos</span>
@@ -747,11 +750,32 @@ export default function LandingPage() {
             </p>
           </div>
 
+          {/* Billing toggle */}
+          <div className="flex justify-center mb-8 sm:mb-10">
+            <div role="tablist" aria-label="Período de cobrança" className="inline-flex p-1 bg-[#F5F6F7] border border-[rgba(20,22,46,0.08)] rounded-full">
+              {(['monthly', 'yearly'] as const).map((opt) => (
+                <button
+                  key={opt}
+                  role="tab"
+                  aria-selected={billing === opt}
+                  onClick={() => setBilling(opt)}
+                  className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[12px] sm:text-[13px] font-semibold transition-all ${
+                    billing === opt
+                      ? 'bg-[#14162E] text-white shadow-[0_2px_8px_rgba(20,22,46,0.18)]'
+                      : 'text-[#6B7088] hover:text-[#14162E]'
+                  }`}
+                >
+                  {opt === 'monthly' ? 'Mensal' : 'Anual'}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-3">
             <PricingCard
               badge="Grátis"
               name="Iniciante"
-              price="R$0"
+              price="R$ 0"
               subtitle="Para começar a correr com IA"
               features={[
                 { text: '100 RunPoints por dia', included: true },
@@ -765,8 +789,9 @@ export default function LandingPage() {
             <PricingCard
               badge="Mais popular"
               name="Pro"
-              price="R$29"
-              subtitle="3x mais que o Gratuito"
+              price={billing === 'monthly' ? 'R$ 39,90' : 'R$ 358,80'}
+              intervalLabel={billing === 'monthly' ? '/mês' : '/ano'}
+              subtitle={billing === 'monthly' ? '3x mais que o Gratuito' : 'Equivalente a R$ 29,90/mês'}
               features={[
                 { text: '300 RunPoints por dia', included: true },
                 { text: '10 anexos por dia (5x mais)', included: true },
@@ -780,8 +805,9 @@ export default function LandingPage() {
             <PricingCard
               badge="Performance"
               name="Premium"
-              price="R$59"
-              subtitle="10x mais que o Gratuito"
+              price={billing === 'monthly' ? 'R$ 59,90' : 'R$ 718,80'}
+              intervalLabel={billing === 'monthly' ? '/mês' : '/ano'}
+              subtitle={billing === 'monthly' ? '10x mais que o Gratuito' : 'Equivalente a R$ 59,90/mês'}
               features={[
                 { text: '1.000 RunPoints por dia', included: true },
                 { text: '100 anexos por dia (10x mais)', included: true },
