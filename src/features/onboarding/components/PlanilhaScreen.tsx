@@ -27,7 +27,7 @@ export function PlanilhaScreen() {
       <div className="max-w-lg mx-auto px-6 py-8 lg:px-8 lg:py-12 flex flex-col min-h-screen items-center justify-center text-center">
         {/* Header */}
         <div className="absolute top-8 left-6 lg:left-8">
-          <span className="font-display font-bold text-lg text-[#14162E]">RunMind</span>
+          <span className="font-display font-bold text-lg text-[#14162E]">Runmind</span>
         </div>
 
         {/* Celebration icon */}

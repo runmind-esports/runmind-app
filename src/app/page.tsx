@@ -282,7 +282,7 @@ export default function LandingPage() {
       <nav className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-12 bg-white/95 backdrop-blur-xl border-b border-[rgba(20,22,46,0.08)] transition-shadow ${isScrolled ? 'shadow-[0_4px_24px_rgba(20,22,46,0.07)]' : ''}`} style={{ height: 'calc(68px + env(safe-area-inset-top, 0px))', paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <Link href="/" className="flex items-center gap-2 sm:gap-3">
           <RunmindLogo size={28} />
-          <span className="font-display text-base sm:text-lg font-bold tracking-tight">runmind</span>
+          <span className="font-display text-base sm:text-lg font-bold tracking-tight">Runmind</span>
         </Link>
 
         <ul className="hidden lg:flex items-center gap-9">
@@ -426,7 +426,7 @@ export default function LandingPage() {
                     <RunmindLogo size={20} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-[13px] text-white leading-tight">RunMind Coach</div>
+                    <div className="font-semibold text-[13px] text-white leading-tight">Runmind Coach</div>
                     <div className="flex items-center gap-1 text-[10px] text-[#00F048]/80 leading-tight mt-0.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#00F048]" />
                       online
@@ -877,7 +877,7 @@ export default function LandingPage() {
             <div className="col-span-2 sm:col-span-2 md:col-span-1">
               <Link href="/" className="flex items-center gap-2.5 mb-4">
                 <RunmindLogo size={28} />
-                <span className="font-display font-bold text-[17px] text-white">runmind</span>
+                <span className="font-display font-bold text-[17px] text-white">Runmind</span>
               </Link>
               <p className="text-[12px] sm:text-[13px] font-light leading-relaxed text-white/35 max-w-[260px] mb-6">
                 Treinamento de elite acessível para o corredor brasileiro. Dados reais, planos personalizados, resultados de verdade.
@@ -937,9 +937,24 @@ export default function LandingPage() {
             </div>
           </div>
 
+          {/* Legal — CNPJ + location disclosure for Meta WhatsApp Business
+              verification cross-check. The CNPJ on the website must match the
+              one registered on the WABA Business Portfolio so the Graph reviewer
+              can validate brand → operator → registered entity in one hop. */}
+          <div className="pt-6 sm:pt-7 border-t border-white/[0.06] mb-4 sm:mb-5">
+            <p className="text-[11px] sm:text-xs font-light leading-relaxed text-white/35 max-w-[680px]">
+              <span className="font-semibold text-white/55">Runmind</span> — CNPJ{' '}
+              <span className="font-semibold text-white/55">63.581.899/0001-01</span>. Recife, Pernambuco, Brasil. Contato:{' '}
+              <a href="mailto:contato@proza.net.br" className="text-white/55 hover:text-white transition-colors underline underline-offset-2">
+                contato@proza.net.br
+              </a>
+              .
+            </p>
+          </div>
+
           {/* Bottom */}
-          <div className="pt-6 sm:pt-7 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <span className="text-[11px] sm:text-xs font-light text-white/25 text-center sm:text-left">© 2025 Runmind. Todos os direitos reservados.</span>
+          <div className="pt-4 sm:pt-5 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span className="text-[11px] sm:text-xs font-light text-white/25 text-center sm:text-left">© 2026 Runmind. Todos os direitos reservados.</span>
             <div className="flex items-center gap-2 flex-wrap justify-center">
               {['Strava Connected', 'Google Health Connected'].map((badge) => (
                 <div key={badge} className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/10 text-[9px] sm:text-[10px] font-semibold tracking-[0.12em] uppercase text-white/30">
