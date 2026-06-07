@@ -807,11 +807,11 @@ export default function LandingPage() {
               name="Premium"
               price={billing === 'monthly' ? 'R$ 59,90' : 'R$ 718,80'}
               intervalLabel={billing === 'monthly' ? '/mês' : '/ano'}
-              subtitle={billing === 'monthly' ? '10x mais que o Gratuito' : 'Equivalente a R$ 59,90/mês'}
+              subtitle={billing === 'monthly' ? 'Uso sem barreiras' : 'Equivalente a R$ 59,90/mês'}
               features={[
-                { text: '1.000 RunPoints por dia', included: true },
-                { text: '100 anexos por dia (10x mais)', included: true },
-                { text: '50 conversas (10x mais)', included: true },
+                { text: 'RunPoints ilimitados', included: true },
+                { text: 'Anexos ilimitados', included: true },
+                { text: 'Conversas ilimitadas', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
                 { text: 'Modelo inteligente', included: true },
               ]}
