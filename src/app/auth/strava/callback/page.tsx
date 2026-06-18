@@ -4,6 +4,8 @@ import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { stravaApi } from '@/features/strava/services/stravaApi'
 import { validateOAuthState, clearOAuthState } from '@/features/strava/utils/oauth'
+import { authApi } from '@/features/auth/services/authApi'
+import { tokenStorage, runmidApiClient } from '@/shared/lib/apiClient'
 
 function RunmindLogo() {
   return <img src="/brand/runmind-logo.svg" alt="Runmind" width={40} height={40} />
@@ -58,29 +60,58 @@ function StravaCallbackContent() {
         return
       }
 
-      try {
-        // Exchange code for tokens
-        console.log('Exchanging code with backend...')
-        await stravaApi.exchangeCode(code)
-        clearOAuthState()
-        setStatus('success')
+      // Branch on auth state: callback fires for two distinct flows.
+      //   1. ATTACH — user already logged-in (Google JWT in storage) and
+      //      came back from /settings clicking "Conectar Strava". Hit the
+      //      protected /strava/token route to bind Strava to that account
+      //      and return to /settings.
+      //   2. LOGIN — user is logged-out and came back from /login clicking
+      //      "Continuar com Strava". Hit the public /auth/strava route to
+      //      upsert a user and receive a fresh JWT pair, then route the
+      //      same way Google login does (onboarding vs. /chat).
+      const isLoggedIn = authApi.isAuthenticated()
 
-        // Redirect to settings with success indicator
-        setTimeout(() => {
-          router.push('/settings?strava=connected')
-        }, 1500)
+      try {
+        if (isLoggedIn) {
+          console.log('Attaching Strava to existing account...')
+          await stravaApi.exchangeCode(code)
+          clearOAuthState()
+          setStatus('success')
+
+          setTimeout(() => {
+            router.push('/settings?strava=connected')
+          }, 1500)
+        } else {
+          console.log('Logging in with Strava...')
+          const { accessToken, refreshToken, user } = await stravaApi.login(code)
+          tokenStorage.setTokens(accessToken, refreshToken, user.username)
+          clearOAuthState()
+          setStatus('success')
+
+          // Mirrors Google callback's onboarding check: a 200 on training/
+          // profile means the user has finished onboarding; a 404 (or any
+          // failure) routes the user there. The same backend rule applies
+          // to a brand-new Strava account, so the UX stays consistent.
+          try {
+            await runmidApiClient.get('/api/v1/training/profile')
+            router.replace('/chat')
+          } catch {
+            router.replace('/onboarding')
+          }
+        }
       } catch (err: unknown) {
-        console.error('Strava exchange error:', err)
+        console.error('Strava callback error:', err)
         setStatus('error')
 
-        // Check for specific error types
         const error = err as { response?: { status?: number; data?: { message?: string } } }
-        if (error?.response?.status === 401) {
-          setErrorMessage('Voce precisa estar logado para conectar o Strava.')
-        } else if (error?.response?.data?.message) {
+        if (error?.response?.data?.message) {
           setErrorMessage(error.response.data.message)
         } else {
-          setErrorMessage('Falha ao conectar com o Strava. Tente novamente.')
+          setErrorMessage(
+            isLoggedIn
+              ? 'Falha ao conectar com o Strava. Tente novamente.'
+              : 'Falha ao entrar com o Strava. Tente novamente.'
+          )
         }
         clearOAuthState()
       }
