@@ -49,13 +49,6 @@ const INTERVAL_DISPLAY: Record<string, string> = {
 
 const PRO_INTERVALS: BillingInterval[] = ['monthly', 'semestral', 'yearly']
 
-const FREE_FEATURES = [
-  '50 RunPoints por dia',
-  '1 anexo por dia',
-  '3 conversas',
-  'Integração Strava + Google Health',
-]
-
 export function PlansSection() {
   const { plans, isLoadingPlans, isCheckingOut, isOpeningPortal, error, checkout, openPortal } = useSubscription()
   const { tier: userTier, interval: userInterval, expiresAt, customerId, isLoading: isLoadingTier } = useUserTier()
@@ -64,6 +57,7 @@ export function PlansSection() {
   const isBusy = isCheckingOut || isOpeningPortal
   const isPaid = userTier === 'pro' || userTier === 'premium'
 
+  const freePlan = useMemo(() => plans.find((p) => p.tier === 'free'), [plans])
   const proPlans = useMemo(() => plans.filter((p) => p.tier === 'pro'), [plans])
   const proByInterval = useMemo(() => {
     return {
@@ -149,7 +143,7 @@ export function PlansSection() {
           </div>
 
           <div className={`grid sm:grid-cols-2 ${gridCols} gap-3`}>
-            {showFreeCard && <FreeCard />}
+            {showFreeCard && <FreeCard plan={freePlan} />}
             {PRO_INTERVALS.map((interval) => (
               <ProVariantCard
                 key={interval}
@@ -169,7 +163,8 @@ export function PlansSection() {
   )
 }
 
-function FreeCard() {
+function FreeCard({ plan }: { plan: SubscriptionPlan | undefined }) {
+  const features = plan?.features ?? []
   return (
     <div className="relative p-5 rounded-2xl border border-border bg-background flex flex-col">
       <div className="mb-4">
@@ -195,7 +190,7 @@ function FreeCard() {
       </div>
 
       <ul className="space-y-1.5 mb-4 flex-1">
-        {FREE_FEATURES.map((feature) => (
+        {features.map((feature) => (
           <li key={feature} className="flex items-center gap-2 text-xs text-foreground-muted">
             <Check className="w-3.5 h-3.5 text-accent flex-shrink-0" />
             {feature}

@@ -758,9 +758,8 @@ export default function LandingPage() {
               price="R$ 0"
               subtitle="Para começar a correr com IA"
               features={[
-                { text: '100 RunPoints por dia', included: true },
+                { text: '20 RunPoints por dia', included: true },
                 { text: '2 anexos por dia', included: true },
-                { text: '5 conversas', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
                 { text: 'Modelo inteligente', included: true },
               ]}
@@ -773,9 +772,8 @@ export default function LandingPage() {
               intervalLabel="/mês"
               subtitle="Cobrado mensalmente"
               features={[
-                { text: '300 RunPoints por dia', included: true },
-                { text: '10 anexos por dia (5x mais)', included: true },
-                { text: '15 conversas (3x mais)', included: true },
+                { text: '100 RunPoints por dia', included: true },
+                { text: '10 anexos por dia', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
                 { text: 'Modelo inteligente', included: true },
               ]}
@@ -788,9 +786,8 @@ export default function LandingPage() {
               intervalLabel="/mês"
               subtitle="Cobrado R$ 179,40 a cada 6 meses"
               features={[
-                { text: '300 RunPoints por dia', included: true },
-                { text: '10 anexos por dia (5x mais)', included: true },
-                { text: '15 conversas (3x mais)', included: true },
+                { text: '100 RunPoints por dia', included: true },
+                { text: '10 anexos por dia', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
                 { text: 'Modelo inteligente', included: true },
               ]}
@@ -804,9 +801,8 @@ export default function LandingPage() {
               intervalLabel="/mês"
               subtitle="Cobrado R$ 238,80 anualmente"
               features={[
-                { text: '300 RunPoints por dia', included: true },
-                { text: '10 anexos por dia (5x mais)', included: true },
-                { text: '15 conversas (3x mais)', included: true },
+                { text: '100 RunPoints por dia', included: true },
+                { text: '10 anexos por dia', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
                 { text: 'Modelo inteligente', included: true },
               ]}
