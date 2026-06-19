@@ -1,0 +1,26 @@
+{
+  "name": "Runmind — Coach de Corrida com IA",
+  "short_name": "Runmind",
+  "description": "Assistente inteligente para corredores",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#00F048",
+  "background_color": "#FFFFFF",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
