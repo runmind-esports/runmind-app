@@ -307,6 +307,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 | 17. Subscription Checkout UI | - | 3/3 | Complete    | 2026-04-28 |
 | 18. Tela de Consumo de Mana | - | 2/2 | Complete    | 2026-04-28 |
 | 19. WhatsApp Conversion CTA | - | 2/2 | Complete   | 2026-05-22 |
+| 20. Pro Plans Restructure & Settings Update | - | 0/0 | Planned | - |
 
 ### Phase 18: Tela de Consumo de Mana
 
@@ -318,6 +319,32 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 13 -
 Plans:
 - [x] 18-01-PLAN.md -- Mana feature module: types, API service (chatApiClient), useManaStatus hook, barrel exports
 - [x] 18-02-PLAN.md -- CircularGauge, WeeklyBarChart, LowManaCard, ConsumptionSection components, settings page 3rd tab wiring
+
+### Phase 20: Pro Plans Restructure & Settings Update
+
+**Goal:** PlansSection e Settings mostram apenas Free + Pro (3 frequências). Backend ja retorna 5 planos (Free implicit, pro_monthly, pro_semestral, pro_yearly, premium_*), frontend filtra: esconde tudo `tier=premium`, agrupa as 3 frequencias do Pro num card unico com seletor visual. Settings reflete plano ativo sem oferecer upgrade pra Premium.
+
+**Depends on:** Phase 17 (Subscription Checkout UI ja shipped — refactor por cima do PlansSection.tsx existente)
+
+**Requirements**: TBD (sem requirement IDs formais — visual change scoped to PlansSection + settings subscription tab)
+
+**Success Criteria** (what must be TRUE):
+  1. `/plans` mostra exatamente 2 cards: Free e Pro (Premium escondido mesmo que backend retorne)
+  2. Card Pro renderiza um seletor visual (segmented control / tabs) com 3 opcoes: "Mensal", "Semestral", "Anual"
+  3. Cada frequencia exibe preco total + preco efetivo mensal:
+     - Mensal: R$ 39,90/mes (sem comparacao)
+     - Semestral: R$ 179,40 cobrados a cada 6 meses (R$ 29,90/mes — destacar economia vs Mensal)
+     - Anual: R$ 238,80 cobrados anualmente (R$ 19,90/mes — destacar economia vs Mensal)
+  4. CTA do Pro abre Stripe Checkout com o `planId` correto (`pro_monthly` / `pro_semestral` / `pro_yearly`) baseado na frequencia selecionada
+  5. Settings page (tab subscription) NAO mostra Premium como opcao de upgrade. Se usuario ja esta em Premium, sua row de "plano ativo" continua identificando corretamente (no marketing/upgrade nao oferece).
+  6. Build (`npm run build`) e type-check (`tsc --noEmit`) passam limpos
+  7. Sem regressao em outros consumidores de `subscriptionApi.getPlans()` (chat upgrade CTA, sidebar badge — todos continuam funcionando)
+
+**IN scope:** Refactor de `src/features/settings/components/PlansSection.tsx`, atualizacao de `src/features/subscription/types/subscription.types.ts` (adicionar `'semestral'` ao Interval union), copy/format helpers (calcular preco efetivo mensal a partir de amount + interval + intervalCount), settings tab que renderiza assinatura ativa.
+
+**OUT of scope:** Mudancas no backend (`runmid-api` ja shipped no PR #2 do mesmo dia), mudancas em landing page de pricing (`/`), Stripe Customer Portal customization, i18n EN (so PT-BR por enquanto), migracao de usuarios Premium existentes.
+
+**UI hint**: yes
 
 ### Phase 19: WhatsApp Conversion CTA
 

@@ -1,4 +1,4 @@
-export type BillingInterval = 'monthly' | 'yearly'
+export type BillingInterval = 'monthly' | 'semestral' | 'yearly'
 
 export interface SubscriptionPlan {
   id: string          // e.g. "pro_monthly"

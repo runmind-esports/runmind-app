@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Check, Zap, Loader2, ExternalLink } from 'lucide-react'
 import { useSubscription, useUserTier } from '@/features/subscription'
-import type { BillingInterval } from '@/features/subscription'
+import type { BillingInterval, SubscriptionPlan } from '@/features/subscription'
 
 function formatCurrency(amountInCentavos: number): string {
   return (amountInCentavos / 100).toLocaleString('pt-BR', {
@@ -21,10 +21,23 @@ function formatDate(dateStr: string | null): string {
   })
 }
 
-function calcAnnualSavingsPercent(monthlyAmount: number, yearlyAmount: number): number {
-  const yearlyEquivalent = monthlyAmount * 12
-  if (yearlyEquivalent <= 0) return 0
-  return Math.round(((yearlyEquivalent - yearlyAmount) / yearlyEquivalent) * 100)
+// Effective monthly rate for the segmented control: yearly amount ÷ 12 makes
+// the "you actually pay R$ 19,90/mês" comparison legible next to the headline
+// total. Same divisor for semestral (÷ 6). Returns centavos.
+function effectiveMonthlyCentavos(plan: SubscriptionPlan, interval: BillingInterval): number {
+  if (interval === 'yearly') return Math.round(plan.amount / 12)
+  if (interval === 'semestral') return Math.round(plan.amount / 6)
+  return plan.amount
+}
+
+// % saved vs paying the monthly plan for the equivalent duration. Returns 0
+// for the monthly itself (no savings to advertise).
+function savingsPercent(plan: SubscriptionPlan, interval: BillingInterval, monthlyAmount: number): number {
+  if (interval === 'monthly' || monthlyAmount <= 0) return 0
+  const months = interval === 'yearly' ? 12 : 6
+  const baseline = monthlyAmount * months
+  if (baseline <= 0) return 0
+  return Math.round(((baseline - plan.amount) / baseline) * 100)
 }
 
 const TIER_DISPLAY: Record<string, string> = {
@@ -35,25 +48,43 @@ const TIER_DISPLAY: Record<string, string> = {
 
 const INTERVAL_DISPLAY: Record<string, string> = {
   monthly: 'Mensal',
+  semestral: 'Semestral',
   yearly: 'Anual',
 }
+
+const INTERVAL_OPTIONS: BillingInterval[] = ['monthly', 'semestral', 'yearly']
+
+// Free tier has no API record (the backend only stores paid plans). The card
+// copy lives here so the Free option always renders for unpaid users without
+// an extra round-trip.
+const FREE_FEATURES = [
+  '50 RunPoints por dia',
+  '1 anexo por dia',
+  '3 conversas',
+  'Integração Strava + Google Health',
+]
 
 export function PlansSection() {
   const { plans, isLoadingPlans, isCheckingOut, isOpeningPortal, error, checkout, openPortal } = useSubscription()
   const { tier: userTier, interval: userInterval, expiresAt, customerId, isLoading: isLoadingTier } = useUserTier()
-  const [billingInterval, setBillingInterval] = useState<BillingInterval>('monthly')
+  const [selectedInterval, setSelectedInterval] = useState<BillingInterval>('monthly')
 
   const isLoading = isLoadingPlans || isLoadingTier
   const isBusy = isCheckingOut || isOpeningPortal
   const isPaid = userTier === 'pro' || userTier === 'premium'
 
-  const filteredPlans = plans.filter((p) => p.interval === billingInterval)
-  const monthlyPlans = plans.filter((p) => p.interval === 'monthly')
-
-  const proPlan = filteredPlans.find((p) => p.tier === 'pro')
-  const premiumPlan = filteredPlans.find((p) => p.tier === 'premium')
-  const proMonthly = monthlyPlans.find((p) => p.tier === 'pro')
-  const premiumMonthly = monthlyPlans.find((p) => p.tier === 'premium')
+  // Premium plans are filtered out of marketing UI per Phase 20 — legacy
+  // Premium subscribers keep their entitlements via the "Seu plano" banner
+  // (driven by useUserTier, not this list), but the upgrade ladder no longer
+  // surfaces Premium as an option.
+  const proPlans = useMemo(() => plans.filter((p) => p.tier === 'pro'), [plans])
+  const proByInterval = useMemo(() => {
+    return {
+      monthly: proPlans.find((p) => p.interval === 'monthly'),
+      semestral: proPlans.find((p) => p.interval === 'semestral'),
+      yearly: proPlans.find((p) => p.interval === 'yearly'),
+    } as Record<BillingInterval, SubscriptionPlan | undefined>
+  }, [proPlans])
 
   if (isLoading) {
     return (
@@ -63,6 +94,12 @@ export function PlansSection() {
       </div>
     )
   }
+
+  const selectedProPlan = proByInterval[selectedInterval]
+  const monthlyAnchor = proByInterval.monthly?.amount ?? 0
+  // Premium users see no upgrade ladder — their banner already says "Premium"
+  // and the goal is to keep them rather than offer a downgrade.
+  const showUpgradeSection = userTier === 'free' || userTier === 'pro'
 
   return (
     <div className="space-y-6">
@@ -114,89 +151,35 @@ export function PlansSection() {
         </div>
       )}
 
-      {/* Upgrade section — only show if there are plans above current tier */}
-      {((userTier === 'free' && (proPlan || premiumPlan)) ||
-        (userTier === 'pro' && premiumPlan)) && (
+      {showUpgradeSection && (
         <>
           <div>
-            <h3 className="text-sm font-bold text-foreground mb-1">Fazer upgrade</h3>
+            <h3 className="text-sm font-bold text-foreground mb-1">
+              {userTier === 'free' ? 'Escolha seu plano' : 'Mudar de frequência'}
+            </h3>
             <p className="text-xs text-foreground-muted">
-              Desbloqueie mais RunPoints e funcionalidades
+              {userTier === 'free'
+                ? 'Comece grátis ou desbloqueie tudo no Pro.'
+                : 'Pague menos por mês comprando mais tempo de uma vez.'}
             </p>
           </div>
 
-          {/* Billing interval toggle */}
-          <div className="flex items-center justify-center gap-3">
-            <span
-              className={`text-xs font-medium transition-colors ${
-                billingInterval === 'monthly' ? 'text-foreground' : 'text-foreground-muted'
-              }`}
-            >
-              Mensal
-            </span>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={billingInterval === 'yearly'}
-              onClick={() => setBillingInterval(billingInterval === 'monthly' ? 'yearly' : 'monthly')}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                billingInterval === 'yearly' ? 'bg-accent' : 'bg-background-tertiary'
-              }`}
-            >
-              <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  billingInterval === 'yearly' ? 'translate-x-6' : 'translate-x-1'
-                }`}
-              />
-            </button>
-            <span
-              className={`text-xs font-medium transition-colors ${
-                billingInterval === 'yearly' ? 'text-foreground' : 'text-foreground-muted'
-              }`}
-            >
-              Anual
-            </span>
-          </div>
-
           <div className="space-y-3">
-            {/* Pro plan — show for free users, or pro users who can switch to yearly */}
-            {proPlan && (userTier === 'free' || (userTier === 'pro' && billingInterval !== userInterval)) && (
-              <UpgradeCard
-                name={proPlan.name}
-                description={userTier === 'pro' ? 'Mude para o plano anual e economize' : 'Para corredores que querem evoluir'}
-                price={formatCurrency(proPlan.amount)}
-                period={billingInterval === 'monthly' ? '/mês' : '/ano'}
-                features={proPlan.features}
-                highlighted={userTier === 'free'}
-                isBusy={isBusy}
-                onAction={() => checkout(proPlan.id)}
-                actionLabel={userTier === 'pro' ? 'Mudar para anual' : undefined}
-                savingsPercent={
-                  billingInterval === 'yearly' && proMonthly
-                    ? calcAnnualSavingsPercent(proMonthly.amount, proPlan.amount)
-                    : undefined
-                }
-              />
-            )}
+            {/* Free card — only when the user hasn't upgraded yet. */}
+            {userTier === 'free' && <FreeCard />}
 
-            {/* Premium plan — show for free and pro users */}
-            {premiumPlan && (
-              <UpgradeCard
-                name={premiumPlan.name}
-                description="Para quem compete e quer resultado"
-                price={formatCurrency(premiumPlan.amount)}
-                period={billingInterval === 'monthly' ? '/mês' : '/ano'}
-                features={premiumPlan.features}
-                highlighted={userTier === 'pro'}
-                isBusy={isBusy}
-                onAction={() => checkout(premiumPlan.id)}
-                savingsPercent={
-                  billingInterval === 'yearly' && premiumMonthly
-                    ? calcAnnualSavingsPercent(premiumMonthly.amount, premiumPlan.amount)
-                    : undefined
-                }
-              />
-            )}
+            {/* Pro card with the 3-frequency segmented control. */}
+            <ProCard
+              proByInterval={proByInterval}
+              selectedInterval={selectedInterval}
+              onIntervalChange={setSelectedInterval}
+              selectedPlan={selectedProPlan}
+              monthlyAnchor={monthlyAnchor}
+              userTier={userTier}
+              userInterval={userInterval}
+              isBusy={isBusy}
+              onCheckout={checkout}
+            />
           </div>
         </>
       )}
@@ -204,69 +187,28 @@ export function PlansSection() {
   )
 }
 
-interface UpgradeCardProps {
-  name: string
-  description: string
-  price: string
-  period: string
-  features: string[]
-  highlighted?: boolean
-  isBusy: boolean
-  onAction: () => void
-  actionLabel?: string
-  savingsPercent?: number
-}
-
-function UpgradeCard({
-  name,
-  description,
-  price,
-  period,
-  features,
-  highlighted,
-  isBusy,
-  onAction,
-  actionLabel,
-  savingsPercent,
-}: UpgradeCardProps) {
+function FreeCard() {
   return (
-    <div
-      className={`relative p-5 rounded-2xl border transition-all duration-200 ${
-        highlighted
-          ? 'border-[#00F048]/30 bg-background'
-          : 'border-border bg-background'
-      }`}
-    >
-      {highlighted && (
-        <div className="absolute -top-2.5 left-5 px-2.5 py-0.5 bg-[#00F048] text-[#14162E] text-[10px] font-bold rounded-full tracking-wide uppercase">
-          Recomendado
-        </div>
-      )}
-
+    <div className="relative p-5 rounded-2xl border border-border bg-background">
       <div className="flex items-start justify-between mb-3">
         <div>
           <h3 className="font-display font-semibold text-sm text-foreground tracking-tight">
-            {name}
+            Gratuito
           </h3>
-          <p className="text-xs text-foreground-muted mt-0.5">{description}</p>
+          <p className="text-xs text-foreground-muted mt-0.5">
+            Pra experimentar o coach IA com limites diários.
+          </p>
         </div>
         <div className="text-right flex-shrink-0">
           <span className="font-display font-bold text-xl text-foreground tracking-tight">
-            {price}
+            R$ 0
           </span>
-          <span className="text-xs text-foreground-muted">{period}</span>
-          {savingsPercent != null && savingsPercent > 0 && (
-            <div className="mt-0.5">
-              <span className="px-1.5 py-0.5 bg-green-500/15 text-green-400 text-[9px] font-bold rounded-full">
-                Economia de {savingsPercent}%
-              </span>
-            </div>
-          )}
+          <span className="text-xs text-foreground-muted">/mês</span>
         </div>
       </div>
 
       <ul className="space-y-1.5 mb-4">
-        {features.map((feature) => (
+        {FREE_FEATURES.map((feature) => (
           <li key={feature} className="flex items-center gap-2 text-xs text-foreground-muted">
             <Check className="w-3.5 h-3.5 text-accent flex-shrink-0" />
             {feature}
@@ -275,8 +217,102 @@ function UpgradeCard({
       </ul>
 
       <button
-        onClick={onAction}
-        disabled={isBusy}
+        disabled
+        className="w-full px-4 py-2.5 rounded-full text-xs font-bold bg-background-tertiary text-foreground-muted cursor-default"
+      >
+        Seu plano atual
+      </button>
+    </div>
+  )
+}
+
+interface ProCardProps {
+  proByInterval: Record<BillingInterval, SubscriptionPlan | undefined>
+  selectedInterval: BillingInterval
+  onIntervalChange: (next: BillingInterval) => void
+  selectedPlan: SubscriptionPlan | undefined
+  monthlyAnchor: number
+  userTier: string
+  userInterval: string | null
+  isBusy: boolean
+  onCheckout: (planId: string) => void
+}
+
+function ProCard({
+  proByInterval,
+  selectedInterval,
+  onIntervalChange,
+  selectedPlan,
+  monthlyAnchor,
+  userTier,
+  userInterval,
+  isBusy,
+  onCheckout,
+}: ProCardProps) {
+  const highlighted = userTier === 'free'
+
+  // The user is "already on" the selected variant when they're a Pro
+  // subscriber AND their server-side interval matches the selector. In that
+  // case the CTA degrades to a disabled "Plano atual" badge — keeps the card
+  // visible (so the comparison stays in view) without offering a no-op.
+  const isCurrentVariant = userTier === 'pro' && userInterval === selectedInterval
+
+  const ctaLabel = (() => {
+    if (isCurrentVariant) return 'Plano atual'
+    if (userTier === 'pro') return `Mudar para ${INTERVAL_DISPLAY[selectedInterval]}`
+    return 'Assinar Pro'
+  })()
+
+  const handleClick = () => {
+    if (!selectedPlan || isCurrentVariant) return
+    onCheckout(selectedPlan.id)
+  }
+
+  return (
+    <div
+      className={`relative p-5 rounded-2xl border transition-all duration-200 ${
+        highlighted ? 'border-[#00F048]/30 bg-background' : 'border-border bg-background'
+      }`}
+    >
+      {highlighted && (
+        <div className="absolute -top-2.5 left-5 px-2.5 py-0.5 bg-[#00F048] text-[#14162E] text-[10px] font-bold rounded-full tracking-wide uppercase">
+          Recomendado
+        </div>
+      )}
+
+      <div className="mb-4">
+        <h3 className="font-display font-semibold text-sm text-foreground tracking-tight">
+          Pro
+        </h3>
+        <p className="text-xs text-foreground-muted mt-0.5">
+          Coach IA com Strava + Health Connect, planilhas personalizadas e chat ilimitado.
+        </p>
+      </div>
+
+      <FrequencySelector
+        proByInterval={proByInterval}
+        selectedInterval={selectedInterval}
+        onIntervalChange={onIntervalChange}
+      />
+
+      <PriceDisplay
+        plan={selectedPlan}
+        interval={selectedInterval}
+        monthlyAnchor={monthlyAnchor}
+      />
+
+      <ul className="space-y-1.5 mb-4 mt-4">
+        {(selectedPlan?.features ?? []).map((feature) => (
+          <li key={feature} className="flex items-center gap-2 text-xs text-foreground-muted">
+            <Check className="w-3.5 h-3.5 text-accent flex-shrink-0" />
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      <button
+        onClick={handleClick}
+        disabled={isBusy || isCurrentVariant || !selectedPlan}
         className={`w-full px-4 py-2.5 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 transition-colors ${
           highlighted
             ? 'bg-[#00F048] text-[#14162E] hover:bg-[#00F048]/90'
@@ -285,11 +321,101 @@ function UpgradeCard({
       >
         {isBusy ? (
           <Loader2 className="w-3.5 h-3.5 animate-spin" />
-        ) : !actionLabel ? (
+        ) : !isCurrentVariant ? (
           <Zap className="w-3.5 h-3.5" />
         ) : null}
-        {actionLabel || `Assinar ${name}`}
+        {ctaLabel}
       </button>
+    </div>
+  )
+}
+
+interface FrequencySelectorProps {
+  proByInterval: Record<BillingInterval, SubscriptionPlan | undefined>
+  selectedInterval: BillingInterval
+  onIntervalChange: (next: BillingInterval) => void
+}
+
+function FrequencySelector({ proByInterval, selectedInterval, onIntervalChange }: FrequencySelectorProps) {
+  return (
+    <div
+      role="tablist"
+      aria-label="Frequência de cobrança"
+      className="flex p-1 mb-3 rounded-full bg-background-tertiary"
+    >
+      {INTERVAL_OPTIONS.map((interval) => {
+        const isActive = interval === selectedInterval
+        const available = !!proByInterval[interval]
+        return (
+          <button
+            key={interval}
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            disabled={!available}
+            onClick={() => onIntervalChange(interval)}
+            className={`flex-1 px-3 py-2 rounded-full text-[13px] font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${
+              isActive
+                ? 'bg-[#00F048] text-[#14162E]'
+                : 'bg-transparent text-foreground-muted hover:text-foreground'
+            }`}
+          >
+            {INTERVAL_DISPLAY[interval]}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+interface PriceDisplayProps {
+  plan: SubscriptionPlan | undefined
+  interval: BillingInterval
+  monthlyAnchor: number
+}
+
+function PriceDisplay({ plan, interval, monthlyAnchor }: PriceDisplayProps) {
+  // aria-live keeps screen readers in sync when the user toggles frequencies;
+  // the mount guard avoids announcing the initial value as a "change".
+  if (!plan) {
+    return (
+      <div className="text-xs text-foreground-muted" role="status" aria-live="polite">
+        Plano indisponível no momento.
+      </div>
+    )
+  }
+
+  const monthly = effectiveMonthlyCentavos(plan, interval)
+  const saved = savingsPercent(plan, interval, monthlyAnchor)
+  const headline = formatCurrency(plan.amount)
+
+  const periodLabel: string = (() => {
+    if (interval === 'yearly') return 'cobrado anualmente'
+    if (interval === 'semestral') return 'cobrado a cada 6 meses'
+    return 'cobrado mensalmente'
+  })()
+
+  return (
+    <div role="status" aria-live="polite" className="mb-1">
+      <div className="flex items-baseline gap-2">
+        <span className="font-display font-bold text-2xl text-foreground tracking-tight">
+          {headline}
+        </span>
+        {interval !== 'monthly' && (
+          <span className="text-xs text-foreground-muted">
+            ({formatCurrency(monthly)}/mês)
+          </span>
+        )}
+        {interval === 'monthly' && (
+          <span className="text-xs text-foreground-muted">/mês</span>
+        )}
+      </div>
+      <p className="text-[11px] text-foreground-muted mt-0.5">{periodLabel}</p>
+      {saved > 0 && (
+        <span className="inline-block mt-2 px-2 py-0.5 bg-green-500/15 text-green-400 text-[10px] font-bold rounded-full">
+          Economize {saved}%
+        </span>
+      )}
     </div>
   )
 }
