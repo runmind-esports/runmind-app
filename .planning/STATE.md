@@ -97,8 +97,14 @@ Recent decisions affecting current work:
 - Backend Go repo needs to be explored for existing RunnerProfile model before Phase 5 planning
 - **Cross-repo dependency (Phase 19):** `POST /api/v1/whatsapp/init-token` é entregue pela runmid-api Phase 5 (`~/Documents/runmid/runmid-api/.planning/phases/05-whatsapp-linking-endpoints/`). Plan 19-01 pode rodar a qualquer momento (build/lint são suficientes); Plan 19-02 smoke test real precisa do backend up — alternativa: mock via DevTools/MSW.
 
+## Quick Tasks Completed
+
+| ID | Date | Task | Commits |
+|---|---|---|---|
+| 260619-fv3 | 2026-06-19 | Landing PWA install (manifest + SW + Instalar app button + iOS modal) | `ec431a9`, `8cf7da1`, `fa61dae` |
+
 ## Session Continuity
 
-Last session: 2026-05-22T17:35:00.000Z
-Stopped at: Completed 19-02-PLAN.md (Phase 19 done; awaiting operator smoke test signal)
+Last session: 2026-06-19T14:30:00.000Z
+Stopped at: Quick task 260619-fv3 complete (PWA install on landing — awaiting operator smoke test on Android Chrome / iOS Safari)
 Resume file: None
