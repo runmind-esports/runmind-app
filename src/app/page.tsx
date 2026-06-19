@@ -258,7 +258,6 @@ function TestimonialCard({
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [billing, setBilling] = useState<'monthly' | 'yearly'>('monthly')
 
   useEffect(() => {
     // If user is already logged in, redirect to chat
@@ -750,28 +749,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Billing toggle */}
-          <div className="flex justify-center mb-8 sm:mb-10">
-            <div role="tablist" aria-label="Período de cobrança" className="inline-flex p-1 bg-[#F5F6F7] border border-[rgba(20,22,46,0.08)] rounded-full">
-              {(['monthly', 'yearly'] as const).map((opt) => (
-                <button
-                  key={opt}
-                  role="tab"
-                  aria-selected={billing === opt}
-                  onClick={() => setBilling(opt)}
-                  className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[12px] sm:text-[13px] font-semibold transition-all ${
-                    billing === opt
-                      ? 'bg-[#14162E] text-white shadow-[0_2px_8px_rgba(20,22,46,0.18)]'
-                      : 'text-[#6B7088] hover:text-[#14162E]'
-                  }`}
-                >
-                  {opt === 'monthly' ? 'Mensal' : 'Anual'}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-3 max-w-6xl mx-auto">
             <PricingCard
               badge="Grátis"
               name="Iniciante"
@@ -787,11 +765,26 @@ export default function LandingPage() {
               buttonText="Começar grátis"
             />
             <PricingCard
+              badge="Mensal"
+              name="Pro"
+              price="R$ 39,90"
+              intervalLabel="/mês"
+              subtitle="Cobrado mensalmente"
+              features={[
+                { text: '300 RunPoints por dia', included: true },
+                { text: '10 anexos por dia (5x mais)', included: true },
+                { text: '15 conversas (3x mais)', included: true },
+                { text: 'Integração Strava + Google Health', included: true },
+                { text: 'Modelo inteligente', included: true },
+              ]}
+              buttonText="Assinar Pro"
+            />
+            <PricingCard
               badge="Mais popular"
               name="Pro"
-              price={billing === 'monthly' ? 'R$ 39,90' : 'R$ 358,80'}
-              intervalLabel={billing === 'monthly' ? '/mês' : '/ano'}
-              subtitle={billing === 'monthly' ? '3x mais que o Gratuito' : 'Equivalente a R$ 29,90/mês'}
+              price="R$ 29,90"
+              intervalLabel="/mês"
+              subtitle="Cobrado R$ 179,40 a cada 6 meses"
               features={[
                 { text: '300 RunPoints por dia', included: true },
                 { text: '10 anexos por dia (5x mais)', included: true },
@@ -803,19 +796,19 @@ export default function LandingPage() {
               featured
             />
             <PricingCard
-              badge="Performance"
-              name="Premium"
-              price={billing === 'monthly' ? 'R$ 59,90' : 'R$ 718,80'}
-              intervalLabel={billing === 'monthly' ? '/mês' : '/ano'}
-              subtitle={billing === 'monthly' ? 'Uso sem barreiras' : 'Equivalente a R$ 59,90/mês'}
+              badge="Melhor oferta"
+              name="Pro"
+              price="R$ 19,90"
+              intervalLabel="/mês"
+              subtitle="Cobrado R$ 238,80 anualmente"
               features={[
-                { text: 'RunPoints ilimitados', included: true },
-                { text: 'Anexos ilimitados', included: true },
-                { text: 'Conversas ilimitadas', included: true },
+                { text: '300 RunPoints por dia', included: true },
+                { text: '10 anexos por dia (5x mais)', included: true },
+                { text: '15 conversas (3x mais)', included: true },
                 { text: 'Integração Strava + Google Health', included: true },
                 { text: 'Modelo inteligente', included: true },
               ]}
-              buttonText="Assinar Premium"
+              buttonText="Assinar Pro"
             />
           </div>
         </div>
