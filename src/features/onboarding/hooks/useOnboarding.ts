@@ -5,22 +5,48 @@ import { tokenStorage } from '@/shared/lib/apiClient'
 import { onboardingApi } from '../services/onboardingApi'
 import type { SaveProfileRequest } from '../types/onboarding.types'
 
-// Question keys mapped to step indices (1-10)
 const QUESTION_KEYS = [
-  'goal',           // Q1 - step 1
-  'fitness',        // Q2 - step 2
-  'running',        // Q3 - step 3
-  'raced',          // Q4 - step 4
-  'pace',           // Q5 - step 5
-  'days',           // Q6 - step 6
-  'otherActivities',// Q7 - step 7
-  'injury',         // Q8 - step 8
-  'preference',     // Q9 - step 9
-  'strength',       // Q10 - step 10
+  'goal',
+  'fitness',
+  'running',
+  'raced',
+  'pace',
+  'days',
+  'otherActivities',
+  'injury',
+  'preference',
+  'strength',
 ] as const
 
-type AnswerValue = string | boolean | number | null
+type AnswerValue = string | boolean | number | string[] | null
 type Answers = Record<string, AnswerValue>
+
+const PACE_DISTANCE_METERS: Record<string, number> = {
+  '5k': 5000,
+  '10k': 10000,
+  '21k': 21097,
+  '42k': 42195,
+}
+
+const PACE_SECONDS_PER_KM: Record<string, number> = {
+  dontKnow: 0,
+  above7: 450,
+  '6to7': 390,
+  '5to6': 330,
+  below5: 270,
+}
+
+function paceKey5kSecondsFromAnswer(paceKey: string, distanceKey: string | null | undefined): number {
+  const base = PACE_SECONDS_PER_KM[paceKey] ?? 0
+  if (base === 0) return 0
+  const distM = distanceKey ? PACE_DISTANCE_METERS[distanceKey] : 5000
+  if (!distM || distM === 5000) return base
+  // Riegel's formula: T2 = T1 * (D2/D1)^1.06 where T is total time
+  // base is sec/km at distance D2; we want sec/km equivalent at 5k (D1).
+  const totalAtDist = base * (distM / 1000)
+  const totalAt5k = totalAtDist * Math.pow(5000 / distM, 1.06)
+  return Math.round(totalAt5k / 5)
+}
 
 function getInitialUserName(): string {
   const stored = tokenStorage.getUsername()
@@ -31,14 +57,12 @@ function getInitialUserName(): string {
   return stored
 }
 
-function mapAnswersToRequest(answers: Answers, userName: string): SaveProfileRequest {
-  // fitnessLevel: map number 1-2 to beginner, 3 to intermediate, 4-5 to advanced
+function mapAnswersToRequest(answers: Answers): SaveProfileRequest {
   const fitnessValue = answers.fitness as number
   let fitnessLevel = 'beginner'
   if (fitnessValue === 3) fitnessLevel = 'intermediate'
   else if (fitnessValue >= 4) fitnessLevel = 'advanced'
 
-  // weeklyKmCapacity: map string keys to midpoints
   const weeklyKmMap: Record<string, number> = {
     upTo5: 2.5,
     upTo10: 7.5,
@@ -50,17 +74,11 @@ function mapAnswersToRequest(answers: Answers, userName: string): SaveProfileReq
     ? 0
     : weeklyKmMap[answers.weeklyKm as string] ?? 0
 
-  // pace5kSeconds: map string keys to seconds
-  const paceMap: Record<string, number> = {
-    dontKnow: 0,
-    above7: 450,
-    '6to7': 390,
-    '5to6': 330,
-    below5: 270,
-  }
-  const pace5kSeconds = paceMap[answers.pace as string] ?? 0
+  const pace5kSeconds = paceKey5kSecondsFromAnswer(
+    answers.pace as string,
+    answers.paceDistance as string | null,
+  )
 
-  // preferredDays: map string keys to day arrays
   const daysMap: Record<string, string[]> = {
     '2days': ['tuesday', 'thursday'],
     '3days': ['monday', 'wednesday', 'friday'],
@@ -69,13 +87,25 @@ function mapAnswersToRequest(answers: Answers, userName: string): SaveProfileReq
   }
   const preferredDays = daysMap[answers.days as string] ?? []
 
-  // trainingPreference: map UI keys to API values
   const preferenceMap: Record<string, string> = {
     shortIntense: 'short_intense',
     longModerate: 'long_moderate',
     any: 'any',
   }
   const trainingPreference = preferenceMap[answers.preference as string] ?? 'any'
+
+  const otherActivitiesArr = Array.isArray(answers.otherActivities) ? (answers.otherActivities as string[]) : []
+  const otherActivities = otherActivitiesArr.reduce<Record<string, boolean>>((acc, key) => {
+    acc[key] = true
+    return acc
+  }, {})
+
+  const injuriesHistory: Record<string, unknown> = {
+    hasInjury: answers.injury === true,
+  }
+  if (answers.injury === true && typeof answers.injuryDetails === 'string' && answers.injuryDetails.trim()) {
+    injuriesHistory.details = (answers.injuryDetails as string).trim()
+  }
 
   return {
     goals: [answers.goal as string],
@@ -84,8 +114,8 @@ function mapAnswersToRequest(answers: Answers, userName: string): SaveProfileReq
     hasRacedBefore: answers.raced as boolean,
     pace5kSeconds,
     preferredDays,
-    otherActivities: { active: answers.otherActivities as boolean },
-    injuriesHistory: { hasInjury: answers.injury as boolean },
+    otherActivities,
+    injuriesHistory,
     trainingPreference,
     includeStrengthTraining: answers.strength as boolean,
   }
@@ -94,7 +124,7 @@ function mapAnswersToRequest(answers: Answers, userName: string): SaveProfileReq
 export function useOnboarding() {
   const [currentStep, setCurrentStep] = useState(0)
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward')
-  const [answers, setAnswers] = useState<Answers>({})
+  const [answers, setAnswers] = useState<Answers>({ paceDistance: '5k' })
   const [userName, setUserName] = useState(getInitialUserName)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
@@ -109,11 +139,25 @@ export function useOnboarding() {
     }
     const questionKey = QUESTION_KEYS[currentStep - 1]
     const answer = answers[questionKey]
+
+    if (questionKey === 'otherActivities') {
+      // Multi-select: zero selections is a valid answer ("nenhuma")
+      return Array.isArray(answer)
+    }
+
     if (answer === null || answer === undefined) return false
 
-    // Q3 (running): if yes, also require weeklyKm
     if (questionKey === 'running' && answer === true) {
       return answers.weeklyKm !== null && answers.weeklyKm !== undefined
+    }
+
+    if (questionKey === 'pace' && answer !== 'dontKnow') {
+      return typeof answers.paceDistance === 'string' && answers.paceDistance.length > 0
+    }
+
+    if (questionKey === 'injury' && answer === true) {
+      const details = answers.injuryDetails
+      return typeof details === 'string' && details.trim().length > 0
     }
 
     return true
@@ -123,7 +167,7 @@ export function useOnboarding() {
     setIsSubmitting(true)
     setSubmitError(null)
     try {
-      const request = mapAnswersToRequest(answers, userName)
+      const request = mapAnswersToRequest(answers)
       const response = await onboardingApi.saveProfile(request)
       return response
     } catch (error) {
@@ -132,7 +176,7 @@ export function useOnboarding() {
       setIsSubmitting(false)
       return undefined
     }
-  }, [answers, userName])
+  }, [answers])
 
   const goNext = useCallback(async () => {
     if (currentStep === 10) {
@@ -155,9 +199,11 @@ export function useOnboarding() {
   const setAnswer = useCallback((key: string, value: AnswerValue) => {
     setAnswers((prev) => {
       const next = { ...prev, [key]: value }
-      // Q3: when running is set to false, clear weeklyKm
       if (key === 'running' && value === false) {
         delete next.weeklyKm
+      }
+      if (key === 'injury' && value === false) {
+        delete next.injuryDetails
       }
       return next
     })

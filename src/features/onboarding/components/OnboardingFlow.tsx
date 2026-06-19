@@ -74,10 +74,16 @@ export function OnboardingFlow() {
             ) : (
               <QuestionStep
                 questionIndex={currentStep - 1}
-                value={answers[QUESTIONS[currentStep - 1].key] ?? null}
+                value={(answers[QUESTIONS[currentStep - 1].key] as string | boolean | number | null) ?? null}
                 onChange={setAnswer}
                 conditionalValue={currentStep === 3 ? (answers.weeklyKm as string | null) : undefined}
                 onConditionalChange={currentStep === 3 ? (v) => setAnswer('weeklyKm', v) : undefined}
+                paceDistance={currentStep === 5 ? (answers.paceDistance as string | null) ?? null : undefined}
+                onPaceDistanceChange={currentStep === 5 ? (v) => setAnswer('paceDistance', v) : undefined}
+                multiValue={currentStep === 7 ? ((answers.otherActivities as string[] | undefined) ?? []) : undefined}
+                onMultiChange={currentStep === 7 ? (v) => setAnswer('otherActivities', v) : undefined}
+                detailsValue={currentStep === 8 ? ((answers.injuryDetails as string | undefined) ?? '') : undefined}
+                onDetailsChange={currentStep === 8 ? (v) => setAnswer('injuryDetails', v) : undefined}
               />
             )}
           </div>

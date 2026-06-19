@@ -26,6 +26,8 @@ export const translations = {
       },
       pace: {
         question: 'Qual e o seu pace medio atual?',
+        distanceLabel: 'Pace de referência para qual distância?',
+        distanceOptions: ['5km', '10km', '21km', '42km'],
         options: ['Nao sei', 'Acima de 7:00/km', '6:00 a 7:00/km', '5:00 a 6:00/km', 'Abaixo de 5:00/km'],
       },
       days: {
@@ -33,10 +35,14 @@ export const translations = {
         options: ['2 dias', '3 dias', '4 dias', '5 ou mais dias'],
       },
       otherActivities: {
-        question: 'Voce pratica outras atividades físicas?',
+        question: 'Você pratica outras atividades físicas?',
+        hint: 'Selecione todas que pratica (ou nenhuma)',
+        options: ['Ciclismo', 'Natação', 'Musculação', 'Funcional', 'Yoga / Pilates', 'Caminhada', 'Trilha', 'Capoeira', 'Futebol', 'Outro'],
       },
       injury: {
-        question: 'Possui alguma lesao ou restricao medica?',
+        question: 'Possui alguma lesão ou restrição médica?',
+        detailsLabel: 'Conta um pouco sobre a lesão',
+        detailsPlaceholder: 'Ex: dor no joelho direito há 2 meses, em fisioterapia, libera corrida leve…',
       },
       preference: {
         question: 'Qual sua preferencia de treino?',
@@ -101,6 +107,8 @@ export const translations = {
       },
       pace: {
         question: 'What is your current average pace?',
+        distanceLabel: 'Reference pace for which distance?',
+        distanceOptions: ['5km', '10km', '21km', '42km'],
         options: ["I don't know", 'Above 7:00/km', '6:00 to 7:00/km', '5:00 to 6:00/km', 'Below 5:00/km'],
       },
       days: {
@@ -109,9 +117,13 @@ export const translations = {
       },
       otherActivities: {
         question: 'Do you practice other physical activities?',
+        hint: 'Select all that apply (or none)',
+        options: ['Cycling', 'Swimming', 'Weight training', 'Functional', 'Yoga / Pilates', 'Walking', 'Trail', 'Capoeira', 'Soccer', 'Other'],
       },
       injury: {
         question: 'Do you have any injury or medical restriction?',
+        detailsLabel: 'Tell us a bit about the injury',
+        detailsPlaceholder: 'E.g. right knee pain for 2 months, in physio, light runs allowed…',
       },
       preference: {
         question: 'What is your training preference?',
