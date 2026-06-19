@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Green circle background -->
+  <circle cx="512" cy="512" r="512" fill="#10B981"/>
+
+  <!-- Chat bubble tail (bottom-left) -->
+  <path d="M280 700 L220 780 L360 700 Z" fill="white"/>
+
+  <!-- Rounded rectangle chat bubble -->
+  <rect x="220" y="260" rx="80" ry="80" width="584" height="440" fill="white"/>
+
+  <!-- Letter R -->
+  <path d="
+    M380 360
+    L380 620
+    L440 620
+    L440 520
+    L520 520
+    L590 620
+    L660 620
+    L580 510
+    C620 490 645 455 645 415
+    C645 370 615 340 570 330
+    C555 326 530 326 500 326
+    L380 326
+    L380 360
+    Z
+    M440 380
+    L510 380
+    C545 380 565 382 578 388
+    C592 395 598 408 598 420
+    C598 435 590 448 575 455
+    C560 462 540 464 510 464
+    L440 464
+    Z
+  " fill="#10B981"/>
+</svg>
