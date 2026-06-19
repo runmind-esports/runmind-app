@@ -941,15 +941,32 @@ export default function LandingPage() {
               </ul>
             </div>
 
-            {/* Suporte */}
+            {/* Suporte — Privacidade e Termos precisam ter href real para
+                a verificação do Google OAuth (homepage requirement: "include a
+                link to your privacy policy that is easily accessible"). */}
             <div>
               <h4 className="font-display font-semibold text-[13px] text-white mb-4">Suporte</h4>
               <ul className="flex flex-col gap-2.5">
-                {['Central de Ajuda', 'Privacidade', 'Termos de Uso', 'Status'].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-[13px] font-light text-white/35 hover:text-white transition-colors">{item}</a>
-                  </li>
-                ))}
+                <li>
+                  <Link href="/privacy" className="text-[13px] font-light text-white/35 hover:text-white transition-colors">
+                    Política de Privacidade
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="text-[13px] font-light text-white/35 hover:text-white transition-colors">
+                    Termos de Uso
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/data-deletion" className="text-[13px] font-light text-white/35 hover:text-white transition-colors">
+                    Exclusão de dados
+                  </Link>
+                </li>
+                <li>
+                  <a href="mailto:contato@proza.net.br" className="text-[13px] font-light text-white/35 hover:text-white transition-colors">
+                    Contato
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
