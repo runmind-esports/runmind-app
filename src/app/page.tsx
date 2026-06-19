@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { InstallPWAButton } from '@/components/InstallPWAButton'
 
 // Runmind Logo
 function RunmindLogo({ size = 40 }: { size?: number }) {
@@ -361,6 +362,7 @@ export default function LandingPage() {
                   <PlayIcon />
                   Ver como funciona
                 </a>
+                <InstallPWAButton />
               </div>
 
               {/* Objection killer */}
