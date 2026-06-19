@@ -3,10 +3,11 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Link2, CreditCard, Zap, CheckCircle2, X, LogOut, MessageCircle } from 'lucide-react'
+import { ArrowLeft, Link2, CreditCard, Zap, CheckCircle2, X, LogOut, MessageCircle, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { IntegrationsSection } from '@/features/settings/components/IntegrationsSection'
 import { PlansSection } from '@/features/settings/components/PlansSection'
+import { InstallAppSection } from '@/features/settings/components/InstallAppSection'
 import { ConsumptionSection } from '@/features/runPoints/components/ConsumptionSection'
 import { useUserTier } from '@/features/subscription'
 import { useAuth } from '@/features/auth/hooks/useAuth'
@@ -17,6 +18,7 @@ const TABS = [
   { id: 'integrations', label: 'Integrações', icon: Link2 },
   { id: 'plans', label: 'Planos', icon: CreditCard },
   { id: 'consumption', label: 'Consumo', icon: Zap },
+  { id: 'install', label: 'Instalar', icon: Download },
 ] as const
 
 type TabId = typeof TABS[number]['id']
@@ -169,6 +171,7 @@ function SettingsContent() {
           {activeTab === 'integrations' && <IntegrationsSection />}
           {activeTab === 'plans' && <PlansSection />}
           {activeTab === 'consumption' && <ConsumptionSection />}
+          {activeTab === 'install' && <InstallAppSection />}
         </div>
       </main>
     </div>

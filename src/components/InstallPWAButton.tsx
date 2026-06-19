@@ -1,44 +1,28 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
-type BeforeInstallPromptEvent = Event & {
-  prompt(): Promise<void>
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
-}
+import { subscribePWAInstall, triggerPWAInstall, type BeforeInstallPromptEvent } from '@/shared/lib/pwaInstall'
 
 export function InstallPWAButton() {
   const [prompt, setPrompt] = useState<BeforeInstallPromptEvent | null>(null)
+  const [isInstalled, setIsInstalled] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
-  const [isStandalone, setIsStandalone] = useState(false)
   const [showIOSModal, setShowIOSModal] = useState(false)
 
   useEffect(() => {
     setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent))
-    setIsStandalone(window.matchMedia('(display-mode: standalone)').matches)
-
-    const onPrompt = (e: Event) => {
-      e.preventDefault()
-      setPrompt(e as BeforeInstallPromptEvent)
-    }
-    const onInstalled = () => setPrompt(null)
-
-    window.addEventListener('beforeinstallprompt', onPrompt)
-    window.addEventListener('appinstalled', onInstalled)
-    return () => {
-      window.removeEventListener('beforeinstallprompt', onPrompt)
-      window.removeEventListener('appinstalled', onInstalled)
-    }
+    return subscribePWAInstall((p, installed) => {
+      setPrompt(p)
+      setIsInstalled(installed)
+    })
   }, [])
 
-  if (isStandalone) return null
+  if (isInstalled) return null
   if (!prompt && !isIOS) return null
 
   const handleInstall = async () => {
     if (prompt) {
-      await prompt.prompt()
-      await prompt.userChoice
-      setPrompt(null)
+      await triggerPWAInstall()
       return
     }
     setShowIOSModal(true)

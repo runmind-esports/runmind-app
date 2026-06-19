@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import '@/shared/lib/pwaInstall'
 
 export function RegisterSW() {
   useEffect(() => {
