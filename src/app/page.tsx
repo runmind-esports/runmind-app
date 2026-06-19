@@ -281,8 +281,9 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white text-[#14162E]">
+      <InstallPWAButton />
       {/* Navigation */}
-      <nav className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-12 bg-white/95 backdrop-blur-xl border-b border-[rgba(20,22,46,0.08)] transition-shadow ${isScrolled ? 'shadow-[0_4px_24px_rgba(20,22,46,0.07)]' : ''}`} style={{ height: 'calc(68px + env(safe-area-inset-top, 0px))', paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+      <nav className={`fixed left-0 right-0 top-[var(--install-banner-h,0px)] z-50 flex items-center justify-between px-4 sm:px-6 lg:px-12 bg-white/95 backdrop-blur-xl border-b border-[rgba(20,22,46,0.08)] transition-shadow ${isScrolled ? 'shadow-[0_4px_24px_rgba(20,22,46,0.07)]' : ''}`} style={{ height: 'calc(68px + env(safe-area-inset-top, 0px))', paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <Link href="/" className="flex items-center gap-2 sm:gap-3">
           <RunmindLogo size={28} />
           <span className="font-display text-base sm:text-lg font-bold tracking-tight">Runmind</span>
@@ -309,7 +310,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-dvh pt-[68px] overflow-hidden bg-white">
+      <section className="relative min-h-dvh pt-[calc(68px+var(--install-banner-h,0px))] overflow-hidden bg-white">
         {/* Background Effects */}
         <div className="absolute -top-[120px] -right-20 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(0,240,72,0.07)_0%,transparent_70%)] pointer-events-none" />
         <div
@@ -362,7 +363,6 @@ export default function LandingPage() {
                   <PlayIcon />
                   Ver como funciona
                 </a>
-                <InstallPWAButton />
               </div>
 
               {/* Objection killer */}
