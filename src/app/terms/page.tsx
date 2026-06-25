@@ -38,7 +38,7 @@ export default function TermsPage() {
             O Runmind é um coach virtual de corrida que combina dados do Strava e do Google Health com
             inteligência artificial para gerar planos de treino, análises de desempenho e orientações
             personalizadas. As interações acontecem via web (runmind.com.br) e via WhatsApp Business.
-            O serviço é operado por <strong>CNPJ 63.581.899/0001-01</strong>, Recife/PE, Brasil.
+            O serviço é operado por <strong>CNPJ 65.760.091/0001-09</strong>, Recife/PE, Brasil.
           </p>
         </section>
 
@@ -178,8 +178,8 @@ export default function TermsPage() {
           <h2 className="font-display font-semibold text-xl mb-3">13. Contato</h2>
           <p className="text-[#3F4356] leading-relaxed">
             Dúvidas, notificações legais e solicitações relacionadas a estes Termos:{' '}
-            <a href="mailto:contato@proza.net.br" className="text-[#14162E] font-medium underline underline-offset-2">
-              contato@proza.net.br
+            <a href="mailto:contato@runmind.com.br" className="text-[#14162E] font-medium underline underline-offset-2">
+              contato@runmind.com.br
             </a>
             .
           </p>

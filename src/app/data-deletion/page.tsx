@@ -87,8 +87,8 @@ export default function DataDeletionPage() {
               <h3 className="font-semibold mb-1">Opção 2 — Por e-mail</h3>
               <p className="text-sm text-[#3F4356] mt-2 leading-relaxed">
                 Envie um e-mail para{' '}
-                <a href="mailto:contato@proza.net.br?subject=Solicita%C3%A7%C3%A3o%20de%20exclus%C3%A3o%20de%20conta%20Runmind" className="text-[#14162E] font-medium underline underline-offset-2">
-                  contato@proza.net.br
+                <a href="mailto:contato@runmind.com.br?subject=Solicita%C3%A7%C3%A3o%20de%20exclus%C3%A3o%20de%20conta%20Runmind" className="text-[#14162E] font-medium underline underline-offset-2">
+                  contato@runmind.com.br
                 </a>{' '}
                 com o assunto <em>&ldquo;Solicitação de exclusão de conta Runmind&rdquo;</em>, a partir do mesmo endereço de e-mail
                 usado para cadastro. Você receberá uma confirmação em até 2 dias úteis e a exclusão é executada em até{' '}
@@ -123,8 +123,8 @@ export default function DataDeletionPage() {
             quer exercer qualquer outro direito previsto na LGPD (acesso,
             correção, portabilidade, oposição), entre em contato com nosso
             encarregado de proteção de dados (DPO) pelo e-mail{' '}
-            <a href="mailto:contato@proza.net.br" className="text-[#14162E] font-medium underline underline-offset-2">
-              contato@proza.net.br
+            <a href="mailto:contato@runmind.com.br" className="text-[#14162E] font-medium underline underline-offset-2">
+              contato@runmind.com.br
             </a>
             .
           </p>
@@ -147,7 +147,7 @@ export default function DataDeletionPage() {
             </li>
             <li>
               <strong>By email:</strong> send a deletion request from the registered email address to{' '}
-              <a href="mailto:contato@proza.net.br" className="underline">contato@proza.net.br</a>. We acknowledge
+              <a href="mailto:contato@runmind.com.br" className="underline">contato@runmind.com.br</a>. We acknowledge
               within 2 business days and complete deletion within <strong>30 calendar days</strong>.
             </li>
           </ul>

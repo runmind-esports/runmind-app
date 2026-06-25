@@ -963,7 +963,7 @@ export default function LandingPage() {
                   </Link>
                 </li>
                 <li>
-                  <a href="mailto:contato@proza.net.br" className="text-[13px] font-light text-white/35 hover:text-white transition-colors">
+                  <a href="mailto:contato@runmind.com.br" className="text-[13px] font-light text-white/35 hover:text-white transition-colors">
                     Contato
                   </a>
                 </li>
@@ -978,9 +978,9 @@ export default function LandingPage() {
           <div className="pt-6 sm:pt-7 border-t border-white/[0.06] mb-4 sm:mb-5">
             <p className="text-[11px] sm:text-xs font-light leading-relaxed text-white/35 max-w-[680px]">
               <span className="font-semibold text-white/55">Runmind</span> — CNPJ{' '}
-              <span className="font-semibold text-white/55">63.581.899/0001-01</span>. Recife, Pernambuco, Brasil. Contato:{' '}
-              <a href="mailto:contato@proza.net.br" className="text-white/55 hover:text-white transition-colors underline underline-offset-2">
-                contato@proza.net.br
+              <span className="font-semibold text-white/55">65.760.091/0001-09</span>. Recife, Pernambuco, Brasil. Contato:{' '}
+              <a href="mailto:contato@runmind.com.br" className="text-white/55 hover:text-white transition-colors underline underline-offset-2">
+                contato@runmind.com.br
               </a>
               .
             </p>

@@ -27,12 +27,12 @@ export default function PrivacyPage() {
         <section className="mb-10">
           <h2 className="font-display font-semibold text-xl mb-3">1. Quem somos</h2>
           <p className="text-[#3F4356] leading-relaxed">
-            O Runmind é um coach virtual de corrida operado por <strong>CNPJ 63.581.899/0001-01</strong>,
+            O Runmind é um coach virtual de corrida operado por <strong>CNPJ 65.760.091/0001-09</strong>,
             localizado em Recife/PE, Brasil. Para fins da LGPD (Lei 13.709/2018), somos o{' '}
             <strong>controlador</strong> dos dados pessoais coletados ao longo do uso do serviço.
             Dúvidas ou solicitações relacionadas a esta política devem ser direcionadas a{' '}
-            <a href="mailto:contato@proza.net.br" className="text-[#14162E] font-medium underline underline-offset-2">
-              contato@proza.net.br
+            <a href="mailto:contato@runmind.com.br" className="text-[#14162E] font-medium underline underline-offset-2">
+              contato@runmind.com.br
             </a>
             .
           </p>
@@ -205,7 +205,7 @@ export default function PrivacyPage() {
           </ul>
           <p className="text-[#3F4356] leading-relaxed mt-3">
             Para exercer qualquer um desses direitos, escreva para{' '}
-            <a href="mailto:contato@proza.net.br" className="text-[#14162E] font-medium underline underline-offset-2">contato@proza.net.br</a>{' '}
+            <a href="mailto:contato@runmind.com.br" className="text-[#14162E] font-medium underline underline-offset-2">contato@runmind.com.br</a>{' '}
             a partir do e-mail cadastrado.
           </p>
         </section>
