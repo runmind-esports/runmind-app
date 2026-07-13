@@ -10,7 +10,7 @@ steps:
       - '--build-arg'
       - 'NEXT_PUBLIC_RUNMID_API_URL=https://runmid-api-620849332552.us-central1.run.app'
       - '--build-arg'
-      - 'NEXT_PUBLIC_STRAVA_CLIENT_ID=165299'
+      - 'NEXT_PUBLIC_STRAVA_CLIENT_ID=263776'
       - '--build-arg'
       - 'NEXT_PUBLIC_CHAT_API_URL=https://runmind-chat-agent-620849332552.us-central1.run.app'
       - '-t'
